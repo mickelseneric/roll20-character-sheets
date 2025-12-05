@@ -1,0 +1,10 @@
+{
+  "html": "MechWarrior_1e.html",
+  "css": "MechWarrior_1e.css",
+  "authors": "Your Name (Roll20 username)",
+  "roll20userid": "000000",
+  "preview": "preview.png",
+  "instructions": "Character sheet for MechWarrior 1st Edition RPG. This is a static layout matching the original 1st edition character sheet format, including attributes, skills, hit location tracking, and equipment sections.",
+  "legacy": false,
+  "version": "1733415000"
+}

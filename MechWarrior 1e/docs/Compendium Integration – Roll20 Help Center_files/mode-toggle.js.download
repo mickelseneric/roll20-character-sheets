@@ -1,0 +1,41 @@
+(function($, window, document) {
+  ('use strict');
+
+  var ModeToggle = {
+    init: function() {
+      this.cacheElements();
+      this.bindEvents(); 
+      this.addMode();
+    },
+    bindEvents: function() {
+      $(document).on('change', '[data-mode-toggle]', this.toggleMode.bind(this));
+    },
+    cacheElements: function() {
+      this.$body = $('body');
+      this.$button = $('[data-mode-toggle]');
+      this.$modeLayout = $('[data-mode]');
+    },
+    addMode: function(){
+      if(localStorage.getItem('style_mode')){
+        var currentMode = localStorage.getItem('style_mode');
+        this.$body.attr('data-mode', currentMode);
+        if(currentMode === 'dark'){
+          this.$button.prop('checked','true');
+        }
+      } else {
+        this.$body.attr('data-mode', 'light');
+      }
+    },
+    toggleMode: function(){
+      if(this.$button.prop('checked')){
+        this.$body.attr('data-mode','dark');
+        localStorage.setItem('style_mode','dark');
+      } else {
+        this.$body.attr('data-mode','light');
+        localStorage.setItem('style_mode','light');
+      }
+    }
+  };
+
+  window.ModeToggle = ModeToggle;
+})(jQuery, window, document);

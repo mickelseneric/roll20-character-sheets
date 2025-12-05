@@ -1,0 +1,62 @@
+(function ($, window, document) {
+  ("use strict");
+
+  var Layout = {
+    init: function () {
+      if (LotusUtils.isHomePage() || LotusUtils.isSearchResultsPage()) {
+        $("[data-hero-unit]").removeClass(LotusConfig.css.hiddenClass);
+        $("[data-footer-submit-ticket]").removeClass(
+          LotusConfig.css.hiddenClass
+        );
+      }
+
+      if (LotusUtils.isArticlePage()) {
+        var $sidenavContainer = $("[data-sidenav]");
+        $sidenavContainer.css("max-height", $(window).innerHeight() - 250);
+
+        $(window).on("scroll resize", function () {
+          var $sidenav = $(".sidenav-container");
+          var scrollTop = $(document).scrollTop();
+          var articleOffsetBottom =
+            $("[data-article]").offset().top +
+            $("[data-article]").innerHeight();
+          var sidenavWidth = $(".article-left-column").width();
+          var sidenavHeight = $sidenav.innerHeight();
+          var sidenavOffsetBottom = scrollTop + 100 + sidenavHeight;
+
+          if (
+            scrollTop >= $sidenavContainer.offset().top &&
+            articleOffsetBottom > sidenavOffsetBottom
+          ) {
+            $sidenav
+              .addClass("sidenav-container--scrolled")
+              .removeClass("scrolled-btm");
+            $sidenav.css({
+              position: "fixed",
+              top: 30 + sidenavHeight,
+              width: sidenavWidth,
+            });
+          } else if (scrollTop < $("[data-article]").offset().top) {
+            $sidenav
+              .removeClass("sidenav-container--scrolled")
+              .addClass("scrolled-btm")
+              .removeAttr("style");
+          } else if (articleOffsetBottom <= sidenavOffsetBottom) {
+            $sidenav
+              .removeClass("sidenav-container--scrolled")
+              .addClass("scrolled-btm");
+            $sidenav.css({
+              position: "absolute",
+              top: articleOffsetBottom - sidenavHeight - 120,
+              width: sidenavWidth,
+            });
+          }
+        });
+      }
+
+      $('#new_request input[type="submit"]').val(`${LotusConfig.sendBtn}`);
+    },
+  };
+
+  window.Layout = Layout;
+})(jQuery, window, document);

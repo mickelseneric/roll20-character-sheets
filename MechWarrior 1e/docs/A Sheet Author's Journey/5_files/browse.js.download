@@ -1,0 +1,701 @@
+$(function() {
+
+	$(".chosen").chosen();
+
+	$("#remove-admin-menu").on("click", function(e) {
+		e.preventDefault();
+		$("#admin-dropdropdown").remove();
+		$("#admin-list").remove();
+		$(".logo img").prop("style", "");
+	});
+
+	$(".localtimeme").each(function() {
+		var time = parseInt($.trim($(this).text()), 10);
+		var d = Date.create(time*1000);
+		$(this).attr("data-timestamp", d.getTime());
+		var mytimezone = "";
+		// var _tzstring = new Date().toString().match(/\(([A-Za-z\s].*)\)/);
+		// if(_tzstring && _tzstring.length) mytimezone = _tzstring[1];
+		if(d.toLocaleString) {
+			mytimezone = d.toLocaleString('en', {timeZoneName: 'short'}).split(' ').pop();
+		}
+		$(this).text(d.format('{Weekday} {Month} {dd} {h}:{mm}{TT}') + " " + mytimezone + " (" + d.relative() + ")");
+	});
+
+	$(".localtimeme-short").each(function() {
+		var time = parseInt($.trim($(this).text()), 10);
+		var d = Date.create(time*1000);
+		$(this).attr("data-timestamp", d.getTime());
+		var mytimezone = "";
+		// var _tzstring = new Date().toString().match(/\(([A-Za-z\s].*)\)/);
+		// if(_tzstring && _tzstring.length) mytimezone = _tzstring[1];
+		if(d.toLocaleString) {
+			mytimezone = d.toLocaleString('en', {timeZoneName: 'short'}).split(' ').pop();
+		}
+		$(this).text(d.format('{Month} {dd} {h}:{mm}{TT}') + " " + mytimezone);
+	});
+
+	function autoGrav() {
+		console.log("autograv");
+		if($(this).hasClass("tipsy-w"))
+			return 'w';
+		if($(this).hasClass("tipsy-e"))
+			return 'e';
+		if($(this).hasClass("tipsy-n"))
+			return "n";
+		if($(this).hasClass("tipsy-s"))
+			return "s";
+		if($(this).hasClass("tipsy-side"))
+			return $(this).offset().left > ($(document).scrollLeft() + $(window).width() / 2) ? 'e' : 'w';
+		else
+			return $(this).offset().top > ($(document).scrollTop() + $(window).height() / 2) ? 's' : 'n';
+	}
+
+	$(document).lightly();
+	/* Campaign Tags */
+
+	window.CampaignTag = Backbone.Model.extend({
+
+		defaults: {
+			campaign_id: 0,
+			tag: ""
+		}	
+	});
+
+	window.CampaignTagCollection = Backbone.Collection.extend({
+		model: CampaignTag,
+		url: "/campaigns/campaigntags/0" //needs to be set to Campaign ID.
+
+	});
+
+	window.CampaignTagView = Backbone.View.extend({
+
+		_template: $.jqotec("#tmpl_campaigntag"),
+
+		events: {
+			"click": "destroy"
+		},
+
+		initialize: function() {
+			_.bindAll(this, "render");
+			this.model.bind("change", this.render);
+		},
+
+		render: function() {
+			$(this.el).html(this._template(this.model.toJSON()));
+		},
+
+		destroy: function() {
+			$(this.el).remove();
+			this.model.destroy();
+		}
+
+	});
+
+	window.CampaignTagsView = Backbone.View.extend({
+
+		_template: $.jqotec("#tmpl_campaigntags"),
+
+		events: {
+			"click .add": "toggleEditing"
+		},
+
+		initialize: function() {
+			_.bindAll(this, "render", "addAll", "initTextboxlist", "addFromBitBox", "removeFromBitBox", "beginEditing", "stopEditing");
+			this.campaignid = $(this.el).attr("data-campaignid");
+			this.editable = $(this.el).attr("data-editable");
+			this.editing = false;
+			this.CampaignTags = new CampaignTagCollection();
+			this.CampaignTags.url = "/campaigns/campaigntags/" + this.campaignid;
+
+			$(this.el).html(this._template(this));
+
+			this.input = $(this.el).find("input");
+			this.textboxlist = new $.TextboxList(this.input, {
+				encode: function() {},
+				decode: function() {},
+				startEditableBit: false,
+				inBetweenEditableBits: false,
+				unique: true,
+				plugins: {
+					autocomplete: {
+				    minLength: 3,
+				    queryRemote: true,
+				    remote: {url: '/campaigns/tag_autocomplete'}
+					}
+				}
+			});
+
+			//this.CampaignTags.bind('add', this.addOne);
+			this.CampaignTags.bind('refresh', this.addAll);
+			if(this.campaignid != 0) {
+				if(!_.isUndefined(window.BOOTSTRAP_CAMPAIGN_TAGS) && !_.isUndefined(BOOTSTRAP_CAMPAIGN_TAGS[this.campaignid])) {
+					for(var i=0; i < BOOTSTRAP_CAMPAIGN_TAGS[this.campaignid].length; i++) {
+						this.CampaignTags.add(BOOTSTRAP_CAMPAIGN_TAGS[this.campaignid][i]);
+					}
+					this.addAll();
+				}
+				else {
+					this.CampaignTags.fetch();
+				}
+			}
+
+			this.textboxlist.addEvent('bitBoxAdd', this.addFromBitBox);
+			this.textboxlist.addEvent('bitBoxRemove', this.removeFromBitBox);
+
+			this.stopEditing();
+
+			if($(this.el).attr("data-hide-edit-button") == "true") {
+				$(this.el).find(".add").hide();
+			}
+
+			if($(this.el).attr("data-auto-edit") == "true") {
+				this.toggleEditing(true);
+			}
+
+			if($(this.el).attr("data-initial-tags")) {
+				var tags = JSON.parse($(this.el).attr("data-initial-tags"));
+				for(var i=0; i < tags.length; i++) {
+					console.log("adding " + tags[i].tag)
+					this.textboxlist.add(tags[i].tag);
+				}
+			}
+
+		},
+
+		render: function() {
+
+		},
+
+		addFromBitBox: function(bit) {
+			if(this.editing) {
+				var newtag = this.CampaignTags.create({tag: bit.getValue()[1]});
+				bit.setValue([newtag.cid, newtag.get("tag"), bit.getValue()[2]]);
+			}
+		},
+
+		removeFromBitBox: function(bit) {
+			this.CampaignTags.get(bit.getValue()[0]).destroy();
+		},
+
+		addAll: function() {
+			this.CampaignTags.each(this.initTextboxlist);
+		},
+
+		initTextboxlist: function(campaigntag) {
+			this.textboxlist.add(campaigntag.get("tag"), campaigntag.cid);
+		},
+
+		toggleEditing: function(noFocus) {
+			if(this.editing) {
+				this.stopEditing();
+				this.editing = false;
+			}
+			else {
+				this.beginEditing(noFocus);
+				this.editing = true;
+			}
+		},
+
+		beginEditing: function(noFocus) {
+			$(this.el).find(".add em").html("<span class='pictos'>3</span> I'm Done!");
+			$(this.el).find(".textboxlist").removeClass("noedit").find("input").show();
+			//$(this.el).find(".textboxlist input:last").click();
+			if(typeof(noFocus) == "undefined" || noFocus != true)
+				setTimeout(this.textboxlist.focusLast, 0);
+		},
+
+		stopEditing: function() {
+			$(this.el).find(".add em").html("<span class='pictos'>p</span> Edit Tags");
+			$(this.el).find(".textboxlist input").hide();
+			$(this.el).find(".textboxlist").addClass("noedit");
+		}
+
+	});
+
+	//Find all divs with a class of campaign_tags (and a data-campaignid attr, hopefully), and load the model.
+	window.campaignTagViews = Array();
+	$(".campaigntags").each(function() {
+		var campaigntagview = new window.CampaignTagsView({el: $(this)});
+		window.campaignTagViews.push(campaigntagview);
+	});
+
+	/* Campaign Tags */
+
+	window.TokenTag = Backbone.Model.extend({
+
+		defaults: {
+			tokenid: 0,
+			tag: ""
+		}
+
+	});
+
+	window.TokenTagCollection = Backbone.Collection.extend({
+		model: TokenTag,
+		url: "/browse/tokentags/0" //needs to be set to Campaign ID.
+
+	});
+
+	window.TokenTagView = Backbone.View.extend({
+
+		_template: $.jqotec("#tmpl_tokentag"),
+
+		events: {
+			"click": "destroy"
+		},
+
+		initialize: function() {
+			_.bindAll(this, "render");
+			this.model.bind("change", this.render);
+		},
+
+		render: function() {
+			$(this.el).html(this._template(this.model.toJSON()));
+		},
+
+		destroy: function() {
+			$(this.el).remove();
+			this.model.destroy();
+		}
+
+	});
+
+	window.TokenTagsView = Backbone.View.extend({
+
+		_template: $.jqotec("#tmpl_tokentags"),
+
+		events: {
+			"click .add": "toggleEditing"
+		},
+
+		initialize: function() {
+			_.bindAll(this, "render", "addAll", "initTextboxlist", "addFromBitBox", "removeFromBitBox", "beginEditing", "stopEditing");
+			this.tokenid = $(this.el).attr("data-tokenid");
+			this.editable = $(this.el).attr("data-editable");
+			this.editing = false;
+			this.TokenTags = new TokenTagCollection();
+			this.TokenTags.url = "/browse/tokentags/" + this.tokenid;
+
+			$(this.el).html(this._template(this));
+
+			this.input = $(this.el).find("input");
+			this.textboxlist = new $.TextboxList(this.input, {
+				encode: function() {},
+				decode: function() {},
+				startEditableBit: false,
+				inBetweenEditableBits: false,
+				unique: true,
+				plugins: {
+					autocomplete: {
+				    minLength: 3,
+				    queryRemote: true,
+				    remote: {url: '/browse/tag_autocomplete'}
+					}
+				}
+			});
+
+			//this.TokenTags.bind('add', this.addOne);
+			this.TokenTags.bind('refresh', this.addAll);
+			if(this.tokenid != 0) {
+				if(!_.isUndefined(window.BOOTSTRAP_TOKEN_TAGS) && !_.isUndefined(BOOTSTRAP_TOKEN_TAGS[this.tokenid])) {
+					for(var i=0; i < BOOTSTRAP_TOKEN_TAGS[this.tokenid].length; i++) {
+						this.TokenTags.add(BOOTSTRAP_TOKEN_TAGS[this.tokenid][i]);
+					}
+					this.addAll();
+				}
+				else {
+					this.TokenTags.fetch();
+				}
+			}
+
+			this.textboxlist.addEvent('bitBoxAdd', this.addFromBitBox);
+			this.textboxlist.addEvent('bitBoxRemove', this.removeFromBitBox);
+
+			this.stopEditing();
+
+			if($(this.el).attr("data-hide-edit-button") == "true") {
+				$(this.el).find(".add").hide();
+			}
+
+			if($(this.el).attr("data-auto-edit") == "true") {
+				this.toggleEditing(true);
+			}
+
+			if($(this.el).attr("data-initial-tags")) {
+				var tags = JSON.parse($(this.el).attr("data-initial-tags"));
+				for(var i=0; i < tags.length; i++) {
+					console.log("adding " + tags[i].tag)
+					this.textboxlist.add(tags[i].tag);
+				}
+			}
+
+		},
+
+		render: function() {
+
+		},
+
+		addFromBitBox: function(bit) {
+			if(this.editing) {
+				var newtag = this.TokenTags.create({tag: bit.getValue()[1]});
+				bit.setValue([newtag.cid, newtag.get("tag"), bit.getValue()[2]]);
+			}
+		},
+
+		removeFromBitBox: function(bit) {
+			this.TokenTags.get(bit.getValue()[0]).destroy();
+		},
+
+		addAll: function() {
+			this.TokenTags.each(this.initTextboxlist);
+		},
+
+		initTextboxlist: function(tokentag) {
+			this.textboxlist.add(tokentag.get("tag"), tokentag.cid);
+		},
+
+		toggleEditing: function(noFocus) {
+			if(this.editing) {
+				this.stopEditing();
+				this.editing = false;
+			}
+			else {
+				this.beginEditing(noFocus);
+				this.editing = true;
+			}
+		},
+
+		beginEditing: function(noFocus) {
+			$(this.el).find(".add em").html("<span class='pictos'>3</span> I'm Done!");
+			$(this.el).find(".textboxlist").removeClass("noedit").find("input").show();
+			//$(this.el).find(".textboxlist input:last").click();
+			if(typeof(noFocus) == "undefined" || noFocus != true)
+				setTimeout(this.textboxlist.focusLast, 0);
+		},
+
+		stopEditing: function() {
+			$(this.el).find(".add em").html("<span class='pictos'>p</span> Edit Tags");
+			$(this.el).find(".textboxlist input").hide();
+			$(this.el).find(".textboxlist").addClass("noedit");
+		}
+
+	});
+
+	//Find all divs with a class of token_tags (and a data-tokenid attr, hopefully), and load the model.
+	window.tokenTagViews = Array();
+	$(".tokentags").each(function() {
+		var tokentagview = new window.TokenTagsView({el: $(this)});
+		window.tokenTagViews.push(tokentagview);
+	});
+
+	/* Campaign Tags */
+
+	window.YourTag = Backbone.Model.extend({
+
+		defaults: {
+			tokenid: 0,
+			tag: ""
+		}
+
+	});
+
+	window.YourTagCollection = Backbone.Collection.extend({
+		model: YourTag,
+		url: "/browse/yourtags/0" //needs to be set to Campaign ID.
+
+	});
+
+	window.YourTagView = Backbone.View.extend({
+
+		_template: $.jqotec("#tmpl_yourtag"),
+
+		events: {
+			"click": "destroy"
+		},
+
+		initialize: function() {
+			_.bindAll(this, "render");
+			this.model.bind("change", this.render);
+		},
+
+		render: function() {
+			$(this.el).html(this._template(this.model.toJSON()));
+		},
+
+		destroy: function() {
+			$(this.el).remove();
+			this.model.destroy();
+		}
+
+	});
+
+	window.YourTagsView = Backbone.View.extend({
+
+		_template: $.jqotec("#tmpl_yourtags"),
+
+		events: {
+			"click .add": "toggleEditing"
+		},
+
+		initialize: function() {
+			_.bindAll(this, "render", "addAll", "initTextboxlist", "addFromBitBox", "removeFromBitBox", "beginEditing", "stopEditing");
+
+			this.editable = $(this.el).attr("data-editable");
+			this.editing = false;
+			this.YourTags = new YourTagCollection();
+			if(this.$el.attr("data-imageid") !== undefined) {
+				this.tokenid = $(this.el).attr("data-imageid");
+				this.YourTags.url = "/library/yourtags/" + this.tokenid;
+			}
+			else {
+				this.tokenid = $(this.el).attr("data-tokenid");
+				this.YourTags.url = "/browse/yourtags/" + this.tokenid;
+			}
+
+
+			$(this.el).html(this._template(this));
+
+			this.input = $(this.el).find("input");
+			this.textboxlist = new $.TextboxList(this.input, {
+				encode: function() {},
+				decode: function() {},
+				startEditableBit: false,
+				inBetweenEditableBits: false,
+				unique: true,
+				plugins: {
+					autocomplete: {
+				    minLength: 3,
+				    queryRemote: true,
+				    remote: {url: '/browse/yourtag_autocomplete'}
+					}
+				}
+			});
+
+			//this.YourtAgs.bind('add', this.addOne);
+			this.YourTags.bind('refresh', this.addAll);
+			if(this.tokenid != 0) {
+				if(!_.isUndefined(window.BOOTSTRAP_YOUR_TAGS) && !_.isUndefined(BOOTSTRAP_YOUR_TAGS[this.tokenid])) {
+					for(var i=0; i < BOOTSTRAP_YOUR_TAGS[this.tokenid].length; i++) {
+						//console.log(BOOTSTRAP_YOUR_TAGS[this.tokenid][i]);
+						this.YourTags.add(BOOTSTRAP_YOUR_TAGS[this.tokenid][i]);
+					}
+					this.addAll();
+				}
+				else {
+					this.YourTags.fetch();
+				}
+			}
+
+			this.textboxlist.addEvent('bitBoxAdd', this.addFromBitBox);
+			this.textboxlist.addEvent('bitBoxRemove', this.removeFromBitBox);
+
+			this.stopEditing();
+
+			if($(this.el).attr("data-hide-edit-button") == "true") {
+				$(this.el).find(".add").hide();
+			}
+
+			if($(this.el).attr("data-auto-edit") == "true") {
+				this.toggleEditing(true);
+			}
+
+			if($(this.el).attr("data-initial-tags")) {
+				var tags = JSON.parse($(this.el).attr("data-initial-tags"));
+				for(var i=0; i < tags.length; i++) {
+					console.log("adding " + tags[i].tag)
+					this.textboxlist.add(tags[i].tag);
+				}
+			}
+
+		},
+
+		render: function() {
+
+		},
+
+		addFromBitBox: function(bit, override) {
+			if(this.editing || override) {
+				var newtag = this.YourTags.create({tag: bit.getValue()[1]});
+				bit.setValue([newtag.cid, newtag.get("tag"), bit.getValue()[2]]);
+			}
+		},
+
+		removeFromBitBox: function(bit) {
+			this.YourTags.get(bit.getValue()[0]).destroy();
+		},
+
+		addAll: function() {
+			this.YourTags.each(this.initTextboxlist);
+		},
+
+		initTextboxlist: function(yourtag) {
+			this.textboxlist.add(yourtag.get("tag"), yourtag.cid);
+		},
+
+		toggleEditing: function(noFocus) {
+			if(this.editing) {
+				this.stopEditing();
+				this.editing = false;
+			}
+			else {
+				this.beginEditing(noFocus);
+				this.editing = true;
+			}
+		},
+
+		beginEditing: function(noFocus) {
+			$(this.el).find(".add em").html("<span class='pictos'>3</span> I'm Done!");
+			$(this.el).find(".textboxlist").removeClass("noedit").find("input").show();
+			//$(this.el).find(".textboxlist input:last").click();
+			if(typeof(noFocus) == "undefined" || noFocus != true)
+				setTimeout(this.textboxlist.focusLast, 0);
+		},
+
+		stopEditing: function() {
+			$(this.el).find(".add em").html("<span class='pictos'>p</span> Edit Tags");
+			$(this.el).find(".textboxlist input").hide();
+			$(this.el).find(".textboxlist").addClass("noedit");
+		}
+
+	});
+
+	//Find all divs with a class of token_tags (and a data-tokenid attr, hopefully), and load the model.
+	window.yourTagViews = Array();
+	$(".yourtags").each(function() {
+		var yourtagview = new window.YourTagsView({el: $(this)});
+		window.yourTagViews.push(yourtagview);
+	});
+
+	if($("#main").hasClass("batch")) {
+		$(".item").on("click", ".add", function() {
+
+			var container = $(this).parents(".item");
+			var itemid = container.attr("data-itemid");
+			var name = container.find("input[name=name]").val();
+			var description = container.find("textarea[name=description]").val();
+			var author = container.find("input[name=author]").val();
+
+			$.post("/batch/update/"+itemid, {name: name, description: description, author: author}, function(data) {
+				if(data == "success")
+					container.addClass("done");
+				else
+					alert(data);
+			});
+
+		});
+	}
+
+	var templateUploadSlot = function($target) {
+		$target.html($("#tmpl_uploadslot").jqote($target.attr("data-current-image") || ""));
+		var uploadurl = "/image_library/newupload";
+		if($target.attr("data-url")) {
+			uploadurl = $target.attr("data-url");
+		}
+		else if($target.hasClass("accountupload")) {
+			uploadurl = "/account/newupload";
+		}
+		$target.find(".avatar").dndUploader({
+	    	url : uploadurl,
+	    	method : "POST",
+	    	allowMultiple: false
+	    });
+	};
+
+	$(".uploadslot").each(function() {
+		templateUploadSlot($(this));
+	});
+
+	$(".uploadslot").bind("uploadcomplete", function(e, response) {
+		var othis = this;
+		e.stopPropagation();
+		if(typeof response === "object") {
+			var json = response;
+		}
+		else {
+    		var json = JSON.parse(response);
+    	}
+    	if(!json) {
+    		$(this).find(".status").html("<div class='alert alert-danger'>Error uploading file. Pleaes try again.</div>");
+    		return;
+    	}
+    	console.log(json);
+    	$(this).attr({"data-current-image": (json.length ? json[0].url : json.base + "?" + new Date().getTime())});
+    	$(this).attr("data-current-image-id", (json.length ? json[0].imageid : json.imageid));
+    	setTimeout(function() {
+    		templateUploadSlot($(othis));
+    	}, 3000);
+
+    });
+
+    $(".uploadslot").on("click", ".remove a", function() {
+    	//DO SOMETHING
+    	$target = $(this).parents(".uploadslot");
+    	$target.attr("data-current-image", "");
+    	templateUploadSlot($target);
+    	$target.trigger("uploadremoved");
+    });
+
+});
+
+var re = /(\()*(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/g;
+var imgre = /(?:([^:\/?#]+):)?(?:\/\/([^\/?#]*))?([^?#]*\.(?:jpe?g|gif|png))(?:\?([^#]*))?(?:#(.*))?/i;
+
+var _numpostsprocessed = 0;
+
+$(".forum .postcontent").each(function() {
+	var $this = $(this);
+	var content = $this.html();
+	var urls = content.match(re);
+	var finished = 0;
+	$this.find("a").each(function() {
+		var link = $(this).attr("href");
+		var $this = $(this);
+		if(link === undefined || link.match(re) === null) return;
+		if(_numpostsprocessed > 15) return;
+		_numpostsprocessed++;
+		if(link.match(imgre)) {
+			return;
+			var oEmbedCache = "<div class='noembed-embed noembed-img'><div class='noembed-wrapper'><div class='noembed-embed-inner'><p><a href='"+link+"' target='_blank'><img src='"+link+"' /></a></p></div></div></div>";
+			oEmbedCache = "<div class='show-oembed'><div class='whilehidden'>Preview hidden <a href='javascript:void(0);'>Show</a></div><div class='whileshown'><a href='javascript:void(0);'>Hide preview</a></div></div>" + oEmbedCache;
+			$this.after(oEmbedCache);
+		}
+		else {
+			$.getJSON("https://noembed.com/embed?url="+escape(link)+"&callback=", function(obj) {
+				var oEmbedCache = "";
+				finished++;
+				if(!obj.error) {
+					//console.log(obj);
+
+					oEmbedCache += obj.html;
+
+					oEmbedCache = "<div class='show-oembed'><div class='whilehidden'>Preview hidden <a href='javascript:void(0);'>Show</a></div><div class='whileshown'><a href='javascript:void(0);'>Hide preview</a></div></div>" + oEmbedCache;
+				}
+
+				if(oEmbedCache !== "") {
+					$this.after(oEmbedCache);
+				}
+
+			});
+		}
+	});
+});
+
+$(".postcontent").on("click", ".show-oembed", function() {
+	$(this).parents(".postcontent").toggleClass("oembed-hidden");
+});
+
+window.strip_tags = function (input, allowed, ignoreadvanced) {
+// Strips HTML and PHP tags from a string
+	allowed = allowed || "<code><span><div><label><a><br><br /><p><b><i><del><strike><u><img><video><audio><param><blockquote><mark><cite><small><ul><ol><li><hr><dl><dt><dd><sup><sub><big><pre><code><figure><figcaption><strong><em><table><tr><td><th><tbody><thead><tfoot><h1><h2><h3><h4><h5><h6>";
+    if(!ignoreadvanced && allowed !== undefined) {
+        input = html_sanitize(input, function urlX(url) { if(/^https?:\/\//.test(url)) { return url } }, function idX(id) { return "userscript-" + id });
+    }
+    allowed = (((allowed || "") + "").toLowerCase().match(/<[a-z][a-z0-9]*>/g) || []).join(''); // making sure the allowed arg is a string containing only tags in lowercase (<a><b><c>)
+    var tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi,
+        commentsAndPhpTags = /<!--[\s\S]*?-->|<\?(?:php)?[\s\S]*?\?>/gi;
+    return input.replace(commentsAndPhpTags, '').replace(tags, function ($0, $1) {
+        return allowed.indexOf('<' + $1.toLowerCase() + '>') > -1 ? $0 : '';
+    });
+	//return input;
+};

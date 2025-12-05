@@ -1,0 +1,34 @@
+(function($, window, document) {
+  ('use strict');
+
+  var MenuToggle = {
+    init: function() {
+      this.cacheElements();
+      this.bindEvents(); 
+      setTimeout(function(){
+        var $topbarLinks = $('.topbar__link-wrap').clone();
+        $('.sidenav__categories-list').prepend($topbarLinks);
+      }, 1500);
+    },
+    cacheElements: function() {
+      this.$button = $('[data-toggle-menu]');
+      this.$menu = $('[data-menu]');
+      this.$topbarNav = $('[data-topbar-nav]');
+    },
+    bindEvents: function() {
+      $(document).on('click', '[data-toggle-menu]', this.handleClick.bind(this));
+      $(document).on('click', '.dropdown-toggle', function(){ return false; });
+      $(document).on('click', '.sidenav-overlay', this.handleOverlayClick.bind(this));
+    },
+    handleClick: function(e) {
+      $(e.target).addClass(LotusConfig.css.activeClass);
+      $('.sidenav-mobile, .sidenav-overlay').addClass('is-active');
+    },
+    handleOverlayClick: function() {
+      this.$button.removeClass(LotusConfig.css.activeClass);
+      $('.sidenav-mobile, .sidenav-overlay').removeClass('is-active');
+    }
+  };
+
+  window.MenuToggle = MenuToggle;
+})(jQuery, window, document);
