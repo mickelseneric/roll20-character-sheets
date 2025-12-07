@@ -101,6 +101,13 @@
     box-sizing: border-box;
 }
 
+/* Smaller inputs for warrior data attributes (2-digit values) */
+.sheet-warrior-data .sheet-field-group input[type="number"] {
+    flex: 0 0 auto;
+    width: 50px;
+    text-align: center;
+}
+
 .sheet-field-group input:focus {
     outline: none;
     border-bottom: 2px solid #8a9aaa;
@@ -204,4 +211,20 @@
 
 .sheet-skill-row label {
     margin-bottom: 0;
+}
+
+/* Horizontal divider for separating subsections */
+.sheet-horizontal-divider {
+    height: 1px;
+    background-color: #6a7a8a;
+    margin: 20px 0;
+    width: 100%;
+}
+
+/* Saving roll target label */
+.sheet-saving-roll-target {
+    font-size: 10px;
+    color: #8a9aaa;
+    margin-left: 10px;
+    white-space: nowrap;
 }

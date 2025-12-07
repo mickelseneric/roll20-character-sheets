@@ -152,7 +152,7 @@ All contributions must meet minimum requirements:
 
 ## Building Character Sheets: Technical Details
 
-> **📚 Complete Documentation Available**: The entire Roll20 wiki for character sheet development has been saved locally to `MechWarrior 1e/docs/`. When building the MechWarrior 1e sheet, read these files directly rather than trying to access external wikis.
+> **📚 Complete Documentation Available**: The entire Roll20 wiki for character sheet development has been saved locally to `docs/Roll20 Wiki/`. When building character sheets, read these files directly rather than trying to access external wikis.
 
 ### Required Files (Minimum)
 A character sheet **requires four files minimum** in an appropriately named subfolder:
@@ -176,7 +176,7 @@ A character sheet **requires four files minimum** in an appropriately named subf
 
 ### Essential Roll20 Concepts & Local Documentation
 
-**IMPORTANT**: Complete Roll20 wiki documentation is available locally in `MechWarrior 1e/docs/`.
+**IMPORTANT**: Complete Roll20 wiki documentation is available locally in `docs/Roll20 Wiki/`.
 
 #### Core Documentation Files
 Read these files in order when learning to build sheets:
@@ -192,7 +192,7 @@ Read these files in order when learning to build sheets:
 9. **`CSS Wizardry - Roll20 Wiki.html`** - Advanced CSS techniques
 
 #### Tutorial: A Sheet Author's Journey
-Step-by-step tutorial in `MechWarrior 1e/docs/A Sheet Author's Journey/`:
+Step-by-step tutorial in `docs/Roll20 Wiki/A Sheet Author's Journey/`:
 - **`1.html`** - The Beginning
 - **`2.html`** - (Continue reading in sequence)
 - **`3.html`** through **`6.html`** - Progressive tutorial
@@ -389,12 +389,47 @@ Developing an **interactive** character sheet for MechWarrior 1st Edition in the
   - Sheet workers for reactive updates
   - Modern, clean visual design
 
+### 🚨 CRITICAL: File Synchronization Rule
+**MANDATORY: After EVERY change to `MechWarrior_1e.html`, you MUST immediately sync the changes to `MW1e_preview.html`.**
+
+This is a **non-negotiable requirement** for every edit session:
+1. Make changes to `MechWarrior_1e.html`
+2. **IMMEDIATELY** apply the same changes to `MW1e_preview.html`
+3. Verify both files have identical content within `<div class="sheet-mechwarrior">...</div>`
+
+**Never skip this step. The preview file is used for local testing and must always match the main sheet.**
+
+### 🚨 CRITICAL: JavaScript Implementation Rule
+**The two HTML files require DIFFERENT JavaScript implementations:**
+
+**`MechWarrior_1e.html` (Roll20 Production Sheet):**
+- **ALWAYS** use `<script type="text/worker">` for sheet workers
+- **ALWAYS** use Roll20 API functions:
+  - `on()` for event listeners (e.g., `on('change:body change:dex', function() {...})`)
+  - `getAttrs([...], function(values) {...})` to read attributes
+  - `setAttrs({...})` to update attributes
+  - `on('sheet:opened', function() {...})` for initialization
+- Follow Roll20 sheet worker best practices
+- Calculated fields MUST have `disabled="true"` attribute
+
+**`MW1e_preview.html` (Local Browser Testing):**
+- **ALWAYS** use `<script>` (NOT `<script type="text/worker">`)
+- **ALWAYS** use regular JavaScript/DOM APIs:
+  - `document.addEventListener('DOMContentLoaded', function() {...})` for initialization
+  - `document.querySelector()` to find elements
+  - `.addEventListener('input', ...)` and `.addEventListener('change', ...)` for event listeners
+  - Direct `.value` property access to read/write values
+- Must work in standard browsers without Roll20
+- Provides real-time visual feedback during development
+
+**When syncing files:** HTML structure must be identical, but `<script>` sections will be completely different.
+
 ### Reference Materials
 
-1. **Documentation**: `MechWarrior 1e/docs/`
+1. **Documentation**: `docs/Roll20 Wiki/`
    - **COMPLETE Roll20 wiki saved locally** - All character sheet development guides
-   - See "Essential Roll20 Concepts & Local Documentation" section below for index
-   - **A Sheet Author's Journey tutorial**: `MechWarrior 1e/docs/A Sheet Author's Journey/`
+   - See "Essential Roll20 Concepts & Local Documentation" section above for index
+   - **A Sheet Author's Journey tutorial**: `docs/Roll20 Wiki/A Sheet Author's Journey/`
      - Step-by-step tutorial files `1.html` through `6.html`
 
 2. **Reference image**: `MechWarrior 1e/img/character-sheet.png` - Original 1e character sheet
@@ -442,12 +477,45 @@ From the reference sheets:
 MechWarrior 1e/
 ├── MechWarrior_1e.html          # Main sheet HTML
 ├── MechWarrior_1e.css           # Styling
+├── MW1e_preview.html            # Preview file for local testing (see note below)
 ├── sheet.json                   # Metadata (critical!)
 ├── preview.png                  # Preview image
 ├── img/                         # Reference images
 │   └── character-sheet.png      # Original 1e sheet reference
 └── translation.json             # (Optional) i18n support
 ```
+
+**Preview File Synchronization (see CRITICAL rule above)**
+- `MW1e_preview.html` is a standalone HTML file used for local browser testing
+- It wraps the sheet content from `MechWarrior_1e.html` with proper HTML document structure
+- The sheet content (inside `<div class="sheet-mechwarrior">`) MUST be identical in both files
+- Only the outer wrapper differs (MW1e_preview.html has `<!DOCTYPE>`, `<head>`, `<body>` tags)
+- **See the "🚨 CRITICAL: File Synchronization Rule" section above for the mandatory workflow**
+
+### Automation Options for File Synchronization
+
+**Option 1: Manual Reminder (Current)**
+- Document requirement in CLAUDE.md (done)
+- Rely on careful review and testing
+
+**Option 2: Node.js Sync Script**
+Create a script to extract sheet content and update both files:
+```javascript
+// sync-sheet.js - Extracts content from main sheet and updates preview
+const fs = require('fs');
+// Read MechWarrior_1e.html, extract sheet content, update MW1e_preview.html
+```
+
+**Option 3: Build Process**
+- Use a templating system where sheet content is in a separate file
+- Build script generates both MechWarrior_1e.html and MW1e_preview.html
+- Similar to how Pathfinder Community sheet uses webpack
+
+**Option 4: Symlinks** (Not recommended)
+- Won't work well because files have different structures
+- Preview needs HTML wrapper that production doesn't
+
+**Recommended Approach**: Option 2 (sync script) provides good balance of automation without complex build process. Can be run manually before testing or committing changes.
 
 ## Getting Help
 

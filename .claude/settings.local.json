@@ -5,7 +5,8 @@
       "WebFetch(domain:help.roll20.net)",
       "Bash(for:*)",
       "Bash(do echo \"$f\")",
-      "Bash(done)"
+      "Bash(done)",
+      "Bash(node sync-sheet.js:*)"
     ],
     "deny": [],
     "ask": []
