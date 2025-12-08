@@ -6,7 +6,14 @@
       "Bash(for:*)",
       "Bash(do echo \"$f\")",
       "Bash(done)",
-      "Bash(node sync-sheet.js:*)"
+      "Bash(node sync-sheet.js:*)",
+      "Bash(git config:*)",
+      "Bash(git commit:*)",
+      "Bash(python update-all-skills.py:*)",
+      "Bash(ls:*)",
+      "Bash(python add-skill-xp-costs.py:*)",
+      "Bash(python:*)",
+      "Bash(node:*)"
     ],
     "deny": [],
     "ask": []

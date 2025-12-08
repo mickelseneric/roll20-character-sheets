@@ -16,23 +16,108 @@
     letter-spacing: 8px;
     text-align: center;
     color: #c8d0d8;
-    margin: 0 0 30px 0;
+    margin: 0 0 20px 0;
     text-transform: uppercase;
+    border-bottom: 2px solid #b2854e;
 }
 
-/* Character Section Container */
-.sheet-character-section {
-    position: relative;
+/* Tab System */
+input.sheet-tab {
+    display: none; /* Hide radio buttons completely */
 }
 
-/* Hexagonal Border Container */
-.sheet-section-container {
-    background-color: #4a5a6a;
-    border: 2px solid #6a7a8a;
-    padding: 25px 30px;
+label.sheet-tab-label {
+    background-color: #6a7a8a; /* Border color */
+    color: #c8d0d8;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 2px; /* Outer padding for border */
+    margin-right: 8px;
+    margin-bottom: 0;
     position: relative;
-    display: flex;
-    gap: 40px;
+    text-align: center;
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    -webkit-clip-path: polygon(
+        8px 0%,
+        calc(100% - 8px) 0%,
+        100% 8px,
+        100% calc(100% - 8px),
+        calc(100% - 8px) 100%,
+        8px 100%,
+        0% calc(100% - 8px),
+        0% 8px
+    );
+    clip-path: polygon(
+        8px 0%,
+        calc(100% - 8px) 0%,
+        100% 8px,
+        100% calc(100% - 8px),
+        calc(100% - 8px) 100%,
+        8px 100%,
+        0% calc(100% - 8px),
+        0% 8px
+    );
+    width: auto;
+    max-width: 200px;
+}
+
+/* Inner label background */
+label.sheet-tab-label::before {
+    content: attr(data-label);
+    display: block;
+    background-color: #4a5a6a; /* Fill color */
+    padding: 4px 18px;
+    -webkit-clip-path: polygon(
+        7px 0%,
+        calc(100% - 7px) 0%,
+        100% 7px,
+        100% calc(100% - 7px),
+        calc(100% - 7px) 100%,
+        7px 100%,
+        0% calc(100% - 7px),
+        0% 7px
+    );
+    clip-path: polygon(
+        7px 0%,
+        calc(100% - 7px) 0%,
+        100% 7px,
+        100% calc(100% - 7px),
+        calc(100% - 7px) 100%,
+        7px 100%,
+        0% calc(100% - 7px),
+        0% 7px
+    );
+}
+
+input.sheet-tab:checked + label.sheet-tab-label {
+    background-color: #b2854e; /* Border color when active */
+    color: #2a3a4a;
+}
+
+input.sheet-tab:checked + label.sheet-tab-label::before {
+    background-color: #b2854e; /* Fill color when active */
+}
+
+/* Tab Content */
+div.sheet-tab-content {
+    display: none;
+    margin-top: 20px;
+}
+
+/* Show active tab */
+input.sheet-tab-character:checked ~ div.sheet-tab-character,
+input.sheet-tab-combat:checked ~ div.sheet-tab-combat {
+    display: block;
+}
+
+/* Reusable Angled Panel with Chamfered Corners */
+.sheet-angled-panel {
+    background-color: #6a7a8a; /* Border color as background */
+    padding: 2px; /* Border thickness */
+    position: relative;
     clip-path: polygon(
         20px 0%,
         calc(100% - 20px) 0%,
@@ -45,6 +130,45 @@
     );
 }
 
+/* Inner content area */
+.sheet-angled-panel > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* Create inner panel background using ::before */
+.sheet-angled-panel::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    right: 2px;
+    bottom: 2px;
+    background-color: #4a5a6a;
+    clip-path: polygon(
+        19px 0%,
+        calc(100% - 19px) 0%,
+        100% 19px,
+        100% calc(100% - 19px),
+        calc(100% - 19px) 100%,
+        19px 100%,
+        0% calc(100% - 19px),
+        0% 19px
+    );
+    z-index: 0;
+}
+
+/* Character Section Container */
+.sheet-character-section {
+    position: relative;
+}
+
+/* Section Container Layout */
+.sheet-section-container {
+    display: flex;
+    padding: 25px 30px;
+}
+
 /* Section Headers */
 .sheet-section-header {
     font-size: 14px;
@@ -53,7 +177,7 @@
     color: #c8d0d8;
     margin: 0 0 20px 0;
     text-transform: uppercase;
-    border-bottom: 1px solid #6a7a8a;
+    border-bottom: 1px solid #b2854e;
     padding-bottom: 8px;
 }
 
@@ -137,7 +261,7 @@
 .sheet-skill-header-row {
     display: flex;
     align-items: center;
-    border-bottom: 2px solid #6a7a8a;
+    border-bottom: 2px solid #b2854e;
     padding-bottom: 8px;
     margin-bottom: 8px;
 }
@@ -237,4 +361,296 @@
     color: #8a9aaa;
     margin-left: 10px;
     white-space: nowrap;
+}
+
+.sheet-saving-roll-target input {
+    width: 30px;
+    height: auto;
+    background-color: transparent;
+    border: none;
+    color: #8a9aaa;
+    font-size: 10px;
+    padding: 0;
+    text-align: center;
+    display: inline;
+}
+
+/* XP Cost Display */
+.sheet-xp-cost {
+    font-size: 9px;
+    color: #b2854e;
+    margin-left: 10px;
+    white-space: nowrap;
+    font-weight: bold;
+}
+
+.sheet-xp-cost span {
+    color: #d2a56e;
+}
+
+/* XP Field Label Alignment */
+.sheet-user-data .sheet-field-group label {
+    min-width: 150px;
+}
+
+/* XP Input Field Widths - Make them consistent */
+input[name="attr_total_xp"],
+input[name="attr_xp_available"] {
+    flex: 0 0 auto;
+    width: 180px;
+}
+
+/* XP Available Container - Highlighted when negative */
+.sheet-xp-negative-flag {
+    display: none;
+}
+
+.sheet-xp-available-container {
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    margin: -5px;
+    padding: 5px;
+}
+
+input[name="attr_xp_available"] {
+    font-weight: bold;
+}
+
+/* Bright red background when XP is negative */
+input.sheet-xp-negative-flag:checked ~ .sheet-xp-available-container {
+    background-color: #ff3333 !important;
+}
+
+input.sheet-xp-negative-flag:checked ~ .sheet-xp-available-container label,
+input.sheet-xp-negative-flag:checked ~ .sheet-xp-available-container input {
+    color: #ffffff !important;
+}
+
+/* Skill XP Cost Column */
+.sheet-skill-row input[name*="_xp_cost"] {
+    width: 60px;
+    font-size: 10px;
+    color: #d2a56e;
+    font-weight: bold;
+}
+
+/* Combat Tab Styles */
+#combat-stats {
+    margin-bottom: 20px;
+}
+
+.sheet-combat-stats-row {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 15px;
+}
+
+.sheet-combat-stats-row .sheet-field-group {
+    flex: 0 1 auto;
+    margin-bottom: 0;
+}
+
+.sheet-combat-stats-row .sheet-field-group label {
+    width: auto;
+    margin-right: 10px;
+}
+
+.sheet-combat-stats-row .sheet-field-group input {
+    width: 80px;
+    text-align: center;
+}
+
+/* Damage Tracking Section */
+#damage-section {
+    margin-top: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+#damage-section .sheet-section-header {
+    text-align: center;
+    font-size: 14px;
+}
+
+.sheet-damage-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+/* Head - centered at top */
+.sheet-damage-row-single {
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+/* Torso row with arms - spread out like stick figure */
+.sheet-damage-row-triple {
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 20px;
+}
+
+/* Legs - offset inward by 50% from the arms */
+.sheet-damage-row-double {
+    justify-content: center;
+    gap: 60px;
+}
+
+.sheet-damage-location {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.sheet-damage-location label {
+    font-size: 12px;
+    font-weight: normal;
+    letter-spacing: 1px;
+    color: #c8d0d8;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.sheet-damage-values {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: 2px solid #6a7a8a;
+    padding: 8px 15px;
+    background-color: rgba(106, 122, 138, 0.2);
+}
+
+.sheet-damage-values input {
+    width: 40px;
+    height: auto;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #6a7a8a;
+    color: #c8d0d8;
+    font-size: 16px;
+    text-align: center;
+    padding: 2px 0;
+}
+
+.sheet-damage-values input:focus {
+    outline: none;
+    border-bottom: 2px solid #8a9aaa;
+}
+
+.sheet-damage-separator {
+    font-size: 16px;
+    color: #8a9aaa;
+    font-weight: bold;
+}
+
+.sheet-damage-max {
+    font-size: 16px;
+    color: #c8d0d8;
+    width: 40px;
+    text-align: center;
+}
+
+/* Weapons Section */
+#weapons-section {
+    margin-top: 20px;
+    padding: 20px;
+    flex-direction: column;
+}
+
+#weapons-section .sheet-section-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.sheet-weapons-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #c8d0d8;
+}
+
+.sheet-weapons-table thead th {
+    background-color: rgba(106, 122, 138, 0.3);
+    border: 1px solid #6a7a8a;
+    padding: 8px;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.sheet-weapons-header-main th {
+    border-bottom: none;
+}
+
+.sheet-weapons-header-sub th {
+    border-top: none;
+    font-size: 10px;
+    padding: 4px;
+}
+
+.sheet-weapons-table tbody td {
+    border: 1px solid #6a7a8a;
+    padding: 4px;
+    background-color: rgba(74, 90, 106, 0.2);
+}
+
+.sheet-weapon-row input {
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    color: #c8d0d8;
+    font-size: 12px;
+    padding: 4px;
+    box-sizing: border-box;
+}
+
+.sheet-weapon-row input:focus {
+    outline: none;
+    background-color: rgba(200, 208, 216, 0.05);
+}
+
+.sheet-weapon-row input::placeholder {
+    color: #5a6a7a;
+    font-style: italic;
+}
+
+/* Column widths for weapons table */
+.sheet-weapons-table th:nth-child(1),
+.sheet-weapons-table td:nth-child(1) {
+    width: 25%;
+}
+
+.sheet-weapons-table th:nth-child(2),
+.sheet-weapons-table td:nth-child(2) {
+    width: 15%;
+}
+
+.sheet-weapons-table th:nth-child(3),
+.sheet-weapons-table td:nth-child(3) {
+    width: 12%;
+}
+
+.sheet-weapons-table th:nth-child(4),
+.sheet-weapons-table td:nth-child(4),
+.sheet-weapons-table th:nth-child(5),
+.sheet-weapons-table td:nth-child(5),
+.sheet-weapons-table th:nth-child(6),
+.sheet-weapons-table td:nth-child(6) {
+    width: 10%;
+}
+
+.sheet-weapons-table th:nth-child(7),
+.sheet-weapons-table td:nth-child(7) {
+    width: 8%;
+    text-align: center;
 }

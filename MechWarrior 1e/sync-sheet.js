@@ -18,9 +18,17 @@ console.log('Reading sheet files...');
 const mainContent = fs.readFileSync(MAIN_SHEET, 'utf8');
 const previewContent = fs.readFileSync(PREVIEW_SHEET, 'utf8');
 
-// Extract the sheet content from main file (everything inside)
-// The main file is just the sheet content without HTML wrapper
-const sheetContent = mainContent;
+// Extract the sheet HTML content (excluding Roll20 sheet workers)
+// Split main content by script tag
+const mainScriptMatch = mainContent.match(/<script type="text\/worker">[\s\S]*?<\/script>/);
+let sheetHTMLOnly = mainContent;
+if (mainScriptMatch) {
+    sheetHTMLOnly = mainContent.substring(0, mainScriptMatch.index).trim();
+}
+
+// Extract existing browser JavaScript from preview file
+const previewScriptMatch = previewContent.match(/<script>[\s\S]*?<\/script>/);
+const previewScript = previewScriptMatch ? previewScriptMatch[0] : '';
 
 // Find the position in preview file where sheet content starts and ends
 // Sheet content is between <body> and </body>
@@ -35,10 +43,11 @@ if (!bodyStartMatch || !bodyEndMatch) {
 const bodyStart = bodyStartMatch.index + bodyStartMatch[0].length;
 const bodyEnd = bodyEndMatch.index;
 
-// Build new preview content
+// Build new preview content: HTML from main + preserved browser JavaScript
 const newPreviewContent =
     previewContent.substring(0, bodyStart) +
-    '\n    ' + sheetContent.trim() + '\n' +
+    '\n    ' + sheetHTMLOnly +
+    '\n\n' + previewScript + '\n' +
     previewContent.substring(bodyEnd);
 
 // Write updated preview file
