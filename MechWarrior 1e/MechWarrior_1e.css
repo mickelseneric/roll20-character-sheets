@@ -16,9 +16,101 @@
     letter-spacing: 8px;
     text-align: center;
     color: #c8d0d8;
-    margin: 0 0 30px 0;
+    margin: 0 0 20px 0;
     text-transform: uppercase;
     border-bottom: 2px solid #b2854e;
+}
+
+/* Tab System */
+input.sheet-tab {
+    display: none; /* Hide radio buttons completely */
+}
+
+label.sheet-tab-label {
+    background-color: #6a7a8a; /* Border color */
+    color: #c8d0d8;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 2px; /* Outer padding for border */
+    margin-right: 8px;
+    margin-bottom: 0;
+    position: relative;
+    text-align: center;
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    -webkit-clip-path: polygon(
+        8px 0%,
+        calc(100% - 8px) 0%,
+        100% 8px,
+        100% calc(100% - 8px),
+        calc(100% - 8px) 100%,
+        8px 100%,
+        0% calc(100% - 8px),
+        0% 8px
+    );
+    clip-path: polygon(
+        8px 0%,
+        calc(100% - 8px) 0%,
+        100% 8px,
+        100% calc(100% - 8px),
+        calc(100% - 8px) 100%,
+        8px 100%,
+        0% calc(100% - 8px),
+        0% 8px
+    );
+    width: auto;
+    max-width: 200px;
+}
+
+/* Inner label background */
+label.sheet-tab-label::before {
+    content: attr(data-label);
+    display: block;
+    background-color: #4a5a6a; /* Fill color */
+    padding: 4px 18px;
+    -webkit-clip-path: polygon(
+        7px 0%,
+        calc(100% - 7px) 0%,
+        100% 7px,
+        100% calc(100% - 7px),
+        calc(100% - 7px) 100%,
+        7px 100%,
+        0% calc(100% - 7px),
+        0% 7px
+    );
+    clip-path: polygon(
+        7px 0%,
+        calc(100% - 7px) 0%,
+        100% 7px,
+        100% calc(100% - 7px),
+        calc(100% - 7px) 100%,
+        7px 100%,
+        0% calc(100% - 7px),
+        0% 7px
+    );
+}
+
+input.sheet-tab:checked + label.sheet-tab-label {
+    background-color: #b2854e; /* Border color when active */
+    color: #2a3a4a;
+}
+
+input.sheet-tab:checked + label.sheet-tab-label::before {
+    background-color: #b2854e; /* Fill color when active */
+}
+
+/* Tab Content */
+div.sheet-tab-content {
+    display: none;
+    margin-top: 20px;
+}
+
+/* Show active tab */
+input.sheet-tab-character:checked ~ div.sheet-tab-character,
+input.sheet-tab-combat:checked ~ div.sheet-tab-combat {
+    display: block;
 }
 
 /* Reusable Angled Panel with Chamfered Corners */
@@ -270,4 +362,16 @@
     color: #8a9aaa;
     margin-left: 10px;
     white-space: nowrap;
+}
+
+.sheet-saving-roll-target input {
+    width: 30px;
+    height: auto;
+    background-color: transparent;
+    border: none;
+    color: #8a9aaa;
+    font-size: 10px;
+    padding: 0;
+    text-align: center;
+    display: inline;
 }
