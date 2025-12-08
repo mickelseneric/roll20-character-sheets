@@ -166,7 +166,6 @@ input.sheet-tab-combat:checked ~ div.sheet-tab-combat {
 /* Section Container Layout */
 .sheet-section-container {
     display: flex;
-    gap: 40px;
     padding: 25px 30px;
 }
 
@@ -374,4 +373,284 @@ input.sheet-tab-combat:checked ~ div.sheet-tab-combat {
     padding: 0;
     text-align: center;
     display: inline;
+}
+
+/* XP Cost Display */
+.sheet-xp-cost {
+    font-size: 9px;
+    color: #b2854e;
+    margin-left: 10px;
+    white-space: nowrap;
+    font-weight: bold;
+}
+
+.sheet-xp-cost span {
+    color: #d2a56e;
+}
+
+/* XP Field Label Alignment */
+.sheet-user-data .sheet-field-group label {
+    min-width: 150px;
+}
+
+/* XP Input Field Widths - Make them consistent */
+input[name="attr_total_xp"],
+input[name="attr_xp_available"] {
+    flex: 0 0 auto;
+    width: 180px;
+}
+
+/* XP Available Container - Highlighted when negative */
+.sheet-xp-negative-flag {
+    display: none;
+}
+
+.sheet-xp-available-container {
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    margin: -5px;
+    padding: 5px;
+}
+
+input[name="attr_xp_available"] {
+    font-weight: bold;
+}
+
+/* Bright red background when XP is negative */
+input.sheet-xp-negative-flag:checked ~ .sheet-xp-available-container {
+    background-color: #ff3333 !important;
+}
+
+input.sheet-xp-negative-flag:checked ~ .sheet-xp-available-container label,
+input.sheet-xp-negative-flag:checked ~ .sheet-xp-available-container input {
+    color: #ffffff !important;
+}
+
+/* Skill XP Cost Column */
+.sheet-skill-row input[name*="_xp_cost"] {
+    width: 60px;
+    font-size: 10px;
+    color: #d2a56e;
+    font-weight: bold;
+}
+
+/* Combat Tab Styles */
+#combat-stats {
+    margin-bottom: 20px;
+}
+
+.sheet-combat-stats-row {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 15px;
+}
+
+.sheet-combat-stats-row .sheet-field-group {
+    flex: 0 1 auto;
+    margin-bottom: 0;
+}
+
+.sheet-combat-stats-row .sheet-field-group label {
+    width: auto;
+    margin-right: 10px;
+}
+
+.sheet-combat-stats-row .sheet-field-group input {
+    width: 80px;
+    text-align: center;
+}
+
+/* Damage Tracking Section */
+#damage-section {
+    margin-top: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+#damage-section .sheet-section-header {
+    text-align: center;
+    font-size: 14px;
+}
+
+.sheet-damage-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+/* Head - centered at top */
+.sheet-damage-row-single {
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+/* Torso row with arms - spread out like stick figure */
+.sheet-damage-row-triple {
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 20px;
+}
+
+/* Legs - offset inward by 50% from the arms */
+.sheet-damage-row-double {
+    justify-content: center;
+    gap: 60px;
+}
+
+.sheet-damage-location {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.sheet-damage-location label {
+    font-size: 12px;
+    font-weight: normal;
+    letter-spacing: 1px;
+    color: #c8d0d8;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.sheet-damage-values {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: 2px solid #6a7a8a;
+    padding: 8px 15px;
+    background-color: rgba(106, 122, 138, 0.2);
+}
+
+.sheet-damage-values input {
+    width: 40px;
+    height: auto;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #6a7a8a;
+    color: #c8d0d8;
+    font-size: 16px;
+    text-align: center;
+    padding: 2px 0;
+}
+
+.sheet-damage-values input:focus {
+    outline: none;
+    border-bottom: 2px solid #8a9aaa;
+}
+
+.sheet-damage-separator {
+    font-size: 16px;
+    color: #8a9aaa;
+    font-weight: bold;
+}
+
+.sheet-damage-max {
+    font-size: 16px;
+    color: #c8d0d8;
+    width: 40px;
+    text-align: center;
+}
+
+/* Weapons Section */
+#weapons-section {
+    margin-top: 20px;
+    padding: 20px;
+    flex-direction: column;
+}
+
+#weapons-section .sheet-section-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.sheet-weapons-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #c8d0d8;
+}
+
+.sheet-weapons-table thead th {
+    background-color: rgba(106, 122, 138, 0.3);
+    border: 1px solid #6a7a8a;
+    padding: 8px;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.sheet-weapons-header-main th {
+    border-bottom: none;
+}
+
+.sheet-weapons-header-sub th {
+    border-top: none;
+    font-size: 10px;
+    padding: 4px;
+}
+
+.sheet-weapons-table tbody td {
+    border: 1px solid #6a7a8a;
+    padding: 4px;
+    background-color: rgba(74, 90, 106, 0.2);
+}
+
+.sheet-weapon-row input {
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    color: #c8d0d8;
+    font-size: 12px;
+    padding: 4px;
+    box-sizing: border-box;
+}
+
+.sheet-weapon-row input:focus {
+    outline: none;
+    background-color: rgba(200, 208, 216, 0.05);
+}
+
+.sheet-weapon-row input::placeholder {
+    color: #5a6a7a;
+    font-style: italic;
+}
+
+/* Column widths for weapons table */
+.sheet-weapons-table th:nth-child(1),
+.sheet-weapons-table td:nth-child(1) {
+    width: 25%;
+}
+
+.sheet-weapons-table th:nth-child(2),
+.sheet-weapons-table td:nth-child(2) {
+    width: 15%;
+}
+
+.sheet-weapons-table th:nth-child(3),
+.sheet-weapons-table td:nth-child(3) {
+    width: 12%;
+}
+
+.sheet-weapons-table th:nth-child(4),
+.sheet-weapons-table td:nth-child(4),
+.sheet-weapons-table th:nth-child(5),
+.sheet-weapons-table td:nth-child(5),
+.sheet-weapons-table th:nth-child(6),
+.sheet-weapons-table td:nth-child(6) {
+    width: 10%;
+}
+
+.sheet-weapons-table th:nth-child(7),
+.sheet-weapons-table td:nth-child(7) {
+    width: 8%;
+    text-align: center;
 }

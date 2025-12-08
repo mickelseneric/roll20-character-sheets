@@ -10,7 +10,10 @@
       "Bash(git config:*)",
       "Bash(git commit:*)",
       "Bash(python update-all-skills.py:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(python add-skill-xp-costs.py:*)",
+      "Bash(python:*)",
+      "Bash(node:*)"
     ],
     "deny": [],
     "ask": []
