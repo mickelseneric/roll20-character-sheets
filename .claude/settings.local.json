@@ -6,7 +6,9 @@
       "Bash(for:*)",
       "Bash(do echo \"$f\")",
       "Bash(done)",
-      "Bash(node sync-sheet.js:*)"
+      "Bash(node sync-sheet.js:*)",
+      "Bash(git config:*)",
+      "Bash(git commit:*)"
     ],
     "deny": [],
     "ask": []
