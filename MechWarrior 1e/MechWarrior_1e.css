@@ -175,6 +175,7 @@
 
 .sheet-skill-row .sheet-skill-name {
     font-size: 11px;
+    font-weight: bold;
     color: #c8d0d8;
     width: 180px;
     flex-shrink: 0;
@@ -182,10 +183,19 @@
     box-sizing: border-box;
 }
 
+.sheet-skill-row .sheet-skill-name em {
+    font-size: 10px;
+    font-weight: normal;
+}
+
 .sheet-sub-skill .sheet-skill-name {
     padding-left: 15px;
     font-size: 10px;
     font-style: italic;
+}
+
+.sheet-sub-skill .sheet-skill-name em {
+    font-size: 9px;
 }
 
 .sheet-skill-row input {
