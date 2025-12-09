@@ -52,6 +52,7 @@
                     <div class="sheet-attr-header-name">ATTRIBUTES</div>
                     <div class="sheet-attr-header-cell">ATTR<br/>LEVEL</div>
                     <div class="sheet-attr-header-cell">SAVING ROLL<br/>TARGET</div>
+                    <div class="sheet-attr-header-cell">ROLL</div>
                 </div>
 
                 <!-- Attribute Rows -->
@@ -60,6 +61,7 @@
                     <input type="number" name="attr_body" value="6" />
                     <input type="hidden" name="attr_body_xp_cost" value="0" />
                     <input type="text" name="attr_body_save" readonly />
+                    <button type="roll" name="roll_body_save" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=BODY Save}} {{base_target=@{body_save}}} {{combat_mod=@{combat_modifier}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{body_save} - @{combat_modifier} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + @{combat_modifier} + ?{Situational Modifier|0}]]}}"><img src="img/2D6.png" alt="Roll" /></button>
                 </div>
 
                 <div class="sheet-attr-row">
@@ -67,6 +69,7 @@
                     <input type="number" name="attr_dex" value="6" />
                     <input type="hidden" name="attr_dex_xp_cost" value="0" />
                     <input type="text" name="attr_dex_save" readonly />
+                    <button type="roll" name="roll_dex_save" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=DEX Save}} {{base_target=@{dex_save}}} {{combat_mod=@{combat_modifier}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{dex_save} - @{combat_modifier} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + @{combat_modifier} + ?{Situational Modifier|0}]]}}"><img src="img/2D6.png" alt="Roll" /></button>
                 </div>
 
                 <div class="sheet-attr-row">
@@ -74,6 +77,7 @@
                     <input type="number" name="attr_lrn" value="6" />
                     <input type="hidden" name="attr_lrn_xp_cost" value="0" />
                     <input type="text" name="attr_lrn_save" readonly />
+                    <button type="roll" name="roll_lrn_save" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=LRN Save}} {{base_target=@{lrn_save}}} {{combat_mod=@{combat_modifier}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{lrn_save} - @{combat_modifier} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + @{combat_modifier} + ?{Situational Modifier|0}]]}}"><img src="img/2D6.png" alt="Roll" /></button>
                 </div>
 
                 <div class="sheet-attr-row">
@@ -81,6 +85,7 @@
                     <input type="number" name="attr_cha" value="6" />
                     <input type="hidden" name="attr_cha_xp_cost" value="0" />
                     <input type="text" name="attr_cha_save" readonly />
+                    <button type="roll" name="roll_cha_save" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=CHA Save}} {{base_target=@{cha_save}}} {{combat_mod=@{combat_modifier}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{cha_save} - @{combat_modifier} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + @{combat_modifier} + ?{Situational Modifier|0}]]}}"><img src="img/2D6.png" alt="Roll" /></button>
                 </div>
 
             </div>
@@ -98,103 +103,142 @@
                         <div class="sheet-skill-header-cell">SKILL<br/>LEVEL</div>
                         <div class="sheet-skill-header-cell">ATTRIBUTE<br/>TARGET</div>
                         <div class="sheet-skill-header-cell">MODIFIED SKILL<br/>ROLL TARGET</div>
+                        <div class="sheet-skill-header-cell">ROLL</div>
                     </div>
 
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Athletics <em>(BODY/DEX)</em></div>
                         <input type="number" name="attr_athletics_level" value="0" />
                         <input type="text" name="attr_athletics_attr" readonly />
-                        <input type="text" name="attr_athletics_mod" readonly />                    </div>
+                        <input type="text" name="attr_athletics_mod" readonly />
+                        <button type="roll" name="roll_athletics" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Athletics}} {{base_target=@{athletics_mod}}} {{combat_mod=@{combat_modifier}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{athletics_mod} - @{combat_modifier} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + @{combat_modifier} + ?{Situational Modifier|0}]]}}"><img src="img/2D6.png" alt="Roll" /></button>
+                    </div>
                     <div class="sheet-skill-row sheet-sub-skill">
                         <div class="sheet-skill-name">Aerobatics <em>(BODY/DEX)</em></div>
                         <input type="number" name="attr_aerobatics_level" value="0" />
                         <input type="text" name="attr_aerobatics_attr" readonly />
-                        <input type="text" name="attr_aerobatics_mod" readonly />                    </div>
+                        <input type="text" name="attr_aerobatics_mod" readonly />
+                        <button type="roll" name="roll_aerobatics" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Aerobatics}} {{base_target=@{aerobatics_mod}}} {{combat_mod=@{combat_modifier}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{aerobatics_mod} - @{combat_modifier} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + @{combat_modifier} + ?{Situational Modifier|0}]]}}"><img src="img/2D6.png" alt="Roll" /></button>
+                    </div>
                     <div class="sheet-skill-row sheet-sub-skill">
                         <div class="sheet-skill-name">Climbing <em>(BODY/DEX)</em></div>
                         <input type="number" name="attr_climbing_level" value="0" />
                         <input type="text" name="attr_climbing_attr" readonly />
-                        <input type="text" name="attr_climbing_mod" readonly />                    </div>
+                        <input type="text" name="attr_climbing_mod" readonly />
+                        <button type="roll" name="roll_climbing" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Climbing}} {{base_target=@{climbing_mod}}} {{combat_mod=@{combat_modifier}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{climbing_mod} - @{combat_modifier} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + @{combat_modifier} + ?{Situational Modifier|0}]]}}"><img src="img/2D6.png" alt="Roll" /></button>
+                    </div>
                     <div class="sheet-skill-row sheet-sub-skill">
                         <div class="sheet-skill-name">Equestrian <em>(BODY/DEX)</em></div>
                         <input type="number" name="attr_equestrian_level" value="0" />
                         <input type="text" name="attr_equestrian_attr" readonly />
-                        <input type="text" name="attr_equestrian_mod" readonly />                    </div>
+                        <input type="text" name="attr_equestrian_mod" readonly />
+                        <button type="roll" name="roll_equestrian" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Equestrian}} {{base_target=@{equestrian_mod}}} {{combat_mod=@{combat_modifier}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{equestrian_mod} - @{combat_modifier} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + @{combat_modifier} + ?{Situational Modifier|0}]]}}"><img src="img/2D6.png" alt="Roll" /></button>
+                    </div>
                     <div class="sheet-skill-row sheet-sub-skill">
                         <div class="sheet-skill-name">Running <em>(BODY/DEX)</em></div>
                         <input type="number" name="attr_running_level" value="0" />
                         <input type="text" name="attr_running_attr" readonly />
-                        <input type="text" name="attr_running_mod" readonly />                    </div>
+                        <input type="text" name="attr_running_mod" readonly />
+                        <button type="roll" name="roll_running" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Running}} {{base_target=@{running_mod}}} {{combat_mod=@{combat_modifier}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{running_mod} - @{combat_modifier} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + @{combat_modifier} + ?{Situational Modifier|0}]]}}"><img src="img/2D6.png" alt="Roll" /></button>
+                    </div>
                     <div class="sheet-skill-row sheet-sub-skill">
                         <div class="sheet-skill-name">Swimming <em>(BODY/DEX)</em></div>
                         <input type="number" name="attr_swimming_level" value="0" />
                         <input type="text" name="attr_swimming_attr" readonly />
-                        <input type="text" name="attr_swimming_mod" readonly />                    </div>
+                        <input type="text" name="attr_swimming_mod" readonly />
+                        <button type="roll" name="roll_swimming" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Swimming}} {{base_target=@{swimming_mod}}} {{combat_mod=@{combat_modifier}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{swimming_mod} - @{combat_modifier} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + @{combat_modifier} + ?{Situational Modifier|0}]]}}"><img src="img/2D6.png" alt="Roll" /></button>
+                    </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Bow/Blade <em>(DEX)</em></div>
                         <input type="number" name="attr_bow_blade_level" value="0" />
                         <input type="text" name="attr_bow_blade_attr" readonly />
-                        <input type="text" name="attr_bow_blade_mod" readonly />                    </div>
+                        <input type="text" name="attr_bow_blade_mod" readonly />
+                        <button type="roll" name="roll_bow_blade" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Bow/Blade}} {{base_target=@{bow_blade_mod}}} {{combat_mod=@{combat_modifier}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{bow_blade_mod} - @{combat_modifier} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + @{combat_modifier} + ?{Situational Modifier|0}]]}}"><img src="img/2D6.png" alt="Roll" /></button>
+                    </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Brawling <em>(BODY)</em></div>
                         <input type="number" name="attr_brawling_level" value="0" />
                         <input type="text" name="attr_brawling_attr" readonly />
-                        <input type="text" name="attr_brawling_mod" readonly />                    </div>
+                        <input type="text" name="attr_brawling_mod" readonly />
+                        <button type="roll" name="roll_brawling" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Brawling}} {{base_target=@{brawling_mod}}} {{combat_mod=@{combat_modifier}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{brawling_mod} - @{combat_modifier} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + @{combat_modifier} + ?{Situational Modifier|0}]]}}"><img src="img/2D6.png" alt="Roll" /></button>
+                    </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Computer <em>(LRN)</em></div>
                         <input type="number" name="attr_computer_level" value="0" />
                         <input type="text" name="attr_computer_attr" readonly />
-                        <input type="text" name="attr_computer_mod" readonly />                    </div>
+                        <input type="text" name="attr_computer_mod" readonly />
+                        <button type="roll" name="roll_computer" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Computer}} {{base_target=@{computer_mod}}} {{combat_mod=@{combat_modifier}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{computer_mod} - @{combat_modifier} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + @{combat_modifier} + ?{Situational Modifier|0}]]}}"><img src="img/2D6.png" alt="Roll" /></button>
+                    </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Diplomacy <em>(CHA)</em></div>
                         <input type="number" name="attr_diplomacy_level" value="0" />
                         <input type="text" name="attr_diplomacy_attr" readonly />
-                        <input type="text" name="attr_diplomacy_mod" readonly />                    </div>
+                        <input type="text" name="attr_diplomacy_mod" readonly />
+                        <button type="roll" name="roll_diplomacy" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Diplomacy}} {{base_target=@{diplomacy_mod}}} {{combat_mod=@{combat_modifier}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{diplomacy_mod} - @{combat_modifier} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + @{combat_modifier} + ?{Situational Modifier|0}]]}}"><img src="img/2D6.png" alt="Roll" /></button>
+                    </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Driver <em>(DEX)</em></div>
                         <input type="number" name="attr_driver_level" value="0" />
                         <input type="text" name="attr_driver_attr" readonly />
-                        <input type="text" name="attr_driver_mod" readonly />                    </div>
+                        <input type="text" name="attr_driver_mod" readonly />
+                        <button type="roll" name="roll_driver" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Driver}} {{base_target=@{driver_mod}}} {{combat_mod=@{combat_modifier}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{driver_mod} - @{combat_modifier} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + @{combat_modifier} + ?{Situational Modifier|0}]]}}"><img src="img/2D6.png" alt="Roll" /></button>
+                    </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Engineering <em>(LRN)</em></div>
                         <input type="number" name="attr_engineering_level" value="0" />
                         <input type="text" name="attr_engineering_attr" readonly />
-                        <input type="text" name="attr_engineering_mod" readonly />                    </div>
+                        <input type="text" name="attr_engineering_mod" readonly />
+                        <button type="roll" name="roll_engineering" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Engineering}} {{base_target=@{engineering_mod}}} {{combat_mod=@{combat_modifier}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{engineering_mod} - @{combat_modifier} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + @{combat_modifier} + ?{Situational Modifier|0}]]}}"><img src="img/2D6.png" alt="Roll" /></button>
+                    </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Gunnery/Aerospace <em>(LRN)</em></div>
                         <input type="number" name="attr_gunnery_aerospace_level" value="0" />
                         <input type="text" name="attr_gunnery_aerospace_attr" readonly />
-                        <input type="text" name="attr_gunnery_aerospace_mod" readonly />                    </div>
+                        <input type="text" name="attr_gunnery_aerospace_mod" readonly />
+                        <button type="roll" name="roll_gunnery_aerospace" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Gunnery/Aerospace}} {{base_target=@{gunnery_aerospace_mod}}} {{combat_mod=@{combat_modifier}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{gunnery_aerospace_mod} - @{combat_modifier} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + @{combat_modifier} + ?{Situational Modifier|0}]]}}"><img src="img/2D6.png" alt="Roll" /></button>
+                    </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Gunnery/Artillery <em>(LRN)</em></div>
                         <input type="number" name="attr_gunnery_artillery_level" value="0" />
                         <input type="text" name="attr_gunnery_artillery_attr" readonly />
-                        <input type="text" name="attr_gunnery_artillery_mod" readonly />                    </div>
+                        <input type="text" name="attr_gunnery_artillery_mod" readonly />
+                        <button type="roll" name="roll_gunnery_artillery" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Gunnery/Artillery}} {{base_target=@{gunnery_artillery_mod}}} {{combat_mod=@{combat_modifier}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{gunnery_artillery_mod} - @{combat_modifier} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + @{combat_modifier} + ?{Situational Modifier|0}]]}}"><img src="img/2D6.png" alt="Roll" /></button>
+                    </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Gunnery/Mech <em>(DEX)</em></div>
                         <input type="number" name="attr_gunnery_mech_level" value="0" />
                         <input type="text" name="attr_gunnery_mech_attr" readonly />
-                        <input type="text" name="attr_gunnery_mech_mod" readonly />                    </div>
+                        <input type="text" name="attr_gunnery_mech_mod" readonly />
+                        <button type="roll" name="roll_gunnery_mech" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Gunnery/Mech}} {{base_target=@{gunnery_mech_mod}}} {{combat_mod=@{combat_modifier}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{gunnery_mech_mod} - @{combat_modifier} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + @{combat_modifier} + ?{Situational Modifier|0}]]}}"><img src="img/2D6.png" alt="Roll" /></button>
+                    </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Interrogation <em>(LRN/CHA)</em></div>
                         <input type="number" name="attr_interrogation_level" value="0" />
                         <input type="text" name="attr_interrogation_attr" readonly />
-                        <input type="text" name="attr_interrogation_mod" readonly />                    </div>
+                        <input type="text" name="attr_interrogation_mod" readonly />
+                        <button type="roll" name="roll_interrogation" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Interrogation}} {{base_target=@{interrogation_mod}}} {{combat_mod=@{combat_modifier}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{interrogation_mod} - @{combat_modifier} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + @{combat_modifier} + ?{Situational Modifier|0}]]}}"><img src="img/2D6.png" alt="Roll" /></button>
+                    </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Jump/Ship Navigation/Piloting <em>(LRN)</em></div>
                         <input type="number" name="attr_jumpship_level" value="0" />
                         <input type="text" name="attr_jumpship_attr" readonly />
-                        <input type="text" name="attr_jumpship_mod" readonly />                    </div>
+                        <input type="text" name="attr_jumpship_mod" readonly />
+                        <button type="roll" name="roll_jumpship" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Jump/Ship Nav/Piloting}} {{base_target=@{jumpship_mod}}} {{combat_mod=@{combat_modifier}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{jumpship_mod} - @{combat_modifier} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + @{combat_modifier} + ?{Situational Modifier|0}]]}}"><img src="img/2D6.png" alt="Roll" /></button>
+                    </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Land Management <em>(LRN)</em></div>
                         <input type="number" name="attr_land_mgmt_level" value="0" />
                         <input type="text" name="attr_land_mgmt_attr" readonly />
-                        <input type="text" name="attr_land_mgmt_mod" readonly />                    </div>
+                        <input type="text" name="attr_land_mgmt_mod" readonly />
+                        <button type="roll" name="roll_land_mgmt" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Land Management}} {{base_target=@{land_mgmt_mod}}} {{combat_mod=@{combat_modifier}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{land_mgmt_mod} - @{combat_modifier} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + @{combat_modifier} + ?{Situational Modifier|0}]]}}"><img src="img/2D6.png" alt="Roll" /></button>
+                    </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Leadership <em>(CHA)</em></div>
                         <input type="number" name="attr_leadership_level" value="0" />
                         <input type="text" name="attr_leadership_attr" readonly />
-                        <input type="text" name="attr_leadership_mod" readonly />                    </div>
+                        <input type="text" name="attr_leadership_mod" readonly />
+                        <button type="roll" name="roll_leadership" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Leadership}} {{base_target=@{leadership_mod}}} {{combat_mod=@{combat_modifier}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{leadership_mod} - @{combat_modifier} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + @{combat_modifier} + ?{Situational Modifier|0}]]}}"><img src="img/2D6.png" alt="Roll" /></button>
+                    </div>
                 </div>
 
                 <!-- Right Skills Column -->
@@ -204,98 +248,135 @@
                         <div class="sheet-skill-header-cell">SKILL<br/>LEVEL</div>
                         <div class="sheet-skill-header-cell">ATTRIBUTE<br/>TARGET</div>
                         <div class="sheet-skill-header-cell">MODIFIED SKILL<br/>ROLL TARGET</div>
+                        <div class="sheet-skill-header-cell">ROLL</div>
                     </div>
 
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Mechanical <em>(LRN)</em></div>
                         <input type="number" name="attr_mechanical_level" value="0" />
                         <input type="text" name="attr_mechanical_attr" readonly />
-                        <input type="text" name="attr_mechanical_mod" readonly />                    </div>
+                        <input type="text" name="attr_mechanical_mod" readonly />
+                        <button type="roll" name="roll_mechanical" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Mechanical}} {{base_target=@{mechanical_mod}}} {{combat_mod=@{combat_modifier}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{mechanical_mod} - @{combat_modifier} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + @{combat_modifier} + ?{Situational Modifier|0}]]}}"><img src="img/2D6.png" alt="Roll" /></button>
+                    </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Medical/First Aid <em>(LRN)</em></div>
                         <input type="number" name="attr_medical_level" value="0" />
                         <input type="text" name="attr_medical_attr" readonly />
-                        <input type="text" name="attr_medical_mod" readonly />                    </div>
+                        <input type="text" name="attr_medical_mod" readonly />
+                        <button type="roll" name="roll_medical" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Medical/First Aid}} {{base_target=@{medical_mod}}} {{combat_mod=@{combat_modifier}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{medical_mod} - @{combat_modifier} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + @{combat_modifier} + ?{Situational Modifier|0}]]}}"><img src="img/2D6.png" alt="Roll" /></button>
+                    </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Piloting/Aerospace <em>(DEX/LRN)</em></div>
                         <input type="number" name="attr_piloting_aerospace_level" value="0" />
                         <input type="text" name="attr_piloting_aerospace_attr" readonly />
-                        <input type="text" name="attr_piloting_aerospace_mod" readonly />                    </div>
+                        <input type="text" name="attr_piloting_aerospace_mod" readonly />
+                        <button type="roll" name="roll_piloting_aerospace" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Piloting/Aerospace}} {{base_target=@{piloting_aerospace_mod}}} {{combat_mod=@{combat_modifier}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{piloting_aerospace_mod} - @{combat_modifier} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + @{combat_modifier} + ?{Situational Modifier|0}]]}}"><img src="img/2D6.png" alt="Roll" /></button>
+                    </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Piloting/Mech <em>(DEX/LRN)</em></div>
                         <input type="number" name="attr_piloting_mech_level" value="0" />
                         <input type="text" name="attr_piloting_mech_attr" readonly />
-                        <input type="text" name="attr_piloting_mech_mod" readonly />                    </div>
+                        <input type="text" name="attr_piloting_mech_mod" readonly />
+                        <button type="roll" name="roll_piloting_mech" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Piloting/Mech}} {{base_target=@{piloting_mech_mod}}} {{combat_mod=@{combat_modifier}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{piloting_mech_mod} - @{combat_modifier} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + @{combat_modifier} + ?{Situational Modifier|0}]]}}"><img src="img/2D6.png" alt="Roll" /></button>
+                    </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Pistol <em>(DEX)</em></div>
                         <input type="number" name="attr_pistol_level" value="0" />
                         <input type="text" name="attr_pistol_attr" readonly />
-                        <input type="text" name="attr_pistol_mod" readonly />                    </div>
+                        <input type="text" name="attr_pistol_mod" readonly />
+                        <button type="roll" name="roll_pistol" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Pistol}} {{base_target=@{pistol_mod}}} {{combat_mod=@{combat_modifier}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{pistol_mod} - @{combat_modifier} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + @{combat_modifier} + ?{Situational Modifier|0}]]}}"><img src="img/2D6.png" alt="Roll" /></button>
+                    </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Rifle <em>(DEX)</em></div>
                         <input type="number" name="attr_rifle_level" value="0" />
                         <input type="text" name="attr_rifle_attr" readonly />
-                        <input type="text" name="attr_rifle_mod" readonly />                    </div>
+                        <input type="text" name="attr_rifle_mod" readonly />
+                        <button type="roll" name="roll_rifle" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Rifle}} {{base_target=@{rifle_mod}}} {{combat_mod=@{combat_modifier}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{rifle_mod} - @{combat_modifier} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + @{combat_modifier} + ?{Situational Modifier|0}]]}}"><img src="img/2D6.png" alt="Roll" /></button>
+                    </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Rogue <em>(DEX/LRN)</em></div>
                         <input type="number" name="attr_rogue_level" value="0" />
                         <input type="text" name="attr_rogue_attr" readonly />
-                        <input type="text" name="attr_rogue_mod" readonly />                    </div>
+                        <input type="text" name="attr_rogue_mod" readonly />
+                        <button type="roll" name="roll_rogue" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Rogue}} {{base_target=@{rogue_mod}}} {{combat_mod=@{combat_modifier}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{rogue_mod} - @{combat_modifier} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + @{combat_modifier} + ?{Situational Modifier|0}]]}}"><img src="img/2D6.png" alt="Roll" /></button>
+                    </div>
                     <div class="sheet-skill-row sheet-sub-skill">
                         <div class="sheet-skill-name">Hide In Cover <em>(DEX/LRN)</em></div>
                         <input type="number" name="attr_hide_level" value="0" />
                         <input type="text" name="attr_hide_attr" readonly />
-                        <input type="text" name="attr_hide_mod" readonly />                    </div>
+                        <input type="text" name="attr_hide_mod" readonly />
+                        <button type="roll" name="roll_hide" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Hide In Cover}} {{base_target=@{hide_mod}}} {{combat_mod=@{combat_modifier}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{hide_mod} - @{combat_modifier} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + @{combat_modifier} + ?{Situational Modifier|0}]]}}"><img src="img/2D6.png" alt="Roll" /></button>
+                    </div>
                     <div class="sheet-skill-row sheet-sub-skill">
                         <div class="sheet-skill-name">Listen/Eavesdrop <em>(DEX/LRN)</em></div>
                         <input type="number" name="attr_listen_level" value="0" />
                         <input type="text" name="attr_listen_attr" readonly />
-                        <input type="text" name="attr_listen_mod" readonly />                    </div>
+                        <input type="text" name="attr_listen_mod" readonly />
+                        <button type="roll" name="roll_listen" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Listen/Eavesdrop}} {{base_target=@{listen_mod}}} {{combat_mod=@{combat_modifier}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{listen_mod} - @{combat_modifier} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + @{combat_modifier} + ?{Situational Modifier|0}]]}}"><img src="img/2D6.png" alt="Roll" /></button>
+                    </div>
                     <div class="sheet-skill-row sheet-sub-skill">
                         <div class="sheet-skill-name">Stealth <em>(DEX/LRN)</em></div>
                         <input type="number" name="attr_stealth_level" value="0" />
                         <input type="text" name="attr_stealth_attr" readonly />
-                        <input type="text" name="attr_stealth_mod" readonly />                    </div>
+                        <input type="text" name="attr_stealth_mod" readonly />
+                        <button type="roll" name="roll_stealth" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Stealth}} {{base_target=@{stealth_mod}}} {{combat_mod=@{combat_modifier}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{stealth_mod} - @{combat_modifier} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + @{combat_modifier} + ?{Situational Modifier|0}]]}}"><img src="img/2D6.png" alt="Roll" /></button>
+                    </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Forgery <em>(DEX/LRN)</em></div>
                         <input type="number" name="attr_forgery_level" value="0" />
                         <input type="text" name="attr_forgery_attr" readonly />
-                        <input type="text" name="attr_forgery_mod" readonly />                    </div>
+                        <input type="text" name="attr_forgery_mod" readonly />
+                        <button type="roll" name="roll_forgery" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Forgery}} {{base_target=@{forgery_mod}}} {{combat_mod=@{combat_modifier}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{forgery_mod} - @{combat_modifier} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + @{combat_modifier} + ?{Situational Modifier|0}]]}}"><img src="img/2D6.png" alt="Roll" /></button>
+                    </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Security Systems <em>(DEX/LRN)</em></div>
                         <input type="number" name="attr_security_level" value="0" />
                         <input type="text" name="attr_security_attr" readonly />
-                        <input type="text" name="attr_security_mod" readonly />                    </div>
+                        <input type="text" name="attr_security_mod" readonly />
+                        <button type="roll" name="roll_security" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Security Systems}} {{base_target=@{security_mod}}} {{combat_mod=@{combat_modifier}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{security_mod} - @{combat_modifier} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + @{combat_modifier} + ?{Situational Modifier|0}]]}}"><img src="img/2D6.png" alt="Roll" /></button>
+                    </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Bribery <em>(DEX/LRN)</em></div>
                         <input type="number" name="attr_bribery_level" value="0" />
                         <input type="text" name="attr_bribery_attr" readonly />
-                        <input type="text" name="attr_bribery_mod" readonly />                    </div>
+                        <input type="text" name="attr_bribery_mod" readonly />
+                        <button type="roll" name="roll_bribery" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Bribery}} {{base_target=@{bribery_mod}}} {{combat_mod=@{combat_modifier}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{bribery_mod} - @{combat_modifier} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + @{combat_modifier} + ?{Situational Modifier|0}]]}}"><img src="img/2D6.png" alt="Roll" /></button>
+                    </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Disguise <em>(DEX/LRN)</em></div>
                         <input type="number" name="attr_disguise_level" value="0" />
                         <input type="text" name="attr_disguise_attr" readonly />
-                        <input type="text" name="attr_disguise_mod" readonly />                    </div>
+                        <input type="text" name="attr_disguise_mod" readonly />
+                        <button type="roll" name="roll_disguise" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Disguise}} {{base_target=@{disguise_mod}}} {{combat_mod=@{combat_modifier}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{disguise_mod} - @{combat_modifier} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + @{combat_modifier} + ?{Situational Modifier|0}]]}}"><img src="img/2D6.png" alt="Roll" /></button>
+                    </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Streetwise <em>(CHA)</em></div>
                         <input type="number" name="attr_streetwise_level" value="0" />
                         <input type="text" name="attr_streetwise_attr" readonly />
-                        <input type="text" name="attr_streetwise_mod" readonly />                    </div>
+                        <input type="text" name="attr_streetwise_mod" readonly />
+                        <button type="roll" name="roll_streetwise" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Streetwise}} {{base_target=@{streetwise_mod}}} {{combat_mod=@{combat_modifier}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{streetwise_mod} - @{combat_modifier} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + @{combat_modifier} + ?{Situational Modifier|0}]]}}"><img src="img/2D6.png" alt="Roll" /></button>
+                    </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Survival <em>(BODY)</em></div>
                         <input type="number" name="attr_survival_level" value="0" />
                         <input type="text" name="attr_survival_attr" readonly />
-                        <input type="text" name="attr_survival_mod" readonly />                    </div>
+                        <input type="text" name="attr_survival_mod" readonly />
+                        <button type="roll" name="roll_survival" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Survival}} {{base_target=@{survival_mod}}} {{combat_mod=@{combat_modifier}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{survival_mod} - @{combat_modifier} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + @{combat_modifier} + ?{Situational Modifier|0}]]}}"><img src="img/2D6.png" alt="Roll" /></button>
+                    </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Tactics <em>(LRN)</em></div>
                         <input type="number" name="attr_tactics_level" value="0" />
                         <input type="text" name="attr_tactics_attr" readonly />
-                        <input type="text" name="attr_tactics_mod" readonly />                    </div>
+                        <input type="text" name="attr_tactics_mod" readonly />
+                        <button type="roll" name="roll_tactics" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Tactics}} {{base_target=@{tactics_mod}}} {{combat_mod=@{combat_modifier}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{tactics_mod} - @{combat_modifier} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + @{combat_modifier} + ?{Situational Modifier|0}]]}}"><img src="img/2D6.png" alt="Roll" /></button>
+                    </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Technician <em>(LRN)</em></div>
                         <input type="number" name="attr_technician_level" value="0" />
                         <input type="text" name="attr_technician_attr" readonly />
-                        <input type="text" name="attr_technician_mod" readonly />                    </div>
+                        <input type="text" name="attr_technician_mod" readonly />
+                        <button type="roll" name="roll_technician" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Technician}} {{base_target=@{technician_mod}}} {{combat_mod=@{combat_modifier}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{technician_mod} - @{combat_modifier} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + @{combat_modifier} + ?{Situational Modifier|0}]]}}"><img src="img/2D6.png" alt="Roll" /></button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -321,6 +402,11 @@
                 <div class="sheet-field-group">
                     <label>CURRENT HTK</label>
                     <input type="number" name="attr_current_htk" value="0" />
+                </div>
+
+                <div class="sheet-field-group">
+                    <label>COMBAT MODIFIER</label>
+                    <input type="number" name="attr_combat_modifier" value="0" title="Ongoing situational modifier set by GM (range, cover, wounds, etc.)" />
                 </div>
             </div>
         </div>
@@ -394,8 +480,14 @@
         </div>
 
         <!-- Weapons Section -->
-        <div class="sheet-section-container sheet-angled-panel" id="weapons-section">
+        <div class="sheet-section-container sheet-angled-panel" id="weapons-section" style="gap: 0;">
             <h2 class="sheet-section-header">WEAPONS</h2>
+
+            <div class="sheet-hit-location-button-container">
+                <button type="roll" name="roll_hit_location" class="sheet-hit-location-button" value="&{template:mw1e-location} {{name=@{character_name}}} {{die1=[[1d6]]}} {{die2=[[1d6]]}} {{crit=1}}">
+                    Roll Hit Location (2D6) <img src="img/hit-location-image-icon.png" alt="" />
+                </button>
+            </div>
 
             <table class="sheet-weapons-table">
                 <thead>
@@ -405,6 +497,8 @@
                         <th rowspan="2">Damage</th>
                         <th colspan="3">Range</th>
                         <th rowspan="2">Ammo</th>
+                        <th rowspan="2">Attack</th>
+                        <th rowspan="2">Damage Roll</th>
                     </tr>
                     <tr class="sheet-weapons-header-sub">
                         <th>Short</th>
@@ -424,11 +518,14 @@
                                 <option value="Rifle">Rifle</option>
                             </select>
                         </td>
-                        <td><input type="text" name="attr_weapon1_damage" placeholder="Damage" /></td>
+                        <td class="sheet-damage-cell"><input type="number" name="attr_weapon1_damage_dice" value="1" min="1" max="20" /><span>D6 + </span><input type="number" name="attr_weapon1_damage_bonus" value="0" min="0" max="5" /></td>
                         <td><input type="text" name="attr_weapon1_short" placeholder="Short" /></td>
                         <td><input type="text" name="attr_weapon1_medium" placeholder="Medium" /></td>
                         <td><input type="text" name="attr_weapon1_long" placeholder="Long" /></td>
                         <td><input type="number" name="attr_weapon1_ammo" value="0" min="0" /></td>
+                        <td><button type="roll" name="roll_weapon1_attack" value="&{template:mw1e-weapon} {{name=@{character_name}}} {{weapon=@{weapon1_name}}} {{weapon_skill=@{weapon1_skill}}} {{base_target=@{weapon1_target}}} {{combat_mod=@{combat_modifier}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{weapon1_target} - @{combat_modifier} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + @{combat_modifier} + ?{Situational Modifier|0}]]}}"><img src="img/attack-image-icon.png" alt="Attack" /></button></td>
+                        <td><button type="roll" name="roll_weapon1_damage" value="&{template:mw1e-damage} {{name=@{character_name}}} {{weapon=@{weapon1_name}}} {{damage=[[@{weapon1_damage_dice}d6 + @{weapon1_damage_bonus}]]}}"><img src="img/damage-image-icon.png" alt="Damage" /></button></td>
+                        <input type="hidden" name="attr_weapon1_target" value="8" />
                     </tr>
                     <tr class="sheet-weapon-row">
                         <td><input type="text" name="attr_weapon2_name" placeholder="Weapon name" /></td>
@@ -436,15 +533,19 @@
                             <select name="attr_weapon2_skill">
                                 <option value="">--</option>
                                 <option value="Bow/Blade">Bow/Blade</option>
+                                <option value="Brawling">Brawling</option>
                                 <option value="Pistol">Pistol</option>
                                 <option value="Rifle">Rifle</option>
                             </select>
                         </td>
-                        <td><input type="text" name="attr_weapon2_damage" placeholder="Damage" /></td>
+                        <td class="sheet-damage-cell"><input type="number" name="attr_weapon2_damage_dice" value="1" min="1" max="20" /><span>D6 + </span><input type="number" name="attr_weapon2_damage_bonus" value="0" min="0" max="5" /></td>
                         <td><input type="text" name="attr_weapon2_short" placeholder="Short" /></td>
                         <td><input type="text" name="attr_weapon2_medium" placeholder="Medium" /></td>
                         <td><input type="text" name="attr_weapon2_long" placeholder="Long" /></td>
                         <td><input type="number" name="attr_weapon2_ammo" value="0" min="0" /></td>
+                        <td><button type="roll" name="roll_weapon2_attack" value="&{template:mw1e-weapon} {{name=@{character_name}}} {{weapon=@{weapon2_name}}} {{weapon_skill=@{weapon2_skill}}} {{base_target=@{weapon2_target}}} {{combat_mod=@{combat_modifier}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{weapon2_target} - @{combat_modifier} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + @{combat_modifier} + ?{Situational Modifier|0}]]}}"><img src="img/attack-image-icon.png" alt="Attack" /></button></td>
+                        <td><button type="roll" name="roll_weapon2_damage" value="&{template:mw1e-damage} {{name=@{character_name}}} {{weapon=@{weapon2_name}}} {{damage=[[@{weapon2_damage_dice}d6 + @{weapon2_damage_bonus}]]}}"><img src="img/damage-image-icon.png" alt="Damage" /></button></td>
+                        <input type="hidden" name="attr_weapon2_target" value="8" />
                     </tr>
                     <tr class="sheet-weapon-row">
                         <td><input type="text" name="attr_weapon3_name" placeholder="Weapon name" /></td>
@@ -452,15 +553,19 @@
                             <select name="attr_weapon3_skill">
                                 <option value="">--</option>
                                 <option value="Bow/Blade">Bow/Blade</option>
+                                <option value="Brawling">Brawling</option>
                                 <option value="Pistol">Pistol</option>
                                 <option value="Rifle">Rifle</option>
                             </select>
                         </td>
-                        <td><input type="text" name="attr_weapon3_damage" placeholder="Damage" /></td>
+                        <td class="sheet-damage-cell"><input type="number" name="attr_weapon3_damage_dice" value="1" min="1" max="20" /><span>D6 + </span><input type="number" name="attr_weapon3_damage_bonus" value="0" min="0" max="5" /></td>
                         <td><input type="text" name="attr_weapon3_short" placeholder="Short" /></td>
                         <td><input type="text" name="attr_weapon3_medium" placeholder="Medium" /></td>
                         <td><input type="text" name="attr_weapon3_long" placeholder="Long" /></td>
                         <td><input type="number" name="attr_weapon3_ammo" value="0" min="0" /></td>
+                        <td><button type="roll" name="roll_weapon3_attack" value="&{template:mw1e-weapon} {{name=@{character_name}}} {{weapon=@{weapon3_name}}} {{weapon_skill=@{weapon3_skill}}} {{base_target=@{weapon3_target}}} {{combat_mod=@{combat_modifier}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{weapon3_target} - @{combat_modifier} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + @{combat_modifier} + ?{Situational Modifier|0}]]}}"><img src="img/attack-image-icon.png" alt="Attack" /></button></td>
+                        <td><button type="roll" name="roll_weapon3_damage" value="&{template:mw1e-damage} {{name=@{character_name}}} {{weapon=@{weapon3_name}}} {{damage=[[@{weapon3_damage_dice}d6 + @{weapon3_damage_bonus}]]}}"><img src="img/damage-image-icon.png" alt="Damage" /></button></td>
+                        <input type="hidden" name="attr_weapon3_target" value="8" />
                     </tr>
                     <tr class="sheet-weapon-row">
                         <td><input type="text" name="attr_weapon4_name" placeholder="Weapon name" /></td>
@@ -468,15 +573,19 @@
                             <select name="attr_weapon4_skill">
                                 <option value="">--</option>
                                 <option value="Bow/Blade">Bow/Blade</option>
+                                <option value="Brawling">Brawling</option>
                                 <option value="Pistol">Pistol</option>
                                 <option value="Rifle">Rifle</option>
                             </select>
                         </td>
-                        <td><input type="text" name="attr_weapon4_damage" placeholder="Damage" /></td>
+                        <td class="sheet-damage-cell"><input type="number" name="attr_weapon4_damage_dice" value="1" min="1" max="20" /><span>D6 + </span><input type="number" name="attr_weapon4_damage_bonus" value="0" min="0" max="5" /></td>
                         <td><input type="text" name="attr_weapon4_short" placeholder="Short" /></td>
                         <td><input type="text" name="attr_weapon4_medium" placeholder="Medium" /></td>
                         <td><input type="text" name="attr_weapon4_long" placeholder="Long" /></td>
                         <td><input type="number" name="attr_weapon4_ammo" value="0" min="0" /></td>
+                        <td><button type="roll" name="roll_weapon4_attack" value="&{template:mw1e-weapon} {{name=@{character_name}}} {{weapon=@{weapon4_name}}} {{weapon_skill=@{weapon4_skill}}} {{base_target=@{weapon4_target}}} {{combat_mod=@{combat_modifier}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{weapon4_target} - @{combat_modifier} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + @{combat_modifier} + ?{Situational Modifier|0}]]}}"><img src="img/attack-image-icon.png" alt="Attack" /></button></td>
+                        <td><button type="roll" name="roll_weapon4_damage" value="&{template:mw1e-damage} {{name=@{character_name}}} {{weapon=@{weapon4_name}}} {{damage=[[@{weapon4_damage_dice}d6 + @{weapon4_damage_bonus}]]}}"><img src="img/damage-image-icon.png" alt="Damage" /></button></td>
+                        <input type="hidden" name="attr_weapon4_target" value="8" />
                     </tr>
                     <tr class="sheet-weapon-row">
                         <td><input type="text" name="attr_weapon5_name" placeholder="Weapon name" /></td>
@@ -484,15 +593,19 @@
                             <select name="attr_weapon5_skill">
                                 <option value="">--</option>
                                 <option value="Bow/Blade">Bow/Blade</option>
+                                <option value="Brawling">Brawling</option>
                                 <option value="Pistol">Pistol</option>
                                 <option value="Rifle">Rifle</option>
                             </select>
                         </td>
-                        <td><input type="text" name="attr_weapon5_damage" placeholder="Damage" /></td>
+                        <td class="sheet-damage-cell"><input type="number" name="attr_weapon5_damage_dice" value="1" min="1" max="20" /><span>D6 + </span><input type="number" name="attr_weapon5_damage_bonus" value="0" min="0" max="5" /></td>
                         <td><input type="text" name="attr_weapon5_short" placeholder="Short" /></td>
                         <td><input type="text" name="attr_weapon5_medium" placeholder="Medium" /></td>
                         <td><input type="text" name="attr_weapon5_long" placeholder="Long" /></td>
                         <td><input type="number" name="attr_weapon5_ammo" value="0" min="0" /></td>
+                        <td><button type="roll" name="roll_weapon5_attack" value="&{template:mw1e-weapon} {{name=@{character_name}}} {{weapon=@{weapon5_name}}} {{weapon_skill=@{weapon5_skill}}} {{base_target=@{weapon5_target}}} {{combat_mod=@{combat_modifier}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{weapon5_target} - @{combat_modifier} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + @{combat_modifier} + ?{Situational Modifier|0}]]}}"><img src="img/attack-image-icon.png" alt="Attack" /></button></td>
+                        <td><button type="roll" name="roll_weapon5_damage" value="&{template:mw1e-damage} {{name=@{character_name}}} {{weapon=@{weapon5_name}}} {{damage=[[@{weapon5_damage_dice}d6 + @{weapon5_damage_bonus}]]}}"><img src="img/damage-image-icon.png" alt="Damage" /></button></td>
+                        <input type="hidden" name="attr_weapon5_target" value="8" />
                     </tr>
                     <tr class="sheet-weapon-row">
                         <td><input type="text" name="attr_weapon6_name" placeholder="Weapon name" /></td>
@@ -500,15 +613,19 @@
                             <select name="attr_weapon6_skill">
                                 <option value="">--</option>
                                 <option value="Bow/Blade">Bow/Blade</option>
+                                <option value="Brawling">Brawling</option>
                                 <option value="Pistol">Pistol</option>
                                 <option value="Rifle">Rifle</option>
                             </select>
                         </td>
-                        <td><input type="text" name="attr_weapon6_damage" placeholder="Damage" /></td>
+                        <td class="sheet-damage-cell"><input type="number" name="attr_weapon6_damage_dice" value="1" min="1" max="20" /><span>D6 + </span><input type="number" name="attr_weapon6_damage_bonus" value="0" min="0" max="5" /></td>
                         <td><input type="text" name="attr_weapon6_short" placeholder="Short" /></td>
                         <td><input type="text" name="attr_weapon6_medium" placeholder="Medium" /></td>
                         <td><input type="text" name="attr_weapon6_long" placeholder="Long" /></td>
                         <td><input type="number" name="attr_weapon6_ammo" value="0" min="0" /></td>
+                        <td><button type="roll" name="roll_weapon6_attack" value="&{template:mw1e-weapon} {{name=@{character_name}}} {{weapon=@{weapon6_name}}} {{weapon_skill=@{weapon6_skill}}} {{base_target=@{weapon6_target}}} {{combat_mod=@{combat_modifier}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{weapon6_target} - @{combat_modifier} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + @{combat_modifier} + ?{Situational Modifier|0}]]}}"><img src="img/attack-image-icon.png" alt="Attack" /></button></td>
+                        <td><button type="roll" name="roll_weapon6_damage" value="&{template:mw1e-damage} {{name=@{character_name}}} {{weapon=@{weapon6_name}}} {{damage=[[@{weapon6_damage_dice}d6 + @{weapon6_damage_bonus}]]}}"><img src="img/damage-image-icon.png" alt="Damage" /></button></td>
+                        <input type="hidden" name="attr_weapon6_target" value="8" />
                     </tr>
                 </tbody>
             </table>
@@ -517,6 +634,185 @@
     <!-- End Combat Tab -->
 
 </div>
+
+<!-- Roll Templates -->
+<rolltemplate class="sheet-rolltemplate-mw1e-skill">
+    <div class="sheet-template-container">
+        <div class="sheet-template-header">
+            <strong>{{name}}</strong> - {{skill}}
+        </div>
+        <div class="sheet-template-body">
+            <div class="sheet-template-row">
+                <span class="sheet-template-label">Base Target:</span>
+                <span class="sheet-template-value">{{base_target}}</span>
+            </div>
+            {{#combat_mod}}
+            <div class="sheet-template-row">
+                <span class="sheet-template-label">Combat Modifier:</span>
+                <span class="sheet-template-value">{{combat_mod}}</span>
+            </div>
+            {{/combat_mod}}
+            {{#situational}}
+            <div class="sheet-template-row">
+                <span class="sheet-template-label">Situational:</span>
+                <span class="sheet-template-value">{{situational}}</span>
+            </div>
+            {{/situational}}
+            <div class="sheet-template-row sheet-template-adjusted">
+                <span class="sheet-template-label">Adjusted Target:</span>
+                <span class="sheet-template-value">{{adjusted_target}}</span>
+            </div>
+            <div class="sheet-template-row sheet-template-roll">
+                <span class="sheet-template-label">Roll (2D6):</span>
+                <span class="sheet-template-value">{{roll}}</span>
+            </div>
+            {{#rollLess() roll adjusted_target}}
+            <div class="sheet-template-result sheet-template-success">✓ SUCCESS</div>
+            {{/rollLess() roll adjusted_target}}
+            {{#rollEquals() roll adjusted_target}}
+            <div class="sheet-template-result sheet-template-success">✓ EXACTLY MET</div>
+            {{/rollEquals() roll adjusted_target}}
+            {{#rollGreater() roll adjusted_target}}
+            <div class="sheet-template-result sheet-template-failure">✗ FAILED</div>
+            {{/rollGreater() roll adjusted_target}}
+        </div>
+    </div>
+</rolltemplate>
+
+<rolltemplate class="sheet-rolltemplate-mw1e-weapon">
+    <div class="sheet-template-container">
+        <div class="sheet-template-header">
+            <strong>{{name}}</strong> - {{weapon}}
+        </div>
+        <div class="sheet-template-body">
+            <div class="sheet-template-row">
+                <span class="sheet-template-label">Weapon Skill:</span>
+                <span class="sheet-template-value">{{weapon_skill}}</span>
+            </div>
+            <div class="sheet-template-row">
+                <span class="sheet-template-label">Base Target:</span>
+                <span class="sheet-template-value">{{base_target}}</span>
+            </div>
+            {{#combat_mod}}
+            <div class="sheet-template-row">
+                <span class="sheet-template-label">Combat Modifier:</span>
+                <span class="sheet-template-value">{{combat_mod}}</span>
+            </div>
+            {{/combat_mod}}
+            {{#situational}}
+            <div class="sheet-template-row">
+                <span class="sheet-template-label">Situational:</span>
+                <span class="sheet-template-value">{{situational}}</span>
+            </div>
+            {{/situational}}
+            <div class="sheet-template-row sheet-template-adjusted">
+                <span class="sheet-template-label">Adjusted Target:</span>
+                <span class="sheet-template-value">{{adjusted_target}}</span>
+            </div>
+            <div class="sheet-template-row sheet-template-roll">
+                <span class="sheet-template-label">Attack Roll (2D6):</span>
+                <span class="sheet-template-value">{{roll}}</span>
+            </div>
+            {{#rollLess() roll adjusted_target}}
+            <div class="sheet-template-result sheet-template-success">✓ HIT</div>
+            {{/rollLess() roll adjusted_target}}
+            {{#rollEquals() roll adjusted_target}}
+            <div class="sheet-template-result sheet-template-success">✓ HIT (Exactly)</div>
+            {{/rollEquals() roll adjusted_target}}
+            {{#rollGreater() roll adjusted_target}}
+            <div class="sheet-template-result sheet-template-failure">✗ MISS</div>
+            {{/rollGreater() roll adjusted_target}}
+        </div>
+    </div>
+</rolltemplate>
+
+<rolltemplate class="sheet-rolltemplate-mw1e-damage">
+    <div class="sheet-template-container">
+        <div class="sheet-template-header">
+            <strong>{{name}}</strong> - {{weapon}} Damage
+        </div>
+        <div class="sheet-template-body">
+            <div class="sheet-template-row sheet-template-damage">
+                <span class="sheet-template-label">Damage:</span>
+                <span class="sheet-template-value">{{damage}}</span>
+            </div>
+        </div>
+    </div>
+</rolltemplate>
+
+<rolltemplate class="sheet-rolltemplate-mw1e-location">
+    <div class="sheet-template-container">
+        <div class="sheet-template-header">
+            <strong>{{name}}</strong> - Hit Location
+        </div>
+        <div class="sheet-template-body">
+            <div class="sheet-template-row">
+                <span class="sheet-template-label">First Die:</span>
+                <span class="sheet-template-value">{{die1}}</span>
+            </div>
+            <div class="sheet-template-row">
+                <span class="sheet-template-label">Second Die:</span>
+                <span class="sheet-template-value">{{die2}}</span>
+            </div>
+            <div class="sheet-template-row sheet-template-hit-location">
+                <span class="sheet-template-label">Location:</span>
+                <span class="sheet-template-value">
+                    {{#rollBetween() die1 1 1}}
+                        {{#rollBetween() die2 1 1}}L Arm{{/rollBetween() die2 1 1}}
+                        {{#rollBetween() die2 2 2}}R Leg*{{/rollBetween() die2 2 2}}
+                        {{#rollBetween() die2 3 3}}Head{{/rollBetween() die2 3 3}}
+                        {{#rollBetween() die2 4 4}}L Arm{{/rollBetween() die2 4 4}}
+                        {{#rollBetween() die2 5 5}}Torso{{/rollBetween() die2 5 5}}
+                        {{#rollBetween() die2 6 6}}Torso{{/rollBetween() die2 6 6}}
+                    {{/rollBetween() die1 1 1}}
+                    {{#rollBetween() die1 2 2}}
+                        {{#rollBetween() die2 1 1}}R Leg{{/rollBetween() die2 1 1}}
+                        {{#rollBetween() die2 2 2}}R Leg*{{/rollBetween() die2 2 2}}
+                        {{#rollBetween() die2 3 3}}R Leg{{/rollBetween() die2 3 3}}
+                        {{#rollBetween() die2 4 4}}Head{{/rollBetween() die2 4 4}}
+                        {{#rollBetween() die2 5 5}}Head{{/rollBetween() die2 5 5}}
+                        {{#rollBetween() die2 6 6}}Head{{/rollBetween() die2 6 6}}
+                    {{/rollBetween() die1 2 2}}
+                    {{#rollBetween() die1 3 3}}
+                        {{#rollBetween() die2 1 1}}Head{{/rollBetween() die2 1 1}}
+                        {{#rollBetween() die2 2 2}}L Arm{{/rollBetween() die2 2 2}}
+                        {{#rollBetween() die2 3 3}}Torso*{{/rollBetween() die2 3 3}}
+                        {{#rollBetween() die2 4 4}}Torso{{/rollBetween() die2 4 4}}
+                        {{#rollBetween() die2 5 5}}Torso{{/rollBetween() die2 5 5}}
+                        {{#rollBetween() die2 6 6}}Torso{{/rollBetween() die2 6 6}}
+                    {{/rollBetween() die1 3 3}}
+                    {{#rollBetween() die1 4 4}}
+                        {{#rollBetween() die2 1 1}}Torso{{/rollBetween() die2 1 1}}
+                        {{#rollBetween() die2 2 2}}Torso{{/rollBetween() die2 2 2}}
+                        {{#rollBetween() die2 3 3}}L Leg{{/rollBetween() die2 3 3}}
+                        {{#rollBetween() die2 4 4}}L Leg{{/rollBetween() die2 4 4}}
+                        {{#rollBetween() die2 5 5}}L Leg{{/rollBetween() die2 5 5}}
+                        {{#rollBetween() die2 6 6}}L Leg*{{/rollBetween() die2 6 6}}
+                    {{/rollBetween() die1 4 4}}
+                    {{#rollBetween() die1 5 5}}
+                        {{#rollBetween() die2 1 1}}Torso{{/rollBetween() die2 1 1}}
+                        {{#rollBetween() die2 2 2}}Torso{{/rollBetween() die2 2 2}}
+                        {{#rollBetween() die2 3 3}}R Arm{{/rollBetween() die2 3 3}}
+                        {{#rollBetween() die2 4 4}}R Arm{{/rollBetween() die2 4 4}}
+                        {{#rollBetween() die2 5 5}}R Arm{{/rollBetween() die2 5 5}}
+                        {{#rollBetween() die2 6 6}}R Arm*{{/rollBetween() die2 6 6}}
+                    {{/rollBetween() die1 5 5}}
+                    {{#rollBetween() die1 6 6}}
+                        {{#rollBetween() die2 1 1}}R Leg{{/rollBetween() die2 1 1}}
+                        {{#rollBetween() die2 2 2}}R Leg{{/rollBetween() die2 2 2}}
+                        {{#rollBetween() die2 3 3}}Torso{{/rollBetween() die2 3 3}}
+                        {{#rollBetween() die2 4 4}}L Leg{{/rollBetween() die2 4 4}}
+                        {{#rollBetween() die2 5 5}}L Leg{{/rollBetween() die2 5 5}}
+                        {{#rollBetween() die2 6 6}}L Leg*{{/rollBetween() die2 6 6}}
+                    {{/rollBetween() die1 6 6}}
+                </span>
+            </div>
+            {{#crit}}
+            <div class="sheet-template-critical">* AUTOMATIC CRITICAL HIT</div>
+            {{/crit}}
+        </div>
+    </div>
+</rolltemplate>
 
 <script type="text/worker">
     // PIB calculation - uses sheet workers because it has complex conditionals
@@ -845,6 +1141,57 @@
                 updateTotalXPSpent();
             });
         });
+    });
+
+    // =================================================================
+    // WEAPON SKILL TARGET SYNC
+    // Automatically sync weapon skill selection to target number
+    // =================================================================
+
+    // Map skill names to their attribute names
+    var WEAPON_SKILL_MAP = {
+        'Bow/Blade': 'bow_blade_mod',
+        'Brawling': 'brawling_mod',
+        'Pistol': 'pistol_mod',
+        'Rifle': 'rifle_mod'
+    };
+
+    // Function to update a specific weapon's target based on selected skill
+    function updateWeaponTarget(weaponNum) {
+        var skillAttr = 'weapon' + weaponNum + '_skill';
+        var targetAttr = 'weapon' + weaponNum + '_target';
+
+        getAttrs([skillAttr, 'bow_blade_mod', 'brawling_mod', 'pistol_mod', 'rifle_mod'], function(values) {
+            var selectedSkill = values[skillAttr];
+            var mappedAttr = WEAPON_SKILL_MAP[selectedSkill];
+            var targetValue = 8; // Default value if no skill selected
+
+            if (mappedAttr && values[mappedAttr]) {
+                targetValue = parseInt(values[mappedAttr]) || 8;
+            }
+
+            console.log('Weapon ' + weaponNum + ': skill=' + selectedSkill + ', target=' + targetValue);
+            var update = {};
+            update[targetAttr] = targetValue;
+            setAttrs(update);
+        });
+    }
+
+    // Listen for weapon skill selection changes
+    on('change:weapon1_skill', function() { updateWeaponTarget(1); });
+    on('change:weapon2_skill', function() { updateWeaponTarget(2); });
+    on('change:weapon3_skill', function() { updateWeaponTarget(3); });
+    on('change:weapon4_skill', function() { updateWeaponTarget(4); });
+    on('change:weapon5_skill', function() { updateWeaponTarget(5); });
+    on('change:weapon6_skill', function() { updateWeaponTarget(6); });
+
+    // Also update weapon targets when the skill modifiers change
+    on('change:bow_blade_mod change:brawling_mod change:pistol_mod change:rifle_mod', function(eventInfo) {
+        console.log('Weapon skill modifier changed:', eventInfo.sourceAttribute);
+        // Update all weapon targets that use this skill
+        for (var i = 1; i <= 6; i++) {
+            updateWeaponTarget(i);
+        }
     });
 
     console.log('MechWarrior 1e sheet workers loaded successfully');
