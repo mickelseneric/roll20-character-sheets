@@ -37,43 +37,50 @@
                     <input type="number" name="attr_total_xp" value="0" />
                 </div>
 
-                <input type="checkbox" name="attr_xp_negative" class="sheet-xp-negative-flag" style="display:none;" />
+                <input type="checkbox" name="attr_xp_negative" class="sheet-xp-negative-flag" value="1" style="display:none;" />
                 <div class="sheet-field-group sheet-xp-available-container">
                     <label>XP AVAILABLE</label>
-                    <input type="number" name="attr_xp_available" value="0" disabled="true" />
+                    <input type="number" name="attr_xp_available" readonly />
                 </div>
             </div>
 
             <!-- Right Column: Warrior Data -->
             <div class="sheet-warrior-data">
-                <h2 class="sheet-section-header">WARRIOR DATA</h2>
 
-                <div class="sheet-field-group">
-                    <label>BODY</label>
+                <!-- Attribute Header Row -->
+                <div class="sheet-attr-header-row">
+                    <div class="sheet-attr-header-name">ATTRIBUTES</div>
+                    <div class="sheet-attr-header-cell">ATTR<br/>LEVEL</div>
+                    <div class="sheet-attr-header-cell">SAVING ROLL<br/>TARGET</div>
+                </div>
+
+                <!-- Attribute Rows -->
+                <div class="sheet-attr-row">
+                    <div class="sheet-attr-name">BODY</div>
                     <input type="number" name="attr_body" value="6" />
                     <input type="hidden" name="attr_body_xp_cost" value="0" />
-                    <span class="sheet-saving-roll-target">Save: <input type="text" name="attr_body_save" value="(14 - @{body})" disabled="true" /></span>
+                    <input type="text" name="attr_body_save" readonly />
                 </div>
 
-                <div class="sheet-field-group">
-                    <label>DEX</label>
+                <div class="sheet-attr-row">
+                    <div class="sheet-attr-name">DEX</div>
                     <input type="number" name="attr_dex" value="6" />
                     <input type="hidden" name="attr_dex_xp_cost" value="0" />
-                    <span class="sheet-saving-roll-target">Save: <input type="text" name="attr_dex_save" value="(14 - @{dex})" disabled="true" /></span>
+                    <input type="text" name="attr_dex_save" readonly />
                 </div>
 
-                <div class="sheet-field-group">
-                    <label>LRN</label>
+                <div class="sheet-attr-row">
+                    <div class="sheet-attr-name">LRN</div>
                     <input type="number" name="attr_lrn" value="6" />
                     <input type="hidden" name="attr_lrn_xp_cost" value="0" />
-                    <span class="sheet-saving-roll-target">Save: <input type="text" name="attr_lrn_save" value="(14 - @{lrn})" disabled="true" /></span>
+                    <input type="text" name="attr_lrn_save" readonly />
                 </div>
 
-                <div class="sheet-field-group">
-                    <label>CHA</label>
+                <div class="sheet-attr-row">
+                    <div class="sheet-attr-name">CHA</div>
                     <input type="number" name="attr_cha" value="6" />
                     <input type="hidden" name="attr_cha_xp_cost" value="0" />
-                    <span class="sheet-saving-roll-target">Save: <input type="text" name="attr_cha_save" value="(14 - @{cha})" disabled="true" /></span>
+                    <input type="text" name="attr_cha_save" readonly />
                 </div>
 
             </div>
@@ -96,98 +103,98 @@
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Athletics <em>(BODY/DEX)</em></div>
                         <input type="number" name="attr_athletics_level" value="0" />
-                        <input type="text" name="attr_athletics_attr" value="(14 - floor((@{body} + @{dex}) / 2))" disabled="true" />
-                        <input type="text" name="attr_athletics_mod" value="(14 - floor((@{body} + @{dex}) / 2) - @{athletics_level})" disabled="true" />                    </div>
+                        <input type="text" name="attr_athletics_attr" readonly />
+                        <input type="text" name="attr_athletics_mod" readonly />                    </div>
                     <div class="sheet-skill-row sheet-sub-skill">
                         <div class="sheet-skill-name">Aerobatics <em>(BODY/DEX)</em></div>
                         <input type="number" name="attr_aerobatics_level" value="0" />
-                        <input type="text" name="attr_aerobatics_attr" value="(14 - floor((@{body} + @{dex}) / 2))" disabled="true" />
-                        <input type="text" name="attr_aerobatics_mod" value="(14 - floor((@{body} + @{dex}) / 2) - @{aerobatics_level})" disabled="true" />                    </div>
+                        <input type="text" name="attr_aerobatics_attr" readonly />
+                        <input type="text" name="attr_aerobatics_mod" readonly />                    </div>
                     <div class="sheet-skill-row sheet-sub-skill">
                         <div class="sheet-skill-name">Climbing <em>(BODY/DEX)</em></div>
                         <input type="number" name="attr_climbing_level" value="0" />
-                        <input type="text" name="attr_climbing_attr" value="(14 - floor((@{body} + @{dex}) / 2))" disabled="true" />
-                        <input type="text" name="attr_climbing_mod" value="(14 - floor((@{body} + @{dex}) / 2) - @{climbing_level})" disabled="true" />                    </div>
+                        <input type="text" name="attr_climbing_attr" readonly />
+                        <input type="text" name="attr_climbing_mod" readonly />                    </div>
                     <div class="sheet-skill-row sheet-sub-skill">
                         <div class="sheet-skill-name">Equestrian <em>(BODY/DEX)</em></div>
                         <input type="number" name="attr_equestrian_level" value="0" />
-                        <input type="text" name="attr_equestrian_attr" value="(14 - floor((@{body} + @{dex}) / 2))" disabled="true" />
-                        <input type="text" name="attr_equestrian_mod" value="(14 - floor((@{body} + @{dex}) / 2) - @{equestrian_level})" disabled="true" />                    </div>
+                        <input type="text" name="attr_equestrian_attr" readonly />
+                        <input type="text" name="attr_equestrian_mod" readonly />                    </div>
                     <div class="sheet-skill-row sheet-sub-skill">
                         <div class="sheet-skill-name">Running <em>(BODY/DEX)</em></div>
                         <input type="number" name="attr_running_level" value="0" />
-                        <input type="text" name="attr_running_attr" value="(14 - floor((@{body} + @{dex}) / 2))" disabled="true" />
-                        <input type="text" name="attr_running_mod" value="(14 - floor((@{body} + @{dex}) / 2) - @{running_level})" disabled="true" />                    </div>
+                        <input type="text" name="attr_running_attr" readonly />
+                        <input type="text" name="attr_running_mod" readonly />                    </div>
                     <div class="sheet-skill-row sheet-sub-skill">
                         <div class="sheet-skill-name">Swimming <em>(BODY/DEX)</em></div>
                         <input type="number" name="attr_swimming_level" value="0" />
-                        <input type="text" name="attr_swimming_attr" value="(14 - floor((@{body} + @{dex}) / 2))" disabled="true" />
-                        <input type="text" name="attr_swimming_mod" value="(14 - floor((@{body} + @{dex}) / 2) - @{swimming_level})" disabled="true" />                    </div>
+                        <input type="text" name="attr_swimming_attr" readonly />
+                        <input type="text" name="attr_swimming_mod" readonly />                    </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Bow/Blade <em>(DEX)</em></div>
                         <input type="number" name="attr_bow_blade_level" value="0" />
-                        <input type="text" name="attr_bow_blade_attr" value="(14 - @{dex})" disabled="true" />
-                        <input type="text" name="attr_bow_blade_mod" value="(14 - @{dex} - @{bow_blade_level})" disabled="true" />                    </div>
+                        <input type="text" name="attr_bow_blade_attr" readonly />
+                        <input type="text" name="attr_bow_blade_mod" readonly />                    </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Brawling <em>(BODY)</em></div>
                         <input type="number" name="attr_brawling_level" value="0" />
-                        <input type="text" name="attr_brawling_attr" value="(14 - @{body})" disabled="true" />
-                        <input type="text" name="attr_brawling_mod" value="(14 - @{body} - @{brawling_level})" disabled="true" />                    </div>
+                        <input type="text" name="attr_brawling_attr" readonly />
+                        <input type="text" name="attr_brawling_mod" readonly />                    </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Computer <em>(LRN)</em></div>
                         <input type="number" name="attr_computer_level" value="0" />
-                        <input type="text" name="attr_computer_attr" value="(14 - @{lrn})" disabled="true" />
-                        <input type="text" name="attr_computer_mod" value="(14 - @{lrn} - @{computer_level})" disabled="true" />                    </div>
+                        <input type="text" name="attr_computer_attr" readonly />
+                        <input type="text" name="attr_computer_mod" readonly />                    </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Diplomacy <em>(CHA)</em></div>
                         <input type="number" name="attr_diplomacy_level" value="0" />
-                        <input type="text" name="attr_diplomacy_attr" value="(14 - @{cha})" disabled="true" />
-                        <input type="text" name="attr_diplomacy_mod" value="(14 - @{cha} - @{diplomacy_level})" disabled="true" />                    </div>
+                        <input type="text" name="attr_diplomacy_attr" readonly />
+                        <input type="text" name="attr_diplomacy_mod" readonly />                    </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Driver <em>(DEX)</em></div>
                         <input type="number" name="attr_driver_level" value="0" />
-                        <input type="text" name="attr_driver_attr" value="(14 - @{dex})" disabled="true" />
-                        <input type="text" name="attr_driver_mod" value="(14 - @{dex} - @{driver_level})" disabled="true" />                    </div>
+                        <input type="text" name="attr_driver_attr" readonly />
+                        <input type="text" name="attr_driver_mod" readonly />                    </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Engineering <em>(LRN)</em></div>
                         <input type="number" name="attr_engineering_level" value="0" />
-                        <input type="text" name="attr_engineering_attr" value="(14 - @{lrn})" disabled="true" />
-                        <input type="text" name="attr_engineering_mod" value="(14 - @{lrn} - @{engineering_level})" disabled="true" />                    </div>
+                        <input type="text" name="attr_engineering_attr" readonly />
+                        <input type="text" name="attr_engineering_mod" readonly />                    </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Gunnery/Aerospace <em>(LRN)</em></div>
                         <input type="number" name="attr_gunnery_aerospace_level" value="0" />
-                        <input type="text" name="attr_gunnery_aerospace_attr" value="(14 - @{lrn})" disabled="true" />
-                        <input type="text" name="attr_gunnery_aerospace_mod" value="(14 - @{lrn} - @{gunnery_aerospace_level})" disabled="true" />                    </div>
+                        <input type="text" name="attr_gunnery_aerospace_attr" readonly />
+                        <input type="text" name="attr_gunnery_aerospace_mod" readonly />                    </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Gunnery/Artillery <em>(LRN)</em></div>
                         <input type="number" name="attr_gunnery_artillery_level" value="0" />
-                        <input type="text" name="attr_gunnery_artillery_attr" value="(14 - @{lrn})" disabled="true" />
-                        <input type="text" name="attr_gunnery_artillery_mod" value="(14 - @{lrn} - @{gunnery_artillery_level})" disabled="true" />                    </div>
+                        <input type="text" name="attr_gunnery_artillery_attr" readonly />
+                        <input type="text" name="attr_gunnery_artillery_mod" readonly />                    </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Gunnery/Mech <em>(DEX)</em></div>
                         <input type="number" name="attr_gunnery_mech_level" value="0" />
-                        <input type="text" name="attr_gunnery_mech_attr" value="(14 - @{dex})" disabled="true" />
-                        <input type="text" name="attr_gunnery_mech_mod" value="(14 - @{dex} - @{gunnery_mech_level})" disabled="true" />                    </div>
+                        <input type="text" name="attr_gunnery_mech_attr" readonly />
+                        <input type="text" name="attr_gunnery_mech_mod" readonly />                    </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Interrogation <em>(LRN/CHA)</em></div>
                         <input type="number" name="attr_interrogation_level" value="0" />
-                        <input type="text" name="attr_interrogation_attr" value="(14 - floor((@{lrn} + @{cha}) / 2))" disabled="true" />
-                        <input type="text" name="attr_interrogation_mod" value="(14 - floor((@{lrn} + @{cha}) / 2) - @{interrogation_level})" disabled="true" />                    </div>
+                        <input type="text" name="attr_interrogation_attr" readonly />
+                        <input type="text" name="attr_interrogation_mod" readonly />                    </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Jump/Ship Navigation/Piloting <em>(LRN)</em></div>
                         <input type="number" name="attr_jumpship_level" value="0" />
-                        <input type="text" name="attr_jumpship_attr" value="(14 - @{lrn})" disabled="true" />
-                        <input type="text" name="attr_jumpship_mod" value="(14 - @{lrn} - @{jumpship_level})" disabled="true" />                    </div>
+                        <input type="text" name="attr_jumpship_attr" readonly />
+                        <input type="text" name="attr_jumpship_mod" readonly />                    </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Land Management <em>(LRN)</em></div>
                         <input type="number" name="attr_land_mgmt_level" value="0" />
-                        <input type="text" name="attr_land_mgmt_attr" value="(14 - @{lrn})" disabled="true" />
-                        <input type="text" name="attr_land_mgmt_mod" value="(14 - @{lrn} - @{land_mgmt_level})" disabled="true" />                    </div>
+                        <input type="text" name="attr_land_mgmt_attr" readonly />
+                        <input type="text" name="attr_land_mgmt_mod" readonly />                    </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Leadership <em>(CHA)</em></div>
                         <input type="number" name="attr_leadership_level" value="0" />
-                        <input type="text" name="attr_leadership_attr" value="(14 - @{cha})" disabled="true" />
-                        <input type="text" name="attr_leadership_mod" value="(14 - @{cha} - @{leadership_level})" disabled="true" />                    </div>
+                        <input type="text" name="attr_leadership_attr" readonly />
+                        <input type="text" name="attr_leadership_mod" readonly />                    </div>
                 </div>
 
                 <!-- Right Skills Column -->
@@ -202,93 +209,93 @@
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Mechanical <em>(LRN)</em></div>
                         <input type="number" name="attr_mechanical_level" value="0" />
-                        <input type="text" name="attr_mechanical_attr" value="(14 - @{lrn})" disabled="true" />
-                        <input type="text" name="attr_mechanical_mod" value="(14 - @{lrn} - @{mechanical_level})" disabled="true" />                    </div>
+                        <input type="text" name="attr_mechanical_attr" readonly />
+                        <input type="text" name="attr_mechanical_mod" readonly />                    </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Medical/First Aid <em>(LRN)</em></div>
                         <input type="number" name="attr_medical_level" value="0" />
-                        <input type="text" name="attr_medical_attr" value="(14 - @{lrn})" disabled="true" />
-                        <input type="text" name="attr_medical_mod" value="(14 - @{lrn} - @{medical_level})" disabled="true" />                    </div>
+                        <input type="text" name="attr_medical_attr" readonly />
+                        <input type="text" name="attr_medical_mod" readonly />                    </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Piloting/Aerospace <em>(DEX/LRN)</em></div>
                         <input type="number" name="attr_piloting_aerospace_level" value="0" />
-                        <input type="text" name="attr_piloting_aerospace_attr" value="(14 - floor((@{dex} + @{lrn}) / 2))" disabled="true" />
-                        <input type="text" name="attr_piloting_aerospace_mod" value="(14 - floor((@{dex} + @{lrn}) / 2) - @{piloting_aerospace_level})" disabled="true" />                    </div>
+                        <input type="text" name="attr_piloting_aerospace_attr" readonly />
+                        <input type="text" name="attr_piloting_aerospace_mod" readonly />                    </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Piloting/Mech <em>(DEX/LRN)</em></div>
                         <input type="number" name="attr_piloting_mech_level" value="0" />
-                        <input type="text" name="attr_piloting_mech_attr" value="(14 - floor((@{dex} + @{lrn}) / 2))" disabled="true" />
-                        <input type="text" name="attr_piloting_mech_mod" value="(14 - floor((@{dex} + @{lrn}) / 2) - @{piloting_mech_level})" disabled="true" />                    </div>
+                        <input type="text" name="attr_piloting_mech_attr" readonly />
+                        <input type="text" name="attr_piloting_mech_mod" readonly />                    </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Pistol <em>(DEX)</em></div>
                         <input type="number" name="attr_pistol_level" value="0" />
-                        <input type="text" name="attr_pistol_attr" value="(14 - @{dex})" disabled="true" />
-                        <input type="text" name="attr_pistol_mod" value="(14 - @{dex} - @{pistol_level})" disabled="true" />                    </div>
+                        <input type="text" name="attr_pistol_attr" readonly />
+                        <input type="text" name="attr_pistol_mod" readonly />                    </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Rifle <em>(DEX)</em></div>
                         <input type="number" name="attr_rifle_level" value="0" />
-                        <input type="text" name="attr_rifle_attr" value="(14 - @{dex})" disabled="true" />
-                        <input type="text" name="attr_rifle_mod" value="(14 - @{dex} - @{rifle_level})" disabled="true" />                    </div>
+                        <input type="text" name="attr_rifle_attr" readonly />
+                        <input type="text" name="attr_rifle_mod" readonly />                    </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Rogue <em>(DEX/LRN)</em></div>
                         <input type="number" name="attr_rogue_level" value="0" />
-                        <input type="text" name="attr_rogue_attr" value="(14 - floor((@{dex} + @{lrn}) / 2))" disabled="true" />
-                        <input type="text" name="attr_rogue_mod" value="(14 - floor((@{dex} + @{lrn}) / 2) - @{rogue_level})" disabled="true" />                    </div>
+                        <input type="text" name="attr_rogue_attr" readonly />
+                        <input type="text" name="attr_rogue_mod" readonly />                    </div>
                     <div class="sheet-skill-row sheet-sub-skill">
                         <div class="sheet-skill-name">Hide In Cover <em>(DEX/LRN)</em></div>
                         <input type="number" name="attr_hide_level" value="0" />
-                        <input type="text" name="attr_hide_attr" value="(14 - floor((@{dex} + @{lrn}) / 2))" disabled="true" />
-                        <input type="text" name="attr_hide_mod" value="(14 - floor((@{dex} + @{lrn}) / 2) - @{hide_level})" disabled="true" />                    </div>
+                        <input type="text" name="attr_hide_attr" readonly />
+                        <input type="text" name="attr_hide_mod" readonly />                    </div>
                     <div class="sheet-skill-row sheet-sub-skill">
                         <div class="sheet-skill-name">Listen/Eavesdrop <em>(DEX/LRN)</em></div>
                         <input type="number" name="attr_listen_level" value="0" />
-                        <input type="text" name="attr_listen_attr" value="(14 - floor((@{dex} + @{lrn}) / 2))" disabled="true" />
-                        <input type="text" name="attr_listen_mod" value="(14 - floor((@{dex} + @{lrn}) / 2) - @{listen_level})" disabled="true" />                    </div>
+                        <input type="text" name="attr_listen_attr" readonly />
+                        <input type="text" name="attr_listen_mod" readonly />                    </div>
                     <div class="sheet-skill-row sheet-sub-skill">
                         <div class="sheet-skill-name">Stealth <em>(DEX/LRN)</em></div>
                         <input type="number" name="attr_stealth_level" value="0" />
-                        <input type="text" name="attr_stealth_attr" value="(14 - floor((@{dex} + @{lrn}) / 2))" disabled="true" />
-                        <input type="text" name="attr_stealth_mod" value="(14 - floor((@{dex} + @{lrn}) / 2) - @{stealth_level})" disabled="true" />                    </div>
+                        <input type="text" name="attr_stealth_attr" readonly />
+                        <input type="text" name="attr_stealth_mod" readonly />                    </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Forgery <em>(DEX/LRN)</em></div>
                         <input type="number" name="attr_forgery_level" value="0" />
-                        <input type="text" name="attr_forgery_attr" value="(14 - floor((@{dex} + @{lrn}) / 2))" disabled="true" />
-                        <input type="text" name="attr_forgery_mod" value="(14 - floor((@{dex} + @{lrn}) / 2) - @{forgery_level})" disabled="true" />                    </div>
+                        <input type="text" name="attr_forgery_attr" readonly />
+                        <input type="text" name="attr_forgery_mod" readonly />                    </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Security Systems <em>(DEX/LRN)</em></div>
                         <input type="number" name="attr_security_level" value="0" />
-                        <input type="text" name="attr_security_attr" value="(14 - floor((@{dex} + @{lrn}) / 2))" disabled="true" />
-                        <input type="text" name="attr_security_mod" value="(14 - floor((@{dex} + @{lrn}) / 2) - @{security_level})" disabled="true" />                    </div>
+                        <input type="text" name="attr_security_attr" readonly />
+                        <input type="text" name="attr_security_mod" readonly />                    </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Bribery <em>(DEX/LRN)</em></div>
                         <input type="number" name="attr_bribery_level" value="0" />
-                        <input type="text" name="attr_bribery_attr" value="(14 - floor((@{dex} + @{lrn}) / 2))" disabled="true" />
-                        <input type="text" name="attr_bribery_mod" value="(14 - floor((@{dex} + @{lrn}) / 2) - @{bribery_level})" disabled="true" />                    </div>
+                        <input type="text" name="attr_bribery_attr" readonly />
+                        <input type="text" name="attr_bribery_mod" readonly />                    </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Disguise <em>(DEX/LRN)</em></div>
                         <input type="number" name="attr_disguise_level" value="0" />
-                        <input type="text" name="attr_disguise_attr" value="(14 - floor((@{dex} + @{lrn}) / 2))" disabled="true" />
-                        <input type="text" name="attr_disguise_mod" value="(14 - floor((@{dex} + @{lrn}) / 2) - @{disguise_level})" disabled="true" />                    </div>
+                        <input type="text" name="attr_disguise_attr" readonly />
+                        <input type="text" name="attr_disguise_mod" readonly />                    </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Streetwise <em>(CHA)</em></div>
                         <input type="number" name="attr_streetwise_level" value="0" />
-                        <input type="text" name="attr_streetwise_attr" value="(14 - @{cha})" disabled="true" />
-                        <input type="text" name="attr_streetwise_mod" value="(14 - @{cha} - @{streetwise_level})" disabled="true" />                    </div>
+                        <input type="text" name="attr_streetwise_attr" readonly />
+                        <input type="text" name="attr_streetwise_mod" readonly />                    </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Survival <em>(BODY)</em></div>
                         <input type="number" name="attr_survival_level" value="0" />
-                        <input type="text" name="attr_survival_attr" value="(14 - @{body})" disabled="true" />
-                        <input type="text" name="attr_survival_mod" value="(14 - @{body} - @{survival_level})" disabled="true" />                    </div>
+                        <input type="text" name="attr_survival_attr" readonly />
+                        <input type="text" name="attr_survival_mod" readonly />                    </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Tactics <em>(LRN)</em></div>
                         <input type="number" name="attr_tactics_level" value="0" />
-                        <input type="text" name="attr_tactics_attr" value="(14 - @{lrn})" disabled="true" />
-                        <input type="text" name="attr_tactics_mod" value="(14 - @{lrn} - @{tactics_level})" disabled="true" />                    </div>
+                        <input type="text" name="attr_tactics_attr" readonly />
+                        <input type="text" name="attr_tactics_mod" readonly />                    </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Technician <em>(LRN)</em></div>
                         <input type="number" name="attr_technician_level" value="0" />
-                        <input type="text" name="attr_technician_attr" value="(14 - @{lrn})" disabled="true" />
-                        <input type="text" name="attr_technician_mod" value="(14 - @{lrn} - @{technician_level})" disabled="true" />                    </div>
+                        <input type="text" name="attr_technician_attr" readonly />
+                        <input type="text" name="attr_technician_mod" readonly />                    </div>
                 </div>
             </div>
         </div>
@@ -303,12 +310,12 @@
             <div class="sheet-combat-stats-row">
                 <div class="sheet-field-group">
                     <label>PIB</label>
-                    <input type="number" name="attr_pib" value="0" disabled="true" />
+                    <input type="number" name="attr_pib" readonly />
                 </div>
 
                 <div class="sheet-field-group">
                     <label>HTK</label>
-                    <input type="text" name="attr_htk" value="(@{body} * 10)" disabled="true" />
+                    <input type="text" name="attr_htk" readonly />
                 </div>
 
                 <div class="sheet-field-group">
@@ -319,7 +326,7 @@
         </div>
 
         <!-- Damage Tracking Section -->
-        <div class="sheet-section-container sheet-angled-panel" id="damage-section">
+        <div class="sheet-angled-panel" id="damage-section">
             <h2 class="sheet-section-header">HIT LOCATIONS</h2>
 
             <!-- Head (top center) -->
@@ -329,7 +336,7 @@
                     <div class="sheet-damage-values">
                         <input type="number" name="attr_damage_head" value="0" min="0" />
                         <span class="sheet-damage-separator">/</span>
-                        <span class="sheet-damage-max">12</span>
+                        <input type="number" name="attr_damage_head_max" readonly />
                     </div>
                 </div>
             </div>
@@ -341,7 +348,7 @@
                     <div class="sheet-damage-values">
                         <input type="number" name="attr_damage_left_arm" value="0" min="0" />
                         <span class="sheet-damage-separator">/</span>
-                        <span class="sheet-damage-max">12</span>
+                        <input type="number" name="attr_damage_left_arm_max" readonly />
                     </div>
                 </div>
 
@@ -350,7 +357,7 @@
                     <div class="sheet-damage-values">
                         <input type="number" name="attr_damage_torso" value="0" min="0" />
                         <span class="sheet-damage-separator">/</span>
-                        <span class="sheet-damage-max">12</span>
+                        <input type="number" name="attr_damage_torso_max" readonly />
                     </div>
                 </div>
 
@@ -359,7 +366,7 @@
                     <div class="sheet-damage-values">
                         <input type="number" name="attr_damage_right_arm" value="0" min="0" />
                         <span class="sheet-damage-separator">/</span>
-                        <span class="sheet-damage-max">12</span>
+                        <input type="number" name="attr_damage_right_arm_max" readonly />
                     </div>
                 </div>
             </div>
@@ -371,7 +378,7 @@
                     <div class="sheet-damage-values">
                         <input type="number" name="attr_damage_left_leg" value="0" min="0" />
                         <span class="sheet-damage-separator">/</span>
-                        <span class="sheet-damage-max">12</span>
+                        <input type="number" name="attr_damage_left_leg_max" readonly />
                     </div>
                 </div>
 
@@ -380,7 +387,7 @@
                     <div class="sheet-damage-values">
                         <input type="number" name="attr_damage_right_leg" value="0" min="0" />
                         <span class="sheet-damage-separator">/</span>
-                        <span class="sheet-damage-max">12</span>
+                        <input type="number" name="attr_damage_right_leg_max" readonly />
                     </div>
                 </div>
             </div>
@@ -408,7 +415,15 @@
                 <tbody>
                     <tr class="sheet-weapon-row">
                         <td><input type="text" name="attr_weapon1_name" placeholder="Weapon name" /></td>
-                        <td><input type="text" name="attr_weapon1_skill" placeholder="Skill" /></td>
+                        <td>
+                            <select name="attr_weapon1_skill">
+                                <option value="">--</option>
+                                <option value="Bow/Blade">Bow/Blade</option>
+                                <option value="Brawling">Brawling</option>
+                                <option value="Pistol">Pistol</option>
+                                <option value="Rifle">Rifle</option>
+                            </select>
+                        </td>
                         <td><input type="text" name="attr_weapon1_damage" placeholder="Damage" /></td>
                         <td><input type="text" name="attr_weapon1_short" placeholder="Short" /></td>
                         <td><input type="text" name="attr_weapon1_medium" placeholder="Medium" /></td>
@@ -417,7 +432,14 @@
                     </tr>
                     <tr class="sheet-weapon-row">
                         <td><input type="text" name="attr_weapon2_name" placeholder="Weapon name" /></td>
-                        <td><input type="text" name="attr_weapon2_skill" placeholder="Skill" /></td>
+                        <td>
+                            <select name="attr_weapon2_skill">
+                                <option value="">--</option>
+                                <option value="Bow/Blade">Bow/Blade</option>
+                                <option value="Pistol">Pistol</option>
+                                <option value="Rifle">Rifle</option>
+                            </select>
+                        </td>
                         <td><input type="text" name="attr_weapon2_damage" placeholder="Damage" /></td>
                         <td><input type="text" name="attr_weapon2_short" placeholder="Short" /></td>
                         <td><input type="text" name="attr_weapon2_medium" placeholder="Medium" /></td>
@@ -426,7 +448,14 @@
                     </tr>
                     <tr class="sheet-weapon-row">
                         <td><input type="text" name="attr_weapon3_name" placeholder="Weapon name" /></td>
-                        <td><input type="text" name="attr_weapon3_skill" placeholder="Skill" /></td>
+                        <td>
+                            <select name="attr_weapon3_skill">
+                                <option value="">--</option>
+                                <option value="Bow/Blade">Bow/Blade</option>
+                                <option value="Pistol">Pistol</option>
+                                <option value="Rifle">Rifle</option>
+                            </select>
+                        </td>
                         <td><input type="text" name="attr_weapon3_damage" placeholder="Damage" /></td>
                         <td><input type="text" name="attr_weapon3_short" placeholder="Short" /></td>
                         <td><input type="text" name="attr_weapon3_medium" placeholder="Medium" /></td>
@@ -435,7 +464,14 @@
                     </tr>
                     <tr class="sheet-weapon-row">
                         <td><input type="text" name="attr_weapon4_name" placeholder="Weapon name" /></td>
-                        <td><input type="text" name="attr_weapon4_skill" placeholder="Skill" /></td>
+                        <td>
+                            <select name="attr_weapon4_skill">
+                                <option value="">--</option>
+                                <option value="Bow/Blade">Bow/Blade</option>
+                                <option value="Pistol">Pistol</option>
+                                <option value="Rifle">Rifle</option>
+                            </select>
+                        </td>
                         <td><input type="text" name="attr_weapon4_damage" placeholder="Damage" /></td>
                         <td><input type="text" name="attr_weapon4_short" placeholder="Short" /></td>
                         <td><input type="text" name="attr_weapon4_medium" placeholder="Medium" /></td>
@@ -444,7 +480,14 @@
                     </tr>
                     <tr class="sheet-weapon-row">
                         <td><input type="text" name="attr_weapon5_name" placeholder="Weapon name" /></td>
-                        <td><input type="text" name="attr_weapon5_skill" placeholder="Skill" /></td>
+                        <td>
+                            <select name="attr_weapon5_skill">
+                                <option value="">--</option>
+                                <option value="Bow/Blade">Bow/Blade</option>
+                                <option value="Pistol">Pistol</option>
+                                <option value="Rifle">Rifle</option>
+                            </select>
+                        </td>
                         <td><input type="text" name="attr_weapon5_damage" placeholder="Damage" /></td>
                         <td><input type="text" name="attr_weapon5_short" placeholder="Short" /></td>
                         <td><input type="text" name="attr_weapon5_medium" placeholder="Medium" /></td>
@@ -453,7 +496,14 @@
                     </tr>
                     <tr class="sheet-weapon-row">
                         <td><input type="text" name="attr_weapon6_name" placeholder="Weapon name" /></td>
-                        <td><input type="text" name="attr_weapon6_skill" placeholder="Skill" /></td>
+                        <td>
+                            <select name="attr_weapon6_skill">
+                                <option value="">--</option>
+                                <option value="Bow/Blade">Bow/Blade</option>
+                                <option value="Pistol">Pistol</option>
+                                <option value="Rifle">Rifle</option>
+                            </select>
+                        </td>
                         <td><input type="text" name="attr_weapon6_damage" placeholder="Damage" /></td>
                         <td><input type="text" name="attr_weapon6_short" placeholder="Short" /></td>
                         <td><input type="text" name="attr_weapon6_medium" placeholder="Medium" /></td>
@@ -473,12 +523,13 @@
     // that auto-calc cannot handle
     function updatePIB() {
         getAttrs(['dex', 'lrn', 'tactics_level', 'leadership_level'], function(values) {
-            const dex = parseInt(values.dex || 6);
-            const lrn = parseInt(values.lrn || 6);
-            const tacticsLevel = parseInt(values.tactics_level || 0);
-            const leadershipLevel = parseInt(values.leadership_level || 0);
+            console.log('updatePIB called with values:', values);
+            var dex = parseInt(values.dex || 6);
+            var lrn = parseInt(values.lrn || 6);
+            var tacticsLevel = parseInt(values.tactics_level || 0);
+            var leadershipLevel = parseInt(values.leadership_level || 0);
 
-            let pib = 0;
+            var pib = 0;
 
             // DEX bonuses
             if (dex >= 12) {
@@ -506,18 +557,126 @@
             // Leadership skill bonus: +1 for each 4 levels
             pib += Math.floor(leadershipLevel / 4);
 
+            console.log('Setting PIB to:', pib);
             setAttrs({ pib: pib });
         });
     }
 
     // Listen for attribute and skill changes that affect PIB
     on('change:dex change:lrn change:tactics_level change:leadership_level', function(eventInfo) {
+        console.log('PIB trigger fired for:', eventInfo.sourceAttribute);
         updatePIB();
     });
 
-    // Initialize PIB calculation on sheet open
+    // Damage Max calculations based on BODY score
+    function updateDamageMax() {
+        getAttrs(['body'], function(values) {
+            var body = parseInt(values.body || 6);
+
+            // Calculate damage max values
+            // Head = BODY
+            var headMax = body;
+            // Torso = BODY * 3
+            var torsoMax = body * 3;
+            // Arms = BODY * 1.5 (rounded down)
+            var armMax = Math.floor(body * 1.5);
+            // Legs = BODY * 1.5 (rounded up)
+            var legMax = Math.ceil(body * 1.5);
+
+            console.log('Damage Max - Head:', headMax, 'Torso:', torsoMax, 'Arm:', armMax, 'Leg:', legMax);
+
+            setAttrs({
+                damage_head_max: headMax,
+                damage_torso_max: torsoMax,
+                damage_left_arm_max: armMax,
+                damage_right_arm_max: armMax,
+                damage_left_leg_max: legMax,
+                damage_right_leg_max: legMax
+            });
+        });
+    }
+
+    // Listen for BODY changes to update damage max values
+    on('change:body', function(eventInfo) {
+        console.log('BODY changed, updating damage max values');
+        updateDamageMax();
+    });
+
+    // Update saving roll targets and HTK based on attributes
+    function updateDerivedStats() {
+        getAttrs(['body', 'dex', 'lrn', 'cha'], function(values) {
+            var body = parseInt(values.body) || 6;
+            var dex = parseInt(values.dex) || 6;
+            var lrn = parseInt(values.lrn) || 6;
+            var cha = parseInt(values.cha) || 6;
+
+            setAttrs({
+                body_save: 14 - body,
+                dex_save: 14 - dex,
+                lrn_save: 14 - lrn,
+                cha_save: 14 - cha,
+                htk: body * 10
+            });
+        });
+    }
+
+    // Skill attribute mappings
+    var SKILL_ATTRIBUTES = {
+        athletics: ['body', 'dex'], aerobatics: ['body', 'dex'], climbing: ['body', 'dex'],
+        equestrian: ['body', 'dex'], running: ['body', 'dex'], swimming: ['body', 'dex'],
+        bow_blade: ['dex'], brawling: ['body'], computer: ['lrn'], diplomacy: ['cha'],
+        driver: ['dex'], engineering: ['lrn'], gunnery_aerospace: ['lrn'], gunnery_artillery: ['lrn'],
+        gunnery_mech: ['dex'], interrogation: ['lrn', 'cha'], jumpship: ['lrn'], land_mgmt: ['lrn'],
+        leadership: ['cha'], mechanical: ['lrn'], medical: ['lrn'], piloting_aerospace: ['dex', 'lrn'],
+        piloting_mech: ['dex', 'lrn'], pistol: ['dex'], rifle: ['dex'], rogue: ['dex', 'lrn'],
+        hide: ['dex', 'lrn'], listen: ['dex', 'lrn'], stealth: ['dex', 'lrn'], forgery: ['dex', 'lrn'],
+        security: ['dex', 'lrn'], bribery: ['dex', 'lrn'], disguise: ['dex', 'lrn'], streetwise: ['cha'],
+        survival: ['body'], tactics: ['lrn'], technician: ['lrn']
+    };
+
+    // Update all skill calculations
+    function updateAllSkillCalculations() {
+        var allAttrs = ['body', 'dex', 'lrn', 'cha'];
+        ALL_SKILLS.forEach(function(skill) {
+            allAttrs.push(skill + '_level');
+        });
+
+        getAttrs(allAttrs, function(values) {
+            var body = parseInt(values.body) || 6;
+            var dex = parseInt(values.dex) || 6;
+            var lrn = parseInt(values.lrn) || 6;
+            var cha = parseInt(values.cha) || 6;
+            var attrValues = { body: body, dex: dex, lrn: lrn, cha: cha };
+            var updates = {};
+
+            ALL_SKILLS.forEach(function(skill) {
+                var skillLevel = parseInt(values[skill + '_level']) || 0;
+                var attrs = SKILL_ATTRIBUTES[skill];
+                var attributeTarget;
+
+                if (attrs.length === 2) {
+                    var avg = Math.floor((attrValues[attrs[0]] + attrValues[attrs[1]]) / 2);
+                    attributeTarget = 14 - avg;
+                } else {
+                    attributeTarget = 14 - attrValues[attrs[0]];
+                }
+
+                var modifiedTarget = attributeTarget - skillLevel;
+                updates[skill + '_attr'] = attributeTarget;
+                updates[skill + '_mod'] = modifiedTarget;
+            });
+
+            setAttrs(updates);
+        });
+    }
+
+    // Initialize all calculations on sheet open
     on('sheet:opened', function(eventInfo) {
+        console.log('MechWarrior 1e: Sheet opened - initializing calculations');
         updatePIB();
+        updateDamageMax();
+        updateDerivedStats();
+        updateAllSkillCalculations();
         updateAllXPCosts();
     });
 
@@ -574,51 +733,61 @@
     }
 
     // Update all attribute XP costs
-    function updateAttributeXPCosts() {
+    function updateAttributeXPCosts(callback) {
         getAttrs(['body', 'dex', 'lrn', 'cha'], function(values) {
-            const updates = {};
-            let totalAttrCost = 0;
+            console.log('updateAttributeXPCosts called with values:', values);
+            var updates = {};
+            var totalAttrCost = 0;
 
             // Calculate cost for each attribute
             ['body', 'dex', 'lrn', 'cha'].forEach(function(attr) {
-                const cost = calculateAttributeXPCost(attr, values[attr]);
+                var cost = calculateAttributeXPCost(attr, values[attr]);
                 updates[attr + '_xp_cost'] = cost;
                 updates[attr + '_xp_cost_display'] = cost;
                 totalAttrCost += cost;
             });
 
-            setAttrs(updates);
-            updateTotalXPSpent();
+            console.log('Attribute XP updates:', updates);
+            setAttrs(updates, {}, function() {
+                if (callback) callback();
+            });
         });
     }
 
     // Update all skill XP costs
-    function updateSkillXPCosts() {
-        const attrNames = ALL_SKILLS.map(skill => skill + '_level');
+    function updateSkillXPCosts(callback) {
+        var attrNames = ALL_SKILLS.map(function(skill) { return skill + '_level'; });
 
         getAttrs(attrNames, function(values) {
-            const updates = {};
+            console.log('updateSkillXPCosts called');
+            var updates = {};
 
             ALL_SKILLS.forEach(function(skill) {
-                const level = values[skill + '_level'];
-                const cost = calculateSkillXPCost(level);
+                var level = values[skill + '_level'];
+                var cost = calculateSkillXPCost(level);
                 updates[skill + '_xp_cost'] = cost;
             });
 
-            setAttrs(updates);
-            updateTotalXPSpent();
+            console.log('Skill XP updates (sample):', {
+                athletics_xp_cost: updates.athletics_xp_cost,
+                tactics_xp_cost: updates.tactics_xp_cost
+            });
+            setAttrs(updates, {}, function() {
+                if (callback) callback();
+            });
         });
     }
 
     // Update total XP spent and available XP
     function updateTotalXPSpent() {
         // Get all XP cost attributes
-        const attrCosts = ['body_xp_cost', 'dex_xp_cost', 'lrn_xp_cost', 'cha_xp_cost'];
-        const skillCosts = ALL_SKILLS.map(skill => skill + '_xp_cost');
-        const allCosts = attrCosts.concat(skillCosts).concat(['total_xp']);
+        var attrCosts = ['body_xp_cost', 'dex_xp_cost', 'lrn_xp_cost', 'cha_xp_cost'];
+        var skillCosts = ALL_SKILLS.map(function(skill) { return skill + '_xp_cost'; });
+        var allCosts = attrCosts.concat(skillCosts).concat(['total_xp']);
 
         getAttrs(allCosts, function(values) {
-            let totalSpent = 0;
+            console.log('updateTotalXPSpent called');
+            var totalSpent = 0;
 
             // Sum attribute costs
             attrCosts.forEach(function(costAttr) {
@@ -630,9 +799,10 @@
                 totalSpent += parseInt(values[costAttr]) || 0;
             });
 
-            const totalXP = parseInt(values.total_xp) || 0;
-            const availableXP = totalXP - totalSpent;
+            var totalXP = parseInt(values.total_xp) || 0;
+            var availableXP = totalXP - totalSpent;
 
+            console.log('XP Calculation: total=' + totalXP + ', spent=' + totalSpent + ', available=' + availableXP);
             setAttrs({
                 xp_spent: totalSpent,
                 xp_available: availableXP,
@@ -643,24 +813,39 @@
 
     // Update all XP costs (attributes + skills + totals)
     function updateAllXPCosts() {
-        updateAttributeXPCosts();
-        updateSkillXPCosts();
+        updateAttributeXPCosts(function() {
+            updateSkillXPCosts(function() {
+                updateTotalXPSpent();
+            });
+        });
     }
 
     // Listen for attribute changes
     on('change:body change:dex change:lrn change:cha', function(eventInfo) {
-        updateAttributeXPCosts();
+        console.log('Attribute change detected:', eventInfo.sourceAttribute);
+        updateDerivedStats();
+        updateAllSkillCalculations();
+        updateAttributeXPCosts(function() {
+            updateTotalXPSpent();
+        });
     });
 
     // Listen for total XP changes
     on('change:total_xp', function(eventInfo) {
+        console.log('Total XP changed');
         updateTotalXPSpent();
     });
 
     // Listen for skill level changes
     ALL_SKILLS.forEach(function(skill) {
         on('change:' + skill + '_level', function(eventInfo) {
-            updateSkillXPCosts();
+            console.log('Skill level changed:', skill);
+            updateAllSkillCalculations();
+            updateSkillXPCosts(function() {
+                updateTotalXPSpent();
+            });
         });
     });
+
+    console.log('MechWarrior 1e sheet workers loaded successfully');
 </script>
