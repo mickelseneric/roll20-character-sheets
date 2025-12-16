@@ -217,25 +217,25 @@ input.sheet-tab-combat:checked ~ div.sheet-tab-combat {
 }
 
 /* Default state - expanded (checkbox is checked) */
-.sheet-collapse-toggle:checked ~ .sheet-collapsible-section .sheet-collapse-icon {
-    transform: translateY(-50%) rotate(-90deg);
+.sheet-collapse-toggle:checked + .sheet-collapsible-section .sheet-collapse-icon {
+    transform: translateY(-50%) rotate(270deg);
 }
 
-.sheet-collapse-toggle:checked ~ .sheet-collapsible-section .sheet-collapsible-content {
+.sheet-collapse-toggle:checked + .sheet-collapsible-section .sheet-collapsible-content {
     display: block;
 }
 
 /* Collapsed state (checkbox is not checked) */
-.sheet-collapse-toggle:not(:checked) ~ .sheet-collapsible-section .sheet-collapse-icon {
+.sheet-collapse-toggle:not(:checked) + .sheet-collapsible-section .sheet-collapse-icon {
     transform: translateY(-50%) rotate(180deg);
 }
 
-.sheet-collapse-toggle:not(:checked) ~ .sheet-collapsible-section .sheet-collapsible-content {
+.sheet-collapse-toggle:not(:checked) + .sheet-collapsible-section .sheet-collapsible-content {
     display: none;
 }
 
 /* Remove bottom margin from header when collapsed */
-.sheet-collapse-toggle:not(:checked) ~ .sheet-collapsible-section .sheet-collapsible-header {
+.sheet-collapse-toggle:not(:checked) + .sheet-collapsible-section .sheet-collapsible-header {
     margin-bottom: 0;
 }
 
