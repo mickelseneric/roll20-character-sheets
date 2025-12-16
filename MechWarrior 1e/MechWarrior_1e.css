@@ -188,6 +188,57 @@ input.sheet-tab-combat:checked ~ div.sheet-tab-combat {
     padding-bottom: 8px;
 }
 
+/* Collapsible Sections */
+.sheet-collapse-toggle {
+    display: none;
+}
+
+.sheet-collapsible-header {
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.2s ease;
+    display: block;
+    position: relative;
+    text-align: center;
+}
+
+.sheet-collapsible-header:hover {
+    color: #b2854e;
+}
+
+.sheet-collapse-icon {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.3s ease;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform-origin: center;
+}
+
+/* Default state - expanded (checkbox is checked) */
+.sheet-collapse-toggle:checked ~ .sheet-collapsible-section .sheet-collapse-icon {
+    transform: translateY(-50%) rotate(-90deg);
+}
+
+.sheet-collapse-toggle:checked ~ .sheet-collapsible-section .sheet-collapsible-content {
+    display: block;
+}
+
+/* Collapsed state (checkbox is not checked) */
+.sheet-collapse-toggle:not(:checked) ~ .sheet-collapsible-section .sheet-collapse-icon {
+    transform: translateY(-50%) rotate(180deg);
+}
+
+.sheet-collapse-toggle:not(:checked) ~ .sheet-collapsible-section .sheet-collapsible-content {
+    display: none;
+}
+
+/* Remove bottom margin from header when collapsed */
+.sheet-collapse-toggle:not(:checked) ~ .sheet-collapsible-section .sheet-collapsible-header {
+    margin-bottom: 0;
+}
+
 /* Columns */
 .sheet-user-data,
 .sheet-warrior-data {
