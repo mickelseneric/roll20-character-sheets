@@ -14,7 +14,8 @@
       "Bash(python add-skill-xp-costs.py:*)",
       "Bash(python:*)",
       "Bash(node:*)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(git remote get-url:*)"
     ],
     "deny": [],
     "ask": []
