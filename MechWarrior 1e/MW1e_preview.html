@@ -450,9 +450,13 @@
         </div>
 
         <!-- Damage Tracking Section -->
-        <div class="sheet-angled-panel" id="damage-section">
-            <h2 class="sheet-section-header">HIT LOCATIONS</h2>
-
+        <input type="checkbox" name="attr_collapse_damage" class="sheet-collapse-toggle" id="collapse-damage" checked />
+        <div class="sheet-angled-panel sheet-collapsible-section" id="damage-section">
+            <label for="collapse-damage" class="sheet-section-header sheet-collapsible-header">
+                HIT LOCATIONS
+                <img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/chevron.png" class="sheet-collapse-icon" alt="" />
+            </label>
+            <div class="sheet-collapsible-content">
             <!-- Head (top center) -->
             <div class="sheet-damage-row sheet-damage-row-single">
                 <div class="sheet-damage-location">
@@ -515,12 +519,17 @@
                     </div>
                 </div>
             </div>
+            </div><!-- end collapsible-content -->
         </div>
 
         <!-- Weapons Section -->
-        <div class="sheet-section-container sheet-angled-panel" id="weapons-section" style="gap: 0;">
-            <h2 class="sheet-section-header">WEAPONS</h2>
-
+        <input type="checkbox" name="attr_collapse_weapons" class="sheet-collapse-toggle" id="collapse-weapons" checked />
+        <div class="sheet-section-container sheet-angled-panel sheet-collapsible-section" id="weapons-section" style="gap: 0;">
+            <label for="collapse-weapons" class="sheet-section-header sheet-collapsible-header">
+                WEAPONS
+                <img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/chevron.png" class="sheet-collapse-icon" alt="" />
+            </label>
+            <div class="sheet-collapsible-content">
             <div class="sheet-hit-location-button-container">
                 <button type="roll" name="roll_hit_location" class="sheet-hit-location-button" value="&{template:mw1e-location} {{name=@{character_name}}} {{die1=[[1d6]]}} {{die2=[[1d6]]}} {{crit=1}}">
                     Roll Hit Location <img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/hit-location-image-icon.png" alt="" />
@@ -667,6 +676,7 @@
                     </tr>
                 </tbody>
             </table>
+            </div><!-- end collapsible-content -->
         </div>
     </div>
     <!-- End Combat Tab -->

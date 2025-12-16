@@ -1,8 +1,10 @@
 #!/usr/bin/env node
+
 /**
- * sync-sheet.js
+ * Sync Script for MechWarrior 1e Character Sheet
  *
- * Synchronizes the sheet content between MechWarrior_1e.html and MW1e_preview.html
+ * This script extracts the sheet content from MechWarrior_1e.html
+ * and updates MW1e_preview.html to match.
  *
  * Usage: node sync-sheet.js
  */
@@ -10,51 +12,85 @@
 const fs = require('fs');
 const path = require('path');
 
-const MAIN_SHEET = path.join(__dirname, 'MechWarrior_1e.html');
-const PREVIEW_SHEET = path.join(__dirname, 'MW1e_preview.html');
+const MAIN_SHEET = 'MechWarrior_1e.html';
+const PREVIEW_SHEET = 'MW1e_preview.html';
 
-// Read both files
-console.log('Reading sheet files...');
-const mainContent = fs.readFileSync(MAIN_SHEET, 'utf8');
-const previewContent = fs.readFileSync(PREVIEW_SHEET, 'utf8');
+// Markers for extracting content
+const START_MARKER = '<div class="sheet-mechwarrior">';
+const END_MARKER = '</div>\n\n<!-- Roll Templates -->';
 
-// Extract the sheet HTML content (excluding Roll20 sheet workers)
-// Split main content by script tag
-const mainScriptMatch = mainContent.match(/<script type="text\/worker">[\s\S]*?<\/script>/);
-let sheetHTMLOnly = mainContent;
-if (mainScriptMatch) {
-    sheetHTMLOnly = mainContent.substring(0, mainScriptMatch.index).trim();
+function readFile(filename) {
+    const filepath = path.join(__dirname, filename);
+    try {
+        return fs.readFileSync(filepath, 'utf8');
+    } catch (err) {
+        console.error(`Error reading ${filename}:`, err.message);
+        process.exit(1);
+    }
 }
 
-// Extract existing browser JavaScript from preview file
-const previewScriptMatch = previewContent.match(/<script>[\s\S]*?<\/script>/);
-const previewScript = previewScriptMatch ? previewScriptMatch[0] : '';
-
-// Find the position in preview file where sheet content starts and ends
-// Sheet content is between <body> and </body>
-const bodyStartMatch = previewContent.match(/<body>\s*/);
-const bodyEndMatch = previewContent.match(/\s*<\/body>/);
-
-if (!bodyStartMatch || !bodyEndMatch) {
-    console.error('Error: Could not find <body> tags in preview file');
-    process.exit(1);
+function writeFile(filename, content) {
+    const filepath = path.join(__dirname, filename);
+    try {
+        fs.writeFileSync(filepath, content, 'utf8');
+        console.log(`✓ Updated ${filename}`);
+    } catch (err) {
+        console.error(`Error writing ${filename}:`, err.message);
+        process.exit(1);
+    }
 }
 
-const bodyStart = bodyStartMatch.index + bodyStartMatch[0].length;
-const bodyEnd = bodyEndMatch.index;
+function extractSheetContent(html) {
+    const startIdx = html.indexOf(START_MARKER);
+    const endIdx = html.indexOf(END_MARKER);
 
-// Build new preview content: HTML from main + preserved browser JavaScript
-const newPreviewContent =
-    previewContent.substring(0, bodyStart) +
-    '\n    ' + sheetHTMLOnly +
-    '\n\n' + previewScript + '\n' +
-    previewContent.substring(bodyEnd);
+    if (startIdx === -1 || endIdx === -1) {
+        console.error('Error: Could not find sheet content markers');
+        process.exit(1);
+    }
 
-// Write updated preview file
-console.log('Updating MW1e_preview.html...');
-fs.writeFileSync(PREVIEW_SHEET, newPreviewContent, 'utf8');
+    return html.substring(startIdx, endIdx);
+}
 
-console.log('✓ Sync complete! MW1e_preview.html has been updated.');
-console.log('\nFiles synchronized:');
-console.log('  Source:      MechWarrior_1e.html');
-console.log('  Destination: MW1e_preview.html');
+function updatePreview(previewHtml, sheetContent) {
+    const startIdx = previewHtml.indexOf(START_MARKER);
+    const endIdx = previewHtml.indexOf(END_MARKER);
+
+    if (startIdx === -1 || endIdx === -1) {
+        console.error('Error: Could not find markers in preview file');
+        process.exit(1);
+    }
+
+    const before = previewHtml.substring(0, startIdx);
+    const after = previewHtml.substring(endIdx);
+
+    return before + sheetContent + after;
+}
+
+function main() {
+    console.log('MechWarrior 1e Sheet Sync Script');
+    console.log('=================================\n');
+
+    // Read both files
+    console.log(`Reading ${MAIN_SHEET}...`);
+    const mainHtml = readFile(MAIN_SHEET);
+
+    console.log(`Reading ${PREVIEW_SHEET}...`);
+    const previewHtml = readFile(PREVIEW_SHEET);
+
+    // Extract sheet content from main file
+    console.log('Extracting sheet content...');
+    const sheetContent = extractSheetContent(mainHtml);
+
+    // Update preview file
+    console.log('Updating preview file...');
+    const updatedPreview = updatePreview(previewHtml, sheetContent);
+
+    // Write updated preview
+    writeFile(PREVIEW_SHEET, updatedPreview);
+
+    console.log('\n✓ Synchronization complete!');
+}
+
+// Run the script
+main();
