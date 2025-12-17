@@ -168,6 +168,13 @@ A character sheet **requires four files minimum** in an appropriately named subf
    - Visual design of the sheet
    - CSS can also handle tabs, progress bars, custom UI elements
    - See: https://wiki.roll20.net/CSS_Wizardry
+   - **IMPORTANT**: Always check Roll20's default stylesheet (`base.css`) when styling components
+     - Roll20 applies default styles to common elements (buttons, inputs, selects, etc.)
+     - Common issues include:
+       - `button[type="roll"]` has `justify-content: center` by default
+       - `input, textarea, select` have `margin-bottom: 9px` by default
+       - Default styles may conflict with your design - override them explicitly
+     - When UI doesn't behave as expected, check if Roll20's defaults are interfering
 
 3. **`preview.(jpg|png|gif)`** - Preview image shown before sheet selection
 

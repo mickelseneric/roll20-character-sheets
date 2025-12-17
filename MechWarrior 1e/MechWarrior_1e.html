@@ -411,6 +411,38 @@
             </div>
         </div>
 
+        <!-- Rolls & Tables Section -->
+        <input type="checkbox" name="attr_collapse_rolls" class="sheet-collapse-toggle" id="collapse-rolls" checked />
+        <div class="sheet-angled-panel sheet-collapsible-section" id="rolls-tables-section">
+            <label for="collapse-rolls" class="sheet-section-header sheet-collapsible-header">
+                ROLLS & TABLES
+                <img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/chevron.png" class="sheet-collapse-icon" alt="" />
+            </label>
+            <div class="sheet-collapsible-content">
+                <div class="sheet-rolls-container">
+                    <div class="sheet-roll-group">
+                        <button type="roll" name="roll_hit_location" class="sheet-roll-button" value="&{template:mw1e-location} {{name=@{character_name}}} {{die1=[[1d6]]}} {{die2=[[1d6]]}} {{crit=1}}">
+                            <img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/hit-location-image-icon.png" alt="" />
+                            Roll Hit Location
+                        </button>
+                    </div>
+
+                    <div class="sheet-roll-group">
+                        <button type="roll" name="roll_critical_hit" class="sheet-roll-button" value="&{template:mw1e-critical} {{name=@{character_name}}} {{location=[[@{crit_location}]]}} {{roll=[[1d6]]}}">
+                            <img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="" />
+                            Roll Critical Hit
+                        </button>
+                        <select name="attr_crit_location" class="sheet-crit-location-select">
+                            <option value="1">Head</option>
+                            <option value="2">Arm</option>
+                            <option value="3">Leg</option>
+                            <option value="4" selected>Torso</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Damage Tracking Section -->
         <input type="checkbox" name="attr_collapse_damage" class="sheet-collapse-toggle" id="collapse-damage" checked />
         <div class="sheet-angled-panel sheet-collapsible-section" id="damage-section">
@@ -492,12 +524,6 @@
                 <img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/chevron.png" class="sheet-collapse-icon" alt="" />
             </label>
             <div class="sheet-collapsible-content">
-            <div class="sheet-hit-location-button-container">
-                <button type="roll" name="roll_hit_location" class="sheet-hit-location-button" value="&{template:mw1e-location} {{name=@{character_name}}} {{die1=[[1d6]]}} {{die2=[[1d6]]}} {{crit=1}}">
-                    Roll Hit Location <img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/hit-location-image-icon.png" alt="" />
-                </button>
-            </div>
-
             <table class="sheet-weapons-table">
                 <thead>
                     <tr class="sheet-weapons-header-main">
@@ -757,12 +783,8 @@
         </div>
         <div class="sheet-template-body">
             <div class="sheet-template-row">
-                <span class="sheet-template-label">First Die:</span>
-                <span class="sheet-template-value">{{die1}}</span>
-            </div>
-            <div class="sheet-template-row">
-                <span class="sheet-template-label">Second Die:</span>
-                <span class="sheet-template-value">{{die2}}</span>
+                <span class="sheet-template-label">Roll:</span>
+                <span class="sheet-template-value">{{die1}} | {{die2}}</span>
             </div>
             <div class="sheet-template-row sheet-template-hit-location">
                 <span class="sheet-template-label">Location:</span>
@@ -815,6 +837,106 @@
                         {{#rollBetween() die2 5 5}}L Leg{{/rollBetween() die2 5 5}}
                         {{#rollBetween() die2 6 6}}L Leg - CRITICAL HIT{{/rollBetween() die2 6 6}}
                     {{/rollBetween() die1 6 6}}
+                </span>
+            </div>
+        </div>
+    </div>
+</rolltemplate>
+
+<rolltemplate class="sheet-rolltemplate-mw1e-critical">
+    <div class="sheet-template-container">
+        <div class="sheet-template-header">
+            <strong>{{name}}</strong> - Critical Hit
+        </div>
+        <div class="sheet-template-body">
+            <div class="sheet-template-row">
+                <span class="sheet-template-label">Location:</span>
+                <span class="sheet-template-value"><strong>{{#rollBetween() location 1 1}}Head{{/rollBetween() location 1 1}}{{#rollBetween() location 2 2}}Arm{{/rollBetween() location 2 2}}{{#rollBetween() location 3 3}}Leg{{/rollBetween() location 3 3}}{{#rollBetween() location 4 4}}Torso{{/rollBetween() location 4 4}}</strong></span>
+            </div>
+            <div class="sheet-template-row">
+                <span class="sheet-template-label">Roll (1D6):</span>
+                <span class="sheet-template-value">{{roll}}</span>
+            </div>
+            <div class="sheet-template-row">
+                <span class="sheet-template-label">Critical Hit:</span>
+                <span class="sheet-template-value">
+                    {{#rollBetween() roll 1 1}}
+                        {{#rollBetween() location 1 1}}<strong>Blurred Vision</strong>{{/rollBetween() location 1 1}}
+                        {{#rollBetween() location 2 2}}<strong>Shoulder Separated</strong>{{/rollBetween() location 2 2}}
+                        {{#rollBetween() location 3 3}}<strong>Ligaments Torn</strong>{{/rollBetween() location 3 3}}
+                        {{#rollBetween() location 4 4}}<strong>Ribs Broken</strong>{{/rollBetween() location 4 4}}
+                    {{/rollBetween() roll 1 1}}
+                    {{#rollBetween() roll 2 2}}
+                        {{#rollBetween() location 1 1}}<strong>Nose Broken</strong>{{/rollBetween() location 1 1}}
+                        {{#rollBetween() location 2 2}}<strong>Arm Broken</strong>{{/rollBetween() location 2 2}}
+                        {{#rollBetween() location 3 3}}<strong>Internal Bleeding I</strong>{{/rollBetween() location 3 3}}
+                        {{#rollBetween() location 4 4}}<strong>Internal Bleeding I</strong>{{/rollBetween() location 4 4}}
+                    {{/rollBetween() roll 2 2}}
+                    {{#rollBetween() roll 3 3}}
+                        {{#rollBetween() location 1 1}}<strong>Jaw Broken</strong>{{/rollBetween() location 1 1}}
+                        {{#rollBetween() location 2 2}}<strong>Internal Bleeding I</strong>{{/rollBetween() location 2 2}}
+                        {{#rollBetween() location 3 3}}<strong>Leg Broken</strong>{{/rollBetween() location 3 3}}
+                        {{#rollBetween() location 4 4}}<strong>Sternum Broken</strong>{{/rollBetween() location 4 4}}
+                    {{/rollBetween() roll 3 3}}
+                    {{#rollBetween() roll 4 4}}
+                        {{#rollBetween() location 1 1}}<strong>Hearing Loss</strong>{{/rollBetween() location 1 1}}
+                        {{#rollBetween() location 2 2}}<strong>Wrist Broken</strong>{{/rollBetween() location 2 2}}
+                        {{#rollBetween() location 3 3}}<strong>Ankle Shattered</strong>{{/rollBetween() location 3 3}}
+                        {{#rollBetween() location 4 4}}<strong>Internal Bleeding II</strong>{{/rollBetween() location 4 4}}
+                    {{/rollBetween() roll 4 4}}
+                    {{#rollBetween() roll 5 5}}
+                        {{#rollBetween() location 1 1}}<strong>Burns/Scarring</strong>{{/rollBetween() location 1 1}}
+                        {{#rollBetween() location 2 2}}<strong>Finger(s) Severed</strong>{{/rollBetween() location 2 2}}
+                        {{#rollBetween() location 3 3}}<strong>Internal Bleeding II</strong>{{/rollBetween() location 3 3}}
+                        {{#rollBetween() location 4 4}}<strong>Lung Pierced</strong>{{/rollBetween() location 4 4}}
+                    {{/rollBetween() roll 5 5}}
+                    {{#rollBetween() roll 6 6}}
+                        {{#rollBetween() location 1 1}}<strong>Eye Blinded</strong>{{/rollBetween() location 1 1}}
+                        {{#rollBetween() location 2 2}}<strong>Elbow Shattered</strong>{{/rollBetween() location 2 2}}
+                        {{#rollBetween() location 3 3}}<strong>Foot Torn Off</strong>{{/rollBetween() location 3 3}}
+                        {{#rollBetween() location 4 4}}<strong>Spleen Perforated</strong>{{/rollBetween() location 4 4}}
+                    {{/rollBetween() roll 6 6}}
+                </span>
+            </div>
+            <div class="sheet-template-row sheet-template-description">
+                <span class="sheet-template-label">Effect:</span>
+                <span class="sheet-template-value">
+                    {{#rollBetween() roll 1 1}}
+                        {{#rollBetween() location 1 1}}Character will have double vision for 1D6 x 1D6 hours, and suffer a +3 modifier to all attacks or DEX-based actions made during that period.{{/rollBetween() location 1 1}}
+                        {{#rollBetween() location 2 2}}For two weeks, this injury adds +2 to all combat or DEX-based skill rolls made with the afflicted arm.{{/rollBetween() location 2 2}}
+                        {{#rollBetween() location 3 3}}The character suffers a one-half reduction to his walking MP allowance for 1D6 x 1D6 days. He may make no Run/Dodge or Sprint maneuvers until the injury heals.{{/rollBetween() location 3 3}}
+                        {{#rollBetween() location 4 4}}A character's MP allowance is reduced by 1 for three weeks. For that period, he is permitted no heavy lifting.{{/rollBetween() location 4 4}}
+                    {{/rollBetween() roll 1 1}}
+                    {{#rollBetween() roll 2 2}}
+                        {{#rollBetween() location 1 1}}Temporary -1 to CHA (permanent if improperly set). Healing Time: 2 weeks. To determine if the bone is set properly, make a skill roll on 2D6 against a Target of 9, subtracting 2 for each Medical/First Aid skill level. Improperly set bones take twice as long to heal and are liable to reinjury.{{/rollBetween() location 1 1}}
+                        {{#rollBetween() location 2 2}}Requires hard cast: +1 to all combat and DEX-based Targets using arm. Healing Time: 6 weeks. To determine if the bone is set properly, make a skill roll on 2D6 against a Target of 9, subtracting 2 for each Medical/First Aid skill level. Improperly set bones take twice as long to heal and are liable to reinjury.{{/rollBetween() location 2 2}}
+                        {{#rollBetween() location 3 3}}The victim's injuries cause internal bleeding. The attending medic must make an Emergency Skill Roll against his Medical Skill Target +3 to complete proper lifesaving procedures, or else the victim dies in 2D6 hours. Add 1 to the Emergency Skill Roll Target for each hour of delay between injury and treatment.{{/rollBetween() location 3 3}}
+                        {{#rollBetween() location 4 4}}The victim's injuries cause internal bleeding. The attending medic must make an Emergency Skill Roll against his Medical Skill Target +3 to complete proper lifesaving procedures, or else the victim dies in 2D6 hours. Add 1 to the Emergency Skill Roll Target for each hour of delay between injury and treatment.{{/rollBetween() location 4 4}}
+                    {{/rollBetween() roll 2 2}}
+                    {{#rollBetween() roll 3 3}}
+                        {{#rollBetween() location 1 1}}Garbled speech; temporary -1 to CHA (permanent if improperly set). Healing Time: 4 weeks. To determine if the bone is set properly, make a skill roll on 2D6 against a Target of 9, subtracting 2 for each Medical/First Aid skill level. Improperly set bones take twice as long to heal and are liable to reinjury.{{/rollBetween() location 1 1}}
+                        {{#rollBetween() location 2 2}}The victim's injuries cause internal bleeding. The attending medic must make an Emergency Skill Roll against his Medical Skill Target +3 to complete proper lifesaving procedures, or else the victim dies in 2D6 hours. Add 1 to the Emergency Skill Roll Target for each hour of delay between injury and treatment.{{/rollBetween() location 2 2}}
+                        {{#rollBetween() location 3 3}}Requires hard cast; character may move at 1/3 rate using crutches. To determine if the bone is set properly, make a skill roll on 2D6 against a Target of 9, subtracting 2 for each Medical/First Aid skill level. Improperly set bones take twice as long to heal and are liable to reinjury.{{/rollBetween() location 3 3}}
+                        {{#rollBetween() location 4 4}}No strenuous movement of any kind permitted. Healing Time: 12 weeks. To determine if the bone is set properly, make a skill roll on 2D6 against a Target of 9, subtracting 2 for each Medical/First Aid skill level. Improperly set bones take twice as long to heal and are liable to reinjury.{{/rollBetween() location 4 4}}
+                    {{/rollBetween() roll 3 3}}
+                    {{#rollBetween() roll 4 4}}
+                        {{#rollBetween() location 1 1}}The character suffers a loss of hearing in one ear. Roll 1D6. On a roll of 1 or 2, this deafness is permanent. On a roll of 3-6, the hearing loss is temporary and will end after 1D6 weeks. While affected, the character suffers a +4 modifier to all hearing rolls.{{/rollBetween() location 1 1}}
+                        {{#rollBetween() location 2 2}}Arm must be immobilized and cannot be used. Healing Time: 8 weeks. To determine if the bone is set properly, make a skill roll on 2D6 against a Target of 9, subtracting 2 for each Medical/First Aid skill level. Improperly set bones take twice as long to heal and are liable to reinjury.{{/rollBetween() location 2 2}}
+                        {{#rollBetween() location 3 3}}A character's bone is broken into multiple fragments, which will require delicate surgery to restore. The attending medic must make an Emergency Skill Roll against his Medical Skill Target +5 to successfully complete this surgery. If the die roll is successful, treat the affected limb as a normal broken arm or leg; if unsuccessful, the victim will suffer permanent disability to the affected limb (unless he gets a bionic replacement).{{/rollBetween() location 3 3}}
+                        {{#rollBetween() location 4 4}}The victim's injuries cause internal bleeding. The attending medic must make an Emergency Skill Roll against his Medical Skill Target +6 to complete proper lifesaving procedures, or else the victim dies in 2D6 hours. Add 1 to the Emergency Skill Roll Target for every 15 minutes of delay between injury and treatment.{{/rollBetween() location 4 4}}
+                    {{/rollBetween() roll 4 4}}
+                    {{#rollBetween() roll 5 5}}
+                        {{#rollBetween() location 1 1}}The character's face is severely scarred by burns or explosion damage. He loses 1D6 points from his CHA score (although it cannot fall below 1). Hospitalization and proper skin grafting will reduce this CHA loss by 50 percent.{{/rollBetween() location 1 1}}
+                        {{#rollBetween() location 2 2}}A character loses one to three digits from the affected hand (Roll 1D6: 1-3 = 1 finger; 4-5 = 2 fingers; 6 = 3 fingers). Injury reduces by 1 all To-Hit Rolls (if the affected hand was the character's shooting hand) and rolls against the DEX score for manual dexterity using this hand.{{/rollBetween() location 2 2}}
+                        {{#rollBetween() location 3 3}}The victim's injuries cause internal bleeding. The attending medic must make an Emergency Skill Roll against his Medical Skill Target +6 to complete proper lifesaving procedures, or else the victim dies in 2D6 hours. Add 1 to the Emergency Skill Roll Target for every 15 minutes of delay between injury and treatment.{{/rollBetween() location 3 3}}
+                        {{#rollBetween() location 4 4}}The attending medic must make an Emergency Skill Roll against his Medical Skill Target +4, or else peritonitis results. In the latter case, the victim must make a successful Saving Roll against BODY Target +2, or perish. If successful, the character will suffer a loss of one-half his MP allowance loss (no Run/Dodge or Sprint maneuvers permitted) for 2D6 weeks.{{/rollBetween() location 4 4}}
+                    {{/rollBetween() roll 5 5}}
+                    {{#rollBetween() roll 6 6}}
+                        {{#rollBetween() location 1 1}}The character permanently loses all vision in one eye unless the attending medic can successfully make an Emergency Skill Roll (roll 2D6, with a successful result equal to or greater than the medic's First Aid Skill Rating Target +4). Victims who are blinded in one eye suffer a permanent +1 modifier to all combat and DEX-based die rolls. They also lose 1 hex-width from their firing arc (reflecting their "blind side"). By making successful BODY and Medical Saving Rolls, the blindness will be only temporary (1D6 + 10 days).{{/rollBetween() location 1 1}}
+                        {{#rollBetween() location 2 2}}A character's bone is broken into multiple fragments, which will require delicate surgery to restore. The attending medic must make an Emergency Skill Roll against his Medical Skill Target +5 to successfully complete this surgery. If the die roll is successful, treat the affected limb as a normal broken arm or leg; if unsuccessful, the victim will suffer permanent disability to the affected limb (unless he gets a bionic replacement).{{/rollBetween() location 2 2}}
+                        {{#rollBetween() location 3 3}}A character's foot is ripped loose from his body. Any character with First Aid/Medical Skill Level 4+ who provides medical attention within 30 minutes of the injury can attempt to re-attach the foot by making an Emergency Skill Roll against his Medical Skill Target +6. If successful, treat the damaged limb as a properly-set Broken Leg. If unsuccessful, the victim is crippled (MP allowance reduced by two-thirds) until he obtains a bionic replacement.{{/rollBetween() location 3 3}}
+                        {{#rollBetween() location 4 4}}The attending medic must make an Emergency Skill Roll against his Medical Skill Target +4 to save the victim's life. An unsuccessful roll means that the victim dies. If successful, the patient must remain out of action for twelve weeks to recuperate. Medical Skill Rolls are made on 2D6 against a character's current skill rating in Medical/First Aid (Target Score for LRN - 1 for each skill level). A successful result is equal to or greater than the character's Target.{{/rollBetween() location 4 4}}
+                    {{/rollBetween() roll 6 6}}
                 </span>
             </div>
         </div>
