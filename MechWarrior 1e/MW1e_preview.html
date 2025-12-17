@@ -449,6 +449,38 @@
             </div>
         </div>
 
+        <!-- Rolls & Tables Section -->
+        <input type="checkbox" name="attr_collapse_rolls" class="sheet-collapse-toggle" id="collapse-rolls" checked />
+        <div class="sheet-angled-panel sheet-collapsible-section" id="rolls-tables-section">
+            <label for="collapse-rolls" class="sheet-section-header sheet-collapsible-header">
+                ROLLS & TABLES
+                <img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/chevron.png" class="sheet-collapse-icon" alt="" />
+            </label>
+            <div class="sheet-collapsible-content">
+                <div class="sheet-rolls-container">
+                    <div class="sheet-roll-group">
+                        <button type="roll" name="roll_hit_location" class="sheet-roll-button" value="&{template:mw1e-location} {{name=@{character_name}}} {{die1=[[1d6]]}} {{die2=[[1d6]]}} {{crit=1}}">
+                            <img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/hit-location-image-icon.png" alt="" />
+                            Roll Hit Location
+                        </button>
+                    </div>
+
+                    <div class="sheet-roll-group">
+                        <button type="roll" name="roll_critical_hit" class="sheet-roll-button" value="&{template:mw1e-critical} {{name=@{character_name}}} {{location=[[@{crit_location}]]}} {{roll=[[1d6]]}}">
+                            <img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="" />
+                            Roll Critical Hit
+                        </button>
+                        <select name="attr_crit_location" class="sheet-crit-location-select">
+                            <option value="1">Head</option>
+                            <option value="2">Arm</option>
+                            <option value="3">Leg</option>
+                            <option value="4" selected>Torso</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Damage Tracking Section -->
         <input type="checkbox" name="attr_collapse_damage" class="sheet-collapse-toggle" id="collapse-damage" checked />
         <div class="sheet-angled-panel sheet-collapsible-section" id="damage-section">
@@ -530,12 +562,6 @@
                 <img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/chevron.png" class="sheet-collapse-icon" alt="" />
             </label>
             <div class="sheet-collapsible-content">
-            <div class="sheet-hit-location-button-container">
-                <button type="roll" name="roll_hit_location" class="sheet-hit-location-button" value="&{template:mw1e-location} {{name=@{character_name}}} {{die1=[[1d6]]}} {{die2=[[1d6]]}} {{crit=1}}">
-                    Roll Hit Location <img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/hit-location-image-icon.png" alt="" />
-                </button>
-            </div>
-
             <table class="sheet-weapons-table">
                 <thead>
                     <tr class="sheet-weapons-header-main">

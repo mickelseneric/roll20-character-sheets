@@ -640,6 +640,88 @@ input.sheet-xp-negative-flag:checked ~ .sheet-xp-available-container input {
     text-align: center;
 }
 
+/* Rolls & Tables Section */
+#rolls-tables-section {
+    margin-top: 20px;
+    padding: 20px;
+}
+
+.sheet-rolls-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+}
+
+.sheet-roll-group {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+button[type="roll"].sheet-roll-button {
+    border: none;
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    width: 250px;
+    justify-content: flex-start;
+    transition: none;
+}
+
+button[type="roll"].sheet-roll-button:hover {
+    opacity: 0.8;
+    transition: none;
+}
+
+button[type="roll"].sheet-roll-button:active {
+    opacity: 0.6;
+    transition: none;
+}
+
+button[type="roll"].sheet-roll-button img {
+    width: 24px;
+    height: 24px;
+}
+
+.sheet-crit-location-select {
+    height: 24px;
+    background-color: #2a3544;
+    border: none;
+    border-bottom: 1px solid #6a7a8a;
+    color: #c8d0d8;
+    font-size: 14px;
+    padding: 4px 8px;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+    min-width: 100px;
+    cursor: pointer;
+    margin-bottom: 0;
+}
+
+.sheet-crit-location-select:hover {
+    background-color: #344050;
+    border-bottom-color: #8a9aaa;
+}
+
+.sheet-crit-location-select:focus {
+    outline: none;
+    border-bottom: 2px solid #8a9aaa;
+    background-color: #3a4a5a;
+}
+
+.sheet-crit-location-select option {
+    background-color: #3a4a5a;
+    color: #c8d0d8;
+}
+
 /* Damage Tracking Section */
 #damage-section {
     margin-top: 20px;
@@ -980,4 +1062,139 @@ button[type="roll"] img {
 .sheet-hit-location-button img {
     width: 24px;
     height: 24px;
+}
+
+/* =================================================================
+   ROLL TEMPLATES
+   ================================================================= */
+
+.sheet-rolltemplate-mw1e-skill .sheet-template-container,
+.sheet-rolltemplate-mw1e-weapon .sheet-template-container,
+.sheet-rolltemplate-mw1e-damage .sheet-template-container,
+.sheet-rolltemplate-mw1e-location .sheet-template-container,
+.sheet-rolltemplate-mw1e-critical .sheet-template-container {
+    background-color: #4a5a6a;
+    border: 2px solid #b2854e;
+    border-radius: 5px;
+    padding: 10px;
+    color: #c8d0d8;
+    font-family: 'Arial', 'Helvetica', sans-serif;
+}
+
+.sheet-rolltemplate-mw1e-skill .sheet-template-header,
+.sheet-rolltemplate-mw1e-weapon .sheet-template-header,
+.sheet-rolltemplate-mw1e-damage .sheet-template-header,
+.sheet-rolltemplate-mw1e-location .sheet-template-header,
+.sheet-rolltemplate-mw1e-critical .sheet-template-header {
+    background-color: #b2854e;
+    color: #2a3a4a;
+    padding: 8px;
+    margin: -10px -10px 10px -10px;
+    border-radius: 3px 3px 0 0;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.sheet-rolltemplate-mw1e-skill .sheet-template-row,
+.sheet-rolltemplate-mw1e-weapon .sheet-template-row,
+.sheet-rolltemplate-mw1e-damage .sheet-template-row,
+.sheet-rolltemplate-mw1e-location .sheet-template-row,
+.sheet-rolltemplate-mw1e-critical .sheet-template-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    border-bottom: 1px solid #6a7a8a;
+}
+
+.sheet-rolltemplate-mw1e-skill .sheet-template-row:last-child,
+.sheet-rolltemplate-mw1e-weapon .sheet-template-row:last-child,
+.sheet-rolltemplate-mw1e-damage .sheet-template-row:last-child,
+.sheet-rolltemplate-mw1e-location .sheet-template-row:last-child,
+.sheet-rolltemplate-mw1e-critical .sheet-template-row:last-child {
+    border-bottom: none;
+}
+
+.sheet-rolltemplate-mw1e-skill .sheet-template-label,
+.sheet-rolltemplate-mw1e-weapon .sheet-template-label,
+.sheet-rolltemplate-mw1e-damage .sheet-template-label,
+.sheet-rolltemplate-mw1e-location .sheet-template-label,
+.sheet-rolltemplate-mw1e-critical .sheet-template-label {
+    font-weight: bold;
+    color: #8a9aaa;
+}
+
+.sheet-rolltemplate-mw1e-skill .sheet-template-value,
+.sheet-rolltemplate-mw1e-weapon .sheet-template-value,
+.sheet-rolltemplate-mw1e-damage .sheet-template-value,
+.sheet-rolltemplate-mw1e-location .sheet-template-value,
+.sheet-rolltemplate-mw1e-critical .sheet-template-value {
+    color: #c8d0d8;
+}
+
+/* Critical Hit Results Styling */
+.sheet-rolltemplate-mw1e-critical .sheet-crit-results {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 5px;
+}
+
+.sheet-rolltemplate-mw1e-critical .sheet-crit-results > div {
+    padding: 5px;
+    background-color: rgba(106, 122, 138, 0.3);
+    border-left: 3px solid #6a7a8a;
+}
+
+.sheet-rolltemplate-mw1e-critical .sheet-crit-head {
+    border-left-color: #d9534f !important;
+}
+
+.sheet-rolltemplate-mw1e-critical .sheet-crit-arm {
+    border-left-color: #5bc0de !important;
+}
+
+.sheet-rolltemplate-mw1e-critical .sheet-crit-leg {
+    border-left-color: #f0ad4e !important;
+}
+
+.sheet-rolltemplate-mw1e-critical .sheet-crit-torso {
+    border-left-color: #5cb85c !important;
+}
+
+/* Override Roll20's critical success/failure colors for dice */
+.sheet-rolltemplate-mw1e-skill .inlinerollresult,
+.sheet-rolltemplate-mw1e-weapon .inlinerollresult,
+.sheet-rolltemplate-mw1e-damage .inlinerollresult,
+.sheet-rolltemplate-mw1e-location .inlinerollresult,
+.sheet-rolltemplate-mw1e-critical .inlinerollresult {
+    background-color: #FEF68E !important;
+    border: 2px solid #87850A !important;
+}
+
+.sheet-rolltemplate-mw1e-skill .inlinerollresult.fullcrit,
+.sheet-rolltemplate-mw1e-weapon .inlinerollresult.fullcrit,
+.sheet-rolltemplate-mw1e-damage .inlinerollresult.fullcrit,
+.sheet-rolltemplate-mw1e-location .inlinerollresult.fullcrit,
+.sheet-rolltemplate-mw1e-critical .inlinerollresult.fullcrit {
+    background-color: #FEF68E !important;
+    border: 2px solid #87850A !important;
+}
+
+.sheet-rolltemplate-mw1e-skill .inlinerollresult.fullfail,
+.sheet-rolltemplate-mw1e-weapon .inlinerollresult.fullfail,
+.sheet-rolltemplate-mw1e-damage .inlinerollresult.fullfail,
+.sheet-rolltemplate-mw1e-location .inlinerollresult.fullfail,
+.sheet-rolltemplate-mw1e-critical .inlinerollresult.fullfail {
+    background-color: #FEF68E !important;
+    border: 2px solid #87850A !important;
+}
+
+.sheet-rolltemplate-mw1e-skill .inlinerollresult.importantroll,
+.sheet-rolltemplate-mw1e-weapon .inlinerollresult.importantroll,
+.sheet-rolltemplate-mw1e-damage .inlinerollresult.importantroll,
+.sheet-rolltemplate-mw1e-location .inlinerollresult.importantroll,
+.sheet-rolltemplate-mw1e-critical .inlinerollresult.importantroll {
+    background-color: #FEF68E !important;
+    border: 2px solid #87850A !important;
 }
