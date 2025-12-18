@@ -391,9 +391,9 @@ input.sheet-tab-combat:checked ~ div.sheet-tab-combat {
 }
 
 .sheet-attr-row button[type="roll"] {
-    width: 60px !important;
-    min-width: 60px !important;
-    max-width: 60px !important;
+    width: 40px !important;
+    min-width: 40px !important;
+    max-width: 40px !important;
     flex-shrink: 0;
     margin: 0 3px !important;
     padding: 0 !important;
@@ -512,9 +512,9 @@ input.sheet-tab-combat:checked ~ div.sheet-tab-combat {
 }
 
 .sheet-skill-row button[type="roll"] {
-    width: 55px !important;
-    min-width: 55px !important;
-    max-width: 55px !important;
+    width: 40px !important;
+    min-width: 40px !important;
+    max-width: 40px !important;
     flex-shrink: 0;
     margin: 0 3px !important;
     padding: 0 !important;
@@ -638,6 +638,37 @@ input.sheet-xp-negative-flag:checked ~ .sheet-xp-available-container input {
 .sheet-combat-stats-row .sheet-field-group input {
     width: 80px;
     text-align: center;
+}
+
+/* PIB field group with breakdown */
+.sheet-pib-group {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+}
+
+.sheet-pib-input-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+/* PIB breakdown display */
+.sheet-pib-breakdown {
+    width: auto !important;
+    min-width: 250px !important;
+    max-width: 400px !important;
+    font-size: 11px !important;
+    font-style: italic;
+    color: #888 !important;
+    background: transparent !important;
+    border: none !important;
+    padding: 2px 5px 2px 0 !important;
+    margin-top: 3px !important;
+    margin-bottom: 0 !important;
+    text-align: left !important;
+    cursor: default !important;
 }
 
 /* Rolls & Tables Section */
@@ -850,7 +881,7 @@ input[name*="damage"][name*="max"][readonly] {
     background-color: rgba(106, 122, 138, 0.3);
     border: 1px solid #6a7a8a;
     padding: 8px;
-    font-size: 11px;
+    font-size: 8px;
     font-weight: bold;
     letter-spacing: 1px;
     text-transform: uppercase;
@@ -861,10 +892,13 @@ input[name*="damage"][name*="max"][readonly] {
     border-bottom: none;
 }
 
-.sheet-weapons-header-sub th {
+.sheet-weapons-table .sheet-weapons-header-sub th {
     border-top: none;
-    font-size: 10px;
+    font-size: 8px;
     padding: 4px;
+}
+.sheet-weapons-table thead tr.sheet-weapons-header-sub th {
+    width: 10%;
 }
 
 .sheet-weapons-table tbody td {
@@ -995,8 +1029,8 @@ select:focus {
    ================================================================= */
 
 /* General button styling */
-button[type="roll"] {
-    background-color: transparent;
+button[type="roll"],
+button[type="action"] {
     border: none;
     cursor: pointer;
     padding: 0;
@@ -1006,16 +1040,19 @@ button[type="roll"] {
     justify-content: center;
 }
 
-button[type="roll"]:hover {
+button[type="roll"]:hover,
+button[type="action"]:hover {
     opacity: 0.8;
 }
 
-button[type="roll"]:active {
+button[type="roll"]:active,
+button[type="action"]:active {
     opacity: 0.6;
 }
 
 /* Button images - scale down from 256x256 */
-button[type="roll"] img {
+button[type="roll"] img,
+button[type="action"] img {
     display: block;
     width: 24px;
     height: 24px;
@@ -1024,13 +1061,22 @@ button[type="roll"] img {
 
 /* Skill and attribute roll buttons (2D6 icon) */
 .sheet-skill-row button[type="roll"] img,
-.sheet-attr-row button[type="roll"] img {
+.sheet-skill-row button[type="action"] img,
+.sheet-attr-row button[type="roll"] img,
+.sheet-attr-row button[type="action"] img {
     width: 28px;
     height: 28px;
 }
 
 /* Weapon attack and damage buttons */
-.sheet-weapons-table button[type="roll"] img {
+.sheet-weapons-table button[type="roll"],
+.sheet-weapons-table button[type="action"] {
+    border-radius: 6px !important;
+    padding: 4px !important;
+}
+
+.sheet-weapons-table button[type="roll"] img,
+.sheet-weapons-table button[type="action"] img {
     width: 32px;
     height: 32px;
 }
@@ -1168,33 +1214,414 @@ button[type="roll"] img {
 .sheet-rolltemplate-mw1e-damage .inlinerollresult,
 .sheet-rolltemplate-mw1e-location .inlinerollresult,
 .sheet-rolltemplate-mw1e-critical .inlinerollresult {
-    background-color: #FEF68E !important;
-    border: 2px solid #87850A !important;
+    background-color: transparent !important;
+    border: none !important;
+    color: #c8d0d8 !important;
+    padding: 0 !important;
 }
 
-.sheet-rolltemplate-mw1e-skill .inlinerollresult.fullcrit,
-.sheet-rolltemplate-mw1e-weapon .inlinerollresult.fullcrit,
-.sheet-rolltemplate-mw1e-damage .inlinerollresult.fullcrit,
-.sheet-rolltemplate-mw1e-location .inlinerollresult.fullcrit,
-.sheet-rolltemplate-mw1e-critical .inlinerollresult.fullcrit {
-    background-color: #FEF68E !important;
-    border: 2px solid #87850A !important;
+/* Attack Roll in weapon template - green highlight for success */
+.sheet-rolltemplate-mw1e-weapon .sheet-attack-result-success .sheet-template-roll .inlinerollresult {
+    background-color: #4a7a5a !important;
+    border: 2px solid #5a8a6a !important;
+    color: #ffffff !important;
+    padding: 2px 6px !important;
+    border-radius: 3px !important;
+    font-weight: bold !important;
 }
 
-.sheet-rolltemplate-mw1e-skill .inlinerollresult.fullfail,
-.sheet-rolltemplate-mw1e-weapon .inlinerollresult.fullfail,
-.sheet-rolltemplate-mw1e-damage .inlinerollresult.fullfail,
-.sheet-rolltemplate-mw1e-location .inlinerollresult.fullfail,
-.sheet-rolltemplate-mw1e-critical .inlinerollresult.fullfail {
-    background-color: #FEF68E !important;
-    border: 2px solid #87850A !important;
+/* Red highlight for failure */
+.sheet-rolltemplate-mw1e-weapon .sheet-attack-result-failure .sheet-template-roll .inlinerollresult {
+    background-color: #8a4a4a !important;
+    border: 2px solid #aa5a5a !important;
+    color: #ffffff !important;
+    padding: 2px 6px !important;
+    border-radius: 3px !important;
+    font-weight: bold !important;
 }
 
-.sheet-rolltemplate-mw1e-skill .inlinerollresult.importantroll,
-.sheet-rolltemplate-mw1e-weapon .inlinerollresult.importantroll,
-.sheet-rolltemplate-mw1e-damage .inlinerollresult.importantroll,
-.sheet-rolltemplate-mw1e-location .inlinerollresult.importantroll,
-.sheet-rolltemplate-mw1e-critical .inlinerollresult.importantroll {
-    background-color: #FEF68E !important;
-    border: 2px solid #87850A !important;
+/* ===================================
+   Custom Attack Dialog
+   =================================== */
+
+/* Hide radio buttons */
+.sheet-dialog-hidden,
+.sheet-dialog-show {
+    display: none;
+}
+
+/* Dialog Overlay - Hidden by default */
+.sheet-attack-dialog-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.75);
+    z-index: 10000;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Show dialog when "show" radio is checked */
+.sheet-dialog-show:checked ~ .sheet-attack-dialog-overlay {
+    display: flex;
+}
+
+/* Dialog Box - uses double-layer pattern like sheet-angled-panel */
+.sheet-attack-dialog {
+    background-color: #6a7a8a !important; /* Border color as background */
+    border: none !important;
+    padding: 2px !important; /* Border thickness */
+    width: 338px !important;
+    max-width: 90% !important;
+    box-shadow: 0 9px 30px rgba(0, 0, 0, 0.9) !important;
+    border-radius: 0 !important;
+    position: relative !important;
+    -webkit-clip-path: polygon(
+        11px 0%,
+        calc(100% - 11px) 0%,
+        100% 11px,
+        100% calc(100% - 11px),
+        calc(100% - 11px) 100%,
+        11px 100%,
+        0% calc(100% - 11px),
+        0% 11px
+    ) !important;
+    clip-path: polygon(
+        11px 0%,
+        calc(100% - 11px) 0%,
+        100% 11px,
+        100% calc(100% - 11px),
+        calc(100% - 11px) 100%,
+        11px 100%,
+        0% calc(100% - 11px),
+        0% 11px
+    ) !important;
+}
+
+/* Inner dialog background using ::before - creates the "border" effect */
+.sheet-attack-dialog::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 2px !important;
+    left: 2px !important;
+    right: 2px !important;
+    bottom: 2px !important;
+    background-color: #3a4a5a !important; /* Inner fill color */
+    z-index: 0 !important;
+    -webkit-clip-path: polygon(
+        10px 0%,
+        calc(100% - 10px) 0%,
+        100% 10px,
+        100% calc(100% - 10px),
+        calc(100% - 10px) 100%,
+        10px 100%,
+        0% calc(100% - 10px),
+        0% 10px
+    ) !important;
+    clip-path: polygon(
+        10px 0%,
+        calc(100% - 10px) 0%,
+        100% 10px,
+        100% calc(100% - 10px),
+        calc(100% - 10px) 100%,
+        10px 100%,
+        0% calc(100% - 10px),
+        0% 10px
+    ) !important;
+}
+
+/* Ensure dialog content appears above the ::before background */
+.sheet-attack-dialog > * {
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+/* Dialog Header */
+.sheet-attack-dialog-header {
+    background-color: #4a5a6a !important;
+    border-bottom: 2px solid #b2854e !important;
+    padding: 11px 15px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    border-radius: 0 !important;
+    /* Clip top corners to match parent dialog */
+    -webkit-clip-path: polygon(
+        11px 0%,
+        calc(100% - 11px) 0%,
+        100% 11px,
+        100% 100%,
+        0% 100%,
+        0% 11px
+    ) !important;
+    clip-path: polygon(
+        11px 0%,
+        calc(100% - 11px) 0%,
+        100% 11px,
+        100% 100%,
+        0% 100%,
+        0% 11px
+    ) !important;
+}
+
+.sheet-attack-dialog-header h3 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: bold;
+    color: #c8d0d8;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.sheet-attack-dialog .sheet-close-dialog {
+    background-color: #5a6a7a !important;
+    border: 2px solid #6a7a8a !important;
+    color: #c8d0d8 !important;
+    width: 24px !important;
+    height: 24px !important;
+    font-size: 21px !important;
+    line-height: 21px !important;
+    cursor: pointer !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-weight: bold !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+}
+
+.sheet-attack-dialog .sheet-close-dialog:hover {
+    background-color: #7a8a9a !important;
+    border-color: #8a9aaa !important;
+    box-shadow: 0 0 10px rgba(122, 138, 154, 0.6) !important;
+}
+
+/* Dialog Body */
+.sheet-attack-dialog-body {
+    padding: 19px 15px;
+}
+
+/* Info rows (read-only display) */
+.sheet-dialog-info-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 11px;
+    gap: 8px;
+}
+
+.sheet-dialog-info-row .sheet-dialog-label {
+    color: #c8d0d8;
+    font-weight: bold;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    min-width: 105px;
+    flex-shrink: 0;
+}
+
+.sheet-dialog-info-row .sheet-dialog-readonly {
+    background-color: #2a3a4a;
+    border: 2px solid #5a6a7a;
+    color: #999;
+    padding: 6px 9px;
+    font-size: 11px;
+    flex: 1;
+    cursor: not-allowed;
+}
+
+/* Editable field row (situational modifier) */
+.sheet-dialog-field-row {
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 2px solid #5a6a7a;
+    gap: 8px;
+}
+
+.sheet-dialog-field-row .sheet-dialog-label {
+    color: #c8d0d8;
+    font-weight: bold;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    min-width: 105px;
+    flex-shrink: 0;
+}
+
+.sheet-dialog-field-row input[type="number"] {
+    background-color: #2a3a4a !important;
+    border: 2px solid #6a7a8a !important;
+    color: #c8d0d8 !important;
+    padding: 6px 9px !important;
+    font-size: 11px !important;
+    flex: 1 !important;
+    text-align: left !important;
+    font-weight: normal !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+}
+
+.sheet-dialog-field-row input[type="number"]:focus {
+    outline: none !important;
+    border-color: #b2854e !important;
+    box-shadow: 0 0 6px rgba(178, 133, 78, 0.5) !important;
+}
+
+/* Dialog Footer */
+.sheet-attack-dialog-footer {
+    background-color: #4a5a6a !important;
+    border-top: 2px solid #6a7a8a !important;
+    padding: 14px 15px !important;
+    display: flex !important;
+    justify-content: flex-end !important;
+    gap: 9px !important;
+    border-radius: 0 !important;
+    /* Clip bottom corners to match parent dialog */
+    -webkit-clip-path: polygon(
+        0% 0%,
+        100% 0%,
+        100% calc(100% - 11px),
+        calc(100% - 11px) 100%,
+        11px 100%,
+        0% calc(100% - 11px)
+    ) !important;
+    clip-path: polygon(
+        0% 0%,
+        100% 0%,
+        100% calc(100% - 11px),
+        calc(100% - 11px) 100%,
+        11px 100%,
+        0% calc(100% - 11px)
+    ) !important;
+}
+
+/* Override Roll20's default button styles */
+.sheet-dialog-submit,
+.sheet-dialog-cancel,
+button.sheet-dialog-submit,
+button.sheet-dialog-cancel {
+    font-size: 10px !important;
+    font-weight: bold !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    cursor: pointer !important;
+    border: none !important;
+    color: #c8d0d8 !important;
+    padding: 5px 15px !important;
+    position: relative !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    line-height: normal !important;
+    -webkit-clip-path: polygon(
+        6px 0%,
+        calc(100% - 6px) 0%,
+        100% 6px,
+        100% calc(100% - 6px),
+        calc(100% - 6px) 100%,
+        6px 100%,
+        0% calc(100% - 6px),
+        0% 6px
+    ) !important;
+    clip-path: polygon(
+        6px 0%,
+        calc(100% - 6px) 0%,
+        100% 6px,
+        100% calc(100% - 6px),
+        calc(100% - 6px) 100%,
+        6px 100%,
+        0% calc(100% - 6px),
+        0% 6px
+    ) !important;
+}
+
+/* Inner button background using ::after pseudo-element - creates the "border" effect */
+.sheet-dialog-submit::after,
+.sheet-dialog-cancel::after,
+button.sheet-dialog-submit::after,
+button.sheet-dialog-cancel::after {
+    content: '' !important;
+    position: absolute !important;
+    top: 2px !important;
+    left: 2px !important;
+    right: 2px !important;
+    bottom: 2px !important;
+    z-index: -1 !important;
+    -webkit-clip-path: polygon(
+        5px 0%,
+        calc(100% - 5px) 0%,
+        100% 5px,
+        100% calc(100% - 5px),
+        calc(100% - 5px) 100%,
+        5px 100%,
+        0% calc(100% - 5px),
+        0% 5px
+    ) !important;
+    clip-path: polygon(
+        5px 0%,
+        calc(100% - 5px) 0%,
+        100% 5px,
+        100% calc(100% - 5px),
+        calc(100% - 5px) 100%,
+        5px 100%,
+        0% calc(100% - 5px),
+        0% 5px
+    ) !important;
+}
+
+/* Roll Attack button - green theme */
+.sheet-dialog-submit,
+button.sheet-dialog-submit {
+    background-color: #5a8a6a !important; /* Outer border color */
+}
+
+.sheet-dialog-submit::after,
+button.sheet-dialog-submit::after {
+    background-color: #4a7a5a !important; /* Inner fill color */
+}
+
+.sheet-dialog-submit:hover,
+button.sheet-dialog-submit:hover {
+    background-color: #6aaa8a !important; /* Brighter outer border */
+}
+
+.sheet-dialog-submit:hover::after,
+button.sheet-dialog-submit:hover::after {
+    background-color: #5a9a7a !important; /* Brighter inner fill */
+}
+
+/* Override hover effects for roll attack button */
+button[type="roll"][name="roll_attack_from_dialog"],
+button[type="roll"][name="roll_attack_from_dialog"]:hover,
+button[type="roll"][name="roll_attack_from_dialog"]:active {
+    transition: none !important;
+    background-position: 0 0 !important;
+}
+
+/* Cancel button - neutral gray theme */
+.sheet-dialog-cancel,
+button.sheet-dialog-cancel {
+    background-color: #6a7a8a !important; /* Outer border color */
+}
+
+.sheet-dialog-cancel::after,
+button.sheet-dialog-cancel::after {
+    background-color: #4a5a6a !important; /* Inner fill color */
+}
+
+.sheet-dialog-cancel:hover,
+button.sheet-dialog-cancel:hover {
+    background-color: #8a9aaa !important; /* Brighter outer border */
+}
+
+.sheet-dialog-cancel:hover::after,
+button.sheet-dialog-cancel:hover::after {
+    background-color: #6a7a8a !important; /* Brighter inner fill */
 }
