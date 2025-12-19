@@ -9,13 +9,13 @@
     <input type="radio" name="attr_show_attack_dialog" class="sheet-dialog-hidden" value="0" checked="checked" />
     <input type="radio" name="attr_show_attack_dialog" class="sheet-dialog-show" value="1" />
 
-    <div class="sheet-attack-dialog-overlay">
-        <div class="sheet-attack-dialog">
-            <div class="sheet-attack-dialog-header">
-                <h3>Roll Attack</h3>
-                <button type="action" name="act_closedialog" class="sheet-close-dialog">×</button>
+    <div class="sheet-dialog-overlay sheet-attack-dialog-overlay">
+        <div class="sheet-dialog-container sheet-attack-dialog-container">
+            <div class="sheet-dialog-header">
+                <h3>ROLL ATTACK</h3>
+                <button type="action" name="act_closedialog" class="sheet-dialog-close">×</button>
             </div>
-            <div class="sheet-attack-dialog-body">
+            <div class="sheet-dialog-body sheet-attack-dialog-body">
                 <div class="sheet-dialog-info-row">
                     <span class="sheet-dialog-label">WEAPON:</span>
                     <input type="text" name="attr_pending_weapon_name" readonly class="sheet-dialog-readonly" />
@@ -33,7 +33,7 @@
                     <input type="number" name="attr_attack_situational_modifier" value="0" />
                 </div>
             </div>
-            <div class="sheet-attack-dialog-footer">
+            <div class="sheet-dialog-footer">
                 <button type="roll" name="roll_attack_from_dialog"
                         value="&{template:mw1e-weapon} {{name=@{character_name}}} {{weapon=@{pending_weapon_name}}} {{weapon_skill=@{pending_weapon_skill}}} {{base_target=@{pending_base_target}}} {{situational=@{attack_situational_modifier}}} {{adjusted_target=[[@{pending_base_target} + @{attack_situational_modifier}]]}} {{roll=[[2d6]]}}"
                         class="sheet-dialog-submit">
@@ -482,8 +482,12 @@
                     </div>
                     <div class="sheet-roll-group">
                         <button type="action" name="act_show_ranged_rules" class="sheet-roll-button">
-                            <img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="" />
                             Ranged Attack Rules
+                        </button>
+                    </div>
+                    <div class="sheet-roll-group">
+                        <button type="action" name="act_show_melee_rules" class="sheet-roll-button">
+                            Melee Attack Rules
                         </button>
                     </div>
                 </div>
@@ -993,13 +997,13 @@
 <input type="radio" name="attr_show_consciousness_dialog" class="sheet-dialog-hidden" value="0" checked="checked" />
 <input type="radio" name="attr_show_consciousness_dialog" class="sheet-dialog-show" value="1" />
 
-<div class="sheet-consciousness-dialog-overlay">
-    <div class="sheet-consciousness-dialog">
-        <div class="sheet-consciousness-dialog-header">
+<div class="sheet-dialog-overlay sheet-consciousness-dialog-overlay">
+    <div class="sheet-dialog-container sheet-consciousness-dialog-container">
+        <div class="sheet-dialog-header">
             <h3>CONSCIOUSNESS SAVING ROLL</h3>
-            <button type="action" name="act_close_consciousness" class="sheet-close-dialog">×</button>
+            <button type="action" name="act_close_consciousness" class="sheet-dialog-close">×</button>
         </div>
-        <div class="sheet-consciousness-dialog-body">
+        <div class="sheet-dialog-body sheet-consciousness-dialog-body">
             <div class="sheet-dialog-info-row">
                 <span class="sheet-dialog-label">CURRENT HTK:</span>
                 <input type="number" name="attr_consciousness_current_htk" readonly class="sheet-dialog-readonly" />
@@ -1009,7 +1013,7 @@
                 <input type="number" name="attr_consciousness_target" readonly class="sheet-dialog-readonly" />
             </div>
         </div>
-        <div class="sheet-consciousness-dialog-footer">
+        <div class="sheet-dialog-footer">
             <button type="roll" name="roll_consciousness"
                     value="&{template:mw1e-consciousness} {{name=@{character_name}}} {{current_htk=@{consciousness_current_htk}}} {{target=[[@{consciousness_target}]]}} {{roll=[[2d6]]}}"
                     class="sheet-dialog-submit">
@@ -1024,13 +1028,13 @@
 <input type="radio" name="attr_show_ranged_rules" class="sheet-dialog-hidden" value="0" checked="checked" />
 <input type="radio" name="attr_show_ranged_rules" class="sheet-dialog-show" value="1" />
 
-<div class="sheet-ranged-rules-dialog-overlay">
-    <div class="sheet-ranged-rules-dialog">
-        <div class="sheet-ranged-rules-dialog-header">
+<div class="sheet-dialog-overlay sheet-ranged-rules-dialog-overlay">
+    <div class="sheet-dialog-container sheet-rules-dialog-container">
+        <div class="sheet-dialog-header">
             <h3>RANGED ATTACK RULES</h3>
-            <button type="action" name="act_close_ranged_rules" class="sheet-close-dialog">×</button>
+            <button type="action" name="act_close_ranged_rules" class="sheet-dialog-close">×</button>
         </div>
-        <div class="sheet-ranged-rules-dialog-body">
+        <div class="sheet-dialog-body sheet-rules-dialog-body">
             <h4>Range Modifiers</h4>
             <table class="sheet-rules-table">
                 <thead>
@@ -1145,6 +1149,126 @@
                 <li>Each round of Careful Aim reduces the To-Hit Target Number by 1 (to a maximum of -3)</li>
                 <li>Characters taking Careful Aim may not move and must have target within their LOS</li>
                 <li>Interrupting Careful Aim (firing at a different target, target moves out of LOS) causes all Careful Aim bonuses to be lost</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Melee Attack Rules Dialog -->
+<input type="radio" name="attr_show_melee_rules" class="sheet-dialog-hidden" value="0" checked="checked" />
+<input type="radio" name="attr_show_melee_rules" class="sheet-dialog-show" value="1" />
+
+<div class="sheet-dialog-overlay sheet-melee-rules-dialog-overlay">
+    <div class="sheet-dialog-container sheet-rules-dialog-container">
+        <div class="sheet-dialog-header">
+            <h3>MELEE ATTACK RULES</h3>
+            <button type="action" name="act_close_melee_rules" class="sheet-dialog-close">×</button>
+        </div>
+        <div class="sheet-dialog-body sheet-rules-dialog-body">
+            <h4>Target Modifiers</h4>
+            <table class="sheet-rules-table">
+                <thead>
+                    <tr>
+                        <th>Modifier</th>
+                        <th>Condition</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>-1</td><td>Stationary</td></tr>
+                    <tr><td>-1</td><td>Made ranged attack against another opponent</td></tr>
+                    <tr><td>0</td><td>Walked</td></tr>
+                    <tr><td>+2</td><td>On higher elevation</td></tr>
+                    <tr><td>+3</td><td>Dodged/Evaded</td></tr>
+                    <tr><td>-2</td><td>Also making all-out attack</td></tr>
+                    <tr><td>+2</td><td>In moving vehicle</td></tr>
+                    <tr><td>+1</td><td>In partial concealment</td></tr>
+                </tbody>
+            </table>
+
+            <h4>Attacker Modifiers</h4>
+            <table class="sheet-rules-table">
+                <thead>
+                    <tr>
+                        <th>Modifier</th>
+                        <th>Condition</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>+1</td><td>Walked</td></tr>
+                    <tr><td>+2</td><td>Dodged/Evaded</td></tr>
+                    <tr><td>+2</td><td>Ran (tackle only)</td></tr>
+                    <tr><td>+3</td><td>Sprinted (tackle only)</td></tr>
+                    <tr><td>-2</td><td>Making all-out attack</td></tr>
+                    <tr><td>-2</td><td>On higher elevation</td></tr>
+                    <tr><td>+2*</td><td>Using wrong hand</td></tr>
+                    <tr><td>+2*</td><td>Using 2 weapons</td></tr>
+                    <tr><td>+2</td><td>Drawing weapon this round</td></tr>
+                    <tr><td>+4</td><td>Aimed shot - head</td></tr>
+                    <tr><td>+3</td><td>Aimed shot - arm</td></tr>
+                    <tr><td>+2</td><td>Aimed shot - other</td></tr>
+                    <tr><td>+1</td><td>Partial darkness</td></tr>
+                    <tr><td>+2</td><td>Total darkness</td></tr>
+                </tbody>
+            </table>
+            <p><em>* Ambidextrous characters may avoid some of these penalties.</em></p>
+
+            <h4>Special Attacks</h4>
+
+            <h5>Aimed Shots</h5>
+            <ul>
+                <li>Attacker must have moved no more than one half his MP allowance</li>
+                <li>A successful Aimed Shot always hits the targeted location</li>
+            </ul>
+
+            <h5>Coshing</h5>
+            <ul>
+                <li>Attackers using Cudgels, Blackjacks, or Clubs may make a special attack from behind, in an attempt to knock their opponent unconscious</li>
+                <li>Requires either a Hit Location Roll of Head or an Aimed Shot to the head</li>
+                <li>A successful hit gives half the weapon's normal damage</li>
+                <li>On a successful hit the target must make a BODY Saving Roll with a penalty of +1 for every level of the attacker's Brawling skill</li>
+                <li>If the Saving Roll fails, the victim becomes unconscious for 1D6 melee rounds per damage point inflicted</li>
+            </ul>
+
+            <h5>All-Out Attacks</h5>
+            <ul>
+                <li>All-out attacks receive a +2 bonus to the To-Hit Roll</li>
+                <li>Melee attacks against the character performing an All-Out attack also receive a +2 modifier to their To-Hit Roll</li>
+            </ul>
+
+            <h5>Grapple/Tackle</h5>
+            <ul>
+                <li>Target takes Brawling damage as normal, plus +1 bonus to damage for each two hexes traveled (rounding down)</li>
+                <li>Attacker sustains damage equal to one-half the defender's BODY score (round up)</li>
+                <li>All damage to both Target and Attacker is applied to the torso</li>
+                <li>On a successful attack the defender must make a DEX-based Saving Roll with modifier of Attacker's BODY score - Defender's BODY score to stay standing</li>
+                <li>After a successful attack the attacker maintains control of the defender on successive turns, until the defender escapes. To escape the defender spends an entire combat round and makes a successful DEX-based Saving Roll with the same BODY modifications applied as during the initial Grapple/Tackle attack. There is an additional +3 penalty if the combatants have fallen to the ground</li>
+            </ul>
+
+            <h5>Shields</h5>
+            <ul>
+                <li>Characters carrying one-handed melee weapons or slug-throwers may carry a small shield in the form of a buckler or Roman round shield to help in their defense</li>
+                <li>Use of a shield adds a +1 modifier to the wearer's own To-Hit Target with weapons, and reduces by one-quarter his MP allowance for any maneuver (i.e., Walking = 3 MP, Dodging/Evading = 5 MP, Running = 7 MP)</li>
+                <li>Attacking - As in a Grappling attack, the difference in BODY is used as a To-Hit Target modifier, and a successful attack requires the defender to make a DEX-based Saving Roll (including the BODY difference) to remain upright. If the defender is able to remain standing, he will be forced into one of his three rear hexes by the attack, and the attacker will advance into the hex vacated by the defender</li>
+            </ul>
+
+            <h5>Firing Ranged Weapons Into Melee</h5>
+            <ul>
+                <li>Whenever more than one target, friendly or enemy, is present in a hex, the actual recipient of the ranged attack is determined AT RANDOM immediately prior to the To-Hit Roll</li>
+                <li>If the To-Hit Roll fails, the attacker misses all targets in the hex</li>
+            </ul>
+
+            <h5>Martial Arts</h5>
+            <ul>
+                <li>Characters with Brawling level 4 or more qualify for martial arts skill. They are now able to cosh without a weapon. Their Grapple/Tackle bonus is (BODY+DEX x 2) instead of +1 per every 2 hexes run. They only sustain one-fourth normal damage as a defender or attacker in a Grapple/Tackle attack, and no DEX Saving Roll is required to remain standing after such an attack</li>
+            </ul>
+
+            <h5>Resolving Melee Combat</h5>
+            <ul>
+                <li>On a successful attack, non-lethal damage equal to the attacker's BODY is applied</li>
+                <li>Damage amounts may be modified by certain skills levels</li>
+                <li>The attacker rolls for hit location, just as with ranged attacks</li>
+                <li>If a critical hit is rolled the specific, lethal damage is applied</li>
+                <li>Consciousness Rolls are made in the same manner as described for lethal HTK</li>
             </ul>
         </div>
     </div>
@@ -1820,6 +1944,22 @@
     on('clicked:close_ranged_rules', function() {
         console.log('Closing ranged attack rules dialog');
         setAttrs({ show_ranged_rules: 0 });
+    });
+
+    // =================================================================
+    // MELEE ATTACK RULES DIALOG
+    // =================================================================
+
+    // Open melee rules dialog
+    on('clicked:show_melee_rules', function() {
+        console.log('Opening melee attack rules dialog');
+        setAttrs({ show_melee_rules: 1 });
+    });
+
+    // Close melee rules dialog
+    on('clicked:close_melee_rules', function() {
+        console.log('Closing melee attack rules dialog');
+        setAttrs({ show_melee_rules: 0 });
     });
 
     console.log('MechWarrior 1e sheet workers loaded successfully');
