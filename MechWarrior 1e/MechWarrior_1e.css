@@ -690,34 +690,54 @@ input.sheet-xp-negative-flag:checked ~ .sheet-xp-available-container input {
     gap: 15px;
 }
 
-button[type="roll"].sheet-roll-button {
-    border: none;
-    padding: 0;
-    margin: 0;
-    font-size: 14px;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    width: 250px;
-    justify-content: flex-start;
-    transition: none;
+/* Roll button styling - applies to both type="roll" and type="action" */
+button[type="roll"].sheet-roll-button,
+button[type="action"].sheet-roll-button {
+    border: none !important;
+    padding: 2px 8px !important;
+    margin: 0 !important;
+    font-size: 14px !important;
+    font-weight: bold !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    cursor: pointer !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    width: 250px !important;
+    min-width: 250px !important;
+    max-width: 250px !important;
+    justify-content: flex-start !important;
+    transition: none !important;
+    background-color: #e8e8e8 !important;
+    color: #000000 !important;
+    border-radius: 4px !important;
+    height: 28px !important;
+    min-height: 28px !important;
+    box-sizing: border-box !important;
+    line-height: 1 !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) !important;
 }
 
-button[type="roll"].sheet-roll-button:hover {
+/* Rules buttons without icons need left padding to align text with buttons that have icons */
+button[type="action"].sheet-roll-button {
+    padding-left: 28px !important; /* 24px icon + 10px gap on each side = 44px */
+}
+
+button[type="roll"].sheet-roll-button:hover,
+button[type="action"].sheet-roll-button:hover {
     opacity: 0.8;
     transition: none;
 }
 
-button[type="roll"].sheet-roll-button:active {
+button[type="roll"].sheet-roll-button:active,
+button[type="action"].sheet-roll-button:active {
     opacity: 0.6;
     transition: none;
 }
 
-button[type="roll"].sheet-roll-button img {
+button[type="roll"].sheet-roll-button img,
+button[type="action"].sheet-roll-button img {
     width: 24px;
     height: 24px;
 }
@@ -1247,7 +1267,7 @@ button[type="action"] img {
 }
 
 /* ===================================
-   Custom Attack Dialog
+   Attack Dialog
    =================================== */
 
 /* Hide radio buttons */
@@ -1256,158 +1276,17 @@ button[type="action"] img {
     display: none;
 }
 
-/* Dialog Overlay - Hidden by default */
-.sheet-attack-dialog-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.75);
-    z-index: 10000;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Show dialog when "show" radio is checked */
+/* Show attack dialog when radio button is selected */
 .sheet-dialog-show:checked ~ .sheet-attack-dialog-overlay {
-    display: flex;
+    display: flex !important;
 }
 
-/* Dialog Box - uses double-layer pattern like sheet-angled-panel */
-.sheet-attack-dialog {
-    background-color: #6a7a8a !important; /* Border color as background */
-    border: none !important;
-    padding: 2px !important; /* Border thickness */
+/* Attack dialog specific sizing */
+.sheet-attack-dialog-container {
     width: 338px !important;
-    max-width: 90% !important;
-    box-shadow: 0 9px 30px rgba(0, 0, 0, 0.9) !important;
-    border-radius: 0 !important;
-    position: relative !important;
-    -webkit-clip-path: polygon(
-        11px 0%,
-        calc(100% - 11px) 0%,
-        100% 11px,
-        100% calc(100% - 11px),
-        calc(100% - 11px) 100%,
-        11px 100%,
-        0% calc(100% - 11px),
-        0% 11px
-    ) !important;
-    clip-path: polygon(
-        11px 0%,
-        calc(100% - 11px) 0%,
-        100% 11px,
-        100% calc(100% - 11px),
-        calc(100% - 11px) 100%,
-        11px 100%,
-        0% calc(100% - 11px),
-        0% 11px
-    ) !important;
 }
 
-/* Inner dialog background using ::before - creates the "border" effect */
-.sheet-attack-dialog::before {
-    content: '' !important;
-    position: absolute !important;
-    top: 2px !important;
-    left: 2px !important;
-    right: 2px !important;
-    bottom: 2px !important;
-    background-color: #3a4a5a !important; /* Inner fill color */
-    z-index: 0 !important;
-    -webkit-clip-path: polygon(
-        10px 0%,
-        calc(100% - 10px) 0%,
-        100% 10px,
-        100% calc(100% - 10px),
-        calc(100% - 10px) 100%,
-        10px 100%,
-        0% calc(100% - 10px),
-        0% 10px
-    ) !important;
-    clip-path: polygon(
-        10px 0%,
-        calc(100% - 10px) 0%,
-        100% 10px,
-        100% calc(100% - 10px),
-        calc(100% - 10px) 100%,
-        10px 100%,
-        0% calc(100% - 10px),
-        0% 10px
-    ) !important;
-}
-
-/* Ensure dialog content appears above the ::before background */
-.sheet-attack-dialog > * {
-    position: relative !important;
-    z-index: 1 !important;
-}
-
-/* Dialog Header */
-.sheet-attack-dialog-header {
-    background-color: #4a5a6a !important;
-    border-bottom: 2px solid #b2854e !important;
-    padding: 11px 15px !important;
-    display: flex !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-    border-radius: 0 !important;
-    /* Clip top corners to match parent dialog */
-    -webkit-clip-path: polygon(
-        11px 0%,
-        calc(100% - 11px) 0%,
-        100% 11px,
-        100% 100%,
-        0% 100%,
-        0% 11px
-    ) !important;
-    clip-path: polygon(
-        11px 0%,
-        calc(100% - 11px) 0%,
-        100% 11px,
-        100% 100%,
-        0% 100%,
-        0% 11px
-    ) !important;
-}
-
-.sheet-attack-dialog-header h3 {
-    margin: 0;
-    font-size: 15px;
-    font-weight: bold;
-    color: #c8d0d8;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-.sheet-attack-dialog .sheet-close-dialog {
-    background-color: #5a6a7a !important;
-    border: 2px solid #6a7a8a !important;
-    color: #c8d0d8 !important;
-    width: 24px !important;
-    height: 24px !important;
-    font-size: 21px !important;
-    line-height: 21px !important;
-    cursor: pointer !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    font-weight: bold !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
-}
-
-.sheet-attack-dialog .sheet-close-dialog:hover {
-    background-color: #7a8a9a !important;
-    border-color: #8a9aaa !important;
-    box-shadow: 0 0 10px rgba(122, 138, 154, 0.6) !important;
-}
-
-/* Dialog Body */
+/* Attack dialog body padding */
 .sheet-attack-dialog-body {
     padding: 19px 15px;
 }
@@ -1636,192 +1515,19 @@ button.sheet-dialog-cancel:hover::after {
    Consciousness Dialog
    =================================== */
 
-/* Hide radio buttons */
-.sheet-dialog-hidden,
-.sheet-dialog-show {
-    display: none;
-}
-
-/* Dialog Overlay - Hidden by default */
-.sheet-consciousness-dialog-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.75);
-    z-index: 10000;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Show dialog when "show" radio is checked */
+/* Show consciousness dialog when radio button is selected */
 .sheet-dialog-show:checked ~ .sheet-consciousness-dialog-overlay {
-    display: flex;
+    display: flex !important;
 }
 
-/* Dialog Box */
-.sheet-consciousness-dialog {
-    background-color: #6a7a8a !important;
-    border: none !important;
-    padding: 2px !important;
+/* Consciousness dialog specific sizing */
+.sheet-consciousness-dialog-container {
     width: 338px !important;
-    max-width: 90% !important;
-    box-shadow: 0 9px 30px rgba(0, 0, 0, 0.9) !important;
-    border-radius: 0 !important;
-    position: relative !important;
-    -webkit-clip-path: polygon(
-        11px 0%,
-        calc(100% - 11px) 0%,
-        100% 11px,
-        100% calc(100% - 11px),
-        calc(100% - 11px) 100%,
-        11px 100%,
-        0% calc(100% - 11px),
-        0% 11px
-    ) !important;
-    clip-path: polygon(
-        11px 0%,
-        calc(100% - 11px) 0%,
-        100% 11px,
-        100% calc(100% - 11px),
-        calc(100% - 11px) 100%,
-        11px 100%,
-        0% calc(100% - 11px),
-        0% 11px
-    ) !important;
 }
 
-/* Inner dialog background */
-.sheet-consciousness-dialog::before {
-    content: '' !important;
-    position: absolute !important;
-    top: 2px !important;
-    left: 2px !important;
-    right: 2px !important;
-    bottom: 2px !important;
-    background-color: #3a4a5a !important;
-    z-index: 0 !important;
-    -webkit-clip-path: polygon(
-        10px 0%,
-        calc(100% - 10px) 0%,
-        100% 10px,
-        100% calc(100% - 10px),
-        calc(100% - 10px) 100%,
-        10px 100%,
-        0% calc(100% - 10px),
-        0% 10px
-    ) !important;
-    clip-path: polygon(
-        10px 0%,
-        calc(100% - 10px) 0%,
-        100% 10px,
-        100% calc(100% - 10px),
-        calc(100% - 10px) 100%,
-        10px 100%,
-        0% calc(100% - 10px),
-        0% 10px
-    ) !important;
-}
-
-/* Ensure dialog content appears above background */
-.sheet-consciousness-dialog > * {
-    position: relative !important;
-    z-index: 1 !important;
-}
-
-/* Dialog Header */
-.sheet-consciousness-dialog-header {
-    background-color: #4a5a6a !important;
-    border-bottom: 2px solid #b2854e !important;
-    padding: 11px 15px !important;
-    display: flex !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-    border-radius: 0 !important;
-    -webkit-clip-path: polygon(
-        11px 0%,
-        calc(100% - 11px) 0%,
-        100% 11px,
-        100% 100%,
-        0% 100%,
-        0% 11px
-    ) !important;
-    clip-path: polygon(
-        11px 0%,
-        calc(100% - 11px) 0%,
-        100% 11px,
-        100% 100%,
-        0% 100%,
-        0% 11px
-    ) !important;
-}
-
-.sheet-consciousness-dialog-header h3 {
-    margin: 0;
-    font-size: 15px;
-    font-weight: bold;
-    color: #c8d0d8;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-.sheet-consciousness-dialog .sheet-close-dialog {
-    background-color: #5a6a7a !important;
-    border: 2px solid #6a7a8a !important;
-    color: #c8d0d8 !important;
-    width: 24px !important;
-    height: 24px !important;
-    font-size: 21px !important;
-    line-height: 21px !important;
-    cursor: pointer !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    font-weight: bold !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
-}
-
-.sheet-consciousness-dialog .sheet-close-dialog:hover {
-    background-color: #7a8a9a !important;
-    border-color: #8a9aaa !important;
-    box-shadow: 0 0 10px rgba(122, 138, 154, 0.6) !important;
-}
-
-/* Dialog Body */
+/* Consciousness dialog body padding */
 .sheet-consciousness-dialog-body {
     padding: 19px 15px;
-}
-
-/* Dialog Footer */
-.sheet-consciousness-dialog-footer {
-    background-color: #4a5a6a !important;
-    border-top: 2px solid #6a7a8a !important;
-    padding: 14px 15px !important;
-    display: flex !important;
-    justify-content: flex-end !important;
-    gap: 9px !important;
-    border-radius: 0 !important;
-    -webkit-clip-path: polygon(
-        0% 0%,
-        100% 0%,
-        100% calc(100% - 11px),
-        calc(100% - 11px) 100%,
-        11px 100%,
-        0% calc(100% - 11px)
-    ) !important;
-    clip-path: polygon(
-        0% 0%,
-        100% 0%,
-        100% calc(100% - 11px),
-        calc(100% - 11px) 100%,
-        11px 100%,
-        0% calc(100% - 11px)
-    ) !important;
 }
 
 /* Consciousness roll result message styling */
@@ -1877,123 +1583,17 @@ button.sheet-dialog-cancel:hover::after {
    RANGED ATTACK RULES DIALOG
    ================================================================= */
 
-/* Hide dialog by default */
-.sheet-ranged-rules-dialog-overlay {
-    display: none;
-}
-
-/* Show dialog when radio button is selected */
+/* Show ranged rules dialog when radio button is selected */
 input[name="attr_show_ranged_rules"].sheet-dialog-show:checked ~ .sheet-ranged-rules-dialog-overlay {
     display: flex !important;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    z-index: 10000;
-    justify-content: center;
-    align-items: center;
 }
 
-/* Dialog container */
-.sheet-ranged-rules-dialog {
-    background-color: #4a5a6a;
-    border: 4px solid #b2854e;
-    max-width: 700px;
-    width: 90%;
-    max-height: 80vh;
-    display: flex;
-    flex-direction: column;
-    -webkit-clip-path: polygon(
-        15px 0%,
-        calc(100% - 15px) 0%,
-        100% 15px,
-        100% calc(100% - 15px),
-        calc(100% - 15px) 100%,
-        15px 100%,
-        0% calc(100% - 15px),
-        0% 15px
-    ) !important;
-    clip-path: polygon(
-        15px 0%,
-        calc(100% - 15px) 0%,
-        100% 15px,
-        100% calc(100% - 15px),
-        calc(100% - 15px) 100%,
-        15px 100%,
-        0% calc(100% - 15px),
-        0% 15px
-    ) !important;
-}
-
-/* Dialog header */
-.sheet-ranged-rules-dialog-header {
-    background-color: #4a5a6a !important;
-    border-bottom: 2px solid #b2854e !important;
-    padding: 11px 15px !important;
+/* Show melee rules dialog when radio button is selected */
+input[name="attr_show_melee_rules"].sheet-dialog-show:checked ~ .sheet-melee-rules-dialog-overlay {
     display: flex !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-    border-radius: 0 !important;
-    flex-shrink: 0;
-    /* Clip top corners to match parent dialog */
-    -webkit-clip-path: polygon(
-        11px 0%,
-        calc(100% - 11px) 0%,
-        100% 11px,
-        100% 100%,
-        0% 100%,
-        0% 11px
-    ) !important;
-    clip-path: polygon(
-        11px 0%,
-        calc(100% - 11px) 0%,
-        100% 11px,
-        100% 100%,
-        0% 100%,
-        0% 11px
-    ) !important;
 }
 
-.sheet-ranged-rules-dialog-header h3 {
-    margin: 0;
-    font-size: 15px;
-    font-weight: bold;
-    color: #c8d0d8;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-/* Dialog body - scrollable content */
-.sheet-ranged-rules-dialog-body {
-    padding: 20px;
-    overflow-y: auto;
-    flex: 1;
-    color: #c8d0d8;
-}
-
-.sheet-ranged-rules-dialog-body h4 {
-    color: #b2854e;
-    font-size: 16px;
-    font-weight: bold;
-    margin: 20px 0 10px 0;
-    padding-bottom: 5px;
-    border-bottom: 2px solid #6a7a8a;
-}
-
-.sheet-ranged-rules-dialog-body h4:first-child {
-    margin-top: 0;
-}
-
-.sheet-ranged-rules-dialog-body h5 {
-    color: #8a9aaa;
-    font-size: 14px;
-    font-weight: bold;
-    margin: 15px 0 8px 0;
-}
-
-/* Rules table styling */
+/* Rules table styling - shared by both rules dialogs */
 .sheet-rules-table {
     width: 100%;
     border-collapse: collapse;
@@ -2027,18 +1627,6 @@ input[name="attr_show_ranged_rules"].sheet-dialog-show:checked ~ .sheet-ranged-r
     background-color: rgba(178, 133, 78, 0.2);
 }
 
-/* Lists */
-.sheet-ranged-rules-dialog-body ul {
-    margin: 8px 0 15px 20px;
-    padding: 0;
-    color: #c8d0d8;
-}
-
-.sheet-ranged-rules-dialog-body li {
-    margin-bottom: 5px;
-    line-height: 1.4;
-}
-
 /* Note text */
 .sheet-rules-note {
     font-style: italic;
@@ -2070,4 +1658,226 @@ input[name="attr_show_ranged_rules"].sheet-dialog-show:checked ~ .sheet-ranged-r
 
 .sheet-info-button:active {
     background-color: rgba(178, 133, 78, 0.7);
+}
+
+/* =================================================================
+   GENERIC DIALOG SYSTEM - SHARED BY ALL DIALOGS
+   ================================================================= */
+
+/* Dialog Overlay - base styles shared by all dialogs */
+.sheet-dialog-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 10000;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Dialog Container - creates angled border effect using double-layer pattern */
+.sheet-dialog-container {
+    background-color: #6a7a8a !important; /* Border color */
+    border: none !important;
+    padding: 2px !important; /* Border thickness */
+    max-width: 90% !important;
+    position: relative !important;
+    display: flex !important;
+    flex-direction: column !important;
+    -webkit-clip-path: polygon(
+        11px 0%,
+        calc(100% - 11px) 0%,
+        100% 11px,
+        100% calc(100% - 11px),
+        calc(100% - 11px) 100%,
+        11px 100%,
+        0% calc(100% - 11px),
+        0% 11px
+    ) !important;
+    clip-path: polygon(
+        11px 0%,
+        calc(100% - 11px) 0%,
+        100% 11px,
+        100% calc(100% - 11px),
+        calc(100% - 11px) 100%,
+        11px 100%,
+        0% calc(100% - 11px),
+        0% 11px
+    ) !important;
+}
+
+/* Inner background - creates the dialog background inside the "border" */
+.sheet-dialog-container::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 2px !important;
+    left: 2px !important;
+    right: 2px !important;
+    bottom: 2px !important;
+    background-color: #4a5a6a !important;
+    z-index: 0 !important;
+    -webkit-clip-path: polygon(
+        10px 0%,
+        calc(100% - 10px) 0%,
+        100% 10px,
+        100% calc(100% - 10px),
+        calc(100% - 10px) 100%,
+        10px 100%,
+        0% calc(100% - 10px),
+        0% 10px
+    ) !important;
+    clip-path: polygon(
+        10px 0%,
+        calc(100% - 10px) 0%,
+        100% 10px,
+        100% calc(100% - 10px),
+        calc(100% - 10px) 100%,
+        10px 100%,
+        0% calc(100% - 10px),
+        0% 10px
+    ) !important;
+}
+
+/* Ensure dialog content appears above the ::before background */
+.sheet-dialog-container > * {
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+/* Dialog Header - shared styling */
+.sheet-dialog-header {
+    background-color: #4a5a6a !important;
+    border-bottom: 2px solid #b2854e !important;
+    padding: 11px 15px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    border-radius: 0 !important;
+    flex-shrink: 0 !important;
+    -webkit-clip-path: polygon(
+        11px 0%,
+        calc(100% - 11px) 0%,
+        100% 11px,
+        100% 100%,
+        0% 100%,
+        0% 11px
+    ) !important;
+    clip-path: polygon(
+        11px 0%,
+        calc(100% - 11px) 0%,
+        100% 11px,
+        100% 100%,
+        0% 100%,
+        0% 11px
+    ) !important;
+}
+
+.sheet-dialog-header h3 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: bold;
+    color: #c8d0d8;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Generic Close Button - shared by all dialogs */
+.sheet-dialog-close {
+    background-color: #5a6a7a !important;
+    border: 2px solid #6a7a8a !important;
+    color: #c8d0d8 !important;
+    width: 24px !important;
+    height: 24px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    padding: 0 !important;
+    font-size: 18px !important;
+    line-height: 1 !important;
+    font-weight: bold !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+}
+
+.sheet-dialog-close:hover {
+    background-color: #7a8a9a !important;
+    border-color: #8a9aaa !important;
+    box-shadow: 0 0 10px rgba(122, 138, 154, 0.6) !important;
+}
+
+/* Dialog Body - base styles */
+.sheet-dialog-body {
+    color: #c8d0d8;
+}
+
+/* Dialog Footer - shared styling */
+.sheet-dialog-footer {
+    background-color: #4a5a6a !important;
+    border-top: 2px solid #6a7a8a !important;
+    padding: 14px 15px !important;
+    display: flex !important;
+    justify-content: flex-end !important;
+    gap: 10px !important;
+    flex-shrink: 0 !important;
+}
+
+/* =================================================================
+   RULES DIALOG SPECIFIC STYLES
+   Used by Ranged Attack Rules and Melee Attack Rules dialogs
+   ================================================================= */
+
+/* Rules dialog container - wider than standard dialogs */
+.sheet-rules-dialog-container {
+    width: 700px !important;
+    max-width: 90% !important;
+    max-height: 80vh !important;
+}
+
+/* Rules dialog body - scrollable with flex layout */
+.sheet-rules-dialog-body {
+    padding: 20px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex: 1;
+    color: #c8d0d8;
+}
+
+.sheet-rules-dialog-body h4 {
+    color: #b2854e;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 20px 0 10px 0;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #6a7a8a;
+}
+
+.sheet-rules-dialog-body h4:first-child {
+    margin-top: 0;
+}
+
+.sheet-rules-dialog-body h5 {
+    color: #8a9aaa;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 15px 0 8px 0;
+}
+
+.sheet-rules-dialog-body ul {
+    margin: 8px 0 15px 20px;
+    padding: 0;
+    color: #c8d0d8;
+}
+
+.sheet-rules-dialog-body li {
+    margin-bottom: 5px;
+    line-height: 1.4;
+}
+
+.sheet-rules-dialog-body p {
+    margin: 10px 0;
+    line-height: 1.4;
 }
