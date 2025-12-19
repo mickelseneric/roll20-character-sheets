@@ -516,6 +516,12 @@
                             <option value="4" selected>Torso</option>
                         </select>
                     </div>
+                    <div class="sheet-roll-group">
+                        <button type="button" class="sheet-roll-button" id="show-ranged-rules">
+                            <img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="" />
+                            Ranged Attack Rules
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -748,6 +754,171 @@
 
 </div>
 
+<!-- Consciousness Saving Roll Dialog -->
+<input type="radio" name="attr_show_consciousness_dialog" class="sheet-consciousness-dialog-control" value="0" checked />
+<input type="radio" name="attr_show_consciousness_dialog" class="sheet-consciousness-dialog-control" value="1" />
+
+<div class="sheet-consciousness-dialog-overlay">
+    <div class="sheet-consciousness-dialog">
+        <div class="sheet-consciousness-dialog-header">
+            <span class="sheet-dialog-title">CONSCIOUSNESS SAVING ROLL</span>
+            <button type="action" name="act_close_consciousness" class="sheet-dialog-close">✕</button>
+        </div>
+
+        <div class="sheet-consciousness-dialog-body">
+            <div class="sheet-dialog-row">
+                <label class="sheet-dialog-label">CURRENT HTK:</label>
+                <input type="number" name="attr_consciousness_current_htk" readonly />
+            </div>
+
+            <div class="sheet-dialog-row">
+                <label class="sheet-dialog-label">SAVING TARGET:</label>
+                <input type="number" name="attr_consciousness_target" readonly />
+            </div>
+        </div>
+
+        <div class="sheet-consciousness-dialog-footer">
+            <button type="roll" name="roll_consciousness"
+                    value="&{template:mw1e-consciousness} {{current_htk=@{consciousness_current_htk}}} {{target=@{consciousness_target}}} {{roll=[[2d6]]}}">
+                Roll Saving Throw
+            </button>
+            <button type="action" name="act_close_consciousness2" class="sheet-dialog-cancel">Cancel</button>
+        </div>
+    </div>
+</div>
+<!-- End Consciousness Dialog -->
+
+<!-- Ranged Attack Rules Dialog -->
+<input type="radio" name="show_ranged_rules" class="sheet-dialog-hidden" value="0" checked="checked" />
+<input type="radio" name="show_ranged_rules" class="sheet-dialog-show" value="1" />
+
+<div class="sheet-ranged-rules-dialog-overlay">
+    <div class="sheet-ranged-rules-dialog">
+        <div class="sheet-ranged-rules-dialog-header">
+            <h3>RANGED ATTACK RULES</h3>
+            <button type="button" class="sheet-close-dialog" id="close-ranged-rules">×</button>
+        </div>
+        <div class="sheet-ranged-rules-dialog-body">
+            <h4>Range Modifiers</h4>
+            <table class="sheet-rules-table">
+                <thead>
+                    <tr>
+                        <th>Modifier</th>
+                        <th>Range Category</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>+0</td><td>Short range</td></tr>
+                    <tr><td>+2</td><td>Medium range</td></tr>
+                    <tr><td>+4</td><td>Long range</td></tr>
+                </tbody>
+            </table>
+
+            <h4>Target Action/Conditions</h4>
+            <table class="sheet-rules-table">
+                <thead>
+                    <tr>
+                        <th>Modifier</th>
+                        <th>Action/Condition</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>-1</td><td>Stationary</td></tr>
+                    <tr><td>0</td><td>Walking</td></tr>
+                    <tr><td>+1</td><td>Running</td></tr>
+                    <tr><td>+3</td><td>Dodging/Evading</td></tr>
+                    <tr><td>+1</td><td>In Partial Cover</td></tr>
+                    <tr><td>+3</td><td>In Full Cover</td></tr>
+                    <tr><td>+1</td><td>Prone</td></tr>
+                    <tr><td>+1</td><td>In Slow-Moving Vehicle (&lt;10 kph)</td></tr>
+                    <tr><td>+2</td><td>In Fast-Moving Vehicle (&gt;10 kph)</td></tr>
+                </tbody>
+            </table>
+
+            <h4>Attacker Action/Conditions</h4>
+            <table class="sheet-rules-table">
+                <thead>
+                    <tr>
+                        <th>Modifier</th>
+                        <th>Action/Condition</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>+1</td><td>Walking</td></tr>
+                    <tr><td>+2</td><td>Running</td></tr>
+                    <tr><td>+4</td><td>Dodging/Evading</td></tr>
+                    <tr><td>+1</td><td>Attacker Wounded</td></tr>
+                    <tr><td>+1</td><td>In Slow-Moving Vehicle (&lt;10 kph)</td></tr>
+                    <tr><td>+3</td><td>In Fast-Moving Vehicle (&gt;10 kph)</td></tr>
+                </tbody>
+            </table>
+
+            <h4>Attacker Fire Modifiers</h4>
+            <table class="sheet-rules-table">
+                <thead>
+                    <tr>
+                        <th>Modifier</th>
+                        <th>Condition</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>+2</td><td>Using Wrong Hand</td></tr>
+                    <tr><td>+2</td><td>Using 2 Weapons</td></tr>
+                    <tr><td>+6</td><td>Aimed Shot - Head</td></tr>
+                    <tr><td>+4</td><td>Aimed Shot - Arm</td></tr>
+                    <tr><td>+3</td><td>Aimed Shot - Other</td></tr>
+                    <tr><td>+2</td><td>Drawing Weapon this Round</td></tr>
+                    <tr><td>+1</td><td>Firing Through Light Woods/Rubble Hex</td></tr>
+                    <tr><td>+3</td><td>Firing Through Heavy Woods Hex</td></tr>
+                    <tr><td>-2</td><td>Firing Burst (SMG only)</td></tr>
+                    <tr><td>-1</td><td>Careful Aim (per round max of 3 rounds)</td></tr>
+                </tbody>
+            </table>
+
+            <h4>Special Modifiers</h4>
+            <table class="sheet-rules-table">
+                <thead>
+                    <tr>
+                        <th>Modifier</th>
+                        <th>Condition</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>+4</td><td>Partial Darkness (any shot &gt; 60m, no penalty if using IR scope-sight)</td></tr>
+                    <tr><td>+6</td><td>Total Darkness (any shot &gt; 10m)</td></tr>
+                    <tr><td>+1</td><td>Fog of War - For each 12 combat rounds Laser Pistols/Rifles suffer +1 To-Hit (due to refraction of light beams by smoke/aerosole)</td></tr>
+                </tbody>
+            </table>
+
+            <h4>Special Attacks</h4>
+
+            <h5>Burst Fire</h5>
+            <ul>
+                <li>Characters using SMGs may declare burst fire rather than a single shot</li>
+                <li>A burst does the same damage as a single shot</li>
+                <li>If the shot is successful all characters in the ring of adjacent hexes to the target also sustain 1D6 of damage</li>
+                <li>Burst Fire fires 10 shots of ammo</li>
+            </ul>
+
+            <h5>Aimed Shot</h5>
+            <ul>
+                <li>Target a specific part of an opponent's body</li>
+                <li>Character may move no faster than one-half his Walking MP</li>
+                <li>Targeted location must be unobstructed by cover</li>
+                <li>A successful aimed shot always hits the targeted location</li>
+            </ul>
+
+            <h5>Careful Aim</h5>
+            <ul>
+                <li>Each round of Careful Aim reduces the To-Hit Target Number by 1 (to a maximum of -3)</li>
+                <li>Characters taking Careful Aim may not move and must have target within their LOS</li>
+                <li>Interrupting Careful Aim (firing at a different target, target moves out of LOS) causes all Careful Aim bonuses to be lost</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- End Ranged Attack Rules Dialog -->
+
 <!-- Roll Templates -->
 <rolltemplate class="sheet-rolltemplate-mw1e-skill">
     <div class="sheet-template-container">
@@ -919,6 +1090,51 @@
                     {{/rollBetween() die1 6 6}}
                 </span>
             </div>
+        </div>
+    </div>
+</rolltemplate>
+
+<rolltemplate class="sheet-rolltemplate-mw1e-consciousness">
+    <div class="sheet-template-container">
+        <div class="sheet-template-header">
+            <strong>CONSCIOUSNESS SAVING ROLL</strong>
+        </div>
+        <div class="sheet-template-body">
+            <div class="sheet-template-row">
+                <span class="sheet-template-label">Current HTK:</span>
+                <span class="sheet-template-value">{{current_htk}}</span>
+            </div>
+            <div class="sheet-template-row">
+                <span class="sheet-template-label">Target:</span>
+                <span class="sheet-template-value">{{target}}</span>
+            </div>
+            {{#rollLess() roll target}}
+            <div class="sheet-consciousness-result-failure">
+                <div class="sheet-template-row sheet-template-roll">
+                    <span class="sheet-template-label">Roll (2D6):</span>
+                    <span class="sheet-template-value">{{roll}}</span>
+                </div>
+                <div class="sheet-template-result sheet-template-failure">Failed - Character falls unconscious</div>
+            </div>
+            {{/rollLess() roll target}}
+            {{#rollGreater() roll target}}
+            <div class="sheet-consciousness-result-success">
+                <div class="sheet-template-row sheet-template-roll">
+                    <span class="sheet-template-label">Roll (2D6):</span>
+                    <span class="sheet-template-value">{{roll}}</span>
+                </div>
+                <div class="sheet-template-result sheet-template-success">Success - Character remains conscious</div>
+            </div>
+            {{/rollGreater() roll target}}
+            {{#rollBetween() roll target target}}
+            <div class="sheet-consciousness-result-success">
+                <div class="sheet-template-row sheet-template-roll">
+                    <span class="sheet-template-label">Roll (2D6):</span>
+                    <span class="sheet-template-value">{{roll}}</span>
+                </div>
+                <div class="sheet-template-result sheet-template-success">Success - Character remains conscious</div>
+            </div>
+            {{/rollBetween() roll target target}}
         </div>
     </div>
 </rolltemplate>
@@ -1182,11 +1398,149 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Add specific listener for current HTK changes (doesn't need recalculation)
+    // =================================================================
+    // CONSCIOUSNESS SAVING ROLL SYSTEM
+    // =================================================================
+
+    // Consciousness threshold table from RULES_REFERENCE.md
+    // Format: HTK_value: [[threshold1_htk, target1], [threshold2_htk, target2], ...]
+    const CONSCIOUSNESS_THRESHOLDS = {
+        20: [[17, 3], [13, 5], [10, 7], [7, 10], [3, 11]],
+        30: [[25, 3], [20, 5], [15, 7], [10, 10], [5, 11]],
+        40: [[33, 3], [27, 5], [20, 7], [13, 10], [7, 11]],
+        50: [[42, 3], [33, 5], [25, 7], [17, 10], [8, 11]],
+        60: [[50, 3], [40, 5], [30, 7], [20, 10], [10, 11]],
+        70: [[58, 3], [47, 5], [35, 7], [23, 10], [12, 11]],
+        80: [[67, 3], [53, 5], [40, 7], [27, 10], [13, 11]],
+        90: [[75, 3], [60, 5], [45, 7], [30, 10], [15, 11]],
+        100: [[83, 3], [67, 5], [50, 7], [33, 10], [17, 11]],
+        110: [[92, 3], [73, 5], [55, 7], [37, 10], [18, 11]],
+        120: [[100, 3], [80, 5], [60, 7], [40, 10], [20, 11]]
+    };
+
+    let previousCurrentHTK = null;
+
+    function checkConsciousnessThreshold() {
+        const currentHTK = getAttr('current_htk');
+        const maxHTK = getAttr('htk');
+        const dialogControl = document.querySelector('input[name="attr_show_consciousness_dialog"][value="1"]');
+        const dialogOpen = dialogControl && dialogControl.checked;
+
+        console.log('Consciousness check: currentHTK=' + currentHTK + ', previousHTK=' + previousCurrentHTK + ', maxHTK=' + maxHTK);
+
+        // Initialize on first run
+        if (previousCurrentHTK === null) {
+            console.log('First run, initializing previousCurrentHTK');
+            previousCurrentHTK = currentHTK;
+            return;
+        }
+
+        // Don't trigger if dialog is already open
+        if (dialogOpen) {
+            console.log('Consciousness dialog already open, skipping check');
+            return;
+        }
+
+        // Don't trigger if Current HTK is 0 or negative
+        if (currentHTK <= 0) {
+            console.log('Current HTK is 0 or negative, no consciousness check needed');
+            previousCurrentHTK = currentHTK;
+            return;
+        }
+
+        // If HTK increased (healing), update previous and return
+        // This allows the threshold to be detected again if HTK drops in the future
+        if (currentHTK > previousCurrentHTK) {
+            console.log('HTK increased (healing), updating previousCurrentHTK for future checks');
+            previousCurrentHTK = currentHTK;
+            return;
+        }
+
+        // If HTK unchanged, nothing to do
+        if (currentHTK === previousCurrentHTK) {
+            console.log('HTK unchanged, skipping check');
+            return;
+        }
+
+        // HTK decreased - check if we crossed a threshold
+        const thresholds = CONSCIOUSNESS_THRESHOLDS[maxHTK];
+        if (!thresholds) {
+            console.log('No consciousness thresholds defined for HTK=' + maxHTK);
+            previousCurrentHTK = currentHTK;
+            return;
+        }
+
+        // Find if we crossed a threshold (was above, now at or below)
+        let crossedThreshold = null;
+        for (let i = 0; i < thresholds.length; i++) {
+            const thresholdHTK = thresholds[i][0];
+            const target = thresholds[i][1];
+
+            if (previousCurrentHTK > thresholdHTK && currentHTK <= thresholdHTK) {
+                crossedThreshold = { htk: thresholdHTK, target: target };
+                console.log('Crossed consciousness threshold: HTK=' + thresholdHTK + ', Target=' + target);
+                break;
+            }
+        }
+
+        // Always update previous value after checking thresholds
+        previousCurrentHTK = currentHTK;
+
+        // If threshold was crossed, show the dialog
+        if (crossedThreshold) {
+            console.log('Triggering consciousness saving roll dialog');
+            setAttr('consciousness_current_htk', currentHTK);
+            setAttr('consciousness_target', crossedThreshold.target);
+
+            // Show dialog
+            const showDialog = document.querySelector('input[name="attr_show_consciousness_dialog"][value="1"]');
+            if (showDialog) {
+                showDialog.checked = true;
+            }
+        }
+    }
+
+    // Monitor current HTK changes
     const currentHTKInput = document.querySelector('input[name="attr_current_htk"]');
     if (currentHTKInput) {
-        // Current HTK is user-editable but doesn't trigger recalculations
-        // No listener needed since it's independent
+        // Initialize previous value
+        previousCurrentHTK = parseInt(currentHTKInput.value || 0);
+
+        // Listen for changes
+        currentHTKInput.addEventListener('input', checkConsciousnessThreshold);
+        currentHTKInput.addEventListener('change', checkConsciousnessThreshold);
+    }
+
+    // Also monitor HTK changes (affects thresholds)
+    const htkInput = document.querySelector('input[name="attr_htk"]');
+    if (htkInput) {
+        htkInput.addEventListener('change', checkConsciousnessThreshold);
+    }
+
+    // Handle close buttons
+    const closeButtons = document.querySelectorAll('button[name="act_close_consciousness"], button[name="act_close_consciousness2"]');
+    closeButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            const hideDialog = document.querySelector('input[name="attr_show_consciousness_dialog"][value="0"]');
+            if (hideDialog) {
+                hideDialog.checked = true;
+            }
+        });
+    });
+
+    // Handle roll button (auto-close after roll)
+    const rollButton = document.querySelector('button[name="roll_consciousness"]');
+    if (rollButton) {
+        rollButton.addEventListener('click', function() {
+            console.log('Consciousness roll made, auto-closing dialog');
+            setTimeout(function() {
+                const hideDialog = document.querySelector('input[name="attr_show_consciousness_dialog"][value="0"]');
+                if (hideDialog) {
+                    hideDialog.checked = true;
+                }
+            }, 100);
+        });
     }
 
     // Initialize calculations on page load
@@ -1330,6 +1684,35 @@ document.addEventListener('DOMContentLoaded', function() {
 
             closeDialog();
         });
+
+        // Ranged Attack Rules Dialog Handlers
+        const showRangedRulesBtn = document.getElementById('show-ranged-rules');
+        const closeRangedRulesBtn = document.getElementById('close-ranged-rules');
+        const rangedRulesRadios = document.querySelectorAll('input[name="show_ranged_rules"]');
+
+        if (showRangedRulesBtn) {
+            showRangedRulesBtn.addEventListener('click', function() {
+                console.log('Opening Ranged Attack Rules dialog');
+                // Set the radio to show the dialog
+                rangedRulesRadios.forEach(radio => {
+                    if (radio.value === '1') {
+                        radio.checked = true;
+                    }
+                });
+            });
+        }
+
+        if (closeRangedRulesBtn) {
+            closeRangedRulesBtn.addEventListener('click', function() {
+                console.log('Closing Ranged Attack Rules dialog');
+                // Set the radio to hide the dialog
+                rangedRulesRadios.forEach(radio => {
+                    if (radio.value === '0') {
+                        radio.checked = true;
+                    }
+                });
+            });
+        }
     });
     </script>
 </body>

@@ -396,18 +396,7 @@ Developing an **interactive** character sheet for MechWarrior 1st Edition in the
   - Sheet workers for reactive updates
   - Modern, clean visual design
 
-### 🚨 CRITICAL: File Synchronization Rule
-**MANDATORY: After EVERY change to `MechWarrior_1e.html`, you MUST immediately sync the changes to `MW1e_preview.html`.**
-
-This is a **non-negotiable requirement** for every edit session:
-1. Make changes to `MechWarrior_1e.html`
-2. **IMMEDIATELY** apply the same changes to `MW1e_preview.html`
-3. Verify both files have identical content within `<div class="sheet-mechwarrior">...</div>`
-
-**Never skip this step. The preview file is used for local testing and must always match the main sheet.**
-
-### 🚨 CRITICAL: JavaScript Implementation Rule
-**The two HTML files require DIFFERENT JavaScript implementations:**
+### Sheet Worker Implementation
 
 **`MechWarrior_1e.html` (Roll20 Production Sheet):**
 - **ALWAYS** use `<script type="text/worker">` for sheet workers
@@ -418,18 +407,6 @@ This is a **non-negotiable requirement** for every edit session:
   - `on('sheet:opened', function() {...})` for initialization
 - Follow Roll20 sheet worker best practices
 - Calculated fields MUST have `disabled="true"` attribute
-
-**`MW1e_preview.html` (Local Browser Testing):**
-- **ALWAYS** use `<script>` (NOT `<script type="text/worker">`)
-- **ALWAYS** use regular JavaScript/DOM APIs:
-  - `document.addEventListener('DOMContentLoaded', function() {...})` for initialization
-  - `document.querySelector()` to find elements
-  - `.addEventListener('input', ...)` and `.addEventListener('change', ...)` for event listeners
-  - Direct `.value` property access to read/write values
-- Must work in standard browsers without Roll20
-- Provides real-time visual feedback during development
-
-**When syncing files:** HTML structure must be identical, but `<script>` sections will be completely different.
 
 ### Reference Materials
 
@@ -484,45 +461,12 @@ From the reference sheets:
 MechWarrior 1e/
 ├── MechWarrior_1e.html          # Main sheet HTML
 ├── MechWarrior_1e.css           # Styling
-├── MW1e_preview.html            # Preview file for local testing (see note below)
 ├── sheet.json                   # Metadata (critical!)
 ├── preview.png                  # Preview image
 ├── img/                         # Reference images
 │   └── character-sheet.png      # Original 1e sheet reference
 └── translation.json             # (Optional) i18n support
 ```
-
-**Preview File Synchronization (see CRITICAL rule above)**
-- `MW1e_preview.html` is a standalone HTML file used for local browser testing
-- It wraps the sheet content from `MechWarrior_1e.html` with proper HTML document structure
-- The sheet content (inside `<div class="sheet-mechwarrior">`) MUST be identical in both files
-- Only the outer wrapper differs (MW1e_preview.html has `<!DOCTYPE>`, `<head>`, `<body>` tags)
-- **See the "🚨 CRITICAL: File Synchronization Rule" section above for the mandatory workflow**
-
-### Automation Options for File Synchronization
-
-**Option 1: Manual Reminder (Current)**
-- Document requirement in CLAUDE.md (done)
-- Rely on careful review and testing
-
-**Option 2: Node.js Sync Script**
-Create a script to extract sheet content and update both files:
-```javascript
-// sync-sheet.js - Extracts content from main sheet and updates preview
-const fs = require('fs');
-// Read MechWarrior_1e.html, extract sheet content, update MW1e_preview.html
-```
-
-**Option 3: Build Process**
-- Use a templating system where sheet content is in a separate file
-- Build script generates both MechWarrior_1e.html and MW1e_preview.html
-- Similar to how Pathfinder Community sheet uses webpack
-
-**Option 4: Symlinks** (Not recommended)
-- Won't work well because files have different structures
-- Preview needs HTML wrapper that production doesn't
-
-**Recommended Approach**: Option 2 (sync script) provides good balance of automation without complex build process. Can be run manually before testing or committing changes.
 
 ## Getting Help
 
