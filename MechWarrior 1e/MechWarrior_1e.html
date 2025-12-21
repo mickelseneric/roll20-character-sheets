@@ -44,6 +44,84 @@
         </div>
     </div>
 
+    <!-- Skill/Attribute Dialog -->
+    <input type="hidden" name="attr_pending_skill_name" value="" />
+    <input type="hidden" name="attr_pending_skill_target" value="10" />
+    <input type="hidden" name="attr_pending_roll_type" value="skill" />
+    <input type="hidden" name="attr_pending_roll_label" value="" />
+
+    <input type="radio" name="attr_show_skill_dialog" class="sheet-dialog-hidden" value="0" checked="checked" />
+    <input type="radio" name="attr_show_skill_dialog" class="sheet-dialog-show" value="1" />
+
+    <div class="sheet-dialog-overlay sheet-skill-dialog-overlay">
+        <div class="sheet-dialog-container sheet-skill-dialog-container">
+            <div class="sheet-dialog-header">
+                <h3 id="skill-dialog-title">SKILL ROLL</h3>
+                <button type="action" name="act_closeskilldialog" class="sheet-dialog-close">×</button>
+            </div>
+            <div class="sheet-dialog-body sheet-skill-dialog-body">
+                <div class="sheet-dialog-info-row">
+                    <span class="sheet-dialog-label" id="skill-dialog-label">SKILL:</span>
+                    <input type="text" name="attr_pending_skill_name" readonly class="sheet-dialog-readonly" />
+                </div>
+                <div class="sheet-dialog-info-row">
+                    <span class="sheet-dialog-label">BASE TARGET:</span>
+                    <input type="number" name="attr_pending_skill_target" readonly class="sheet-dialog-readonly" />
+                </div>
+                <div class="sheet-dialog-field-row">
+                    <span class="sheet-dialog-label">MODIFIERS:</span>
+                    <input type="number" name="attr_skill_situational_modifier" value="0" />
+                </div>
+            </div>
+            <div class="sheet-dialog-footer">
+                <button type="roll" name="roll_skill_from_dialog"
+                        value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=@{pending_skill_name}}} {{base_target=@{pending_skill_target}}} {{situational=@{skill_situational_modifier}}} {{adjusted_target=[[@{pending_skill_target} - @{skill_situational_modifier}]]}} {{roll=[[2d6 + @{skill_situational_modifier}]]}}"
+                        class="sheet-dialog-submit" id="skill-dialog-button">
+                    Roll Skill
+                </button>
+                <button type="action" name="act_cancelskilldialog" class="sheet-dialog-cancel">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Attribute Save Dialog -->
+    <input type="hidden" name="attr_pending_attr_name" value="" />
+    <input type="hidden" name="attr_pending_attr_target" value="10" />
+
+    <input type="radio" name="attr_show_attr_dialog" class="sheet-dialog-hidden" value="0" checked="checked" />
+    <input type="radio" name="attr_show_attr_dialog" class="sheet-dialog-show" value="1" />
+
+    <div class="sheet-dialog-overlay sheet-attr-dialog-overlay">
+        <div class="sheet-dialog-container sheet-attr-dialog-container">
+            <div class="sheet-dialog-header">
+                <h3>ATTRIBUTE SAVE</h3>
+                <button type="action" name="act_closeattrdialog" class="sheet-dialog-close">×</button>
+            </div>
+            <div class="sheet-dialog-body sheet-attr-dialog-body">
+                <div class="sheet-dialog-info-row">
+                    <span class="sheet-dialog-label">ATTRIBUTE:</span>
+                    <input type="text" name="attr_pending_attr_name" readonly class="sheet-dialog-readonly" />
+                </div>
+                <div class="sheet-dialog-info-row">
+                    <span class="sheet-dialog-label">BASE TARGET:</span>
+                    <input type="number" name="attr_pending_attr_target" readonly class="sheet-dialog-readonly" />
+                </div>
+                <div class="sheet-dialog-field-row">
+                    <span class="sheet-dialog-label">MODIFIERS:</span>
+                    <input type="number" name="attr_attr_situational_modifier" value="0" />
+                </div>
+            </div>
+            <div class="sheet-dialog-footer">
+                <button type="roll" name="roll_attr_from_dialog"
+                        value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=@{pending_attr_name}}} {{base_target=@{pending_attr_target}}} {{situational=@{attr_situational_modifier}}} {{adjusted_target=[[@{pending_attr_target} - @{attr_situational_modifier}]]}} {{roll=[[2d6 + @{attr_situational_modifier}]]}}"
+                        class="sheet-dialog-submit">
+                    Roll Attribute
+                </button>
+                <button type="action" name="act_cancelattrdialog" class="sheet-dialog-cancel">Cancel</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Tab Controls -->
     <input type="radio" name="attr_sheet_tab" class="sheet-tab sheet-tab-character" value="character" id="tab-character" checked="checked" />
     <label for="tab-character" class="sheet-tab-label" data-label="Character Sheet"></label>
@@ -104,7 +182,7 @@
                     <input type="number" name="attr_body" value="6" />
                     <input type="hidden" name="attr_body_xp_cost" value="0" />
                     <input type="text" name="attr_body_save" readonly />
-                    <button type="roll" name="roll_body_save" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=BODY Save}} {{base_target=@{body_save}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{body_save} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + ?{Situational Modifier|0}]]}}"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
+                    <button type="action" name="act_body_save"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
                 </div>
 
                 <div class="sheet-attr-row">
@@ -112,7 +190,7 @@
                     <input type="number" name="attr_dex" value="6" />
                     <input type="hidden" name="attr_dex_xp_cost" value="0" />
                     <input type="text" name="attr_dex_save" readonly />
-                    <button type="roll" name="roll_dex_save" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=DEX Save}} {{base_target=@{dex_save}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{dex_save} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + ?{Situational Modifier|0}]]}}"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
+                    <button type="action" name="act_dex_save"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
                 </div>
 
                 <div class="sheet-attr-row">
@@ -120,7 +198,7 @@
                     <input type="number" name="attr_lrn" value="6" />
                     <input type="hidden" name="attr_lrn_xp_cost" value="0" />
                     <input type="text" name="attr_lrn_save" readonly />
-                    <button type="roll" name="roll_lrn_save" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=LRN Save}} {{base_target=@{lrn_save}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{lrn_save} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + ?{Situational Modifier|0}]]}}"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
+                    <button type="action" name="act_lrn_save"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
                 </div>
 
                 <div class="sheet-attr-row">
@@ -128,7 +206,7 @@
                     <input type="number" name="attr_cha" value="6" />
                     <input type="hidden" name="attr_cha_xp_cost" value="0" />
                     <input type="text" name="attr_cha_save" readonly />
-                    <button type="roll" name="roll_cha_save" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=CHA Save}} {{base_target=@{cha_save}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{cha_save} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + ?{Situational Modifier|0}]]}}"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
+                    <button type="action" name="act_cha_save"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
                 </div>
 
             </div>
@@ -154,133 +232,133 @@
                         <input type="number" name="attr_athletics_level" value="0" />
                         <input type="text" name="attr_athletics_attr" readonly />
                         <input type="text" name="attr_athletics_mod" readonly />
-                        <button type="roll" name="roll_athletics" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Athletics}} {{base_target=@{athletics_mod}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{athletics_mod} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + ?{Situational Modifier|0}]]}}"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
+                        <button type="action" name="act_athletics"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
                     </div>
                     <div class="sheet-skill-row sheet-sub-skill">
                         <div class="sheet-skill-name">Aerobatics <em>(BODY/DEX)</em></div>
                         <input type="number" name="attr_aerobatics_level" value="0" />
                         <input type="text" name="attr_aerobatics_attr" readonly />
                         <input type="text" name="attr_aerobatics_mod" readonly />
-                        <button type="roll" name="roll_aerobatics" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Aerobatics}} {{base_target=@{aerobatics_mod}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{aerobatics_mod} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + ?{Situational Modifier|0}]]}}"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
+                        <button type="action" name="act_aerobatics"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
                     </div>
                     <div class="sheet-skill-row sheet-sub-skill">
                         <div class="sheet-skill-name">Climbing <em>(BODY/DEX)</em></div>
                         <input type="number" name="attr_climbing_level" value="0" />
                         <input type="text" name="attr_climbing_attr" readonly />
                         <input type="text" name="attr_climbing_mod" readonly />
-                        <button type="roll" name="roll_climbing" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Climbing}} {{base_target=@{climbing_mod}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{climbing_mod} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + ?{Situational Modifier|0}]]}}"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
+                        <button type="action" name="act_climbing"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
                     </div>
                     <div class="sheet-skill-row sheet-sub-skill">
                         <div class="sheet-skill-name">Equestrian <em>(BODY/DEX)</em></div>
                         <input type="number" name="attr_equestrian_level" value="0" />
                         <input type="text" name="attr_equestrian_attr" readonly />
                         <input type="text" name="attr_equestrian_mod" readonly />
-                        <button type="roll" name="roll_equestrian" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Equestrian}} {{base_target=@{equestrian_mod}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{equestrian_mod} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + ?{Situational Modifier|0}]]}}"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
+                        <button type="action" name="act_equestrian"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
                     </div>
                     <div class="sheet-skill-row sheet-sub-skill">
                         <div class="sheet-skill-name">Running <em>(BODY/DEX)</em></div>
                         <input type="number" name="attr_running_level" value="0" />
                         <input type="text" name="attr_running_attr" readonly />
                         <input type="text" name="attr_running_mod" readonly />
-                        <button type="roll" name="roll_running" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Running}} {{base_target=@{running_mod}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{running_mod} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + ?{Situational Modifier|0}]]}}"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
+                        <button type="action" name="act_running"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
                     </div>
                     <div class="sheet-skill-row sheet-sub-skill">
                         <div class="sheet-skill-name">Swimming <em>(BODY/DEX)</em></div>
                         <input type="number" name="attr_swimming_level" value="0" />
                         <input type="text" name="attr_swimming_attr" readonly />
                         <input type="text" name="attr_swimming_mod" readonly />
-                        <button type="roll" name="roll_swimming" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Swimming}} {{base_target=@{swimming_mod}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{swimming_mod} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + ?{Situational Modifier|0}]]}}"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
+                        <button type="action" name="act_swimming"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
                     </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Bow/Blade <em>(DEX)</em></div>
                         <input type="number" name="attr_bow_blade_level" value="0" />
                         <input type="text" name="attr_bow_blade_attr" readonly />
                         <input type="text" name="attr_bow_blade_mod" readonly />
-                        <button type="roll" name="roll_bow_blade" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Bow/Blade}} {{base_target=@{bow_blade_mod}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{bow_blade_mod} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + ?{Situational Modifier|0}]]}}"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
+                        <button type="action" name="act_bow_blade"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
                     </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Brawling <em>(BODY)</em></div>
                         <input type="number" name="attr_brawling_level" value="0" />
                         <input type="text" name="attr_brawling_attr" readonly />
                         <input type="text" name="attr_brawling_mod" readonly />
-                        <button type="roll" name="roll_brawling" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Brawling}} {{base_target=@{brawling_mod}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{brawling_mod} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + ?{Situational Modifier|0}]]}}"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
+                        <button type="action" name="act_brawling"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
                     </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Computer <em>(LRN)</em></div>
                         <input type="number" name="attr_computer_level" value="0" />
                         <input type="text" name="attr_computer_attr" readonly />
                         <input type="text" name="attr_computer_mod" readonly />
-                        <button type="roll" name="roll_computer" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Computer}} {{base_target=@{computer_mod}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{computer_mod} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + ?{Situational Modifier|0}]]}}"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
+                        <button type="action" name="act_computer"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
                     </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Diplomacy <em>(CHA)</em></div>
                         <input type="number" name="attr_diplomacy_level" value="0" />
                         <input type="text" name="attr_diplomacy_attr" readonly />
                         <input type="text" name="attr_diplomacy_mod" readonly />
-                        <button type="roll" name="roll_diplomacy" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Diplomacy}} {{base_target=@{diplomacy_mod}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{diplomacy_mod} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + ?{Situational Modifier|0}]]}}"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
+                        <button type="action" name="act_diplomacy"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
                     </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Driver <em>(DEX)</em></div>
                         <input type="number" name="attr_driver_level" value="0" />
                         <input type="text" name="attr_driver_attr" readonly />
                         <input type="text" name="attr_driver_mod" readonly />
-                        <button type="roll" name="roll_driver" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Driver}} {{base_target=@{driver_mod}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{driver_mod} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + ?{Situational Modifier|0}]]}}"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
+                        <button type="action" name="act_driver"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
                     </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Engineering <em>(LRN)</em></div>
                         <input type="number" name="attr_engineering_level" value="0" />
                         <input type="text" name="attr_engineering_attr" readonly />
                         <input type="text" name="attr_engineering_mod" readonly />
-                        <button type="roll" name="roll_engineering" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Engineering}} {{base_target=@{engineering_mod}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{engineering_mod} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + ?{Situational Modifier|0}]]}}"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
+                        <button type="action" name="act_engineering"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
                     </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Gunnery/Aerospace <em>(LRN)</em></div>
                         <input type="number" name="attr_gunnery_aerospace_level" value="0" />
                         <input type="text" name="attr_gunnery_aerospace_attr" readonly />
                         <input type="text" name="attr_gunnery_aerospace_mod" readonly />
-                        <button type="roll" name="roll_gunnery_aerospace" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Gunnery/Aerospace}} {{base_target=@{gunnery_aerospace_mod}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{gunnery_aerospace_mod} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + ?{Situational Modifier|0}]]}}"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
+                        <button type="action" name="act_gunnery_aerospace"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
                     </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Gunnery/Artillery <em>(LRN)</em></div>
                         <input type="number" name="attr_gunnery_artillery_level" value="0" />
                         <input type="text" name="attr_gunnery_artillery_attr" readonly />
                         <input type="text" name="attr_gunnery_artillery_mod" readonly />
-                        <button type="roll" name="roll_gunnery_artillery" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Gunnery/Artillery}} {{base_target=@{gunnery_artillery_mod}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{gunnery_artillery_mod} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + ?{Situational Modifier|0}]]}}"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
+                        <button type="action" name="act_gunnery_artillery"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
                     </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Gunnery/Mech <em>(DEX)</em></div>
                         <input type="number" name="attr_gunnery_mech_level" value="0" />
                         <input type="text" name="attr_gunnery_mech_attr" readonly />
                         <input type="text" name="attr_gunnery_mech_mod" readonly />
-                        <button type="roll" name="roll_gunnery_mech" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Gunnery/Mech}} {{base_target=@{gunnery_mech_mod}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{gunnery_mech_mod} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + ?{Situational Modifier|0}]]}}"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
+                        <button type="action" name="act_gunnery_mech"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
                     </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Interrogation <em>(LRN/CHA)</em></div>
                         <input type="number" name="attr_interrogation_level" value="0" />
                         <input type="text" name="attr_interrogation_attr" readonly />
                         <input type="text" name="attr_interrogation_mod" readonly />
-                        <button type="roll" name="roll_interrogation" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Interrogation}} {{base_target=@{interrogation_mod}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{interrogation_mod} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + ?{Situational Modifier|0}]]}}"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
+                        <button type="action" name="act_interrogation"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
                     </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Jump/Ship Navigation/Piloting <em>(LRN)</em></div>
                         <input type="number" name="attr_jumpship_level" value="0" />
                         <input type="text" name="attr_jumpship_attr" readonly />
                         <input type="text" name="attr_jumpship_mod" readonly />
-                        <button type="roll" name="roll_jumpship" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Jump/Ship Nav/Piloting}} {{base_target=@{jumpship_mod}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{jumpship_mod} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + ?{Situational Modifier|0}]]}}"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
+                        <button type="action" name="act_jumpship"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
                     </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Land Management <em>(LRN)</em></div>
                         <input type="number" name="attr_land_mgmt_level" value="0" />
                         <input type="text" name="attr_land_mgmt_attr" readonly />
                         <input type="text" name="attr_land_mgmt_mod" readonly />
-                        <button type="roll" name="roll_land_mgmt" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Land Management}} {{base_target=@{land_mgmt_mod}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{land_mgmt_mod} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + ?{Situational Modifier|0}]]}}"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
+                        <button type="action" name="act_land_mgmt"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
                     </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Leadership <em>(CHA)</em></div>
                         <input type="number" name="attr_leadership_level" value="0" />
                         <input type="text" name="attr_leadership_attr" readonly />
                         <input type="text" name="attr_leadership_mod" readonly />
-                        <button type="roll" name="roll_leadership" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Leadership}} {{base_target=@{leadership_mod}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{leadership_mod} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + ?{Situational Modifier|0}]]}}"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
+                        <button type="action" name="act_leadership"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
                     </div>
                 </div>
 
@@ -299,126 +377,126 @@
                         <input type="number" name="attr_mechanical_level" value="0" />
                         <input type="text" name="attr_mechanical_attr" readonly />
                         <input type="text" name="attr_mechanical_mod" readonly />
-                        <button type="roll" name="roll_mechanical" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Mechanical}} {{base_target=@{mechanical_mod}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{mechanical_mod} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + ?{Situational Modifier|0}]]}}"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
+                        <button type="action" name="act_mechanical"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
                     </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Medical/First Aid <em>(LRN)</em></div>
                         <input type="number" name="attr_medical_level" value="0" />
                         <input type="text" name="attr_medical_attr" readonly />
                         <input type="text" name="attr_medical_mod" readonly />
-                        <button type="roll" name="roll_medical" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Medical/First Aid}} {{base_target=@{medical_mod}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{medical_mod} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + ?{Situational Modifier|0}]]}}"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
+                        <button type="action" name="act_medical"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
                     </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Piloting/Aerospace <em>(DEX/LRN)</em></div>
                         <input type="number" name="attr_piloting_aerospace_level" value="0" />
                         <input type="text" name="attr_piloting_aerospace_attr" readonly />
                         <input type="text" name="attr_piloting_aerospace_mod" readonly />
-                        <button type="roll" name="roll_piloting_aerospace" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Piloting/Aerospace}} {{base_target=@{piloting_aerospace_mod}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{piloting_aerospace_mod} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + ?{Situational Modifier|0}]]}}"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
+                        <button type="action" name="act_piloting_aerospace"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
                     </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Piloting/Mech <em>(DEX/LRN)</em></div>
                         <input type="number" name="attr_piloting_mech_level" value="0" />
                         <input type="text" name="attr_piloting_mech_attr" readonly />
                         <input type="text" name="attr_piloting_mech_mod" readonly />
-                        <button type="roll" name="roll_piloting_mech" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Piloting/Mech}} {{base_target=@{piloting_mech_mod}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{piloting_mech_mod} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + ?{Situational Modifier|0}]]}}"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
+                        <button type="action" name="act_piloting_mech"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
                     </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Pistol <em>(DEX)</em></div>
                         <input type="number" name="attr_pistol_level" value="0" />
                         <input type="text" name="attr_pistol_attr" readonly />
                         <input type="text" name="attr_pistol_mod" readonly />
-                        <button type="roll" name="roll_pistol" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Pistol}} {{base_target=@{pistol_mod}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{pistol_mod} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + ?{Situational Modifier|0}]]}}"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
+                        <button type="action" name="act_pistol"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
                     </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Rifle <em>(DEX)</em></div>
                         <input type="number" name="attr_rifle_level" value="0" />
                         <input type="text" name="attr_rifle_attr" readonly />
                         <input type="text" name="attr_rifle_mod" readonly />
-                        <button type="roll" name="roll_rifle" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Rifle}} {{base_target=@{rifle_mod}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{rifle_mod} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + ?{Situational Modifier|0}]]}}"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
+                        <button type="action" name="act_rifle"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
                     </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Rogue <em>(DEX/LRN)</em></div>
                         <input type="number" name="attr_rogue_level" value="0" />
                         <input type="text" name="attr_rogue_attr" readonly />
                         <input type="text" name="attr_rogue_mod" readonly />
-                        <button type="roll" name="roll_rogue" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Rogue}} {{base_target=@{rogue_mod}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{rogue_mod} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + ?{Situational Modifier|0}]]}}"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
+                        <button type="action" name="act_rogue"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
                     </div>
                     <div class="sheet-skill-row sheet-sub-skill">
                         <div class="sheet-skill-name">Hide In Cover <em>(DEX/LRN)</em></div>
                         <input type="number" name="attr_hide_level" value="0" />
                         <input type="text" name="attr_hide_attr" readonly />
                         <input type="text" name="attr_hide_mod" readonly />
-                        <button type="roll" name="roll_hide" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Hide In Cover}} {{base_target=@{hide_mod}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{hide_mod} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + ?{Situational Modifier|0}]]}}"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
+                        <button type="action" name="act_hide"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
                     </div>
                     <div class="sheet-skill-row sheet-sub-skill">
                         <div class="sheet-skill-name">Listen/Eavesdrop <em>(DEX/LRN)</em></div>
                         <input type="number" name="attr_listen_level" value="0" />
                         <input type="text" name="attr_listen_attr" readonly />
                         <input type="text" name="attr_listen_mod" readonly />
-                        <button type="roll" name="roll_listen" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Listen/Eavesdrop}} {{base_target=@{listen_mod}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{listen_mod} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + ?{Situational Modifier|0}]]}}"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
+                        <button type="action" name="act_listen"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
                     </div>
                     <div class="sheet-skill-row sheet-sub-skill">
                         <div class="sheet-skill-name">Stealth <em>(DEX/LRN)</em></div>
                         <input type="number" name="attr_stealth_level" value="0" />
                         <input type="text" name="attr_stealth_attr" readonly />
                         <input type="text" name="attr_stealth_mod" readonly />
-                        <button type="roll" name="roll_stealth" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Stealth}} {{base_target=@{stealth_mod}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{stealth_mod} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + ?{Situational Modifier|0}]]}}"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
+                        <button type="action" name="act_stealth"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
                     </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Forgery <em>(DEX/LRN)</em></div>
                         <input type="number" name="attr_forgery_level" value="0" />
                         <input type="text" name="attr_forgery_attr" readonly />
                         <input type="text" name="attr_forgery_mod" readonly />
-                        <button type="roll" name="roll_forgery" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Forgery}} {{base_target=@{forgery_mod}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{forgery_mod} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + ?{Situational Modifier|0}]]}}"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
+                        <button type="action" name="act_forgery"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
                     </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Security Systems <em>(DEX/LRN)</em></div>
                         <input type="number" name="attr_security_level" value="0" />
                         <input type="text" name="attr_security_attr" readonly />
                         <input type="text" name="attr_security_mod" readonly />
-                        <button type="roll" name="roll_security" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Security Systems}} {{base_target=@{security_mod}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{security_mod} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + ?{Situational Modifier|0}]]}}"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
+                        <button type="action" name="act_security"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
                     </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Bribery <em>(DEX/LRN)</em></div>
                         <input type="number" name="attr_bribery_level" value="0" />
                         <input type="text" name="attr_bribery_attr" readonly />
                         <input type="text" name="attr_bribery_mod" readonly />
-                        <button type="roll" name="roll_bribery" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Bribery}} {{base_target=@{bribery_mod}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{bribery_mod} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + ?{Situational Modifier|0}]]}}"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
+                        <button type="action" name="act_bribery"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
                     </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Disguise <em>(DEX/LRN)</em></div>
                         <input type="number" name="attr_disguise_level" value="0" />
                         <input type="text" name="attr_disguise_attr" readonly />
                         <input type="text" name="attr_disguise_mod" readonly />
-                        <button type="roll" name="roll_disguise" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Disguise}} {{base_target=@{disguise_mod}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{disguise_mod} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + ?{Situational Modifier|0}]]}}"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
+                        <button type="action" name="act_disguise"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
                     </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Streetwise <em>(CHA)</em></div>
                         <input type="number" name="attr_streetwise_level" value="0" />
                         <input type="text" name="attr_streetwise_attr" readonly />
                         <input type="text" name="attr_streetwise_mod" readonly />
-                        <button type="roll" name="roll_streetwise" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Streetwise}} {{base_target=@{streetwise_mod}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{streetwise_mod} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + ?{Situational Modifier|0}]]}}"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
+                        <button type="action" name="act_streetwise"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
                     </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Survival <em>(BODY)</em></div>
                         <input type="number" name="attr_survival_level" value="0" />
                         <input type="text" name="attr_survival_attr" readonly />
                         <input type="text" name="attr_survival_mod" readonly />
-                        <button type="roll" name="roll_survival" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Survival}} {{base_target=@{survival_mod}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{survival_mod} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + ?{Situational Modifier|0}]]}}"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
+                        <button type="action" name="act_survival"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
                     </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Tactics <em>(LRN)</em></div>
                         <input type="number" name="attr_tactics_level" value="0" />
                         <input type="text" name="attr_tactics_attr" readonly />
                         <input type="text" name="attr_tactics_mod" readonly />
-                        <button type="roll" name="roll_tactics" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Tactics}} {{base_target=@{tactics_mod}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{tactics_mod} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + ?{Situational Modifier|0}]]}}"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
+                        <button type="action" name="act_tactics"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
                     </div>
                     <div class="sheet-skill-row">
                         <div class="sheet-skill-name">Technician <em>(LRN)</em></div>
                         <input type="number" name="attr_technician_level" value="0" />
                         <input type="text" name="attr_technician_attr" readonly />
                         <input type="text" name="attr_technician_mod" readonly />
-                        <button type="roll" name="roll_technician" value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=Technician}} {{base_target=@{technician_mod}}} {{situational=?{Situational Modifier|0}}} {{adjusted_target=[[@{technician_mod} - ?{Situational Modifier|0}]]}} {{roll=[[2d6 + ?{Situational Modifier|0}]]}}"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
+                        <button type="action" name="act_technician"><img src="https://raw.githubusercontent.com/mickelseneric/roll20-character-sheets/master/MechWarrior%201e/img/2D6.png" alt="Roll" /></button>
                     </div>
                 </div>
             </div>
@@ -743,15 +821,23 @@
                 <span class="sheet-template-label">Adjusted Target:</span>
                 <span class="sheet-template-value">{{adjusted_target}}</span>
             </div>
-            <div class="sheet-template-row sheet-template-roll">
-                <span class="sheet-template-label">Roll (2D6):</span>
-                <span class="sheet-template-value">{{roll}}</span>
-            </div>
             {{#rollLess() roll adjusted_target}}
-            <div class="sheet-template-result sheet-template-failure">✗ FAILED</div>
+            <div class="sheet-skill-result-failure">
+                <div class="sheet-template-row sheet-template-roll">
+                    <span class="sheet-template-label">Roll (2D6):</span>
+                    <span class="sheet-template-value">{{roll}}</span>
+                </div>
+                <div class="sheet-template-result sheet-template-failure">✗ FAILED</div>
+            </div>
             {{/rollLess() roll adjusted_target}}
             {{^rollLess() roll adjusted_target}}
-            <div class="sheet-template-result sheet-template-success">✓ SUCCESS</div>
+            <div class="sheet-skill-result-success">
+                <div class="sheet-template-row sheet-template-roll">
+                    <span class="sheet-template-label">Roll (2D6):</span>
+                    <span class="sheet-template-value">{{roll}}</span>
+                </div>
+                <div class="sheet-template-result sheet-template-success">✓ SUCCESS</div>
+            </div>
             {{/rollLess() roll adjusted_target}}
         </div>
     </div>
@@ -790,7 +876,7 @@
                 <div class="sheet-template-result sheet-template-failure">✗ MISS</div>
             </div>
             {{/rollLess() roll adjusted_target}}
-            {{#rollGreater() roll adjusted_target}}
+            {{^rollLess() roll adjusted_target}}
             <div class="sheet-attack-result-success">
                 <div class="sheet-template-row sheet-template-roll">
                     <span class="sheet-template-label">Attack Roll (2D6):</span>
@@ -798,16 +884,7 @@
                 </div>
                 <div class="sheet-template-result sheet-template-success">✓ HIT</div>
             </div>
-            {{/rollGreater() roll adjusted_target}}
-            {{#rollBetween() roll adjusted_target adjusted_target}}
-            <div class="sheet-attack-result-success">
-                <div class="sheet-template-row sheet-template-roll">
-                    <span class="sheet-template-label">Attack Roll (2D6):</span>
-                    <span class="sheet-template-value">{{roll}}</span>
-                </div>
-                <div class="sheet-template-result sheet-template-success">✓ HIT</div>
-            </div>
-            {{/rollBetween() roll adjusted_target adjusted_target}}
+            {{/rollLess() roll adjusted_target}}
         </div>
     </div>
 </rolltemplate>
@@ -1789,6 +1866,223 @@
             attack_situational_modifier: 0
         }, {}, function() {
             console.log('Dialog closed successfully');
+        });
+    });
+
+    // =================================================================
+    // SKILL/ATTRIBUTE DIALOG HANDLERS
+    // =================================================================
+
+    // List of all skills for event registration
+    const SKILLS = [
+        'athletics', 'aerobatics', 'climbing', 'equestrian', 'running', 'swimming',
+        'bow_blade', 'brawling', 'computer', 'diplomacy', 'driver', 'engineering',
+        'gunnery_aerospace', 'gunnery_mech', 'gunnery_vehicle', 'leadership',
+        'perception', 'pilot_aerospace', 'pilot_mech', 'protocol', 'small_arms',
+        'strategy', 'tactics', 'technician',
+        'acting', 'animal_handler', 'art_sculpture', 'blades', 'chemistry',
+        'demolitions', 'disguise', 'electronics', 'forgery', 'gambling',
+        'geology', 'zero_g', 'hide_in_cover', 'listen_eavesdrop', 'stealth',
+        'forgery', 'security_systems', 'bribery', 'interrogation', 'melee_wpns',
+        'navigation', 'tracking', 'survival', 'appraisal', 'biology', 'botany',
+        'language', 'law', 'medical_first_aid', 'streetwise', 'negotiation',
+        'training'
+    ];
+
+    // List of all attributes for event registration
+    const ATTRIBUTES = ['body', 'dex', 'lrn', 'cha'];
+
+    // Skill name mapping for display (converts attribute names to proper format)
+    const SKILL_DISPLAY_NAMES = {
+        'athletics': 'Athletics',
+        'aerobatics': 'Aerobatics',
+        'climbing': 'Climbing',
+        'equestrian': 'Equestrian',
+        'running': 'Running',
+        'swimming': 'Swimming',
+        'bow_blade': 'Bow/Blade',
+        'brawling': 'Brawling',
+        'computer': 'Computer',
+        'diplomacy': 'Diplomacy',
+        'driver': 'Driver',
+        'engineering': 'Engineering',
+        'gunnery_aerospace': 'Gunnery/Aerospace',
+        'gunnery_mech': 'Gunnery/Mech',
+        'gunnery_vehicle': 'Gunnery/Vehicle',
+        'leadership': 'Leadership',
+        'perception': 'Perception',
+        'pilot_aerospace': 'Pilot/Aerospace',
+        'pilot_mech': 'Pilot/Mech',
+        'protocol': 'Protocol',
+        'small_arms': 'Small Arms',
+        'strategy': 'Strategy',
+        'tactics': 'Tactics',
+        'technician': 'Technician',
+        'acting': 'Acting',
+        'animal_handler': 'Animal Handler',
+        'art_sculpture': 'Art/Sculpture',
+        'blades': 'Blades',
+        'chemistry': 'Chemistry',
+        'demolitions': 'Demolitions',
+        'disguise': 'Disguise',
+        'electronics': 'Electronics',
+        'forgery': 'Forgery',
+        'gambling': 'Gambling',
+        'geology': 'Geology',
+        'zero_g': 'Zero-G',
+        'hide_in_cover': 'Hide In Cover',
+        'listen_eavesdrop': 'Listen/Eavesdrop',
+        'stealth': 'Stealth',
+        'security_systems': 'Security Systems',
+        'bribery': 'Bribery',
+        'interrogation': 'Interrogation',
+        'melee_wpns': 'Melee Weapons',
+        'navigation': 'Navigation',
+        'tracking': 'Tracking',
+        'survival': 'Survival',
+        'appraisal': 'Appraisal',
+        'biology': 'Biology',
+        'botany': 'Botany',
+        'language': 'Language',
+        'law': 'Law',
+        'medical_first_aid': 'Medical/First Aid',
+        'streetwise': 'Streetwise',
+        'negotiation': 'Negotiation',
+        'training': 'Training'
+    };
+
+    // Open skill dialog
+    function openSkillDialog(skillName) {
+        console.log('openSkillDialog called for skill:', skillName);
+        getAttrs([skillName + '_mod'], function(values) {
+            var target = parseInt(values[skillName + '_mod']) || 10;
+            var displayName = SKILL_DISPLAY_NAMES[skillName] || skillName;
+
+            console.log('Setting skill dialog attributes:', {
+                pending_skill_name: displayName,
+                pending_skill_target: target,
+                pending_roll_type: 'skill'
+            });
+
+            setAttrs({
+                show_skill_dialog: 1,
+                pending_skill_name: displayName,
+                pending_skill_target: target,
+                pending_roll_type: 'skill',
+                skill_situational_modifier: 0
+            }, {}, function() {
+                console.log('Skill dialog opened successfully');
+            });
+        });
+    }
+
+    // Open attribute dialog
+    function openAttributeDialog(attrName) {
+        console.log('openAttributeDialog called for attribute:', attrName);
+        getAttrs([attrName + '_save'], function(values) {
+            var target = parseInt(values[attrName + '_save']) || 10;
+            var displayName = attrName.toUpperCase() + ' Save';
+
+            console.log('Setting attribute dialog attributes:', {
+                pending_attr_name: displayName,
+                pending_attr_target: target
+            });
+
+            setAttrs({
+                show_attr_dialog: 1,
+                pending_attr_name: displayName,
+                pending_attr_target: target,
+                attr_situational_modifier: 0
+            }, {}, function() {
+                console.log('Attribute dialog opened successfully');
+            });
+        });
+    }
+
+    // Register skill button event listeners
+    on('clicked:athletics', function() { openSkillDialog('athletics'); });
+    on('clicked:aerobatics', function() { openSkillDialog('aerobatics'); });
+    on('clicked:climbing', function() { openSkillDialog('climbing'); });
+    on('clicked:equestrian', function() { openSkillDialog('equestrian'); });
+    on('clicked:running', function() { openSkillDialog('running'); });
+    on('clicked:swimming', function() { openSkillDialog('swimming'); });
+    on('clicked:bow_blade', function() { openSkillDialog('bow_blade'); });
+    on('clicked:brawling', function() { openSkillDialog('brawling'); });
+    on('clicked:computer', function() { openSkillDialog('computer'); });
+    on('clicked:diplomacy', function() { openSkillDialog('diplomacy'); });
+    on('clicked:driver', function() { openSkillDialog('driver'); });
+    on('clicked:engineering', function() { openSkillDialog('engineering'); });
+    on('clicked:gunnery_aerospace', function() { openSkillDialog('gunnery_aerospace'); });
+    on('clicked:gunnery_mech', function() { openSkillDialog('gunnery_mech'); });
+    on('clicked:gunnery_vehicle', function() { openSkillDialog('gunnery_vehicle'); });
+    on('clicked:leadership', function() { openSkillDialog('leadership'); });
+    on('clicked:perception', function() { openSkillDialog('perception'); });
+    on('clicked:pilot_aerospace', function() { openSkillDialog('pilot_aerospace'); });
+    on('clicked:pilot_mech', function() { openSkillDialog('pilot_mech'); });
+    on('clicked:protocol', function() { openSkillDialog('protocol'); });
+    on('clicked:small_arms', function() { openSkillDialog('small_arms'); });
+    on('clicked:strategy', function() { openSkillDialog('strategy'); });
+    on('clicked:tactics', function() { openSkillDialog('tactics'); });
+    on('clicked:technician', function() { openSkillDialog('technician'); });
+    on('clicked:acting', function() { openSkillDialog('acting'); });
+    on('clicked:animal_handler', function() { openSkillDialog('animal_handler'); });
+    on('clicked:art_sculpture', function() { openSkillDialog('art_sculpture'); });
+    on('clicked:blades', function() { openSkillDialog('blades'); });
+    on('clicked:chemistry', function() { openSkillDialog('chemistry'); });
+    on('clicked:demolitions', function() { openSkillDialog('demolitions'); });
+    on('clicked:disguise', function() { openSkillDialog('disguise'); });
+    on('clicked:electronics', function() { openSkillDialog('electronics'); });
+    on('clicked:forgery', function() { openSkillDialog('forgery'); });
+    on('clicked:gambling', function() { openSkillDialog('gambling'); });
+    on('clicked:geology', function() { openSkillDialog('geology'); });
+    on('clicked:zero_g', function() { openSkillDialog('zero_g'); });
+    on('clicked:hide_in_cover', function() { openSkillDialog('hide_in_cover'); });
+    on('clicked:listen_eavesdrop', function() { openSkillDialog('listen_eavesdrop'); });
+    on('clicked:stealth', function() { openSkillDialog('stealth'); });
+    on('clicked:security_systems', function() { openSkillDialog('security_systems'); });
+    on('clicked:bribery', function() { openSkillDialog('bribery'); });
+    on('clicked:interrogation', function() { openSkillDialog('interrogation'); });
+    on('clicked:melee_wpns', function() { openSkillDialog('melee_wpns'); });
+    on('clicked:navigation', function() { openSkillDialog('navigation'); });
+    on('clicked:tracking', function() { openSkillDialog('tracking'); });
+    on('clicked:survival', function() { openSkillDialog('survival'); });
+    on('clicked:appraisal', function() { openSkillDialog('appraisal'); });
+    on('clicked:biology', function() { openSkillDialog('biology'); });
+    on('clicked:botany', function() { openSkillDialog('botany'); });
+    on('clicked:language', function() { openSkillDialog('language'); });
+    on('clicked:law', function() { openSkillDialog('law'); });
+    on('clicked:medical_first_aid', function() { openSkillDialog('medical_first_aid'); });
+    on('clicked:streetwise', function() { openSkillDialog('streetwise'); });
+    on('clicked:negotiation', function() { openSkillDialog('negotiation'); });
+    on('clicked:training', function() { openSkillDialog('training'); });
+    console.log('Skill button event listeners registered');
+
+    // Register attribute button event listeners
+    on('clicked:body_save', function() { openAttributeDialog('body'); });
+    on('clicked:dex_save', function() { openAttributeDialog('dex'); });
+    on('clicked:lrn_save', function() { openAttributeDialog('lrn'); });
+    on('clicked:cha_save', function() { openAttributeDialog('cha'); });
+    console.log('Attribute button event listeners registered');
+
+    // Handle skill dialog close/cancel
+    on('clicked:closeskilldialog clicked:cancelskilldialog', function() {
+        console.log('Close/cancel skill dialog button clicked');
+        setAttrs({
+            show_skill_dialog: 0,
+            skill_situational_modifier: 0
+        }, {}, function() {
+            console.log('Skill dialog closed successfully');
+        });
+    });
+
+    // Handle attribute dialog close/cancel
+    on('clicked:closeattrdialog clicked:cancelattrdialog', function() {
+        console.log('Close/cancel attribute dialog button clicked');
+        setAttrs({
+            show_attr_dialog: 0,
+            attr_situational_modifier: 0
+        }, {}, function() {
+            console.log('Attribute dialog closed successfully');
         });
     });
 

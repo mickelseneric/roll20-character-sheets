@@ -390,13 +390,16 @@ input.sheet-tab-combat:checked ~ div.sheet-tab-combat {
     background-color: rgba(200, 208, 216, 0.05);
 }
 
-.sheet-attr-row button[type="roll"] {
-    width: 40px !important;
-    min-width: 40px !important;
-    max-width: 40px !important;
+.sheet-attr-row button[type="roll"],
+.sheet-attr-row button[type="action"] {
+    width: 36px !important;
+    min-width: 36px !important;
+    max-width: 36px !important;
     flex-shrink: 0;
     margin: 0 3px !important;
-    padding: 0 !important;
+    border: none !important;
+    cursor: pointer !important;
+    border-radius: 4px;
 }
 
 /* Skills Section */
@@ -511,13 +514,16 @@ input.sheet-tab-combat:checked ~ div.sheet-tab-combat {
     background-color: rgba(200, 208, 216, 0.05);
 }
 
-.sheet-skill-row button[type="roll"] {
-    width: 40px !important;
-    min-width: 40px !important;
-    max-width: 40px !important;
+.sheet-skill-row button[type="roll"],
+.sheet-skill-row button[type="action"] {
+    width: 36px !important;
+    min-width: 36px !important;
+    max-width: 36px !important;
     flex-shrink: 0;
     margin: 0 3px !important;
-    padding: 0 !important;
+    border: none !important;
+    cursor: pointer !important;
+    border-radius: 4px;
 }
 
 .sheet-skill-row label {
@@ -1131,9 +1137,16 @@ button[type="action"] img {
 }
 
 /* =================================================================
-   ROLL TEMPLATES
+   REUSABLE ROLL TEMPLATES
+
+   To create a new roll template:
+   1. Use standard classes: .sheet-template-container, .sheet-template-header,
+      .sheet-template-body, .sheet-template-row, .sheet-template-label, .sheet-template-value
+   2. For success/failure: Use .sheet-YOURNAME-result-success or .sheet-YOURNAME-result-failure
+   3. Success/failure styling is automatic (see below)
    ================================================================= */
 
+/* Base template container - shared by all templates */
 .sheet-rolltemplate-mw1e-skill .sheet-template-container,
 .sheet-rolltemplate-mw1e-weapon .sheet-template-container,
 .sheet-rolltemplate-mw1e-damage .sheet-template-container,
@@ -1148,6 +1161,7 @@ button[type="action"] img {
     font-family: 'Arial', 'Helvetica', sans-serif;
 }
 
+/* Base template header - shared by all templates */
 .sheet-rolltemplate-mw1e-skill .sheet-template-header,
 .sheet-rolltemplate-mw1e-weapon .sheet-template-header,
 .sheet-rolltemplate-mw1e-damage .sheet-template-header,
@@ -1164,6 +1178,7 @@ button[type="action"] img {
     text-align: center;
 }
 
+/* Base template row - shared by all templates */
 .sheet-rolltemplate-mw1e-skill .sheet-template-row,
 .sheet-rolltemplate-mw1e-weapon .sheet-template-row,
 .sheet-rolltemplate-mw1e-damage .sheet-template-row,
@@ -1185,6 +1200,7 @@ button[type="action"] img {
     border-bottom: none;
 }
 
+/* Base label styling - shared by all templates */
 .sheet-rolltemplate-mw1e-skill .sheet-template-label,
 .sheet-rolltemplate-mw1e-weapon .sheet-template-label,
 .sheet-rolltemplate-mw1e-damage .sheet-template-label,
@@ -1195,6 +1211,7 @@ button[type="action"] img {
     color: #8a9aaa;
 }
 
+/* Base value styling - shared by all templates */
 .sheet-rolltemplate-mw1e-skill .sheet-template-value,
 .sheet-rolltemplate-mw1e-weapon .sheet-template-value,
 .sheet-rolltemplate-mw1e-damage .sheet-template-value,
@@ -1202,6 +1219,77 @@ button[type="action"] img {
 .sheet-rolltemplate-mw1e-critical .sheet-template-value,
 .sheet-rolltemplate-mw1e-consciousness .sheet-template-value {
     color: #c8d0d8;
+}
+
+/* =================================================================
+   REUSABLE SUCCESS/FAILURE STYLING
+
+   Pattern: Use .sheet-YOURNAME-result-success and .sheet-YOURNAME-result-failure
+   wrapping divs around your roll display. The inline roll result will automatically
+   be styled green (success) or red (failure).
+   ================================================================= */
+
+/* Override Roll20's default yellow highlighting for inline rolls */
+.sheet-rolltemplate-mw1e-skill .inlinerollresult,
+.sheet-rolltemplate-mw1e-weapon .inlinerollresult,
+.sheet-rolltemplate-mw1e-damage .inlinerollresult,
+.sheet-rolltemplate-mw1e-location .inlinerollresult,
+.sheet-rolltemplate-mw1e-critical .inlinerollresult,
+.sheet-rolltemplate-mw1e-consciousness .inlinerollresult {
+    background-color: transparent !important;
+    border: none !important;
+    color: #c8d0d8 !important;
+    padding: 0 !important;
+}
+
+/* SUCCESS HIGHLIGHTING - Universal Pattern
+   Any div with class ending in "-result-success" will get green highlighting */
+.sheet-skill-result-success .sheet-template-roll .inlinerollresult,
+.sheet-attack-result-success .sheet-template-roll .inlinerollresult,
+.sheet-consciousness-result-success .sheet-template-roll .inlinerollresult,
+.sheet-save-result-success .sheet-template-roll .inlinerollresult {
+    background-color: #4a7a5a !important;
+    border: 2px solid #5a8a6a !important;
+    color: #ffffff !important;
+    padding: 2px 6px !important;
+    border-radius: 3px !important;
+    font-weight: bold !important;
+}
+
+/* FAILURE HIGHLIGHTING - Universal Pattern
+   Any div with class ending in "-result-failure" will get red highlighting */
+.sheet-skill-result-failure .sheet-template-roll .inlinerollresult,
+.sheet-attack-result-failure .sheet-template-roll .inlinerollresult,
+.sheet-consciousness-result-failure .sheet-template-roll .inlinerollresult,
+.sheet-save-result-failure .sheet-template-roll .inlinerollresult {
+    background-color: #8a4a4a !important;
+    border: 2px solid #aa5a5a !important;
+    color: #ffffff !important;
+    padding: 2px 6px !important;
+    border-radius: 3px !important;
+    font-weight: bold !important;
+}
+
+/* Generic success/failure result text styling */
+.sheet-template-result {
+    margin-top: 10px;
+    padding: 8px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 3px;
+}
+
+.sheet-template-result.sheet-template-success {
+    background-color: #4a7a5a;
+    color: #ffffff;
+    border: 2px solid #5a8a6a;
+}
+
+.sheet-template-result.sheet-template-failure {
+    background-color: #8a4a4a;
+    color: #ffffff;
+    border: 2px solid #aa5a5a;
 }
 
 /* Critical Hit Results Styling */
@@ -1234,40 +1322,15 @@ button[type="action"] img {
     border-left-color: #5cb85c !important;
 }
 
-/* Override Roll20's critical success/failure colors for dice */
-.sheet-rolltemplate-mw1e-skill .inlinerollresult,
-.sheet-rolltemplate-mw1e-weapon .inlinerollresult,
-.sheet-rolltemplate-mw1e-damage .inlinerollresult,
-.sheet-rolltemplate-mw1e-location .inlinerollresult,
-.sheet-rolltemplate-mw1e-critical .inlinerollresult {
-    background-color: transparent !important;
-    border: none !important;
-    color: #c8d0d8 !important;
-    padding: 0 !important;
-}
-
-/* Attack Roll in weapon template - green highlight for success */
-.sheet-rolltemplate-mw1e-weapon .sheet-attack-result-success .sheet-template-roll .inlinerollresult {
-    background-color: #4a7a5a !important;
-    border: 2px solid #5a8a6a !important;
-    color: #ffffff !important;
-    padding: 2px 6px !important;
-    border-radius: 3px !important;
-    font-weight: bold !important;
-}
-
-/* Red highlight for failure */
-.sheet-rolltemplate-mw1e-weapon .sheet-attack-result-failure .sheet-template-roll .inlinerollresult {
-    background-color: #8a4a4a !important;
-    border: 2px solid #aa5a5a !important;
-    color: #ffffff !important;
-    padding: 2px 6px !important;
-    border-radius: 3px !important;
-    font-weight: bold !important;
-}
 
 /* ===================================
-   Attack Dialog
+   REUSABLE DIALOG SYSTEM
+
+   To create a new dialog:
+   1. Use class="sheet-dialog-overlay sheet-YOUR-NAME-dialog-overlay"
+   2. Add CSS rule: input[name="attr_show_YOUR_NAME_dialog"].sheet-dialog-show:checked ~ .sheet-YOUR-NAME-dialog-overlay { display: flex !important; }
+   3. Optional: Add .sheet-YOUR-NAME-dialog-container { width: XXXpx !important; } for custom width
+   4. Optional: Add .sheet-YOUR-NAME-dialog-body { padding: XXpx; } for custom padding
    =================================== */
 
 /* Hide radio buttons */
@@ -1276,19 +1339,23 @@ button[type="action"] img {
     display: none;
 }
 
-/* Show attack dialog when radio button is selected */
-.sheet-dialog-show:checked ~ .sheet-attack-dialog-overlay {
-    display: flex !important;
+/* Default dialog sizing (can be overridden per dialog) */
+.sheet-dialog-container {
+    width: 338px;
 }
 
-/* Attack dialog specific sizing */
-.sheet-attack-dialog-container {
-    width: 338px !important;
-}
-
-/* Attack dialog body padding */
-.sheet-attack-dialog-body {
+/* Default dialog body padding (can be overridden per dialog) */
+.sheet-dialog-body {
     padding: 19px 15px;
+}
+
+/* ===================================
+   Attack Dialog
+   =================================== */
+
+/* Show attack dialog when radio button is selected */
+input[name="attr_show_attack_dialog"].sheet-dialog-show:checked ~ .sheet-attack-dialog-overlay {
+    display: flex !important;
 }
 
 /* Info rows (read-only display) */
@@ -1512,45 +1579,29 @@ button.sheet-dialog-cancel:hover::after {
 }
 
 /* ===================================
-   Consciousness Dialog
+   Skill Dialog
    =================================== */
 
-/* Show consciousness dialog when radio button is selected */
-.sheet-dialog-show:checked ~ .sheet-consciousness-dialog-overlay {
+input[name="attr_show_skill_dialog"].sheet-dialog-show:checked ~ .sheet-skill-dialog-overlay {
     display: flex !important;
 }
 
-/* Consciousness dialog specific sizing */
-.sheet-consciousness-dialog-container {
-    width: 338px !important;
+/* ===================================
+   Attribute Dialog
+   =================================== */
+
+input[name="attr_show_attr_dialog"].sheet-dialog-show:checked ~ .sheet-attr-dialog-overlay {
+    display: flex !important;
 }
 
-/* Consciousness dialog body padding */
-.sheet-consciousness-dialog-body {
-    padding: 19px 15px;
+/* ===================================
+   Consciousness Dialog
+   =================================== */
+
+input[name="attr_show_consciousness_dialog"].sheet-dialog-show:checked ~ .sheet-consciousness-dialog-overlay {
+    display: flex !important;
 }
 
-/* Consciousness roll result message styling */
-.sheet-rolltemplate-mw1e-consciousness .sheet-template-result {
-    margin-top: 10px;
-    padding: 8px;
-    text-align: center;
-    font-weight: bold;
-    font-size: 14px;
-    border-radius: 3px;
-}
-
-.sheet-rolltemplate-mw1e-consciousness .sheet-template-result.sheet-template-success {
-    background-color: #4a7a5a;
-    color: #ffffff;
-    border: 2px solid #5a8a6a;
-}
-
-.sheet-rolltemplate-mw1e-consciousness .sheet-template-result.sheet-template-failure {
-    background-color: #8a4a4a;
-    color: #ffffff;
-    border: 2px solid #aa5a5a;
-}
 
 /* Remove yellow highlight from all inline rolls in consciousness template */
 .sheet-rolltemplate-mw1e-consciousness .inlinerollresult {
