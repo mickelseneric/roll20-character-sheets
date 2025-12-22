@@ -1,11 +1,99 @@
 /* MechWarrior 1st Edition Character Sheet - Modern Sci-Fi Style */
 
 .sheet-mechwarrior {
+    /* ===================================
+       SCALE CONTROL
+       Change --scale to resize everything (e.g., 0.75 for 75%, 1.25 for 125%)
+       =================================== */
+    --scale: 1;
+
+    /* Base font size (14px) - all rem units are relative to this */
+    font-size: calc(14px * var(--scale));
+
+    /* ===================================
+       SPACING SYSTEM
+       =================================== */
+    --spacing-xs: calc(4px * var(--scale));
+    --spacing-sm: calc(8px * var(--scale));
+    --spacing-md: calc(15px * var(--scale));
+    --spacing-lg: calc(20px * var(--scale));
+    --spacing-xl: calc(40px * var(--scale));
+
+    /* Fine-grained spacing */
+    --spacing-1: calc(1px * var(--scale));
+    --spacing-2: calc(2px * var(--scale));
+    --spacing-3: calc(3px * var(--scale));
+    --spacing-5: calc(5px * var(--scale));
+    --spacing-6: calc(6px * var(--scale));
+    --spacing-10: calc(10px * var(--scale));
+    --spacing-11: calc(11px * var(--scale));
+    --spacing-19: calc(19px * var(--scale));
+    --spacing-25: calc(25px * var(--scale));
+    --spacing-30: calc(30px * var(--scale));
+    --spacing-60: calc(60px * var(--scale));
+
+    /* ===================================
+       COMPONENT SIZES
+       =================================== */
+    --input-height-sm: calc(22px * var(--scale));
+    --input-height: calc(24px * var(--scale));
+    --button-height: calc(28px * var(--scale));
+
+    --icon-sm: calc(16px * var(--scale));
+    --icon-md: calc(24px * var(--scale));
+    --icon-lg: calc(28px * var(--scale));
+    --icon-xl: calc(32px * var(--scale));
+
+    --button-width-sm: calc(36px * var(--scale));
+    --button-cs-roll: calc(28px * var(--scale));
+    --button-width-md: calc(250px * var(--scale));
+
+    /* ===================================
+       BORDERS & CHAMFERS
+       =================================== */
+    --border-thin: calc(1px * var(--scale));
+    --border-thick: calc(2px * var(--scale));
+    --border-extra-thick: calc(3px * var(--scale));
+
+    --chamfer-xs: calc(5px * var(--scale));
+    --chamfer-sm: calc(6px * var(--scale));
+    --chamfer-md: calc(7px * var(--scale));
+    --chamfer-tab: calc(8px * var(--scale));
+    --chamfer-dialog: calc(11px * var(--scale));
+    --chamfer-panel: calc(20px * var(--scale));
+
+    --border-radius: calc(4px * var(--scale));
+    --border-radius-md: calc(5px * var(--scale));
+    --border-radius-lg: calc(6px * var(--scale));
+
+    /* ===================================
+       FIELD WIDTHS
+       =================================== */
+    --field-xs: calc(30px * var(--scale));
+    --field-sm: calc(40px * var(--scale));
+    --field-input: calc(55px * var(--scale));
+    --field-attr: calc(60px * var(--scale));
+    --field-md: calc(80px * var(--scale));
+    --field-lg: calc(90px * var(--scale));
+    --field-label: calc(105px * var(--scale));
+    --field-label-md: calc(150px * var(--scale));
+    --field-xl: calc(180px * var(--scale));
+    --field-attr-label: calc(200px * var(--scale));
+
+    /* ===================================
+       DIALOG & CONTAINER WIDTHS
+       =================================== */
+    --dialog-width: calc(338px * var(--scale));
+    --dialog-width-lg: calc(700px * var(--scale));
+    --container-max: calc(900px * var(--scale));
+    --select-min: calc(100px * var(--scale));
+
+    /* Base styles */
     font-family: 'Arial', 'Helvetica', sans-serif;
     background-color: #3a4a5a;
     color: #c8d0d8;
-    padding: 20px;
-    max-width: 900px;
+    padding: var(--spacing-lg);
+    max-width: var(--container-max);
     margin: 0 auto;
 }
 
@@ -17,14 +105,14 @@
 
 /* Title */
 .sheet-title {
-    font-size: 48px;
+    font-size: 3.43rem; /* 48px / 14px = 3.43 */
     font-weight: bold;
-    letter-spacing: 8px;
+    letter-spacing: 0.571rem; /* 8px / 14px = 0.571 */
     text-align: center;
     color: #c8d0d8;
-    margin: 0 0 20px 0;
+    margin: 0 0 var(--spacing-lg) 0;
     text-transform: uppercase;
-    border-bottom: 2px solid #b2854e;
+    border-bottom: var(--border-thick) solid #b2854e;
 }
 
 /* Tab System */
@@ -36,38 +124,38 @@ label.sheet-tab-label {
     background-color: #6a7a8a; /* Border color */
     color: #c8d0d8;
     cursor: pointer;
-    font-size: 13px;
+    font-size: 0.929rem; /* 13px / 14px = 0.929 */
     font-weight: bold;
-    padding: 2px; /* Outer padding for border */
-    margin-right: 8px;
+    padding: var(--spacing-2); /* Outer padding for border */
+    margin-right: var(--spacing-sm);
     margin-bottom: 0;
     position: relative;
     text-align: center;
     display: inline-block;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.071rem; /* 1px / 14px = 0.071 */
     -webkit-clip-path: polygon(
-        8px 0%,
-        calc(100% - 8px) 0%,
-        100% 8px,
-        100% calc(100% - 8px),
-        calc(100% - 8px) 100%,
-        8px 100%,
-        0% calc(100% - 8px),
-        0% 8px
+        var(--chamfer-tab) 0%,
+        calc(100% - var(--chamfer-tab)) 0%,
+        100% var(--chamfer-tab),
+        100% calc(100% - var(--chamfer-tab)),
+        calc(100% - var(--chamfer-tab)) 100%,
+        var(--chamfer-tab) 100%,
+        0% calc(100% - var(--chamfer-tab)),
+        0% var(--chamfer-tab)
     );
     clip-path: polygon(
-        8px 0%,
-        calc(100% - 8px) 0%,
-        100% 8px,
-        100% calc(100% - 8px),
-        calc(100% - 8px) 100%,
-        8px 100%,
-        0% calc(100% - 8px),
-        0% 8px
+        var(--chamfer-tab) 0%,
+        calc(100% - var(--chamfer-tab)) 0%,
+        100% var(--chamfer-tab),
+        100% calc(100% - var(--chamfer-tab)),
+        calc(100% - var(--chamfer-tab)) 100%,
+        var(--chamfer-tab) 100%,
+        0% calc(100% - var(--chamfer-tab)),
+        0% var(--chamfer-tab)
     );
     width: auto;
-    max-width: 200px;
+    max-width: var(--field-attr-label);
 }
 
 /* Inner label background */
@@ -75,26 +163,26 @@ label.sheet-tab-label::before {
     content: attr(data-label);
     display: block;
     background-color: #4a5a6a; /* Fill color */
-    padding: 4px 18px;
+    padding: var(--spacing-xs) calc(18px * var(--scale));
     -webkit-clip-path: polygon(
-        7px 0%,
-        calc(100% - 7px) 0%,
-        100% 7px,
-        100% calc(100% - 7px),
-        calc(100% - 7px) 100%,
-        7px 100%,
-        0% calc(100% - 7px),
-        0% 7px
+        var(--chamfer-md) 0%,
+        calc(100% - var(--chamfer-md)) 0%,
+        100% var(--chamfer-md),
+        100% calc(100% - var(--chamfer-md)),
+        calc(100% - var(--chamfer-md)) 100%,
+        var(--chamfer-md) 100%,
+        0% calc(100% - var(--chamfer-md)),
+        0% var(--chamfer-md)
     );
     clip-path: polygon(
-        7px 0%,
-        calc(100% - 7px) 0%,
-        100% 7px,
-        100% calc(100% - 7px),
-        calc(100% - 7px) 100%,
-        7px 100%,
-        0% calc(100% - 7px),
-        0% 7px
+        var(--chamfer-md) 0%,
+        calc(100% - var(--chamfer-md)) 0%,
+        100% var(--chamfer-md),
+        100% calc(100% - var(--chamfer-md)),
+        calc(100% - var(--chamfer-md)) 100%,
+        var(--chamfer-md) 100%,
+        0% calc(100% - var(--chamfer-md)),
+        0% var(--chamfer-md)
     );
 }
 
@@ -110,7 +198,7 @@ input.sheet-tab:checked + label.sheet-tab-label::before {
 /* Tab Content */
 div.sheet-tab-content {
     display: none;
-    margin-top: 20px;
+    margin-top: var(--spacing-lg);
 }
 
 /* Show active tab */
@@ -122,17 +210,17 @@ input.sheet-tab-combat:checked ~ div.sheet-tab-combat {
 /* Reusable Angled Panel with Chamfered Corners */
 .sheet-angled-panel {
     background-color: #6a7a8a; /* Border color as background */
-    padding: 2px; /* Border thickness */
+    padding: var(--spacing-2); /* Border thickness */
     position: relative;
     clip-path: polygon(
-        20px 0%,
-        calc(100% - 20px) 0%,
-        100% 20px,
-        100% calc(100% - 20px),
-        calc(100% - 20px) 100%,
-        20px 100%,
-        0% calc(100% - 20px),
-        0% 20px
+        var(--chamfer-panel) 0%,
+        calc(100% - var(--chamfer-panel)) 0%,
+        100% var(--chamfer-panel),
+        100% calc(100% - var(--chamfer-panel)),
+        calc(100% - var(--chamfer-panel)) 100%,
+        var(--chamfer-panel) 100%,
+        0% calc(100% - var(--chamfer-panel)),
+        0% var(--chamfer-panel)
     );
 }
 
@@ -146,20 +234,20 @@ input.sheet-tab-combat:checked ~ div.sheet-tab-combat {
 .sheet-angled-panel::before {
     content: '';
     position: absolute;
-    top: 2px;
-    left: 2px;
-    right: 2px;
-    bottom: 2px;
+    top: var(--spacing-2);
+    left: var(--spacing-2);
+    right: var(--spacing-2);
+    bottom: var(--spacing-2);
     background-color: #4a5a6a;
     clip-path: polygon(
-        19px 0%,
-        calc(100% - 19px) 0%,
-        100% 19px,
-        100% calc(100% - 19px),
-        calc(100% - 19px) 100%,
-        19px 100%,
-        0% calc(100% - 19px),
-        0% 19px
+        var(--spacing-19) 0%,
+        calc(100% - var(--spacing-19)) 0%,
+        100% var(--spacing-19),
+        100% calc(100% - var(--spacing-19)),
+        calc(100% - var(--spacing-19)) 100%,
+        var(--spacing-19) 100%,
+        0% calc(100% - var(--spacing-19)),
+        0% var(--spacing-19)
     );
     z-index: 0;
 }
@@ -172,20 +260,20 @@ input.sheet-tab-combat:checked ~ div.sheet-tab-combat {
 /* Section Container Layout */
 .sheet-section-container {
     display: flex;
-    padding: 25px;
-    gap: 40px;
+    padding: var(--spacing-25);
+    gap: var(--spacing-xl);
 }
 
 /* Section Headers */
 .sheet-section-header {
-    font-size: 14px;
+    font-size: 1rem; /* 14px */
     font-weight: bold;
-    letter-spacing: 2px;
+    letter-spacing: 0.143rem; /* 2px / 14px = 0.143 */
     color: #c8d0d8;
-    margin: 0 0 20px 0;
+    margin: 0 0 var(--spacing-lg) 0;
     text-transform: uppercase;
-    border-bottom: 1px solid #b2854e;
-    padding-bottom: 8px;
+    border-bottom: var(--border-thin) solid #b2854e;
+    padding-bottom: var(--spacing-sm);
 }
 
 /* Collapsible Sections */
@@ -207,8 +295,8 @@ input.sheet-tab-combat:checked ~ div.sheet-tab-combat {
 }
 
 .sheet-collapse-icon {
-    width: 16px;
-    height: 16px;
+    width: var(--icon-sm);
+    height: var(--icon-sm);
     transition: transform 0.3s ease;
     position: absolute;
     right: 0;
@@ -251,30 +339,30 @@ input.sheet-tab-combat:checked ~ div.sheet-tab-combat {
 .sheet-field-group {
     display: flex;
     align-items: center;
-    margin-bottom: 15px;
+    margin-bottom: var(--spacing-md);
 }
 
 .sheet-field-group label {
-    font-size: 12px;
+    font-size: 0.857rem; /* 12px / 14px = 0.857 */
     font-weight: normal;
-    letter-spacing: 1px;
+    letter-spacing: 0.071rem; /* 1px / 14px */
     color: #c8d0d8;
     text-transform: uppercase;
-    width: 150px;
+    width: var(--field-label-md);
     flex-shrink: 0;
-    margin-right: 15px;
+    margin-right: var(--spacing-md);
     margin-bottom: 0;
 }
 
 .sheet-field-group input {
     flex: 1 1 auto;
-    height: 24px;
+    height: var(--input-height);
     background-color: transparent;
     border: none;
-    border-bottom: 1px solid #6a7a8a;
+    border-bottom: var(--border-thin) solid #6a7a8a;
     color: #c8d0d8;
-    font-size: 14px;
-    padding: 4px 0;
+    font-size: 1rem; /* 14px */
+    padding: var(--spacing-xs) 0;
     transition: border-color 0.2s;
     box-sizing: border-box;
 }
@@ -282,13 +370,13 @@ input.sheet-tab-combat:checked ~ div.sheet-tab-combat {
 /* XP input fields - larger to accommodate 6 figures */
 .sheet-field-group input[type="number"][name="attr_total_xp"],
 .sheet-field-group input[type="number"][name="attr_xp_available"] {
-    width: 90px;
+    width: var(--field-lg);
     text-align: right;
 }
 
 .sheet-field-group input:focus {
     outline: none;
-    border-bottom: 2px solid #8a9aaa;
+    border-bottom: var(--border-thick) solid #8a9aaa;
     background-color: rgba(200, 208, 216, 0.05);
 }
 
@@ -300,111 +388,120 @@ input.sheet-tab-combat:checked ~ div.sheet-tab-combat {
 .sheet-attr-header-row {
     display: flex;
     align-items: center;
-    border-bottom: 2px solid #b2854e;
-    padding-bottom: 8px;
-    margin-bottom: 8px;
+    border-bottom: var(--border-thick) solid #b2854e;
+    padding-bottom: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
 }
 
 .sheet-attr-header-name {
-    font-size: 14px;
+    font-size: 1rem; /* 14px */
     font-weight: bold;
-    letter-spacing: 2px;
+    letter-spacing: 0.143rem; /* 2px / 14px */
     color: #c8d0d8;
     text-transform: uppercase;
-    width: 200px;
-    flex-shrink: 0;
+    /*width: var(--field-attr-label);*/
+    /*flex-shrink: 0;*/
+    flex-grow: 1;
     text-align: left;
-    /*margin: 0 0 20px 0;*/
-    /*border-bottom: 1px solid #b2854e;*/
-    padding-bottom: 8px;
+    /*margin: 0 0 var(--spacing-lg) 0;*/
+    /*border-bottom: var(--border-thin) solid #b2854e;*/
+    padding-bottom: var(--spacing-sm);
 }
 
 .sheet-attr-header-cell {
-    font-size: 9px;
+    font-size: 0.643rem; /* 9px / 14px = 0.643 */
     font-weight: bold;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.036rem; /* 0.5px / 14px */
     color: #c8d0d8;
     text-transform: uppercase;
-    width: 60px;
-    min-width: 60px;
-    max-width: 60px;
+    width: var(--field-attr);
+    min-width: var(--field-attr);
+    max-width: var(--field-attr);
     flex-shrink: 0;
     text-align: center;
     line-height: 1.2;
-    margin: 0 3px !important;
+    margin: 0 var(--spacing-3) !important;
     padding: 0 !important;
     box-sizing: border-box !important;
+}
+
+/* Last header cell (ROLL column) should match button width */
+.sheet-attr-header-cell:last-child {
+    width: var(--button-cs-roll);
+    min-width: var(--button-cs-roll);
+    max-width: var(--button-cs-roll);
 }
 
 /* Attribute Rows */
 .sheet-attr-row {
     display: flex;
     align-items: center;
-    margin-bottom: 6px;
+    margin-bottom: var(--spacing-6);
 }
 
 .sheet-attr-row .sheet-attr-name {
-    font-size: 11px;
+    font-size: 0.786rem; /* 11px / 14px = 0.786 */
     font-weight: bold;
     color: #c8d0d8;
-    width: 200px;
-    flex-shrink: 0;
+    /*width: var(--field-attr-label);*/
+    /*flex-shrink: 0;*/
     text-align: left;
+    flex-grow: 1;
 }
 
 .sheet-attr-row input[type="number"] {
-    width: 60px !important;
-    min-width: 60px !important;
-    max-width: 60px !important;
-    height: 24px;
+    width: var(--field-attr) !important;
+    min-width: var(--field-attr) !important;
+    max-width: var(--field-attr) !important;
+    height: var(--input-height);
     background-color: transparent;
     border: none;
-    border-bottom: 1px solid #6a7a8a;
+    border-bottom: var(--border-thin) solid #6a7a8a;
     color: #c8d0d8;
-    font-size: 14px;
-    padding: 4px 0 !important;
+    font-size: 1rem; /* 14px */
+    padding: var(--spacing-xs) 0 !important;
     text-align: center;
-    margin: 0 3px !important;
+    margin: 0 var(--spacing-3) !important;
     flex-shrink: 0;
     box-sizing: border-box !important;
 }
 
 .sheet-attr-row input[type="text"][readonly] {
-    width: 60px !important;
-    min-width: 60px !important;
-    max-width: 60px !important;
-    height: 24px;
+    width: var(--field-attr) !important;
+    min-width: var(--field-attr) !important;
+    max-width: var(--field-attr) !important;
+    height: var(--input-height);
     border: none;
-    border-bottom: 1px solid #6a7a8a;
-    font-size: 14px;
-    padding: 4px 0 !important;
+    border-bottom: var(--border-thin) solid #6a7a8a;
+    font-size: 1rem; /* 14px */
+    padding: var(--spacing-xs) 0 !important;
     text-align: center;
-    margin: 0 3px !important;
+    margin: 0 var(--spacing-3) !important;
     flex-shrink: 0;
     box-sizing: border-box !important;
 }
 
 .sheet-attr-row input:focus {
     outline: none;
-    border-bottom: 2px solid #8a9aaa;
+    border-bottom: var(--border-thick) solid #8a9aaa;
     background-color: rgba(200, 208, 216, 0.05);
 }
 
 .sheet-attr-row button[type="roll"],
 .sheet-attr-row button[type="action"] {
-    width: 36px !important;
-    min-width: 36px !important;
-    max-width: 36px !important;
+    width: var(--button-cs-roll) !important;
+    min-width: var(--button-cs-roll) !important;
+    max-width: var(--button-cs-roll) !important;
     flex-shrink: 0;
-    margin: 0 3px !important;
+    margin: 0 var(--spacing-3) !important;
     border: none !important;
     cursor: pointer !important;
-    border-radius: 4px;
+    border-radius: var(--border-radius);
 }
 
 /* Skills Section */
 .sheet-skills-section {
-    margin-top: 20px;
+    margin-top: var(--spacing-lg);
 }
 
 .sheet-skills-section .sheet-section-container {
@@ -413,7 +510,7 @@ input.sheet-tab-combat:checked ~ div.sheet-tab-combat {
 
 .sheet-skills-columns {
     display: flex;
-    gap: 20px;
+    gap: var(--spacing-lg);
 }
 
 .sheet-skills-column {
@@ -426,104 +523,111 @@ input.sheet-tab-combat:checked ~ div.sheet-tab-combat {
 .sheet-skill-header-row {
     display: flex;
     align-items: center;
-    border-bottom: 2px solid #b2854e;
-    padding-bottom: 8px;
-    margin-bottom: 8px;
+    border-bottom: var(--border-thick) solid #b2854e;
+    padding-bottom: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
 }
 
 .sheet-skill-header-name {
-    font-size: 11px;
+    font-size: 0.786rem; /* 11px / 14px */
     font-weight: bold;
-    letter-spacing: 1px;
+    letter-spacing: 0.071rem; /* 1px / 14px */
     color: #c8d0d8;
     text-transform: uppercase;
-    min-width: 150px;
+    min-width: var(--field-label-md);
     flex: 1;
     text-align: left;
 }
 
 .sheet-skill-header-cell {
-    font-size: 9px;
+    font-size: 0.643rem; /* 9px / 14px */
     font-weight: bold;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.036rem; /* 0.5px / 14px */
     color: #c8d0d8;
     text-transform: uppercase;
-    width: 55px;
-    min-width: 55px;
-    max-width: 55px;
+    width: var(--field-input);
+    min-width: var(--field-input);
+    max-width: var(--field-input);
     flex-shrink: 0;
     text-align: center;
     line-height: 1.2;
-    margin: 0 3px !important;
+    margin: 0 var(--spacing-3) !important;
     padding: 0 !important;
     box-sizing: border-box !important;
+}
+
+/* Last header cell (ROLL column) should match button width */
+.sheet-skill-header-cell:last-child {
+    width: var(--button-cs-roll);
+    min-width: var(--button-cs-roll);
+    max-width: var(--button-cs-roll);
 }
 
 /* Skill Rows */
 .sheet-skill-row {
     display: flex;
     align-items: center;
-    margin-bottom: 6px;
+    margin-bottom: var(--spacing-6);
 }
 
 .sheet-skill-row .sheet-skill-name {
-    font-size: 11px;
+    font-size: 0.786rem; /* 11px / 14px */
     font-weight: bold;
     color: #c8d0d8;
-    min-width: 150px;
+    min-width: var(--field-label-md);
     flex: 1;
     text-align: left;
     box-sizing: border-box;
 }
 
 .sheet-skill-row .sheet-skill-name em {
-    font-size: 10px;
+    font-size: 0.714rem; /* 10px / 14px */
     font-weight: normal;
 }
 
 .sheet-sub-skill .sheet-skill-name {
-    padding-left: 15px;
-    font-size: 10px;
+    padding-left: var(--spacing-md);
+    font-size: 0.714rem; /* 10px / 14px */
     font-style: italic;
 }
 
 .sheet-sub-skill .sheet-skill-name em {
-    font-size: 9px;
+    font-size: 0.643rem; /* 9px / 14px */
 }
 
 .sheet-skill-row input {
-    width: 55px !important;
-    min-width: 55px !important;
-    max-width: 55px !important;
+    width: var(--field-input) !important;
+    min-width: var(--field-input) !important;
+    max-width: var(--field-input) !important;
     flex-shrink: 0;
-    height: 22px;
+    height: var(--input-height-sm);
     background-color: transparent;
     border: none;
-    border-bottom: 1px solid #6a7a8a;
+    border-bottom: var(--border-thin) solid #6a7a8a;
     color: #c8d0d8;
-    font-size: 11px;
-    padding: 2px 0 !important;
+    font-size: 0.786rem; /* 11px / 14px */
+    padding: var(--spacing-2) 0 !important;
     text-align: center;
     box-sizing: border-box !important;
-    margin: 0 3px !important;
+    margin: 0 var(--spacing-3) !important;
 }
 
 .sheet-skill-row input:focus {
     outline: none;
-    border-bottom: 2px solid #8a9aaa;
+    border-bottom: var(--border-thick) solid #8a9aaa;
     background-color: rgba(200, 208, 216, 0.05);
 }
 
 .sheet-skill-row button[type="roll"],
 .sheet-skill-row button[type="action"] {
-    width: 36px !important;
-    min-width: 36px !important;
-    max-width: 36px !important;
+    width: var(--button-cs-roll) !important;
+    min-width: var(--button-cs-roll) !important;
+    max-width: var(--button-cs-roll) !important;
     flex-shrink: 0;
-    margin: 0 3px !important;
+    margin: 0 var(--spacing-3) !important;
     border: none !important;
     cursor: pointer !important;
-    border-radius: 4px;
+    border-radius: var(--border-radius);
 }
 
 .sheet-skill-row label {
@@ -532,27 +636,27 @@ input.sheet-tab-combat:checked ~ div.sheet-tab-combat {
 
 /* Horizontal divider for separating subsections */
 .sheet-horizontal-divider {
-    height: 1px;
+    height: var(--border-thin);
     background-color: #6a7a8a;
-    margin: 20px 0;
+    margin: var(--spacing-lg) 0;
     width: 100%;
 }
 
 /* Saving roll target label */
 .sheet-saving-roll-target {
-    font-size: 10px;
+    font-size: 0.714rem; /* 10px / 14px */
     color: #8a9aaa;
-    margin-left: 10px;
+    margin-left: var(--spacing-10);
     white-space: nowrap;
 }
 
 .sheet-saving-roll-target input {
-    width: 30px;
+    width: var(--field-xs);
     height: auto;
     background-color: transparent;
     border: none;
     color: #8a9aaa;
-    font-size: 10px;
+    font-size: 0.714rem; /* 10px / 14px */
     padding: 0;
     text-align: center;
     display: inline;
@@ -560,9 +664,9 @@ input.sheet-tab-combat:checked ~ div.sheet-tab-combat {
 
 /* XP Cost Display */
 .sheet-xp-cost {
-    font-size: 9px;
+    font-size: 0.643rem; /* 9px / 14px */
     color: #b2854e;
-    margin-left: 10px;
+    margin-left: var(--spacing-10);
     white-space: nowrap;
     font-weight: bold;
 }
@@ -573,14 +677,14 @@ input.sheet-tab-combat:checked ~ div.sheet-tab-combat {
 
 /* XP Field Label Alignment */
 .sheet-user-data .sheet-field-group label {
-    min-width: 150px;
+    min-width: var(--field-label-md);
 }
 
 /* XP Input Field Widths - Make them consistent */
 input[name="attr_total_xp"],
 input[name="attr_xp_available"] {
     flex: 0 0 auto;
-    width: 180px;
+    width: var(--field-xl);
 }
 
 /* XP Available Container - Highlighted when negative */
@@ -589,10 +693,10 @@ input[name="attr_xp_available"] {
 }
 
 .sheet-xp-available-container {
-    border-radius: 4px;
+    border-radius: var(--border-radius);
     transition: background-color 0.3s ease;
-    margin: -5px;
-    padding: 5px;
+    margin: calc(-1 * var(--spacing-5));
+    padding: var(--spacing-5);
 }
 
 input[name="attr_xp_available"] {
@@ -611,24 +715,24 @@ input.sheet-xp-negative-flag:checked ~ .sheet-xp-available-container input {
 
 /* Skill XP Cost Column */
 .sheet-skill-row input[name*="_xp_cost"] {
-    width: 60px;
-    font-size: 10px;
+    width: var(--field-attr);
+    font-size: 0.714rem; /* 10px / 14px */
     color: #d2a56e;
     font-weight: bold;
 }
 
 /* Combat Tab Styles */
 #combat-stats {
-    margin-bottom: 20px;
+    margin-bottom: var(--spacing-lg);
 }
 
 .sheet-combat-stats-row {
     display: flex;
     flex-direction: row;
-    gap: 30px;
+    gap: var(--spacing-30);
     justify-content: flex-start;
     align-items: center;
-    padding: 15px;
+    padding: var(--spacing-md);
 }
 
 .sheet-combat-stats-row .sheet-field-group {
@@ -638,11 +742,11 @@ input.sheet-xp-negative-flag:checked ~ .sheet-xp-available-container input {
 
 .sheet-combat-stats-row .sheet-field-group label {
     width: auto;
-    margin-right: 10px;
+    margin-right: var(--spacing-10);
 }
 
 .sheet-combat-stats-row .sheet-field-group input {
-    width: 80px;
+    width: var(--field-md);
     text-align: center;
 }
 
@@ -657,21 +761,21 @@ input.sheet-xp-negative-flag:checked ~ .sheet-xp-available-container input {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 10px;
+    gap: var(--spacing-10);
 }
 
 /* PIB breakdown display */
 .sheet-pib-breakdown {
     width: auto !important;
-    min-width: 250px !important;
-    max-width: 400px !important;
-    font-size: 11px !important;
+    min-width: var(--button-width-md) !important;
+    max-width: calc(400px * var(--scale)) !important;
+    font-size: 0.786rem !important; /* 11px / 14px */
     font-style: italic;
     color: #888 !important;
     background: transparent !important;
     border: none !important;
-    padding: 2px 5px 2px 0 !important;
-    margin-top: 3px !important;
+    padding: var(--spacing-2) var(--spacing-5) var(--spacing-2) 0 !important;
+    margin-top: var(--spacing-3) !important;
     margin-bottom: 0 !important;
     text-align: left !important;
     cursor: default !important;
@@ -679,55 +783,55 @@ input.sheet-xp-negative-flag:checked ~ .sheet-xp-available-container input {
 
 /* Rolls & Tables Section */
 #rolls-tables-section {
-    margin-top: 20px;
-    padding: 20px;
+    margin-top: var(--spacing-lg);
+    padding: var(--spacing-lg);
 }
 
 .sheet-rolls-container {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: var(--spacing-md);
     align-items: flex-start;
 }
 
 .sheet-roll-group {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: var(--spacing-md);
 }
 
 /* Roll button styling - applies to both type="roll" and type="action" */
 button[type="roll"].sheet-roll-button,
 button[type="action"].sheet-roll-button {
     border: none !important;
-    padding: 2px 8px !important;
+    padding: var(--spacing-2) var(--spacing-sm) !important;
     margin: 0 !important;
-    font-size: 14px !important;
+    font-size: 1rem !important; /* 14px */
     font-weight: bold !important;
     text-transform: uppercase !important;
-    letter-spacing: 1px !important;
+    letter-spacing: 0.071rem !important; /* 1px / 14px */
     cursor: pointer !important;
     display: inline-flex !important;
     align-items: center !important;
-    gap: 10px !important;
-    width: 250px !important;
-    min-width: 250px !important;
-    max-width: 250px !important;
+    gap: var(--spacing-10) !important;
+    width: var(--button-width-md) !important;
+    min-width: var(--button-width-md) !important;
+    max-width: var(--button-width-md) !important;
     justify-content: flex-start !important;
     transition: none !important;
     background-color: #e8e8e8 !important;
     color: #000000 !important;
-    border-radius: 4px !important;
-    height: 28px !important;
-    min-height: 28px !important;
+    border-radius: var(--border-radius) !important;
+    height: var(--button-height) !important;
+    min-height: var(--button-height) !important;
     box-sizing: border-box !important;
     line-height: 1 !important;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) !important;
+    box-shadow: 0 var(--border-thin) var(--spacing-3) rgba(0, 0, 0, 0.3) !important;
 }
 
 /* Rules buttons without icons need left padding to align text with buttons that have icons */
 button[type="action"].sheet-roll-button {
-    padding-left: 28px !important; /* 24px icon + 10px gap on each side = 44px */
+    padding-left: var(--button-height) !important; /* 28px to align with icon buttons */
 }
 
 button[type="roll"].sheet-roll-button:hover,
@@ -744,21 +848,21 @@ button[type="action"].sheet-roll-button:active {
 
 button[type="roll"].sheet-roll-button img,
 button[type="action"].sheet-roll-button img {
-    width: 24px;
-    height: 24px;
+    width: var(--icon-md);
+    height: var(--icon-md);
 }
 
 .sheet-crit-location-select {
-    height: 24px;
+    height: var(--input-height);
     background-color: #2a3544;
     border: none;
-    border-bottom: 1px solid #6a7a8a;
+    border-bottom: var(--border-thin) solid #6a7a8a;
     color: #c8d0d8;
-    font-size: 14px;
-    padding: 4px 8px;
+    font-size: 1rem; /* 14px */
+    padding: var(--spacing-xs) var(--spacing-sm);
     transition: border-color 0.2s;
     box-sizing: border-box;
-    min-width: 100px;
+    min-width: var(--select-min);
     cursor: pointer;
     margin-bottom: 0;
 }
@@ -770,7 +874,7 @@ button[type="action"].sheet-roll-button img {
 
 .sheet-crit-location-select:focus {
     outline: none;
-    border-bottom: 2px solid #8a9aaa;
+    border-bottom: var(--border-thick) solid #8a9aaa;
     background-color: #3a4a5a;
 }
 
@@ -781,55 +885,55 @@ button[type="action"].sheet-roll-button img {
 
 /* Damage Tracking Section */
 #damage-section {
-    margin-top: 20px;
-    padding: 20px;
+    margin-top: var(--spacing-lg);
+    padding: var(--spacing-lg);
     display: flex;
     flex-direction: column;
 }
 
 #damage-section .sheet-section-header {
     text-align: center;
-    font-size: 14px;
+    font-size: 1rem; /* 14px */
 }
 
 .sheet-damage-row {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 15px;
+    margin-bottom: var(--spacing-md);
     width: 100%;
 }
 
 /* Head - centered at top */
 .sheet-damage-row-single {
     justify-content: center;
-    margin-bottom: 20px;
+    margin-bottom: var(--spacing-lg);
 }
 
 /* Torso row with arms - spread out like stick figure */
 .sheet-damage-row-triple {
     justify-content: center;
-    gap: 40px;
-    margin-bottom: 20px;
+    gap: var(--spacing-xl);
+    margin-bottom: var(--spacing-lg);
 }
 
 /* Legs - offset inward by 50% from the arms */
 .sheet-damage-row-double {
     justify-content: center;
-    gap: 60px;
+    gap: var(--spacing-60);
 }
 
 .sheet-damage-location {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: var(--spacing-10);
 }
 
 .sheet-damage-location label {
-    font-size: 12px;
+    font-size: 0.857rem; /* 12px / 14px */
     font-weight: normal;
-    letter-spacing: 1px;
+    letter-spacing: 0.071rem; /* 1px / 14px */
     color: #c8d0d8;
     text-transform: uppercase;
     margin: 0;
@@ -840,61 +944,61 @@ button[type="action"].sheet-roll-button img {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    border: 2px solid #6a7a8a;
-    padding: 8px 15px;
+    gap: var(--spacing-sm);
+    border: var(--border-thick) solid #6a7a8a;
+    padding: var(--spacing-sm) var(--spacing-md);
     background-color: rgba(106, 122, 138, 0.2);
 }
 
 .sheet-damage-values input {
-    width: 40px;
+    width: var(--field-sm);
     height: auto;
     background-color: transparent;
     border: none;
-    border-bottom: 1px solid #6a7a8a;
+    border-bottom: var(--border-thin) solid #6a7a8a;
     color: #c8d0d8;
-    font-size: 16px;
+    font-size: 1.143rem; /* 16px / 14px */
     text-align: center;
-    padding: 2px 0;
+    padding: var(--spacing-2) 0;
 }
 
 .sheet-damage-values input:focus {
     outline: none;
-    border-bottom: 2px solid #8a9aaa;
+    border-bottom: var(--border-thick) solid #8a9aaa;
 }
 
 .sheet-damage-separator {
-    font-size: 16px;
+    font-size: 1.143rem; /* 16px / 14px */
     color: #8a9aaa;
     font-weight: bold;
 }
 
 /* Damage max readonly inputs */
 input[name*="damage"][name*="max"][readonly] {
-    font-size: 16px;
+    font-size: 1.143rem; /* 16px / 14px */
     color: #c8d0d8;
-    width: 40px;
+    width: var(--field-sm);
     text-align: center;
     background-color: transparent !important;
     border: none;
-    border-bottom: 1px solid transparent;
-    padding: 2px 0;
+    border-bottom: var(--border-thin) solid transparent;
+    padding: var(--spacing-2) 0;
 }
 
 /* Weapons Section */
 #weapons-section {
-    margin-top: 20px;
-    padding: 20px;
+    margin-top: var(--spacing-lg);
+    padding: var(--spacing-lg);
     flex-direction: column;
 }
 
 #weapons-section .sheet-section-header {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: var(--spacing-lg);
 }
 
 .sheet-hit-location-button-container {
-    margin-bottom: 10px;
+    margin-bottom: var(--spacing-10);
 }
 
 .sheet-weapons-table {
@@ -905,11 +1009,11 @@ input[name*="damage"][name*="max"][readonly] {
 
 .sheet-weapons-table thead th {
     background-color: rgba(106, 122, 138, 0.3);
-    border: 1px solid #6a7a8a;
-    padding: 8px;
-    font-size: 8px;
+    border: var(--border-thin) solid #6a7a8a;
+    padding: var(--spacing-sm);
+    font-size: 0.571rem; /* 8px / 14px */
     font-weight: bold;
-    letter-spacing: 1px;
+    letter-spacing: 0.071rem; /* 1px / 14px */
     text-transform: uppercase;
     text-align: center;
 }
@@ -920,16 +1024,16 @@ input[name*="damage"][name*="max"][readonly] {
 
 .sheet-weapons-table .sheet-weapons-header-sub th {
     border-top: none;
-    font-size: 8px;
-    padding: 4px;
+    font-size: 0.571rem; /* 8px / 14px */
+    padding: var(--spacing-xs);
 }
 .sheet-weapons-table thead tr.sheet-weapons-header-sub th {
     width: 10%;
 }
 
 .sheet-weapons-table tbody td {
-    border: 1px solid #6a7a8a;
-    padding: 4px;
+    border: var(--border-thin) solid #6a7a8a;
+    padding: var(--spacing-xs);
     background-color: rgba(74, 90, 106, 0.2);
 }
 
@@ -938,8 +1042,8 @@ input[name*="damage"][name*="max"][readonly] {
     background-color: transparent;
     border: none;
     color: #c8d0d8;
-    font-size: 12px;
-    padding: 4px;
+    font-size: 0.857rem; /* 12px / 14px */
+    padding: var(--spacing-xs);
     box-sizing: border-box;
 }
 
@@ -960,15 +1064,15 @@ input[name*="damage"][name*="max"][readonly] {
 
 .sheet-damage-cell input {
     display: inline-block;
-    width: 35px !important;
+    width: calc(35px * var(--scale)) !important;
     text-align: center;
 }
 
 .sheet-damage-cell span {
     display: inline;
     color: #c8d0d8;
-    font-size: 12px;
-    padding: 0 2px;
+    font-size: 0.857rem; /* 12px / 14px */
+    padding: 0 var(--spacing-2);
 }
 
 /* Column widths for weapons table */
@@ -1030,10 +1134,10 @@ input[readonly] {
 select {
     background-color: #2a3544;
     color: #889aa8;
-    border: 1px solid #4a5a6a;
-    border-radius: 3px;
-    padding: 4px 8px;
-    font-size: 13px;
+    border: var(--border-thin) solid #4a5a6a;
+    border-radius: var(--spacing-3);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: 0.929rem; /* 13px / 14px */
     font-family: inherit;
     cursor: pointer;
     opacity: 0.9;
@@ -1080,8 +1184,8 @@ button[type="action"]:active {
 button[type="roll"] img,
 button[type="action"] img {
     display: block;
-    width: 24px;
-    height: 24px;
+    width: var(--icon-md);
+    height: var(--icon-md);
     object-fit: contain;
 }
 
@@ -1090,21 +1194,21 @@ button[type="action"] img {
 .sheet-skill-row button[type="action"] img,
 .sheet-attr-row button[type="roll"] img,
 .sheet-attr-row button[type="action"] img {
-    width: 28px;
-    height: 28px;
+    width: var(--icon-lg);
+    height: var(--icon-lg);
 }
 
 /* Weapon attack and damage buttons */
 .sheet-weapons-table button[type="roll"],
 .sheet-weapons-table button[type="action"] {
-    border-radius: 6px !important;
-    padding: 4px !important;
+    border-radius: var(--border-radius-lg) !important;
+    padding: var(--spacing-xs) !important;
 }
 
 .sheet-weapons-table button[type="roll"] img,
 .sheet-weapons-table button[type="action"] img {
-    width: 32px;
-    height: 32px;
+    width: var(--icon-xl);
+    height: var(--icon-xl);
 }
 
 /* Hit location button - has both text and icon */
@@ -1113,13 +1217,13 @@ button[type="action"] img {
     border: none;
     padding: 0;
     margin: 0;
-    font-size: 14px;
+    font-size: 1rem; /* 14px */
     font-weight: bold;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.071rem; /* 1px / 14px */
     display: inline-flex;
     align-items: center;
-    gap: 10px;
+    gap: var(--spacing-10);
     cursor: pointer;
 }
 
@@ -1132,8 +1236,8 @@ button[type="action"] img {
 }
 
 .sheet-hit-location-button img {
-    width: 24px;
-    height: 24px;
+    width: var(--icon-md);
+    height: var(--icon-md);
 }
 
 /* =================================================================
@@ -1147,6 +1251,8 @@ button[type="action"] img {
    ================================================================= */
 
 /* Base template container - shared by all templates */
+/* NOTE: Roll templates are rendered in chat, outside .sheet-mechwarrior scope,
+   so CSS variables don't work. Must use hardcoded values. */
 .sheet-rolltemplate-mw1e-skill .sheet-template-container,
 .sheet-rolltemplate-mw1e-weapon .sheet-template-container,
 .sheet-rolltemplate-mw1e-damage .sheet-template-container,
@@ -1187,8 +1293,8 @@ button[type="action"] img {
 .sheet-rolltemplate-mw1e-consciousness .sheet-template-row {
     display: flex;
     justify-content: space-between;
-    padding: 5px 0;
-    border-bottom: 1px solid #6a7a8a;
+    padding: 5px; /* Hardcoded - roll templates can't access CSS variables */
+    border-bottom: 1px solid #6a7a8a; /* Hardcoded - roll templates can't access CSS variables */
 }
 
 .sheet-rolltemplate-mw1e-skill .sheet-template-row:last-child,
@@ -1341,12 +1447,12 @@ button[type="action"] img {
 
 /* Default dialog sizing (can be overridden per dialog) */
 .sheet-dialog-container {
-    width: 338px;
+    width: var(--dialog-width);
 }
 
 /* Default dialog body padding (can be overridden per dialog) */
 .sheet-dialog-body {
-    padding: 19px 15px;
+    padding: var(--spacing-19) var(--spacing-md);
 }
 
 /* ===================================
@@ -1362,94 +1468,108 @@ input[name="attr_show_attack_dialog"].sheet-dialog-show:checked ~ .sheet-attack-
 .sheet-dialog-info-row {
     display: flex;
     align-items: center;
-    margin-bottom: 11px;
-    gap: 8px;
+    margin-bottom: var(--spacing-11);
+    gap: var(--spacing-sm);
 }
 
 .sheet-dialog-info-row .sheet-dialog-label {
     color: #c8d0d8;
     font-weight: bold;
-    font-size: 9px;
+    font-size: 0.643rem; /* 9px / 14px */
     text-transform: uppercase;
-    letter-spacing: 1px;
-    min-width: 105px;
+    letter-spacing: 0.071rem; /* 1px / 14px */
+    width: var(--field-label);
     flex-shrink: 0;
 }
 
 .sheet-dialog-info-row .sheet-dialog-readonly {
     background-color: #2a3a4a;
-    border: 2px solid #5a6a7a;
+    border: var(--border-thick) solid #5a6a7a;
     color: #999;
-    padding: 6px 9px;
-    font-size: 11px;
+    padding: var(--spacing-6) calc(9px * var(--scale));
+    font-size: 0.786rem; /* 11px / 14px */
     flex: 1;
     cursor: not-allowed;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0 !important; /* Allow flex item to shrink below content size */
+    max-width: 100% !important; /* Constrain to container width */
+}
+
+/* More specific override for all input types in dialog info rows */
+.sheet-dialog-info-row input[type="text"],
+.sheet-dialog-info-row input[type="number"] {
+    min-width: 0 !important; /* Allow flex item to shrink below content size */
+    max-width: 100% !important; /* Constrain to container width */
 }
 
 /* Editable field row (situational modifier) */
 .sheet-dialog-field-row {
     display: flex;
     align-items: center;
-    margin-top: 15px;
-    padding-top: 15px;
-    border-top: 2px solid #5a6a7a;
-    gap: 8px;
+    margin-top: var(--spacing-md);
+    padding-top: var(--spacing-md);
+    border-top: var(--border-thick) solid #5a6a7a;
+    gap: var(--spacing-sm);
 }
 
 .sheet-dialog-field-row .sheet-dialog-label {
     color: #c8d0d8;
     font-weight: bold;
-    font-size: 9px;
+    font-size: 0.643rem; /* 9px / 14px */
     text-transform: uppercase;
-    letter-spacing: 1px;
-    min-width: 105px;
+    letter-spacing: 0.071rem; /* 1px / 14px */
+    width: var(--field-label);
     flex-shrink: 0;
 }
 
 .sheet-dialog-field-row input[type="number"] {
     background-color: #2a3a4a !important;
-    border: 2px solid #6a7a8a !important;
+    border: var(--border-thick) solid #6a7a8a !important;
     color: #c8d0d8 !important;
-    padding: 6px 9px !important;
-    font-size: 11px !important;
+    padding: var(--spacing-6) calc(9px * var(--scale)) !important;
+    font-size: 0.786rem !important; /* 11px / 14px */
     flex: 1 !important;
     text-align: left !important;
     font-weight: normal !important;
     margin: 0 !important;
     border-radius: 0 !important;
+    min-width: 0 !important; /* Allow flex item to shrink below content size */
+    max-width: 100% !important; /* Constrain to container width */
 }
 
 .sheet-dialog-field-row input[type="number"]:focus {
     outline: none !important;
     border-color: #b2854e !important;
-    box-shadow: 0 0 6px rgba(178, 133, 78, 0.5) !important;
+    box-shadow: 0 0 var(--spacing-6) rgba(178, 133, 78, 0.5) !important;
 }
 
 /* Dialog Footer */
 .sheet-attack-dialog-footer {
     background-color: #4a5a6a !important;
-    border-top: 2px solid #6a7a8a !important;
-    padding: 14px 15px !important;
+    border-top: var(--border-thick) solid #6a7a8a !important;
+    padding: calc(14px * var(--scale)) var(--spacing-md) !important;
     display: flex !important;
     justify-content: flex-end !important;
-    gap: 9px !important;
+    gap: calc(9px * var(--scale)) !important;
     border-radius: 0 !important;
     /* Clip bottom corners to match parent dialog */
     -webkit-clip-path: polygon(
         0% 0%,
         100% 0%,
-        100% calc(100% - 11px),
-        calc(100% - 11px) 100%,
-        11px 100%,
-        0% calc(100% - 11px)
+        100% calc(100% - var(--chamfer-dialog)),
+        calc(100% - var(--chamfer-dialog)) 100%,
+        var(--chamfer-dialog) 100%,
+        0% calc(100% - var(--chamfer-dialog))
     ) !important;
     clip-path: polygon(
         0% 0%,
         100% 0%,
-        100% calc(100% - 11px),
-        calc(100% - 11px) 100%,
-        11px 100%,
-        0% calc(100% - 11px)
+        100% calc(100% - var(--chamfer-dialog)),
+        calc(100% - var(--chamfer-dialog)) 100%,
+        var(--chamfer-dialog) 100%,
+        0% calc(100% - var(--chamfer-dialog))
     ) !important;
 }
 
@@ -1458,14 +1578,14 @@ input[name="attr_show_attack_dialog"].sheet-dialog-show:checked ~ .sheet-attack-
 .sheet-dialog-cancel,
 button.sheet-dialog-submit,
 button.sheet-dialog-cancel {
-    font-size: 10px !important;
+    font-size: 0.714rem !important; /* 10px / 14px */
     font-weight: bold !important;
     text-transform: uppercase !important;
-    letter-spacing: 1px !important;
+    letter-spacing: 0.071rem !important; /* 1px / 14px */
     cursor: pointer !important;
     border: none !important;
     color: #c8d0d8 !important;
-    padding: 5px 15px !important;
+    padding: var(--spacing-5) var(--spacing-md) !important;
     position: relative !important;
     margin: 0 !important;
     border-radius: 0 !important;
@@ -1473,24 +1593,24 @@ button.sheet-dialog-cancel {
     text-shadow: none !important;
     line-height: normal !important;
     -webkit-clip-path: polygon(
-        6px 0%,
-        calc(100% - 6px) 0%,
-        100% 6px,
-        100% calc(100% - 6px),
-        calc(100% - 6px) 100%,
-        6px 100%,
-        0% calc(100% - 6px),
-        0% 6px
+        var(--chamfer-sm) 0%,
+        calc(100% - var(--chamfer-sm)) 0%,
+        100% var(--chamfer-sm),
+        100% calc(100% - var(--chamfer-sm)),
+        calc(100% - var(--chamfer-sm)) 100%,
+        var(--chamfer-sm) 100%,
+        0% calc(100% - var(--chamfer-sm)),
+        0% var(--chamfer-sm)
     ) !important;
     clip-path: polygon(
-        6px 0%,
-        calc(100% - 6px) 0%,
-        100% 6px,
-        100% calc(100% - 6px),
-        calc(100% - 6px) 100%,
-        6px 100%,
-        0% calc(100% - 6px),
-        0% 6px
+        var(--chamfer-sm) 0%,
+        calc(100% - var(--chamfer-sm)) 0%,
+        100% var(--chamfer-sm),
+        100% calc(100% - var(--chamfer-sm)),
+        calc(100% - var(--chamfer-sm)) 100%,
+        var(--chamfer-sm) 100%,
+        0% calc(100% - var(--chamfer-sm)),
+        0% var(--chamfer-sm)
     ) !important;
 }
 
@@ -1501,30 +1621,30 @@ button.sheet-dialog-submit::after,
 button.sheet-dialog-cancel::after {
     content: '' !important;
     position: absolute !important;
-    top: 2px !important;
-    left: 2px !important;
-    right: 2px !important;
-    bottom: 2px !important;
+    top: var(--spacing-2) !important;
+    left: var(--spacing-2) !important;
+    right: var(--spacing-2) !important;
+    bottom: var(--spacing-2) !important;
     z-index: -1 !important;
     -webkit-clip-path: polygon(
-        5px 0%,
-        calc(100% - 5px) 0%,
-        100% 5px,
-        100% calc(100% - 5px),
-        calc(100% - 5px) 100%,
-        5px 100%,
-        0% calc(100% - 5px),
-        0% 5px
+        var(--chamfer-xs) 0%,
+        calc(100% - var(--chamfer-xs)) 0%,
+        100% var(--chamfer-xs),
+        100% calc(100% - var(--chamfer-xs)),
+        calc(100% - var(--chamfer-xs)) 100%,
+        var(--chamfer-xs) 100%,
+        0% calc(100% - var(--chamfer-xs)),
+        0% var(--chamfer-xs)
     ) !important;
     clip-path: polygon(
-        5px 0%,
-        calc(100% - 5px) 0%,
-        100% 5px,
-        100% calc(100% - 5px),
-        calc(100% - 5px) 100%,
-        5px 100%,
-        0% calc(100% - 5px),
-        0% 5px
+        var(--chamfer-xs) 0%,
+        calc(100% - var(--chamfer-xs)) 0%,
+        100% var(--chamfer-xs),
+        100% calc(100% - var(--chamfer-xs)),
+        calc(100% - var(--chamfer-xs)) 100%,
+        var(--chamfer-xs) 100%,
+        0% calc(100% - var(--chamfer-xs)),
+        0% var(--chamfer-xs)
     ) !important;
 }
 
@@ -1648,7 +1768,7 @@ input[name="attr_show_melee_rules"].sheet-dialog-show:checked ~ .sheet-melee-rul
 .sheet-rules-table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 15px;
+    margin-bottom: var(--spacing-md);
     background-color: rgba(42, 58, 74, 0.5);
 }
 
@@ -1657,16 +1777,16 @@ input[name="attr_show_melee_rules"].sheet-dialog-show:checked ~ .sheet-melee-rul
 }
 
 .sheet-rules-table th {
-    padding: 8px 10px;
+    padding: var(--spacing-sm) var(--spacing-10);
     text-align: left;
     color: #2a3a4a;
     font-weight: bold;
-    border: 1px solid #4a5a6a;
+    border: var(--border-thin) solid #4a5a6a;
 }
 
 .sheet-rules-table td {
-    padding: 6px 10px;
-    border: 1px solid #4a5a6a;
+    padding: var(--spacing-6) var(--spacing-10);
+    border: var(--border-thin) solid #4a5a6a;
     color: #c8d0d8;
 }
 
@@ -1682,22 +1802,22 @@ input[name="attr_show_melee_rules"].sheet-dialog-show:checked ~ .sheet-melee-rul
 .sheet-rules-note {
     font-style: italic;
     color: #8a9aaa;
-    margin: 10px 0;
-    padding: 10px;
+    margin: var(--spacing-10) 0;
+    padding: var(--spacing-10);
     background-color: rgba(106, 122, 138, 0.3);
-    border-left: 3px solid #b2854e;
+    border-left: var(--spacing-3) solid #b2854e;
 }
 
 /* Info button style */
 .sheet-info-button {
     background-color: rgba(178, 133, 78, 0.3);
-    border: 2px solid #b2854e;
+    border: var(--border-thick) solid #b2854e;
     color: #c8d0d8;
-    padding: 8px 16px;
-    font-size: 13px;
+    padding: var(--spacing-sm) calc(16px * var(--scale));
+    font-size: 0.929rem; /* 13px / 14px */
     font-weight: bold;
     cursor: pointer;
-    border-radius: 4px;
+    border-radius: var(--border-radius);
     transition: all 0.2s;
     width: 100%;
 }
@@ -1733,30 +1853,30 @@ input[name="attr_show_melee_rules"].sheet-dialog-show:checked ~ .sheet-melee-rul
 .sheet-dialog-container {
     background-color: #6a7a8a !important; /* Border color */
     border: none !important;
-    padding: 2px !important; /* Border thickness */
+    padding: var(--spacing-2) !important; /* Border thickness */
     max-width: 90% !important;
     position: relative !important;
     display: flex !important;
     flex-direction: column !important;
     -webkit-clip-path: polygon(
-        11px 0%,
-        calc(100% - 11px) 0%,
-        100% 11px,
-        100% calc(100% - 11px),
-        calc(100% - 11px) 100%,
-        11px 100%,
-        0% calc(100% - 11px),
-        0% 11px
+        var(--chamfer-dialog) 0%,
+        calc(100% - var(--chamfer-dialog)) 0%,
+        100% var(--chamfer-dialog),
+        100% calc(100% - var(--chamfer-dialog)),
+        calc(100% - var(--chamfer-dialog)) 100%,
+        var(--chamfer-dialog) 100%,
+        0% calc(100% - var(--chamfer-dialog)),
+        0% var(--chamfer-dialog)
     ) !important;
     clip-path: polygon(
-        11px 0%,
-        calc(100% - 11px) 0%,
-        100% 11px,
-        100% calc(100% - 11px),
-        calc(100% - 11px) 100%,
-        11px 100%,
-        0% calc(100% - 11px),
-        0% 11px
+        var(--chamfer-dialog) 0%,
+        calc(100% - var(--chamfer-dialog)) 0%,
+        100% var(--chamfer-dialog),
+        100% calc(100% - var(--chamfer-dialog)),
+        calc(100% - var(--chamfer-dialog)) 100%,
+        var(--chamfer-dialog) 100%,
+        0% calc(100% - var(--chamfer-dialog)),
+        0% var(--chamfer-dialog)
     ) !important;
 }
 
@@ -1764,31 +1884,31 @@ input[name="attr_show_melee_rules"].sheet-dialog-show:checked ~ .sheet-melee-rul
 .sheet-dialog-container::before {
     content: '' !important;
     position: absolute !important;
-    top: 2px !important;
-    left: 2px !important;
-    right: 2px !important;
-    bottom: 2px !important;
+    top: var(--spacing-2) !important;
+    left: var(--spacing-2) !important;
+    right: var(--spacing-2) !important;
+    bottom: var(--spacing-2) !important;
     background-color: #4a5a6a !important;
     z-index: 0 !important;
     -webkit-clip-path: polygon(
-        10px 0%,
-        calc(100% - 10px) 0%,
-        100% 10px,
-        100% calc(100% - 10px),
-        calc(100% - 10px) 100%,
-        10px 100%,
-        0% calc(100% - 10px),
-        0% 10px
+        var(--spacing-10) 0%,
+        calc(100% - var(--spacing-10)) 0%,
+        100% var(--spacing-10),
+        100% calc(100% - var(--spacing-10)),
+        calc(100% - var(--spacing-10)) 100%,
+        var(--spacing-10) 100%,
+        0% calc(100% - var(--spacing-10)),
+        0% var(--spacing-10)
     ) !important;
     clip-path: polygon(
-        10px 0%,
-        calc(100% - 10px) 0%,
-        100% 10px,
-        100% calc(100% - 10px),
-        calc(100% - 10px) 100%,
-        10px 100%,
-        0% calc(100% - 10px),
-        0% 10px
+        var(--spacing-10) 0%,
+        calc(100% - var(--spacing-10)) 0%,
+        100% var(--spacing-10),
+        100% calc(100% - var(--spacing-10)),
+        calc(100% - var(--spacing-10)) 100%,
+        var(--spacing-10) 100%,
+        0% calc(100% - var(--spacing-10)),
+        0% var(--spacing-10)
     ) !important;
 }
 
@@ -1801,53 +1921,53 @@ input[name="attr_show_melee_rules"].sheet-dialog-show:checked ~ .sheet-melee-rul
 /* Dialog Header - shared styling */
 .sheet-dialog-header {
     background-color: #4a5a6a !important;
-    border-bottom: 2px solid #b2854e !important;
-    padding: 11px 15px !important;
+    border-bottom: var(--border-thick) solid #b2854e !important;
+    padding: var(--spacing-11) var(--spacing-md) !important;
     display: flex !important;
     justify-content: space-between !important;
     align-items: center !important;
     border-radius: 0 !important;
     flex-shrink: 0 !important;
     -webkit-clip-path: polygon(
-        11px 0%,
-        calc(100% - 11px) 0%,
-        100% 11px,
+        var(--chamfer-dialog) 0%,
+        calc(100% - var(--chamfer-dialog)) 0%,
+        100% var(--chamfer-dialog),
         100% 100%,
         0% 100%,
-        0% 11px
+        0% var(--chamfer-dialog)
     ) !important;
     clip-path: polygon(
-        11px 0%,
-        calc(100% - 11px) 0%,
-        100% 11px,
+        var(--chamfer-dialog) 0%,
+        calc(100% - var(--chamfer-dialog)) 0%,
+        100% var(--chamfer-dialog),
         100% 100%,
         0% 100%,
-        0% 11px
+        0% var(--chamfer-dialog)
     ) !important;
 }
 
 .sheet-dialog-header h3 {
     margin: 0;
-    font-size: 15px;
+    font-size: 1.071rem; /* 15px / 14px */
     font-weight: bold;
     color: #c8d0d8;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 0.143rem; /* 2px / 14px */
 }
 
 /* Generic Close Button - shared by all dialogs */
 .sheet-dialog-close {
     background-color: #5a6a7a !important;
-    border: 2px solid #6a7a8a !important;
+    border: var(--border-thick) solid #6a7a8a !important;
     color: #c8d0d8 !important;
-    width: 24px !important;
-    height: 24px !important;
+    width: var(--icon-md) !important;
+    height: var(--icon-md) !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     cursor: pointer !important;
     padding: 0 !important;
-    font-size: 18px !important;
+    font-size: 1.286rem !important; /* 18px / 14px */
     line-height: 1 !important;
     font-weight: bold !important;
     border-radius: 0 !important;
@@ -1857,7 +1977,7 @@ input[name="attr_show_melee_rules"].sheet-dialog-show:checked ~ .sheet-melee-rul
 .sheet-dialog-close:hover {
     background-color: #7a8a9a !important;
     border-color: #8a9aaa !important;
-    box-shadow: 0 0 10px rgba(122, 138, 154, 0.6) !important;
+    box-shadow: 0 0 var(--spacing-10) rgba(122, 138, 154, 0.6) !important;
 }
 
 /* Dialog Body - base styles */
@@ -1868,11 +1988,11 @@ input[name="attr_show_melee_rules"].sheet-dialog-show:checked ~ .sheet-melee-rul
 /* Dialog Footer - shared styling */
 .sheet-dialog-footer {
     background-color: #4a5a6a !important;
-    border-top: 2px solid #6a7a8a !important;
-    padding: 14px 15px !important;
+    border-top: var(--border-thick) solid #6a7a8a !important;
+    padding: calc(14px * var(--scale)) var(--spacing-md) !important;
     display: flex !important;
     justify-content: flex-end !important;
-    gap: 10px !important;
+    gap: var(--spacing-10) !important;
     flex-shrink: 0 !important;
 }
 
@@ -1883,14 +2003,14 @@ input[name="attr_show_melee_rules"].sheet-dialog-show:checked ~ .sheet-melee-rul
 
 /* Rules dialog container - wider than standard dialogs */
 .sheet-rules-dialog-container {
-    width: 700px !important;
+    width: var(--dialog-width-lg) !important;
     max-width: 90% !important;
     max-height: 80vh !important;
 }
 
 /* Rules dialog body - scrollable with flex layout */
 .sheet-rules-dialog-body {
-    padding: 20px;
+    padding: var(--spacing-lg);
     overflow-y: auto;
     overflow-x: hidden;
     flex: 1;
@@ -1899,11 +2019,11 @@ input[name="attr_show_melee_rules"].sheet-dialog-show:checked ~ .sheet-melee-rul
 
 .sheet-rules-dialog-body h4 {
     color: #b2854e;
-    font-size: 16px;
+    font-size: 1.143rem; /* 16px / 14px */
     font-weight: bold;
-    margin: 20px 0 10px 0;
-    padding-bottom: 5px;
-    border-bottom: 2px solid #6a7a8a;
+    margin: var(--spacing-lg) 0 var(--spacing-10) 0;
+    padding-bottom: var(--spacing-5);
+    border-bottom: var(--border-thick) solid #6a7a8a;
 }
 
 .sheet-rules-dialog-body h4:first-child {
@@ -1912,23 +2032,23 @@ input[name="attr_show_melee_rules"].sheet-dialog-show:checked ~ .sheet-melee-rul
 
 .sheet-rules-dialog-body h5 {
     color: #8a9aaa;
-    font-size: 14px;
+    font-size: 1rem; /* 14px */
     font-weight: bold;
-    margin: 15px 0 8px 0;
+    margin: var(--spacing-md) 0 var(--spacing-sm) 0;
 }
 
 .sheet-rules-dialog-body ul {
-    margin: 8px 0 15px 20px;
+    margin: var(--spacing-sm) 0 var(--spacing-md) var(--spacing-lg);
     padding: 0;
     color: #c8d0d8;
 }
 
 .sheet-rules-dialog-body li {
-    margin-bottom: 5px;
+    margin-bottom: var(--spacing-5);
     line-height: 1.4;
 }
 
 .sheet-rules-dialog-body p {
-    margin: 10px 0;
+    margin: var(--spacing-10) 0;
     line-height: 1.4;
 }

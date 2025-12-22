@@ -148,7 +148,16 @@
 
                 <div class="sheet-field-group">
                     <label>RANK</label>
-                    <input type="text" name="attr_rank" />
+                    <select name="attr_rank" class="sheet-crit-location-select">
+                        <option value="GRN" selected>Green (0–3000 xp)</option>
+                        <option value="REG">Regular (3001–15,000 xp)</option>
+                        <option value="VET">Veteran (15,001–100,000 xp)</option>
+                        <option value="EL1">Elite 1 (100,000+ xp)</option>
+                        <option value="EL2">Elite 2 (200,000+ xp)</option>
+                        <option value="EL3">Elite 3 (300,000+ xp)</option>
+                        <option value="EL4">Elite 4 (400,000+ xp)</option>
+                        <option value="EL5">Elite 5 (500,000+ xp)</option>
+                    </select>
                 </div>
 
                 <div class="sheet-horizontal-divider"></div>
@@ -1981,7 +1990,7 @@
         console.log('openAttributeDialog called for attribute:', attrName);
         getAttrs([attrName + '_save'], function(values) {
             var target = parseInt(values[attrName + '_save']) || 10;
-            var displayName = attrName.toUpperCase() + ' Save';
+            var displayName = attrName.toUpperCase();
 
             console.log('Setting attribute dialog attributes:', {
                 pending_attr_name: displayName,

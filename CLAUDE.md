@@ -170,11 +170,13 @@ A character sheet **requires four files minimum** in an appropriately named subf
    - See: https://wiki.roll20.net/CSS_Wizardry
    - **IMPORTANT**: Always check Roll20's default stylesheet (`base.css`) when styling components
      - Roll20 applies default styles to common elements (buttons, inputs, selects, etc.)
-     - Common issues include:
-       - `button[type="roll"]` has `justify-content: center` by default
+     - **CRITICAL**: Common issues that require explicit overrides:
+       - `input, textarea, select, .uneditable-input` have `width: 210px` by default
        - `input, textarea, select` have `margin-bottom: 9px` by default
-       - Default styles may conflict with your design - override them explicitly
-     - When UI doesn't behave as expected, check if Roll20's defaults are interfering
+       - `button[type="roll"]` has `justify-content: center` by default
+       - Use `!important` when necessary to override Roll20's defaults
+     - When UI doesn't behave as expected (overflow, wrong widths, unexpected spacing), check if Roll20's base.css is interfering
+     - **Roll Templates**: CSS variables (custom properties) don't work in roll templates because they're rendered in chat outside the character sheet scope. Always use hardcoded values for roll template styling.
 
 3. **`preview.(jpg|png|gif)`** - Preview image shown before sheet selection
 
