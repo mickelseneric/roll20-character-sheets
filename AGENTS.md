@@ -1,10 +1,14 @@
-# CLAUDE.md
+# AGENTS.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to Claude Code (claude.ai/code) and other coding agents when working with code in this repository.
 
 ## Repository Overview
 
-This is the **Roll20 Character Sheets** repository - a community-contributed collection of 800+ character sheets for tabletop RPGs used on Roll20.net. Each sheet is in its own directory and consists of HTML, CSS, preview images, and metadata files.
+This is the **Roll20 Character Sheets** repository – a community-contributed collection of 800+ character sheets for tabletop RPGs used on Roll20.net. Each sheet is in its own directory and consists of HTML, CSS, preview images, and metadata files.
+
+## Project Focus
+
+This repository was forked from the original Roll20 Character Sheets repository to build the MechWarrior 1e Character Sheet. All development should only happen in the `MechWarrior_1e` directory. Any pull requests or issues should be directed there.
 
 ## Repository Structure
 
@@ -48,108 +52,6 @@ Optional but important fields:
 - `"version": "1234567890"` - Unix timestamp for versioning
 - `"patreon": "https://..."` - Author's Patreon link
 
-## Development Workflow
-
-### Making Changes to Existing Sheets
-1. Changes should only affect **one sheet directory** per PR
-2. Read the sheet's existing files before making modifications
-3. Check for existing README/changelog in the sheet directory
-4. Never modify `translations/*.json` files directly (managed via Crowdin)
-5. `translation.json` in the root of a sheet folder is allowed
-
-### Creating New Sheets
-Minimum required files:
-1. `<sheetname>.html`
-2. `<sheetname>.css`
-3. `preview.(jpg|png|gif)`
-4. `sheet.json` with all required fields
-
-### Version Bumping
-When updating a sheet for release, bump the version in `sheet.json`:
-```bash
-cd SheetDirectory/
-cat sheet.json | jq ". += {\"version\":\"$(date +%s)\"}" | tee sheet.json
-```
-Requires `jq` to be installed.
-
-## Testing and Validation
-
-### Automated Checks
-Pull requests automatically run validation via `.actions/sheet-checks/`:
-- HTML validation
-- CSS validation
-- Line ending checks (LF required)
-- `sheet.json` schema validation
-- Translation file validation
-- CODEOWNERS validation
-
-### Running Checks Locally
-```bash
-# Install dependencies
-cd .actions/sheet-checks
-npm install
-
-# Build the action
-npm run build
-
-# Run tests
-npm test
-```
-
-### Test Requirements
-The `.actions/sheet-checks/` tool uses:
-- TypeScript
-- Vitest for testing
-- `@vercel/ncc` for bundling
-- Must run `npm run build` after changes to `src/index.ts`
-
-## Deployment Process
-
-### Release Cadence
-- PRs reviewed **weekly minimum** (Thursdays 00:00 UTC)
-- Often reviewed more frequently
-- Changes appear on Roll20.net within ~10 minutes after merge
-- Report issues if changes don't appear within 24 hours
-
-### Supported Branches
-CircleCI only deploys from:
-- `master` (main production branch)
-- `staging`
-
-### How Deployment Works
-1. CircleCI detects changed sheet directories via git diff
-2. Triggers update to Roll20's sheet service
-3. Sheet becomes available on Roll20.net automatically
-
-## Contribution Guidelines
-
-### Pull Request Requirements
-1. PR title format: `[Sheet Name] Change Type: Description`
-   - Example: `[D&D 5e] Bugfix: Fixed initiative calculation`
-2. Only modify files in **one sheet directory**
-3. Never include publisher IP without permission (logos, rules text, etc.)
-4. Get approval from original sheet authors for major changes
-5. Official publisher sheets require confirmation from licensing@roll20.net
-
-### Code Standards
-- Use LF line endings (not CRLF)
-- Follow existing patterns in the sheet you're modifying
-- Character sheets use Roll20-specific HTML attributes and roll templates
-- See https://wiki.roll20.net/Building_Character_Sheets for detailed documentation
-
-### Internationalization
-- **Never submit translations via PR** - use Crowdin instead
-- Translation submissions outside Crowdin will be rejected/overwritten
-- See https://wiki.roll20.net/Character_Sheet_i18n
-- How to become a translation volunteer: https://roll20.zendesk.com/hc/en-us/articles/360058423993
-- How to translate on Crowdin: https://roll20.zendesk.com/hc/en-us/articles/360057432414
-
-### Submission Requirements
-All contributions must meet minimum requirements:
-- See: https://help.roll20.net/hc/en-us/articles/360037773453
-- For large overhauls, request approval from original sheet authors first
-- **Official publisher sheets**: Publisher must email licensing@roll20.net to confirm authorization BEFORE submitting PR
-
 ## Building Character Sheets: Technical Details
 
 > **📚 Complete Documentation Available**: The entire Roll20 wiki for character sheet development has been saved locally to `docs/Roll20 Wiki/`. When building character sheets, read these files directly rather than trying to access external wikis.
@@ -185,7 +87,7 @@ A character sheet **requires four files minimum** in an appropriately named subf
 
 ### Essential Roll20 Concepts & Local Documentation
 
-**IMPORTANT**: Complete Roll20 wiki documentation is available locally in `docs/Roll20 Wiki/`.
+**IMPORTANT**: Complete Roll20 wiki documentation is available locally in `MechWarrior 1e/docs/Roll20 Wiki/`.
 
 #### Core Documentation Files
 Read these files in order when learning to build sheets:
@@ -199,6 +101,10 @@ Read these files in order when learning to build sheets:
 7. **`Sheet.json - Roll20 Wiki.html`** - Metadata file format
 8. **`Building Character Sheets_Auto-Calc - Roll20 Wiki.html`** - Auto-calculations
 9. **`CSS Wizardry - Roll20 Wiki.html`** - Advanced CSS techniques
+10. **`Complete Guide to Macros & Rolls - Roll20 Wiki.html`** - Comprehensive Guid for Text Chat, Dice Rolling and Macros
+11. **`Roll Templates - Roll20 Wiki.html`** - Displaying roll results
+12. **`Inline Rolls - Roll20 Wiki.html`** - Dice roll macros for Roll Templates
+13. **`Custom Roll Parsing - Roll20 Wiki.html`** - Combine the functionality of roll buttons and action buttons
 
 #### Tutorial: A Sheet Author's Journey
 Step-by-step tutorial in `docs/Roll20 Wiki/A Sheet Author's Journey/`:
@@ -377,14 +283,6 @@ CSS controls visibility:
 .sheet-tab-inventory:checked ~ .sheet-inventory { display: block; }
 ```
 
-## Important Notes
-
-- This is a **community project** - most sheets are volunteer work
-- Sheets must work for all Roll20 subscription levels (free, Plus, Pro)
-- The repository contains 400,000+ lines of code from 300+ contributors
-- Some sheets have complex build processes with `package.json`, `Makefile`, or custom scripts
-- Check individual sheet directories for sheet-specific READMEs or build instructions
-
 ## Current Project: MechWarrior 1e Character Sheet
 
 ### Project Overview
@@ -412,8 +310,8 @@ Developing an **interactive** character sheet for MechWarrior 1st Edition in the
 
 ### Reference Materials
 
-1. **Documentation**: `docs/Roll20 Wiki/`
-   - **COMPLETE Roll20 wiki saved locally** - All character sheet development guides
+1. **Documentation**: `MechWarrior 1e/docs/Roll20 Wiki/`
+   - **COMPLETE Roll20 wiki saved locally** – All character sheet development guides
    - See "Essential Roll20 Concepts & Local Documentation" section above for index
    - **A Sheet Author's Journey tutorial**: `docs/Roll20 Wiki/A Sheet Author's Journey/`
      - Step-by-step tutorial files `1.html` through `6.html`
@@ -470,10 +368,8 @@ MechWarrior 1e/
 └── translation.json             # (Optional) i18n support
 ```
 
-## Getting Help
+### MechWarrior 1e Rules References
+The following files are found in `MechWarrior 1e/docs` directory and contain MechWarrior 1e rules and should be referenced when adding or updating features in the Character Sheet.
+- **CHARACTER_CREATION_RULES_REFERENCE.md**: `MechWarrior 1e/docs/Roll20 Wiki/MechWarrior 1e Core Rules/`
+- **RULES_REFERENCE.md**: `MechWarrior 1e/docs/Roll20 Wiki/MechWarrior 1e Skills Rules/`
 
-- Report issues: https://github.com/Roll20/roll20-character-sheets/issues
-- Wiki documentation: https://wiki.roll20.net/Building_Character_Sheets
-- Roll20 Help Center: https://help.roll20.net/hc/en-us/articles/360037773413
-- Community forum: https://app.roll20.net/forum/
-- For urgent issues: https://roll20.net/help
