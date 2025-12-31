@@ -295,6 +295,7 @@ Developing an **interactive** character sheet for MechWarrior 1st Edition in the
   - Auto-calculation of derived statistics
   - Sheet workers for reactive updates
   - Modern, clean visual design
+- **No Preview Syncing**: **DEPRECATED**. DO NOT keep `MW1e_preview.html` in sync with `MechWarrior_1e.html`. The preview file and `sync-sheet.js` are no longer supported.
 
 ### Sheet Worker Implementation
 
@@ -349,12 +350,16 @@ Based on MechWarrior 1e mechanics, the sheet should support:
 
 ### Technical Patterns to Use
 From the reference sheets:
-- **Roll buttons**: Use `<button type="roll">` with inline roll templates
-- **Auto-calculations**: Use `disabled="true"` inputs with `value="@{attr1}+@{attr2}"`
-- **Sheet workers**: JavaScript in `<script type="text/worker">` for complex logic
+- **Roll buttons**: Use `<button type="roll">` with inline roll templates.
+- **Auto-calculations**: Use `disabled="true"` inputs with `value="@{attr1}+@{attr2}"`.
+- **Sheet workers**: JavaScript in `<script type="text/worker">` for complex logic.
 - **Repeating sections**: For inventory, skills, weapons, etc.
-- **Roll templates**: Custom `<rolltemplate>` definitions for chat output
-- **Tabs/sections**: Use CSS-based tabs for organizing large sheets
+- **Roll templates**: Custom `<rolltemplate>` definitions for chat output.
+- **Tabs/sections**: Use CSS-based tabs for organizing large sheets.
+- **Target Mods (Consistent Sign)**: All rolls use `Adjusted Target = Base Target + Target Mods`. Positive inputs are penalties (e.g., Range +2), negative inputs are bonuses (e.g., Stationary -1).
+- **XP Die Roll Modifiers**: Added to the 2D6 roll result.
+- **Hover Breakdown**: Roll results in chat show the final total, but mouse hover reveals the breakdown (e.g., `[Base] + [XP Mod]`).
+- **Pathfinder-Style Hover**: Use labels like `[Base]`, `[Target Mod]`, and `[XP Mod]` inside inline rolls to provide detailed tooltips.
 
 ### File Structure Required
 ```

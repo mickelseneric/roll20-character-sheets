@@ -29,13 +29,24 @@
                     <input type="number" name="attr_pending_base_target" readonly class="sheet-dialog-readonly" />
                 </div>
                 <div class="sheet-dialog-field-row">
-                    <span class="sheet-dialog-label">MODIFIERS:</span>
-                    <input type="number" name="attr_attack_situational_modifier" value="0" />
+                    <span class="sheet-dialog-label">TARGET MODS:</span>
+                    <input type="number" name="attr_attack_target_mods" value="0" placeholder="Penalty +, Bonus -" />
+                </div>
+                <div class="sheet-dialog-field-row">
+                    <span class="sheet-dialog-label">XP DIE ROLL MOD:</span>
+                    <select name="attr_attack_xp_die_modifier">
+                        <option value="0" selected>0</option>
+                        <option value="1" data-xp-cost="50">1 - XP Cost: 50</option>
+                        <option value="2" data-xp-cost="100">2 - XP Cost: 100</option>
+                        <option value="3" data-xp-cost="150">3 - XP Cost: 150</option>
+                        <option value="4" data-xp-cost="200">4 - XP Cost: 200</option>
+                        <option value="5" data-xp-cost="250">5 - XP Cost: 250</option>
+                    </select>
                 </div>
             </div>
             <div class="sheet-dialog-footer">
                 <button type="roll" name="roll_attack_from_dialog"
-                        value="&{template:mw1e-weapon} {{name=@{character_name}}} {{weapon=@{pending_weapon_name}}} {{weapon_skill=@{pending_weapon_skill}}} {{base_target=@{pending_base_target}}} {{situational=@{attack_situational_modifier}}} {{adjusted_target=[[@{pending_base_target} + @{attack_situational_modifier}]]}} {{roll=[[2d6]]}}"
+                        value="&{template:mw1e-weapon} {{name=@{character_name}}} {{weapon=@{pending_weapon_name}}} {{weapon_skill=@{pending_weapon_skill}}} {{base_target=@{pending_base_target}}} {{target_mods=@{attack_target_mods}}} {{adjusted_target=[[@{pending_base_target}[Base] + @{attack_target_mods}[Target Mod] ]]}} {{roll=[[ [[2d6]][Base] + [[@{attack_xp_die_modifier}]][XP Mod] ]]}}"
                         class="sheet-dialog-submit">
                     Roll Attack
                 </button>
@@ -69,11 +80,11 @@
                     <input type="number" name="attr_pending_skill_target" readonly class="sheet-dialog-readonly" />
                 </div>
                 <div class="sheet-dialog-field-row">
-                    <span class="sheet-dialog-label">MODIFIERS:</span>
-                    <input type="number" name="attr_skill_situational_modifier" value="0" />
+                    <span class="sheet-dialog-label">TARGET MODS:</span>
+                    <input type="number" name="attr_skill_target_mods" value="0" placeholder="Penalty +, Bonus -" />
                 </div>
                 <div class="sheet-dialog-field-row">
-                    <span class="sheet-dialog-label">XP DIE ROLL MODS:</span>
+                    <span class="sheet-dialog-label">XP DIE ROLL MOD:</span>
                     <select name="attr_skill_xp_die_modifier">
                         <option value="0" selected>0</option>
                         <option value="1" data-xp-cost="50">1 - XP Cost: 50</option>
@@ -86,7 +97,7 @@
             </div>
             <div class="sheet-dialog-footer">
                 <button type="roll" name="roll_skill_from_dialog"
-                        value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=@{pending_skill_name}}} {{base_target=@{pending_skill_target}}} {{situational=@{skill_situational_modifier}}} {{adjusted_target=[[@{pending_skill_target} - @{skill_situational_modifier}]]}} {{roll=[[2d6 + @{skill_situational_modifier} + @{skill_xp_die_modifier}]]}} {{xp_mod=@{skill_xp_die_modifier}}}"
+                        value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=@{pending_skill_name}}} {{base_target=@{pending_skill_target}}} {{target_mods=@{skill_target_mods}}} {{adjusted_target=[[@{pending_skill_target}[Base] + @{skill_target_mods}[Target Mod] ]]}} {{roll=[[ [[2d6]][Base] + [[@{skill_xp_die_modifier}]][XP Mod] ]]}}"
                         class="sheet-dialog-submit" id="skill-dialog-button">
                     Roll Skill
                 </button>
@@ -118,12 +129,12 @@
                     <input type="number" name="attr_pending_attr_target" readonly class="sheet-dialog-readonly" />
                 </div>
                 <div class="sheet-dialog-field-row">
-                    <span class="sheet-dialog-label">MODIFIERS:</span>
-                    <input type="number" name="attr_attr_situational_modifier" value="0" />
+                    <span class="sheet-dialog-label">TARGET MODS:</span>
+                    <input type="number" name="attr_attribute_target_mods" value="0" placeholder="Penalty +, Bonus -" />
                 </div>
                 <div class="sheet-dialog-field-row">
-                    <span class="sheet-dialog-label">XP DIE ROLL MODS:</span>
-                    <select name="attr_attr_xp_die_modifier">
+                    <span class="sheet-dialog-label">XP DIE ROLL MOD:</span>
+                    <select name="attr_attribute_xp_die_modifier">
                         <option value="0" selected>0</option>
                         <option value="1" data-xp-cost="50">1 - XP Cost: 50</option>
                         <option value="2" data-xp-cost="100">2 - XP Cost: 100</option>
@@ -135,7 +146,7 @@
             </div>
             <div class="sheet-dialog-footer">
                 <button type="roll" name="roll_attr_from_dialog"
-                        value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=@{pending_attr_name}}} {{base_target=@{pending_attr_target}}} {{situational=@{attr_situational_modifier}}} {{adjusted_target=[[@{pending_attr_target} - @{attr_situational_modifier}]]}} {{roll=[[2d6 + @{attr_situational_modifier} + @{attr_xp_die_modifier}]]}} {{xp_mod=@{attr_xp_die_modifier}}}"
+                        value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=@{pending_attr_name}}} {{base_target=@{pending_attr_target}}} {{target_mods=@{attribute_target_mods}}} {{adjusted_target=[[@{pending_attr_target}[Base] + @{attribute_target_mods}[Target Mod] ]]}} {{roll=[[ [[2d6]][Base] + [[@{attribute_xp_die_modifier}]][XP Mod] ]]}}"
                         class="sheet-dialog-submit">
                     Roll Attribute
                 </button>
@@ -837,40 +848,29 @@
                 <span class="sheet-template-label">Base Target:</span>
                 <span class="sheet-template-value">{{base_target}}</span>
             </div>
-            {{#situational}}
+            {{#target_mods}}
             <div class="sheet-template-row">
-                <span class="sheet-template-label">Modifiers:</span>
-                <span class="sheet-template-value">{{situational}}</span>
+                <span class="sheet-template-label">Target Mods:</span>
+                <span class="sheet-template-value">{{target_mods}}</span>
             </div>
-            {{/situational}}
-            <div class="sheet-template-row sheet-template-adjusted">
+            {{/target_mods}}
+            <div class="sheet-template-row">
                 <span class="sheet-template-label">Adjusted Target:</span>
-                <span class="sheet-template-value">{{adjusted_target}}</span>
+                <span class="sheet-template-value">**{{adjusted_target}}**</span>
             </div>
-            {{#rollGreater() xp_mod 0}}
-                <div class="sheet-template-row sheet-template-roll">
-                    <span class="sheet-template-label">Roll (2D6) + XP Mod:</span>
-                    <span class="sheet-template-value">{{roll}} (includes +{{xp_mod}} XP)</span>
-                </div>
-                {{#rollGreater() roll adjusted_target}}
-                    <div class="sheet-template-result sheet-template-failure">✗ FAILED</div>
-                {{/rollGreater() roll adjusted_target}}
-                {{^rollGreater() roll adjusted_target}}
-                    <div class="sheet-template-result sheet-template-success">✓ SUCCESS</div>
-                {{/rollGreater() roll adjusted_target}}
-            {{/rollGreater() xp_mod 0}}
-            {{^rollGreater() xp_mod 0}}
-                <div class="sheet-template-row sheet-template-roll">
-                    <span class="sheet-template-label">Roll (2D6):</span>
-                    <span class="sheet-template-value">{{roll}}</span>
-                </div>
-                {{#rollGreater() roll adjusted_target}}
-                    <div class="sheet-template-result sheet-template-failure">✗ FAILED</div>
-                {{/rollGreater() roll adjusted_target}}
-                {{^rollGreater() roll adjusted_target}}
-                    <div class="sheet-template-result sheet-template-success">✓ SUCCESS</div>
-                {{/rollGreater() roll adjusted_target}}
-            {{/rollGreater() xp_mod 0}}
+            <div class="sheet-template-row sheet-template-roll">
+                <span class="sheet-template-label">Roll (2D6):</span>
+                <span class="sheet-template-value">**{{roll}}**</span>
+            </div>
+            {{#rollGreater() roll adjusted_target}}
+                <div class="sheet-template-result sheet-template-success">✓ SUCCESS</div>
+            {{/rollGreater() roll adjusted_target}}
+            {{#rollTotal() roll adjusted_target}}
+                <div class="sheet-template-result sheet-template-success">✓ SUCCESS</div>
+            {{/rollTotal() roll adjusted_target}}
+            {{#rollLess() roll adjusted_target}}
+                <div class="sheet-template-result sheet-template-failure">✗ FAILED</div>
+            {{/rollLess() roll adjusted_target}}
         </div>
     </div>
 </rolltemplate>
@@ -890,33 +890,28 @@
                 <span class="sheet-template-label">Base Target:</span>
                 <span class="sheet-template-value">{{base_target}}</span>
             </div>
-            {{#situational}}
+            {{#target_mods}}
             <div class="sheet-template-row">
-                <span class="sheet-template-label">Modifiers:</span>
-                <span class="sheet-template-value">{{situational}}</span>
+                <span class="sheet-template-label">Target Mods:</span>
+                <span class="sheet-template-value">{{target_mods}}</span>
             </div>
-            {{/situational}}
-            <div class="sheet-template-row sheet-template-adjusted">
+            {{/target_mods}}
+            <div class="sheet-template-row">
                 <span class="sheet-template-label">Adjusted Target:</span>
-                <span class="sheet-template-value">{{adjusted_target}}</span>
+                <span class="sheet-template-value">**{{adjusted_target}}**</span>
             </div>
-            {{#rollLess() roll adjusted_target}}
-            <div class="sheet-attack-result-failure">
-                <div class="sheet-template-row sheet-template-roll">
-                    <span class="sheet-template-label">Attack Roll (2D6):</span>
-                    <span class="sheet-template-value">{{roll}}</span>
-                </div>
-                <div class="sheet-template-result sheet-template-failure">✗ MISS</div>
+            <div class="sheet-template-row sheet-template-roll">
+                <span class="sheet-template-label">Attack Roll (2D6):</span>
+                <span class="sheet-template-value">**{{roll}}**</span>
             </div>
-            {{/rollLess() roll adjusted_target}}
-            {{^rollLess() roll adjusted_target}}
-            <div class="sheet-attack-result-success">
-                <div class="sheet-template-row sheet-template-roll">
-                    <span class="sheet-template-label">Attack Roll (2D6):</span>
-                    <span class="sheet-template-value">{{roll}}</span>
-                </div>
+            {{#rollGreater() roll adjusted_target}}
                 <div class="sheet-template-result sheet-template-success">✓ HIT</div>
-            </div>
+            {{/rollGreater() roll adjusted_target}}
+            {{#rollTotal() roll adjusted_target}}
+                <div class="sheet-template-result sheet-template-success">✓ HIT</div>
+            {{/rollTotal() roll adjusted_target}}
+            {{#rollLess() roll adjusted_target}}
+                <div class="sheet-template-result sheet-template-failure">✗ MISS</div>
             {{/rollLess() roll adjusted_target}}
         </div>
     </div>
@@ -931,7 +926,7 @@
         <div class="sheet-template-body">
             <div class="sheet-template-row sheet-template-damage">
                 <span class="sheet-template-label">Damage:</span>
-                <span class="sheet-template-value">{{damage}}</span>
+                <span class="sheet-template-value">**{{damage}}**</span>
             </div>
         </div>
     </div>
@@ -946,7 +941,7 @@
         <div class="sheet-template-body">
             <div class="sheet-template-row">
                 <span class="sheet-template-label">Roll:</span>
-                <span class="sheet-template-value">{{die1}} | {{die2}}</span>
+                <span class="sheet-template-value">**{{die1}} | {{die2}}**</span>
             </div>
             <div class="sheet-template-row sheet-template-hit-location">
                 <span class="sheet-template-label">Location:</span>
@@ -1018,7 +1013,7 @@
             </div>
             <div class="sheet-template-row">
                 <span class="sheet-template-label">Roll (1D6):</span>
-                <span class="sheet-template-value">{{roll}}</span>
+                <span class="sheet-template-value">**{{roll}}**</span>
             </div>
             <div class="sheet-template-row">
                 <span class="sheet-template-label">Critical Hit:</span>
@@ -1148,11 +1143,11 @@
             <button type="action" name="act_close_ranged_rules" class="sheet-dialog-close">×</button>
         </div>
         <div class="sheet-dialog-body sheet-rules-dialog-body">
-            <h4>Range Modifiers</h4>
+            <h4>Range Target Mods</h4>
             <table class="sheet-rules-table">
                 <thead>
                     <tr>
-                        <th>Modifier</th>
+                        <th>Target Mod</th>
                         <th>Range Category</th>
                     </tr>
                 </thead>
@@ -1167,7 +1162,7 @@
             <table class="sheet-rules-table">
                 <thead>
                     <tr>
-                        <th>Modifier</th>
+                        <th>Target Mod</th>
                         <th>Action/Condition</th>
                     </tr>
                 </thead>
@@ -1188,7 +1183,7 @@
             <table class="sheet-rules-table">
                 <thead>
                     <tr>
-                        <th>Modifier</th>
+                        <th>Target Mod</th>
                         <th>Action/Condition</th>
                     </tr>
                 </thead>
@@ -1202,11 +1197,11 @@
                 </tbody>
             </table>
 
-            <h4>Attacker Fire Modifiers</h4>
+            <h4>Attacker Fire Target Mods</h4>
             <table class="sheet-rules-table">
                 <thead>
                     <tr>
-                        <th>Modifier</th>
+                        <th>Target Mod</th>
                         <th>Condition</th>
                     </tr>
                 </thead>
@@ -1224,11 +1219,11 @@
                 </tbody>
             </table>
 
-            <h4>Special Modifiers</h4>
+            <h4>Special Target Mods</h4>
             <table class="sheet-rules-table">
                 <thead>
                     <tr>
-                        <th>Modifier</th>
+                        <th>Target Mod</th>
                         <th>Condition</th>
                     </tr>
                 </thead>
@@ -1278,11 +1273,11 @@
             <button type="action" name="act_close_melee_rules" class="sheet-dialog-close">×</button>
         </div>
         <div class="sheet-dialog-body sheet-rules-dialog-body">
-            <h4>Target Modifiers</h4>
+            <h4>Target Mods</h4>
             <table class="sheet-rules-table">
                 <thead>
                     <tr>
-                        <th>Modifier</th>
+                        <th>Target Mod</th>
                         <th>Condition</th>
                     </tr>
                 </thead>
@@ -1298,11 +1293,11 @@
                 </tbody>
             </table>
 
-            <h4>Attacker Modifiers</h4>
+            <h4>Attacker Target Mods</h4>
             <table class="sheet-rules-table">
                 <thead>
                     <tr>
-                        <th>Modifier</th>
+                        <th>Target Mod</th>
                         <th>Condition</th>
                     </tr>
                 </thead>
@@ -1402,33 +1397,19 @@
                 <span class="sheet-template-label">Saving Target:</span>
                 <span class="sheet-template-value">{{target}}</span>
             </div>
-            {{#rollLess() roll target}}
-            <div class="sheet-consciousness-result-failure">
-                <div class="sheet-template-row sheet-template-roll">
-                    <span class="sheet-template-label">Roll (2D6):</span>
-                    <span class="sheet-template-value">{{roll}}</span>
-                </div>
-                <div class="sheet-template-result sheet-template-failure">✗ FAILED - Character falls unconscious</div>
+            <div class="sheet-template-row sheet-template-roll">
+                <span class="sheet-template-label">Roll (2D6):</span>
+                <span class="sheet-template-value">**{{roll}}**</span>
             </div>
-            {{/rollLess() roll target}}
             {{#rollGreater() roll target}}
-            <div class="sheet-consciousness-result-success">
-                <div class="sheet-template-row sheet-template-roll">
-                    <span class="sheet-template-label">Roll (2D6):</span>
-                    <span class="sheet-template-value">{{roll}}</span>
-                </div>
-                <div class="sheet-template-result sheet-template-success">✓ SUCCESS - Character remains conscious</div>
-            </div>
+                <div class="sheet-template-result sheet-template-success">✓ SUCCESS</div>
             {{/rollGreater() roll target}}
-            {{#rollBetween() roll target target}}
-            <div class="sheet-consciousness-result-success">
-                <div class="sheet-template-row sheet-template-roll">
-                    <span class="sheet-template-label">Roll (2D6):</span>
-                    <span class="sheet-template-value">{{roll}}</span>
-                </div>
-                <div class="sheet-template-result sheet-template-success">✓ SUCCESS - Character remains conscious</div>
-            </div>
-            {{/rollBetween() roll target target}}
+            {{#rollTotal() roll target}}
+                <div class="sheet-template-result sheet-template-success">✓ SUCCESS</div>
+            {{/rollTotal() roll target}}
+            {{#rollLess() roll target}}
+                <div class="sheet-template-result sheet-template-failure">✗ FAILED</div>
+            {{/rollLess() roll target}}
         </div>
     </div>
 </rolltemplate>
@@ -1621,8 +1602,14 @@
         // Initialize XP modifiers to 0
         setAttrs({
             skill_xp_die_modifier: 0,
-            attr_xp_die_modifier: 0
-        });
+            attribute_xp_die_modifier: 0,
+            attack_xp_die_modifier: 0
+        }, {silent: true});
+    });
+
+    // Logging for XP die modifiers
+    on('change:skill_xp_die_modifier change:attribute_xp_die_modifier change:attack_xp_die_modifier', function(eventInfo) {
+        console.log('XP Die Modifier changed:', eventInfo.sourceAttribute, 'to', eventInfo.newValue);
     });
 
     // =================================================================
@@ -1853,22 +1840,18 @@
             var weaponSkill = values['weapon' + weaponNum + '_skill'] || 'Unknown';
             var baseTarget = parseInt(values['weapon' + weaponNum + '_target']) || 10;
 
-            console.log('Setting dialog attributes:', {
-                show_attack_dialog: 1,
-                pending_weapon_name: weaponName,
-                pending_weapon_skill: weaponSkill,
-                pending_base_target: baseTarget,
-                attack_situational_modifier: 0
-            });
-
             setAttrs({
                 show_attack_dialog: 1,
                 pending_weapon_name: weaponName,
                 pending_weapon_skill: weaponSkill,
                 pending_base_target: baseTarget,
-                attack_situational_modifier: 0
+                attack_target_mods: 0,
+                attack_xp_die_modifier: 0
             }, {}, function() {
-                console.log('Dialog attributes set successfully');
+                console.log('Attack dialog opened. Reset attack_target_mods and attack_xp_die_modifier to 0');
+                getAttrs(['attack_target_mods', 'attack_xp_die_modifier'], function(v) {
+                    console.log('Verified Dialog State - Target Mods:', v.attack_target_mods, 'XP Mod:', v.attack_xp_die_modifier);
+                });
             });
         });
     }
@@ -1904,7 +1887,8 @@
         console.log('Close/cancel dialog button clicked');
         setAttrs({
             show_attack_dialog: 0,
-            attack_situational_modifier: 0
+            attack_target_mods: 0,
+            attack_xp_die_modifier: 0
         }, {}, function() {
             console.log('Dialog closed successfully');
         });
@@ -1999,20 +1983,20 @@
             var target = parseInt(values[skillName + '_mod']) || 10;
             var displayName = SKILL_DISPLAY_NAMES[skillName] || skillName;
 
-            console.log('Setting skill dialog attributes:', {
-                pending_skill_name: displayName,
-                pending_skill_target: target,
-                pending_roll_type: 'skill'
-            });
+            console.log('Skill ' + displayName + ' current target: ' + target);
 
             setAttrs({
                 show_skill_dialog: 1,
                 pending_skill_name: displayName,
                 pending_skill_target: target,
                 pending_roll_type: 'skill',
-                skill_situational_modifier: 0
+                skill_target_mods: 0,
+                skill_xp_die_modifier: 0
             }, {}, function() {
-                console.log('Skill dialog opened successfully');
+                console.log('Skill dialog opened. Reset skill_target_mods and skill_xp_die_modifier to 0');
+                getAttrs(['skill_target_mods', 'skill_xp_die_modifier'], function(v) {
+                    console.log('Verified Dialog State - Target Mods:', v.skill_target_mods, 'XP Mod:', v.skill_xp_die_modifier);
+                });
             });
         });
     }
@@ -2024,18 +2008,19 @@
             var target = parseInt(values[attrName + '_save']) || 10;
             var displayName = attrName.toUpperCase();
 
-            console.log('Setting attribute dialog attributes:', {
-                pending_attr_name: displayName,
-                pending_attr_target: target
-            });
+            console.log('Attribute ' + displayName + ' current save target: ' + target);
 
             setAttrs({
                 show_attr_dialog: 1,
                 pending_attr_name: displayName,
                 pending_attr_target: target,
-                attr_situational_modifier: 0
+                attribute_target_mods: 0,
+                attribute_xp_die_modifier: 0
             }, {}, function() {
-                console.log('Attribute dialog opened successfully');
+                console.log('Attribute dialog opened. Reset attribute_target_mods and attribute_xp_die_modifier to 0');
+                getAttrs(['attribute_target_mods', 'attribute_xp_die_modifier'], function(v) {
+                    console.log('Verified Dialog State - Target Mods:', v.attribute_target_mods, 'XP Mod:', v.attribute_xp_die_modifier);
+                });
             });
         });
     }
@@ -2110,7 +2095,7 @@
         console.log('Close/cancel skill dialog button clicked');
         setAttrs({
             show_skill_dialog: 0,
-            skill_situational_modifier: 0,
+            skill_target_mods: 0,
             skill_xp_die_modifier: 0
         }, {}, function() {
             console.log('Skill dialog closed successfully');
@@ -2122,8 +2107,8 @@
         console.log('Close/cancel attribute dialog button clicked');
         setAttrs({
             show_attr_dialog: 0,
-            attr_situational_modifier: 0,
-            attr_xp_die_modifier: 0
+            attribute_target_mods: 0,
+            attribute_xp_die_modifier: 0
         }, {}, function() {
             console.log('Attribute dialog closed successfully');
         });

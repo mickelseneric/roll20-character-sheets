@@ -1504,7 +1504,7 @@ input[name="attr_show_attack_dialog"].sheet-dialog-show:checked ~ .sheet-attack-
     max-width: 100% !important; /* Constrain to container width */
 }
 
-/* Editable field row (situational modifier) */
+/* Editable field row (modifier) */
 .sheet-dialog-field-row {
     display: flex;
     align-items: center;
