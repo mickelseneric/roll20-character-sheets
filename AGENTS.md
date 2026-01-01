@@ -356,10 +356,25 @@ From the reference sheets:
 - **Repeating sections**: For inventory, skills, weapons, etc.
 - **Roll templates**: Custom `<rolltemplate>` definitions for chat output.
 - **Tabs/sections**: Use CSS-based tabs for organizing large sheets.
+- **Unified Dialog System**: All interactive dialogs (Skill, Attribute, Attack, Rules) share a common structure:
+  - `sheet-dialog-container`: Main wrapper with angled borders and background.
+  - `sheet-dialog-header`: Styled header with top chamfers and close button.
+  - `sheet-dialog-body`: Padding and content area (scrollable in `sheet-dialog-container-lg`).
+  - `sheet-dialog-footer`: Styled footer with bottom chamfers and action buttons.
 - **Target Mods (Consistent Sign)**: All rolls use `Adjusted Target = Base Target + Target Mods`. Positive inputs are penalties (e.g., Range +2), negative inputs are bonuses (e.g., Stationary -1).
 - **XP Die Roll Modifiers**: Added to the 2D6 roll result.
 - **Hover Breakdown**: Roll results in chat show the final total, but mouse hover reveals the breakdown (e.g., `[Base] + [XP Mod]`).
 - **Pathfinder-Style Hover**: Use labels like `[Base]`, `[Target Mod]`, and `[XP Mod]` inside inline rolls to provide detailed tooltips.
+
+### Development Workflow
+
+1. **Production File**: Edit `MechWarrior_1e.html` (the main production file) directly.
+2. **Testing**: Test changes in the **Roll20 Sandbox** environment.
+3. **Deprecation**: Do NOT use `MW1e_preview.html` or `sync-sheet.js`. These are legacy files and no longer supported.
+
+## ToDo: Automated Testing
+
+- **Sheet Worker Unit Tests**: The project aims to implement automated unit testing for sheet worker logic using **Vitest**, following the pattern established in the `Ars_Magica_5th` sheet. This will involve mocking the Roll20 API (`getAttrs`, `setAttrs`, `on`) to verify complex calculations (XP, PIB) without requiring the Roll20 Sandbox.
 
 ### File Structure Required
 ```

@@ -19,17 +19,7 @@ Interactive character sheet for MechWarrior 1st Edition RPG.
 - **Derived Stats**: Auto-calculation of PIB, Saving Rolls, and HTK.
 - **Combat Tracking**: Integrated Hit Location and Critical Hit templates.
 
-## Development Workflow
-
-### Making Changes
-
-1. Edit `MechWarrior_1e.html` (the main production file)
-2. Test changes directly in the Roll20 Sandbox environment.
-
-### Why was there a Preview File?
-
-Previously, `MW1e_preview.html` was used for local testing. It has been deprecated and should no longer be updated or synced.
-
 ## Resources
 
-See the main repository [AGENTS.md](../AGENTS.md) for complete development documentation and Roll20 sheet building guides.
+- **Developer Documentation**: See the main repository [AGENTS.md](../AGENTS.md) for technical implementation details, development workflow, and Roll20 sheet building guides.
+- **MechWarrior 1e Rules**: Reference files for rules and character creation are located in the `docs/` directory.
