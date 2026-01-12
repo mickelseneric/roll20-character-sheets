@@ -105,7 +105,7 @@
 
 /* Title */
 .sheet-title {
-    font-size: 3.43rem; /* 48px / 14px = 3.43 */
+    font-size: calc(48px * var(--scale));
     font-weight: bold;
     letter-spacing: 0.571rem; /* 8px / 14px = 0.571 */
     text-align: center;
@@ -124,7 +124,7 @@ label.sheet-tab-label {
     background-color: #6a7a8a; /* Border color */
     color: #c8d0d8;
     cursor: pointer;
-    font-size: 0.929rem; /* 13px / 14px = 0.929 */
+    font-size: calc(13px * var(--scale));
     font-weight: bold;
     padding: var(--spacing-2); /* Outer padding for border */
     margin-right: var(--spacing-sm);
@@ -266,7 +266,7 @@ input.sheet-tab-combat:checked ~ div.sheet-tab-combat {
 
 /* Section Headers */
 .sheet-section-header {
-    font-size: 1rem; /* 14px */
+    font-size: calc(14px * var(--scale));
     font-weight: bold;
     letter-spacing: 0.143rem; /* 2px / 14px = 0.143 */
     color: #c8d0d8;
@@ -343,7 +343,7 @@ input.sheet-tab-combat:checked ~ div.sheet-tab-combat {
 }
 
 .sheet-field-group label {
-    font-size: 0.857rem; /* 12px / 14px = 0.857 */
+    font-size: calc(12px * var(--scale));
     font-weight: normal;
     letter-spacing: 0.071rem; /* 1px / 14px */
     color: #c8d0d8;
@@ -361,7 +361,7 @@ input.sheet-tab-combat:checked ~ div.sheet-tab-combat {
     border: none;
     border-bottom: var(--border-thin) solid #6a7a8a;
     color: #c8d0d8;
-    font-size: 1rem; /* 14px */
+    font-size: calc(14px * var(--scale));
     padding: var(--spacing-xs) 0;
     transition: border-color 0.2s;
     box-sizing: border-box;
@@ -394,7 +394,7 @@ input.sheet-tab-combat:checked ~ div.sheet-tab-combat {
 }
 
 .sheet-attr-header-name {
-    font-size: 1rem; /* 14px */
+    font-size: calc(14px * var(--scale));
     font-weight: bold;
     letter-spacing: 0.143rem; /* 2px / 14px */
     color: #c8d0d8;
@@ -409,7 +409,7 @@ input.sheet-tab-combat:checked ~ div.sheet-tab-combat {
 }
 
 .sheet-attr-header-cell {
-    font-size: 0.643rem; /* 9px / 14px = 0.643 */
+    font-size: calc(9px * var(--scale));
     font-weight: bold;
     letter-spacing: 0.036rem; /* 0.5px / 14px */
     color: #c8d0d8;
@@ -440,7 +440,7 @@ input.sheet-tab-combat:checked ~ div.sheet-tab-combat {
 }
 
 .sheet-attr-row .sheet-attr-name {
-    font-size: 0.786rem; /* 11px / 14px = 0.786 */
+    font-size: calc(11px * var(--scale));
     font-weight: bold;
     color: #c8d0d8;
     /*width: var(--field-attr-label);*/
@@ -458,7 +458,7 @@ input.sheet-tab-combat:checked ~ div.sheet-tab-combat {
     border: none;
     border-bottom: var(--border-thin) solid #6a7a8a;
     color: #c8d0d8;
-    font-size: 1rem; /* 14px */
+    font-size: calc(14px * var(--scale));
     padding: var(--spacing-xs) 0 !important;
     text-align: center;
     margin: 0 var(--spacing-3) !important;
@@ -473,7 +473,7 @@ input.sheet-tab-combat:checked ~ div.sheet-tab-combat {
     height: var(--input-height);
     border: none;
     border-bottom: var(--border-thin) solid #6a7a8a;
-    font-size: 1rem; /* 14px */
+    font-size: calc(14px * var(--scale));
     padding: var(--spacing-xs) 0 !important;
     text-align: center;
     margin: 0 var(--spacing-3) !important;
@@ -529,7 +529,7 @@ input.sheet-tab-combat:checked ~ div.sheet-tab-combat {
 }
 
 .sheet-skill-header-name {
-    font-size: 0.786rem; /* 11px / 14px */
+    font-size: calc(11px * var(--scale));
     font-weight: bold;
     letter-spacing: 0.071rem; /* 1px / 14px */
     color: #c8d0d8;
@@ -540,7 +540,7 @@ input.sheet-tab-combat:checked ~ div.sheet-tab-combat {
 }
 
 .sheet-skill-header-cell {
-    font-size: 0.643rem; /* 9px / 14px */
+    font-size: calc(9px * var(--scale));
     font-weight: bold;
     letter-spacing: 0.036rem; /* 0.5px / 14px */
     color: #c8d0d8;
@@ -571,7 +571,7 @@ input.sheet-tab-combat:checked ~ div.sheet-tab-combat {
 }
 
 .sheet-skill-row .sheet-skill-name {
-    font-size: 0.786rem; /* 11px / 14px */
+    font-size: calc(11px * var(--scale));
     font-weight: bold;
     color: #c8d0d8;
     min-width: var(--field-label-md);
@@ -581,18 +581,18 @@ input.sheet-tab-combat:checked ~ div.sheet-tab-combat {
 }
 
 .sheet-skill-row .sheet-skill-name em {
-    font-size: 0.714rem; /* 10px / 14px */
+    font-size: calc(10px * var(--scale));
     font-weight: normal;
 }
 
 .sheet-sub-skill .sheet-skill-name {
     padding-left: var(--spacing-md);
-    font-size: 0.714rem; /* 10px / 14px */
+    font-size: calc(10px * var(--scale));
     font-style: italic;
 }
 
 .sheet-sub-skill .sheet-skill-name em {
-    font-size: 0.643rem; /* 9px / 14px */
+    font-size: calc(9px * var(--scale));
 }
 
 .sheet-skill-row input {
@@ -605,7 +605,7 @@ input.sheet-tab-combat:checked ~ div.sheet-tab-combat {
     border: none;
     border-bottom: var(--border-thin) solid #6a7a8a;
     color: #c8d0d8;
-    font-size: 0.786rem; /* 11px / 14px */
+    font-size: calc(11px * var(--scale));
     padding: var(--spacing-2) 0 !important;
     text-align: center;
     box-sizing: border-box !important;
@@ -644,7 +644,7 @@ input.sheet-tab-combat:checked ~ div.sheet-tab-combat {
 
 /* Saving roll target label */
 .sheet-saving-roll-target {
-    font-size: 0.714rem; /* 10px / 14px */
+    font-size: calc(10px * var(--scale));
     color: #8a9aaa;
     margin-left: var(--spacing-10);
     white-space: nowrap;
@@ -656,7 +656,7 @@ input.sheet-tab-combat:checked ~ div.sheet-tab-combat {
     background-color: transparent;
     border: none;
     color: #8a9aaa;
-    font-size: 0.714rem; /* 10px / 14px */
+    font-size: calc(10px * var(--scale));
     padding: 0;
     text-align: center;
     display: inline;
@@ -664,7 +664,7 @@ input.sheet-tab-combat:checked ~ div.sheet-tab-combat {
 
 /* XP Cost Display */
 .sheet-xp-cost {
-    font-size: 0.643rem; /* 9px / 14px */
+    font-size: calc(9px * var(--scale));
     color: #b2854e;
     margin-left: var(--spacing-10);
     white-space: nowrap;
@@ -716,7 +716,7 @@ input.sheet-xp-negative-flag:checked ~ .sheet-xp-available-container input {
 /* Skill XP Cost Column */
 .sheet-skill-row input[name*="_xp_cost"] {
     width: var(--field-attr);
-    font-size: 0.714rem; /* 10px / 14px */
+    font-size: calc(10px * var(--scale));
     color: #d2a56e;
     font-weight: bold;
 }
@@ -769,7 +769,7 @@ input.sheet-xp-negative-flag:checked ~ .sheet-xp-available-container input {
     width: auto !important;
     min-width: var(--button-width-md) !important;
     max-width: calc(400px * var(--scale)) !important;
-    font-size: 0.786rem !important; /* 11px / 14px */
+    font-size: calc(11px * var(--scale)) !important;
     font-style: italic;
     color: #888 !important;
     background: transparent !important;
@@ -806,7 +806,7 @@ button[type="action"].sheet-roll-button {
     border: none !important;
     padding: var(--spacing-2) var(--spacing-sm) !important;
     margin: 0 !important;
-    font-size: 1rem !important; /* 14px */
+    font-size: calc(14px * var(--scale)) !important;
     font-weight: bold !important;
     text-transform: uppercase !important;
     letter-spacing: 0.071rem !important; /* 1px / 14px */
@@ -858,7 +858,7 @@ button[type="action"].sheet-roll-button img {
     border: none;
     border-bottom: var(--border-thin) solid #6a7a8a;
     color: #c8d0d8;
-    font-size: 1rem; /* 14px */
+    font-size: calc(14px * var(--scale));
     padding: var(--spacing-xs) var(--spacing-sm);
     transition: border-color 0.2s;
     box-sizing: border-box;
@@ -893,7 +893,7 @@ button[type="action"].sheet-roll-button img {
 
 #damage-section .sheet-section-header {
     text-align: center;
-    font-size: 1rem; /* 14px */
+    font-size: calc(14px * var(--scale));
 }
 
 .sheet-damage-row {
@@ -931,7 +931,7 @@ button[type="action"].sheet-roll-button img {
 }
 
 .sheet-damage-location label {
-    font-size: 0.857rem; /* 12px / 14px */
+    font-size: calc(12px * var(--scale));
     font-weight: normal;
     letter-spacing: 0.071rem; /* 1px / 14px */
     color: #c8d0d8;
@@ -957,7 +957,7 @@ button[type="action"].sheet-roll-button img {
     border: none;
     border-bottom: var(--border-thin) solid #6a7a8a;
     color: #c8d0d8;
-    font-size: 1.143rem; /* 16px / 14px */
+    font-size: calc(16px * var(--scale));
     text-align: center;
     padding: var(--spacing-2) 0;
 }
@@ -968,14 +968,14 @@ button[type="action"].sheet-roll-button img {
 }
 
 .sheet-damage-separator {
-    font-size: 1.143rem; /* 16px / 14px */
+    font-size: calc(16px * var(--scale));
     color: #8a9aaa;
     font-weight: bold;
 }
 
 /* Damage max readonly inputs */
 input[name*="damage"][name*="max"][readonly] {
-    font-size: 1.143rem; /* 16px / 14px */
+    font-size: calc(16px * var(--scale));
     color: #c8d0d8;
     width: var(--field-sm);
     text-align: center;
@@ -1011,7 +1011,7 @@ input[name*="damage"][name*="max"][readonly] {
     background-color: rgba(106, 122, 138, 0.3);
     border: var(--border-thin) solid #6a7a8a;
     padding: var(--spacing-sm);
-    font-size: 0.571rem; /* 8px / 14px */
+    font-size: calc(8px * var(--scale));
     font-weight: bold;
     letter-spacing: 0.071rem; /* 1px / 14px */
     text-transform: uppercase;
@@ -1024,7 +1024,7 @@ input[name*="damage"][name*="max"][readonly] {
 
 .sheet-weapons-table .sheet-weapons-header-sub th {
     border-top: none;
-    font-size: 0.571rem; /* 8px / 14px */
+    font-size: calc(8px * var(--scale));
     padding: var(--spacing-xs);
 }
 .sheet-weapons-table thead tr.sheet-weapons-header-sub th {
@@ -1042,7 +1042,7 @@ input[name*="damage"][name*="max"][readonly] {
     background-color: transparent;
     border: none;
     color: #c8d0d8;
-    font-size: 0.857rem; /* 12px / 14px */
+    font-size: calc(12px * var(--scale));
     padding: var(--spacing-xs);
     box-sizing: border-box;
 }
@@ -1071,7 +1071,7 @@ input[name*="damage"][name*="max"][readonly] {
 .sheet-damage-cell span {
     display: inline;
     color: #c8d0d8;
-    font-size: 0.857rem; /* 12px / 14px */
+    font-size: calc(12px * var(--scale));
     padding: 0 var(--spacing-2);
 }
 
@@ -1137,7 +1137,7 @@ select {
     border: var(--border-thin) solid #4a5a6a;
     border-radius: var(--spacing-3);
     padding: var(--spacing-xs) var(--spacing-sm);
-    font-size: 0.929rem; /* 13px / 14px */
+    font-size: calc(13px * var(--scale));
     font-family: inherit;
     cursor: pointer;
     opacity: 0.9;
@@ -1217,7 +1217,7 @@ button[type="action"] img {
     border: none;
     padding: 0;
     margin: 0;
-    font-size: 1rem; /* 14px */
+    font-size: calc(14px * var(--scale));
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 0.071rem; /* 1px / 14px */
@@ -1279,7 +1279,7 @@ button[type="action"] img {
     padding: 8px;
     margin: -10px -10px 10px -10px;
     border-radius: 3px 3px 0 0;
-    font-size: 14px;
+    font-size: calc(14px * var(--scale));
     font-weight: bold;
     text-align: center;
 }
@@ -1382,7 +1382,7 @@ button[type="action"] img {
     padding: 8px;
     text-align: center;
     font-weight: bold;
-    font-size: 14px;
+    font-size: calc(14px * var(--scale));
     border-radius: 3px;
 }
 
@@ -1475,7 +1475,7 @@ input[name="attr_show_attack_dialog"].sheet-dialog-show:checked ~ .sheet-attack-
 .sheet-dialog-info-row .sheet-dialog-label {
     color: #c8d0d8;
     font-weight: bold;
-    font-size: 0.643rem; /* 9px / 14px */
+    font-size: calc(9px * var(--scale));
     text-transform: uppercase;
     letter-spacing: 0.071rem; /* 1px / 14px */
     width: var(--field-label);
@@ -1487,7 +1487,7 @@ input[name="attr_show_attack_dialog"].sheet-dialog-show:checked ~ .sheet-attack-
     border: var(--border-thick) solid #5a6a7a;
     color: #999;
     padding: var(--spacing-6) calc(9px * var(--scale));
-    font-size: 0.786rem; /* 11px / 14px */
+    font-size: calc(11px * var(--scale));
     flex: 1;
     cursor: not-allowed;
     overflow: hidden;
@@ -1517,7 +1517,7 @@ input[name="attr_show_attack_dialog"].sheet-dialog-show:checked ~ .sheet-attack-
 .sheet-dialog-field-row .sheet-dialog-label {
     color: #c8d0d8;
     font-weight: bold;
-    font-size: 0.643rem; /* 9px / 14px */
+    font-size: calc(9px * var(--scale));
     text-transform: uppercase;
     letter-spacing: 0.071rem; /* 1px / 14px */
     width: var(--field-label);
@@ -1529,7 +1529,7 @@ input[name="attr_show_attack_dialog"].sheet-dialog-show:checked ~ .sheet-attack-
     border: var(--border-thick) solid #6a7a8a !important;
     color: #c8d0d8 !important;
     padding: var(--spacing-6) calc(9px * var(--scale)) !important;
-    font-size: 0.786rem !important; /* 11px / 14px */
+    font-size: calc(11px * var(--scale)) !important;
     flex: 1 !important;
     text-align: left !important;
     font-weight: normal !important;
@@ -1580,7 +1580,7 @@ input[name="attr_show_attack_dialog"].sheet-dialog-show:checked ~ .sheet-attack-
 .charsheet .sheet-dialog-cancel,
 button.sheet-dialog-submit,
 button.sheet-dialog-cancel {
-    font-size: 0.714rem !important; /* 10px / 14px */
+    font-size: calc(10px * var(--scale)) !important;
     font-weight: bold !important;
     text-transform: uppercase !important;
     letter-spacing: 0.071rem !important; /* 1px / 14px */
@@ -1835,7 +1835,7 @@ input[name="attr_show_melee_rules"].sheet-dialog-show:checked ~ .sheet-melee-rul
     border: var(--border-thick) solid #b2854e;
     color: #c8d0d8;
     padding: var(--spacing-sm) calc(16px * var(--scale));
-    font-size: 0.929rem; /* 13px / 14px */
+    font-size: calc(13px * var(--scale));
     font-weight: bold;
     cursor: pointer;
     border-radius: var(--border-radius);
@@ -1979,7 +1979,7 @@ input[name="attr_show_melee_rules"].sheet-dialog-show:checked ~ .sheet-melee-rul
 .charsheet .sheet-dialog-header h3 {
     margin: 0 !important;
     padding: 0 !important;
-    font-size: 1.071rem !important; /* 15px / 14px */
+    font-size: calc(15px * var(--scale)) !important;
     font-weight: bold !important;
     color: #c8d0d8 !important;
     text-transform: uppercase !important;
@@ -2003,7 +2003,7 @@ button.sheet-dialog-close {
     cursor: pointer !important;
     padding: 0 !important;
     margin: 0 !important;
-    font-size: 1.286rem !important; /* 18px / 14px */
+    font-size: calc(18px * var(--scale)) !important;
     line-height: 1 !important;
     font-weight: bold !important;
     border-radius: 0 !important;
@@ -2079,7 +2079,7 @@ button.sheet-dialog-close:hover {
 .ui-dialog .charsheet .sheet-dialog-body h4,
 .charsheet .sheet-dialog-body h4 {
     color: #b2854e !important;
-    font-size: 1.143rem !important; /* 16px / 14px */
+    font-size: calc(16px * var(--scale)) !important;
     font-weight: bold !important;
     margin: var(--spacing-lg) 0 var(--spacing-10) 0 !important;
     padding-bottom: var(--spacing-5) !important;
@@ -2095,7 +2095,7 @@ button.sheet-dialog-close:hover {
 .ui-dialog .charsheet .sheet-dialog-body h5,
 .charsheet .sheet-dialog-body h5 {
     color: #8a9aaa !important;
-    font-size: 1rem !important; /* 14px */
+    font-size: calc(14px * var(--scale)) !important;
     font-weight: bold !important;
     margin: var(--spacing-md) 0 var(--spacing-sm) 0 !important;
     line-height: 1.2 !important;
