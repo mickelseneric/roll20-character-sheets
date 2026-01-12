@@ -45,8 +45,7 @@
                 </div>
             </div>
             <div class="sheet-dialog-footer">
-                <button type="roll" name="roll_attack_from_dialog"
-                        value="&{template:mw1e-weapon} {{name=@{character_name}}} {{weapon=@{pending_weapon_name}}} {{weapon_skill=@{pending_weapon_skill}}} {{base_target=@{pending_base_target}}} {{target_mods=@{attack_target_mods}}} {{adjusted_target=[[@{pending_base_target}[Base] + @{attack_target_mods}[Target Mod] ]]}} {{roll=[[ [[2d6]][Base] + [[@{attack_xp_die_modifier}]][XP Mod] ]]}}"
+                <button type="action" name="act_roll_attack"
                         class="sheet-dialog-submit">
                     Roll Attack
                 </button>
@@ -96,8 +95,7 @@
                 </div>
             </div>
             <div class="sheet-dialog-footer">
-                <button type="roll" name="roll_skill_from_dialog"
-                        value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=@{pending_skill_name}}} {{base_target=@{pending_skill_target}}} {{target_mods=@{skill_target_mods}}} {{adjusted_target=[[@{pending_skill_target}[Base] + @{skill_target_mods}[Target Mod] ]]}} {{roll=[[ [[2d6]][Base] + [[@{skill_xp_die_modifier}]][XP Mod] ]]}}"
+                <button type="action" name="act_roll_skill"
                         class="sheet-dialog-submit" id="skill-dialog-button">
                     Roll Skill
                 </button>
@@ -145,8 +143,7 @@
                 </div>
             </div>
             <div class="sheet-dialog-footer">
-                <button type="roll" name="roll_attr_from_dialog"
-                        value="&{template:mw1e-skill} {{name=@{character_name}}} {{skill=@{pending_attr_name}}} {{base_target=@{pending_attr_target}}} {{target_mods=@{attribute_target_mods}}} {{adjusted_target=[[@{pending_attr_target}[Base] + @{attribute_target_mods}[Target Mod] ]]}} {{roll=[[ [[2d6]][Base] + [[@{attribute_xp_die_modifier}]][XP Mod] ]]}}"
+                <button type="action" name="act_roll_attr"
                         class="sheet-dialog-submit">
                     Roll Attribute
                 </button>
@@ -176,8 +173,7 @@
                 </div>
             </div>
             <div class="sheet-dialog-footer">
-                <button type="roll" name="roll_consciousness"
-                        value="&{template:mw1e-consciousness} {{name=@{character_name}}} {{current_htk=@{consciousness_current_htk}}} {{target=[[@{consciousness_target}]]}} {{roll=[[2d6]]}}"
+                <button type="action" name="act_roll_consciousness"
                         class="sheet-dialog-submit" id="consciousness-dialog-button">
                     Roll Saving Throw
                 </button>
@@ -1909,6 +1905,158 @@
         });
     });
 
+    // Handle attack roll from dialog - roll and close with extensive logging
+    on('clicked:roll_attack', function() {
+        console.log('=== ATTACK ROLL BUTTON CLICKED ===');
+        console.log('Getting attributes for roll...');
+
+        getAttrs(['character_name', 'pending_weapon_name', 'pending_weapon_skill', 'pending_base_target',
+                  'attack_target_mods', 'attack_xp_die_modifier'], function(values) {
+
+            console.log('Retrieved attribute values:', values);
+            console.log('character_name:', values.character_name);
+            console.log('pending_weapon_name:', values.pending_weapon_name);
+            console.log('pending_weapon_skill:', values.pending_weapon_skill);
+            console.log('pending_base_target:', values.pending_base_target);
+            console.log('attack_target_mods:', values.attack_target_mods);
+            console.log('attack_xp_die_modifier:', values.attack_xp_die_modifier);
+
+            var rollTemplate = '&{template:mw1e-weapon} ' +
+                '{{name=' + (values.character_name || '') + '}} ' +
+                '{{weapon=' + (values.pending_weapon_name || '') + '}} ' +
+                '{{weapon_skill=' + (values.pending_weapon_skill || '') + '}} ' +
+                '{{base_target=' + (values.pending_base_target || '10') + '}} ' +
+                '{{target_mods=' + (values.attack_target_mods || '0') + '}} ' +
+                '{{adjusted_target=[[' + (values.pending_base_target || '10') + '[Base] + ' + (values.attack_target_mods || '0') + '[Target Mod] ]]}} ' +
+                '{{roll=[[ [[2d6]][Base] + [[' + (values.attack_xp_die_modifier || '0') + ']][XP Mod] ]]}}';
+
+            console.log('Constructed roll template:', rollTemplate);
+            console.log('Calling startRoll...');
+
+            // Execute the roll
+            startRoll(rollTemplate, function(results) {
+                console.log('startRoll callback executed');
+                console.log('Roll results:', results);
+                console.log('Roll ID:', results.rollId);
+
+                finishRoll(results.rollId);
+                console.log('finishRoll called with ID:', results.rollId);
+
+                // Close dialog after roll completes
+                console.log('Closing dialog and resetting values...');
+                setAttrs({
+                    show_attack_dialog: 0,
+                    attack_target_mods: 0,
+                    attack_xp_die_modifier: 0
+                }, {}, function() {
+                    console.log('Dialog closed and values reset');
+                });
+            });
+
+            console.log('startRoll initiated, waiting for callback...');
+        });
+    });
+
+    // Handle skill roll from dialog - roll and close with extensive logging
+    on('clicked:roll_skill', function() {
+        console.log('=== SKILL ROLL BUTTON CLICKED ===');
+        console.log('Getting attributes for roll...');
+
+        getAttrs(['character_name', 'pending_skill_name', 'pending_skill_target',
+                  'skill_target_mods', 'skill_xp_die_modifier'], function(values) {
+
+            console.log('Retrieved attribute values:', values);
+            console.log('character_name:', values.character_name);
+            console.log('pending_skill_name:', values.pending_skill_name);
+            console.log('pending_skill_target:', values.pending_skill_target);
+            console.log('skill_target_mods:', values.skill_target_mods);
+            console.log('skill_xp_die_modifier:', values.skill_xp_die_modifier);
+
+            var rollTemplate = '&{template:mw1e-skill} ' +
+                '{{name=' + (values.character_name || '') + '}} ' +
+                '{{skill=' + (values.pending_skill_name || '') + '}} ' +
+                '{{base_target=' + (values.pending_skill_target || '10') + '}} ' +
+                '{{target_mods=' + (values.skill_target_mods || '0') + '}} ' +
+                '{{adjusted_target=[[' + (values.pending_skill_target || '10') + '[Base] + ' + (values.skill_target_mods || '0') + '[Target Mod] ]]}} ' +
+                '{{roll=[[ [[2d6]][Base] + [[' + (values.skill_xp_die_modifier || '0') + ']][XP Mod] ]]}}';
+
+            console.log('Constructed roll template:', rollTemplate);
+            console.log('Calling startRoll...');
+
+            // Execute the roll
+            startRoll(rollTemplate, function(results) {
+                console.log('startRoll callback executed');
+                console.log('Roll results:', results);
+                console.log('Roll ID:', results.rollId);
+
+                finishRoll(results.rollId);
+                console.log('finishRoll called with ID:', results.rollId);
+
+                // Close dialog after roll completes
+                console.log('Closing dialog and resetting values...');
+                setAttrs({
+                    show_skill_dialog: 0,
+                    skill_target_mods: 0,
+                    skill_xp_die_modifier: 0
+                }, {}, function() {
+                    console.log('Dialog closed and values reset');
+                });
+            });
+
+            console.log('startRoll initiated, waiting for callback...');
+        });
+    });
+
+    // Handle attribute roll from dialog - roll and close with extensive logging
+    on('clicked:roll_attr', function() {
+        console.log('=== ATTRIBUTE ROLL BUTTON CLICKED ===');
+        console.log('Getting attributes for roll...');
+
+        getAttrs(['character_name', 'pending_attr_name', 'pending_attr_target',
+                  'attribute_target_mods', 'attribute_xp_die_modifier'], function(values) {
+
+            console.log('Retrieved attribute values:', values);
+            console.log('character_name:', values.character_name);
+            console.log('pending_attr_name:', values.pending_attr_name);
+            console.log('pending_attr_target:', values.pending_attr_target);
+            console.log('attribute_target_mods:', values.attribute_target_mods);
+            console.log('attribute_xp_die_modifier:', values.attribute_xp_die_modifier);
+
+            var rollTemplate = '&{template:mw1e-skill} ' +
+                '{{name=' + (values.character_name || '') + '}} ' +
+                '{{skill=' + (values.pending_attr_name || '') + '}} ' +
+                '{{base_target=' + (values.pending_attr_target || '10') + '}} ' +
+                '{{target_mods=' + (values.attribute_target_mods || '0') + '}} ' +
+                '{{adjusted_target=[[' + (values.pending_attr_target || '10') + '[Base] + ' + (values.attribute_target_mods || '0') + '[Target Mod] ]]}} ' +
+                '{{roll=[[ [[2d6]][Base] + [[' + (values.attribute_xp_die_modifier || '0') + ']][XP Mod] ]]}}';
+
+            console.log('Constructed roll template:', rollTemplate);
+            console.log('Calling startRoll...');
+
+            // Execute the roll
+            startRoll(rollTemplate, function(results) {
+                console.log('startRoll callback executed');
+                console.log('Roll results:', results);
+                console.log('Roll ID:', results.rollId);
+
+                finishRoll(results.rollId);
+                console.log('finishRoll called with ID:', results.rollId);
+
+                // Close dialog after roll completes
+                console.log('Closing dialog and resetting values...');
+                setAttrs({
+                    show_attr_dialog: 0,
+                    attribute_target_mods: 0,
+                    attribute_xp_die_modifier: 0
+                }, {}, function() {
+                    console.log('Dialog closed and values reset');
+                });
+            });
+
+            console.log('startRoll initiated, waiting for callback...');
+        });
+    });
+
     // =================================================================
     // SKILL/ATTRIBUTE DIALOG HANDLERS
     // =================================================================
@@ -2246,9 +2394,48 @@
         setAttrs({ show_consciousness_dialog: 0 });
     });
 
-    // NOTE: Roll20 does NOT support clicked: events for type="roll" buttons
-    // Players must manually close the consciousness dialog using the X or Cancel button
-    // This is actually good UX for critical rolls - allows players to review the threshold and result
+    // Handle consciousness roll from dialog - roll and close with extensive logging
+    on('clicked:roll_consciousness', function() {
+        console.log('=== CONSCIOUSNESS ROLL BUTTON CLICKED ===');
+        console.log('Getting attributes for roll...');
+
+        getAttrs(['character_name', 'consciousness_current_htk', 'consciousness_target'], function(values) {
+
+            console.log('Retrieved attribute values:', values);
+            console.log('character_name:', values.character_name);
+            console.log('consciousness_current_htk:', values.consciousness_current_htk);
+            console.log('consciousness_target:', values.consciousness_target);
+
+            var rollTemplate = '&{template:mw1e-consciousness} ' +
+                '{{name=' + (values.character_name || '') + '}} ' +
+                '{{current_htk=' + (values.consciousness_current_htk || '0') + '}} ' +
+                '{{target=[[' + (values.consciousness_target || '10') + ']]}} ' +
+                '{{roll=[[2d6]]}}';
+
+            console.log('Constructed roll template:', rollTemplate);
+            console.log('Calling startRoll...');
+
+            // Execute the roll
+            startRoll(rollTemplate, function(results) {
+                console.log('startRoll callback executed');
+                console.log('Roll results:', results);
+                console.log('Roll ID:', results.rollId);
+
+                finishRoll(results.rollId);
+                console.log('finishRoll called with ID:', results.rollId);
+
+                // Close dialog after roll completes
+                console.log('Closing dialog...');
+                setAttrs({
+                    show_consciousness_dialog: 0
+                }, {}, function() {
+                    console.log('Dialog closed');
+                });
+            });
+
+            console.log('startRoll initiated, waiting for callback...');
+        });
+    });
 
     // =================================================================
     // RANGED ATTACK RULES DIALOG
