@@ -507,6 +507,9 @@
           </span>
           <span class="hidden rangetext" name="attr_rangetext" value=""></span>
           <textarea class="maxwidth" spellcheck="false" name="attr_weapontext">Description and upgrades</textarea>
+          <div class="upgrade-info" style="font-size: 0.8em; color: #666; margin-top: 2px;">
+            <span name="attr_upgrades"></span> upgrades, blows a fuse if second-highest die is <span name="attr_upgrades_plus_one"></span> or less.
+          </div>
         </div>
         <hr class="armament-divider">
       </fieldset>
@@ -576,12 +579,12 @@
                         <input class="munname" spellcheck="false" type="text" name="attr_munname" value="Name">
                       </div>
                       <span class="right">
-                        <label class="inline">Diesel Cost</label>
-                        <input class="cost" type="text" name="attr_muncost" value="">
-                      </span>
-                      <span class="right">
                         <label class="inline">Harm</label>
                         <input class="cost" type="number" name="attr_munHarm" value="">
+                      </span>
+                      <span class="right">
+                        <label class="inline">Diesel Cost</label>
+                        <input class="cost" type="text" name="attr_muncost" value="">
                       </span>
                       <textarea class="maxwidth" spellcheck="false" name="attr_muntext"></textarea>
                     </fieldset>
@@ -620,6 +623,9 @@
                       <input type="checkbox" value="true" name="attr_farrange"></input>
                     </span>
                     <textarea class="maxwidth" spellcheck="false" name="attr_weapontext">Description and upgrades</textarea>
+                    <div class="upgrade-info" style="font-size: 0.8em; color: #666; margin-top: 2px;">
+                      <span name="attr_upgrades"></span> upgrades, blows a fuse if second-highest die is <span name="attr_upgrades_plus_one"></span> or less.
+                    </div>
                   </div>
                   <hr class="armament-divider">
                 </fieldset>
@@ -1493,7 +1499,7 @@
     
     <section class="drops">
       <div class="sectiontop">
-        <h2 class="enemyheader">Generate Drops</h2>
+        <h2 class="enemyheader">Generate Drops (Cyberrats base game)</h2>
         <span class="adj">
           <label class="narrow" for="attr_bonusDrops">Adjustment to rolls</label>
           <input type="number" name="attr_bonusDrops" value="0">
@@ -1880,7 +1886,7 @@
     
     <section class="drops">
       <div class="sectiontop">
-        <h2 class="enemyheader">Generate Drops</h2>
+        <h2 class="enemyheader">Generate Drops (Cyberrats in Space)</h2>
         <span class="adj">
           <label class="narrow" for="attr_bonusDrops">Adjustment to rolls</label>
           <input type="number" name="attr_bonusDrops" value="0">
@@ -3594,6 +3600,15 @@ on("change:repeating_arm:equipped", function(eventInfo) {
         armsEquipped: parseInt(values.armsEquipped) + changeval
       }
     );
+  });
+});
+
+on("change:repeating_arm:upgrades", function(eventInfo) {
+  const upgrades = parseInt(eventInfo.newValue) || 0;
+  const upgradesPlusOne = upgrades + 1;
+  
+  setAttrs({
+    [`${eventInfo.sourceAttribute.replace("upgrades", "upgrades_plus_one")}`]: upgradesPlusOne
   });
 });
 

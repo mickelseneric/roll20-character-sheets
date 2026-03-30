@@ -1667,7 +1667,7 @@
 /* CLASSES REVAMPED STYLES START */
 
 .charsheet .table-container .headers-container .header2.name {
-  flex: 6;
+  flex: 8;
   text-align: left;
   padding-left: 5px;
 }
@@ -1675,7 +1675,7 @@
   flex: 2;
 }
 .charsheet .table-container .headers-container .header2.level {
-  flex: 2;
+  flex: 3;
 }
 .charsheet .table-container .headers-container .header2.xp {
   flex: 3;
@@ -1707,7 +1707,7 @@
   cursor: default;
 }
 .charsheet .table-container .table-row .actions{
-  flex: 2;
+  flex: 1;
   display: flex;
   flex-direction: row;
   justify-content: end;
@@ -1855,6 +1855,33 @@
 
 
 /* BREAKTHROUGH REVAMPED STYLES END */
+
+.charsheet button[type="action"].autofill-button {
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 20px;
+  font-size: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #717171;
+  text-align: center;
+  border: #8a8a8a 2px solid;
+  border-radius: 4px;
+}
+.charsheet button[type="action"].autofill-button:hover {
+  border-color: #b61037;
+  color: #b61037;
+}
+
+.sheet-darkmode .charsheet button[type="action"].autofill-button {
+  border-color: #dcdcdc;
+  color: #dadada;
+}
+.sheet-darkmode .charsheet button[type="action"].autofill-button:hover {
+  border-color: #b61037;
+  color: #b61037;
+}
 
 
 /* ABILITIES REVAMPED STYLES START */

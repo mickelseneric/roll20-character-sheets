@@ -1,0 +1,340 @@
+.sheet-gvn {
+  font-family: "Times New Roman", Georgia, serif;
+  font-size: 12px;
+  max-width: 1200px;
+  min-width: 900px;
+  margin: 0 auto;
+  background: #f7f7f7;
+  color: #000;
+}
+
+/* GLOBAL */
+
+.sheet-gvn,
+.sheet-gvn * {
+  box-sizing: border-box;
+  color: #000 !important;
+}
+
+/* INPUTS */
+
+.sheet-gvn input,
+.sheet-gvn textarea,
+.sheet-gvn select {
+  font-family: inherit;
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+.sheet-gvn input:not([type="checkbox"]),
+.sheet-gvn textarea,
+.sheet-gvn select {
+  width: 100%;
+  border: 1px solid #555;
+  background: #fff;
+  padding: 4px 6px;          /* Slightly increased padding for comfort */
+  text-align: center;
+}
+
+.sheet-gvn textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+/* LABELS */
+
+.sheet-gvn label {
+  display: block;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 2px;
+  font-size: 11px;
+}
+
+/* TITLES */
+
+.sheet-title {
+  text-align: center;
+  font-size: 26px;
+  font-weight: bold;
+  margin: 6px 0 10px;
+}
+
+.sheet-subtitle {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+/* TABS */
+
+.sheet-tabbar {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+
+.sheet-tab-button {
+  flex: 1;
+  border: 2px solid #444;
+  background: #d8d8d8;
+  font-weight: bold;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.sheet-tab { display: none; }
+
+.sheet-gvn input[name="attr_sheetTab"][value="core"] ~ .sheet-core { display: block; }
+.sheet-gvn input[name="attr_sheetTab"][value="equipment"] ~ .sheet-equipment { display: block; }
+.sheet-gvn input[name="attr_sheetTab"][value="proficiencies"] ~ .sheet-proficiencies { display: block; }
+.sheet-gvn input[name="attr_sheetTab"][value="command"] ~ .sheet-command { display: block; }
+.sheet-gvn input[name="attr_sheetTab"][value="notes"] ~ .sheet-notes { display: block; }
+
+/* SECTIONS */
+
+.sheet-section {
+  border: 2px solid #444;
+  background: #ececec;
+  padding: 6px;
+  margin-bottom: 10px;
+}
+
+/* GRID */
+
+.sheet-grid {
+  display: grid;
+  gap: 5px;
+  align-items: center;
+}
+
+.sheet-grid-2 { grid-template-columns: repeat(2, 1fr); }
+.sheet-grid-3 { grid-template-columns: repeat(3, 1fr); }
+.sheet-grid-4 { grid-template-columns: repeat(4, 1fr); }
+.sheet-grid-5 { grid-template-columns: repeat(5, 1fr); }
+.sheet-grid-6 { grid-template-columns: repeat(6, 1fr); }
+.sheet-grid-7 { grid-template-columns: repeat(7, 1fr); }
+.sheet-grid-10 { grid-template-columns: repeat(10, 1fr); }
+
+/* SPECIAL GRIDS */
+
+.sheet-grid-gov-weapons {
+  grid-template-columns: 2fr 0.6fr 0.6fr 0.7fr 0.7fr 1fr 0.7fr 0.6fr;
+}
+
+.sheet-grid-armor {
+  grid-template-columns: 3fr 1fr;
+}
+
+.sheet-grid-equipment-gov {
+  grid-template-columns: 3fr 0.8fr;
+}
+
+.sheet-grid-command-log {
+  grid-template-columns: 1fr 2fr 0.6fr;
+  gap: 6px;                    /* Slightly more space between columns */
+  align-items: center;
+}
+
+.sheet-grid-nwp {
+  grid-template-columns: 2fr 0.8fr 0.8fr 0.8fr 0.8fr;
+}
+
+.sheet-grid-wp {
+  grid-template-columns: 2fr 0.8fr;
+}
+
+/* Command Log specific input tweaks */
+.sheet-grid-command-log input {
+  width: 100%;
+  text-align: left;            /* Better for descriptive text like requests */
+  padding: 4px 6px;
+}
+
+/* LAYOUT */
+
+.sheet-two-col {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.sheet-maincol {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sheet-sidecol {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* HEADERS */
+
+.sheet-mount-header {
+  font-weight: bold;
+  text-align: center;
+  border-bottom: 2px solid #444;   /* Thicker, more visible separator */
+  padding-bottom: 4px;
+  background: #e0e0e0;             /* Subtle highlight for headers */
+}
+
+.sheet-mount-header div {
+  font-size: 10px;
+}
+
+/* HP */
+
+.sheet-hp-box {
+  border: 2px solid #444;
+  background: #f4f4f4;
+  padding: 4px;
+}
+
+/* ATTACK */
+
+.sheet-attack-table {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.sheet-attack-header,
+.sheet-attack-top,
+.sheet-attack-row {
+  display: grid;
+  grid-template-columns: 90px 60px 90px;
+  gap: 8px;
+  justify-content: center;
+}
+
+.sheet-attack-top input,
+.sheet-attack-row input {
+  width: 60px;
+  margin: 0 auto;
+}
+
+/* ABILITIES */
+
+.sheet-ability-block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sheet-ability-header,
+.sheet-ability-row {
+  display: grid;
+  grid-template-columns: 110px repeat(7, 1fr);
+  gap: 2px;
+}
+
+.sheet-ability-header {
+  font-weight: bold;
+  text-align: center;
+  background: #dcdcdc;
+  border: 1px solid #444;
+  font-size: 10px;
+}
+
+.sheet-ability-name {
+  font-weight: bold;
+  text-align: left;
+  padding: 3px 4px;
+  background: #fff;
+  border: 1px solid #555;
+}
+
+/* TEXT */
+
+.sheet-notes-area {
+  min-height: 450px;
+  text-align: left;
+}
+
+/* REPEATING — DO NOT TOUCH CORE STRUCTURE */
+
+.sheet-gvn fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* IMPORTANT: leave these alone */
+
+.sheet-gvn .repcontainer { }
+.sheet-gvn .repitem { }
+
+/* ONLY style your content */
+
+.sheet-gvn .repeating_armor .sheet-grid,
+.sheet-gvn .repeating_weapons .sheet-grid,
+.sheet-gvn .repeating_equipment .sheet-grid,
+.sheet-gvn .repeating_nwp .sheet-grid,
+.sheet-gvn .repeating_wp .sheet-grid,
+.sheet-gvn .repeating_command_log .sheet-grid {
+  display: grid;
+  width: 100%;
+  gap: 5px;
+}
+
+/* REMOVE BUTTON (add this if you include a remove button per row) */
+
+.sheet-btn-remove {
+  margin-left: 4px;
+  background: #c00;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  padding: 0 6px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 1;
+}
+
+/* BUTTONS */
+
+.sheet-gvn .repcontrol {
+  margin-top: 4px;
+}
+
+.sheet-gvn .repcontrol .btn {
+  border: 1px solid #444;
+  background: #d8d8d8;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 2px 6px;
+}
+
+/* MOBILE */
+
+@media screen and (max-width: 1000px) {
+
+  .sheet-two-col {
+    flex-direction: column;
+  }
+
+  .sheet-grid,
+  .sheet-grid-10,
+  .sheet-grid-7,
+  .sheet-grid-6,
+  .sheet-grid-5,
+  .sheet-grid-4,
+  .sheet-grid-3,
+  .sheet-grid-2,
+  .sheet-grid-gov-weapons,
+  .sheet-grid-armor,
+  .sheet-grid-equipment-gov,
+  .sheet-grid-command-log,
+  .sheet-grid-nwp,
+  .sheet-grid-wp {
+    grid-template-columns: 1fr;
+  }
+}

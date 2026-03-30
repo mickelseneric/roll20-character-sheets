@@ -109,7 +109,7 @@
 .sheet-rolltemplate-darkmode.sheet-rolltemplate-powerrollability .sheet-roll-container,
 .sheet-rolltemplate-darkmode.sheet-rolltemplate-ability .sheet-roll-container,
 .sheet-rolltemplate-darkmode.sheet-rolltemplate-powerroll .sheet-roll-container,
-.sheet-rolltemplate-simpleroll.sheet-rolltemplate-darkmode .sheet-roll-container {
+.sheet-rolltemplate-darkmode.sheet-rolltemplate-simpleroll .sheet-roll-container {
  	--color-bg-main: #1f1f1f; 
     --color-bg-section: rgb(59, 64, 69); 
 
@@ -235,16 +235,6 @@
 	border-right: var(--border-main);
 }
 
-.charsheet input[type=number].no-spin::-webkit-inner-spin-button,
-.charsheet input[type=number].no-spin::-webkit-outer-spin-button {
-	-webkit-appearance: none;
-	margin: 0;
-}
-
-.charsheet input[type=number].no-spin {
-	-moz-appearance: textfield ;
-}
-
 .charsheet input.input-md {
 	height: 20px;
 	font-size: 0.9em;
@@ -259,7 +249,7 @@
 }
 
 .charsheet label.sublabel {
-	height: 16px;
+	height: min-content;
 	font-size: 0.8em;
 	font-weight: normal;
 	color: var(--color-text-accent);
@@ -286,16 +276,26 @@
 	color: var(--color-button-bg);
 	cursor: pointer;
 	right: 30px;
-	top: 100px;
 	font-weight: normal;
+}
+
+.charsheet label.sheet-options-checkbox-label::before {
+	content: 'y';
+}
+
+.charsheet .sheet-header:has(#sheet-options-checkbox:checked) > .sheet-options-checkbox-label::before { /*~ label.sheet-options-checkbox-label::before {*/
+  color: var(--color-accent-steel);
+  content: '*';
+}
+
+.charsheet .sheet-header:has(#sheet-options-checkbox:checked) > .sheet-options-checkbox-label {
+  top: 108px;
 }
 
 .charsheet label.sheet-options-checkbox-label:hover {
 	color: var(--color-accent-steel);
 }
-.charsheet.has(.sheet-options-checkbox:checked) ~ label.sheet-options-checkbox-label {
-  color: var(--color-accent-steel);
-}
+
 
 input.sheet-options-checkbox {
 	display: none;
@@ -307,8 +307,19 @@ input.sheet-options-checkbox {
 
 .sheet-options-toggle {
   display: grid;
-  gap: 0.25em;
+  gap: 0.5em;
 }
+
+.sheet-options-toggle hr {
+	margin-top: var(--sheet-padding);
+	margin-bottom: var(--sheet-padding);
+	border-top: var(--border-main);
+}
+
+.sheet-options-toggle label {
+	font-weight: normal;
+}
+
 
 /* Switches between Character and NPC Sheets */
 .charsheet input.npc-checkbox:not([value="on"]) ~ .npc-sheet-body,
@@ -328,6 +339,7 @@ input.sheet-options-checkbox {
 	display:none; 
 }
 
+/*
 #stats-minimize-checkbox:checked + label::before,
 #biography-minimize-checkbox:checked + label::before,
 #skills-languages-minimize-checkbox:checked + label::before,
@@ -335,8 +347,14 @@ input.sheet-options-checkbox {
 #abilities-minimize-checkbox:checked + label::before,
 #inventory-minimize-checkbox:checked + label::before,
 #projects-minimize-checkbox:checked + label::before,
-#notes-minimize-checkbox:checked + label::before {
+#notes-minimize-checkbox:checked + label::before,
+#director-screen-minimize-checkbox:checked + label::before {
 	content:'&';
+}
+*/
+
+[id*='minimize-checkbox']:checked + label::before {
+	content: '&';
 }
 
 label[for*='minimize']::before {
@@ -355,8 +373,9 @@ label[for*='minimize']::before {
 
 /* Sheet Options Panel */
 
-
-
+.import-panel > div > textarea {
+	width:100%; 
+}
 
 /* Header Panel */
 
@@ -379,7 +398,7 @@ label[for*='minimize']::before {
 	color: orangered;
 }
 
-.profile-panel {
+.profile-panel, .import-panel {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	column-gap: 0.5em;
@@ -435,24 +454,18 @@ label[for*='minimize']::before {
 	grid-column-end: span 2;
 }
 
-.stats-panel {
+.sticky-characteristics[value="1"] + .stats-panel {
 	position: sticky;
+}
+
+.stats-panel {
+
 	top: 0;
 	z-index: 10;
 	display: grid;
 	grid-template-columns: repeat(10,76px);
 	grid-template-rows: auto;
 	gap: 5px;
-}
-
-.charsheet .sheet-body .stats-panel input[type=number]::-webkit-inner-spin-button, 
-.charsheet .sheet-body .stats-panel input[type=number]::-webkit-outer-spin-button { 
-    -webkit-appearance: none;
-    margin: 0; 
-}
-
-.charsheet .sheet-body .stats-panel input[type=number] {
-	-moz-appearance: textfield;
 }
 
 .stats-panel > .minimize-control {
@@ -469,28 +482,18 @@ label[for*='minimize']::before {
 
 }
 
-.hexagon {
---b: 2px;
-  height: 75px;
-  aspect-ratio: cos(30deg);
-  clip-path: polygon(50% 0,-50% 50%,50% 100%,150% 50%,50% 0, 50% var(--b), calc(100% - var(--b)*sin(60deg)) calc(25% + var(--b)*cos(60deg)), calc(100% - var(--b)*sin(60deg)) calc(75% - var(--b)*cos(60deg)), 50% calc(100% - var(--b)), calc(var(--b)*sin(60deg)) calc(75% - var(--b)*cos(60deg)), calc(var(--b)*sin(60deg)) calc(25% + var(--b)*cos(60deg)), 50% var(--b));
-  background: var(--color-bg-main);
-  position: absolute;
-  z-index: -10;
-  top: 0px;
-}
-
 .dashboard-characteristics {
   grid-column-start: 1;
   grid-column-end: span 5;
   display: flex;
   gap: 2px;
   flex-direction: row;
+  width: 90%;
 }
 
 .dashboard-stat-group {
   text-align: center;
-  width: 75px;
+  width: 100%;
   position: relative;
   display: grid;
   justify-items: center;
@@ -507,13 +510,6 @@ label[for*='minimize']::before {
   font-size: 1.5em;
   text-align: center;
   color: var(--color-text-header);
-  -moz-appearance: textfield;
-}
-
-.charsheet .sheet-body .dashboard-stat-group input[type=number]::-webkit-inner-spin-button, 
-.charsheet .sheet-body .dashboard-stat-group input[type=number]::-webkit-outer-spin-button { 
-    -webkit-appearance: none;
-    margin: 0; 
 }
 
 .dashboard-stamina {
@@ -581,6 +577,7 @@ label[for*='minimize']::before {
 .potencies .potency-input-group input[type="number"] {
 	width:4.5em;
 }
+
 .movement {
 	grid-column-start: 1;
 	grid-column-end: span 5;
@@ -600,6 +597,98 @@ label[for*='minimize']::before {
 	text-align: center;
 }
 
+/* Growing Resource Table */
+.has-resource-toggle[value="0"] ~ .growing-resource {
+    display: none;
+}
+
+.growing-resource {
+	display: block;
+}
+
+.growing-resource-grid {
+    display: grid;
+    grid-template-columns: 80px 1fr; 
+    gap: 4px;
+    align-items: center;
+}
+
+.grid-header {
+    display: contents; 
+    font-weight: bold;
+    border-bottom: 1px solid #000;
+}
+
+.resource-container {
+	position: relative;
+}
+
+.resource-row {
+    display: contents;
+}
+
+.resource-row .edit-mode {
+    display: none;
+}
+
+.resource-row .display-mode {
+	display: contents;
+	
+}
+
+.resource-container .ability-edit:checked ~ .growing-resource-grid .display-mode {
+    display: none;
+}
+.resource-container .ability-edit:checked ~ .growing-resource-grid .edit-mode {
+    display: contents;
+}
+
+.row-toggle-2[value="0"] ~ .resource-container { display: none; }
+.row-toggle-2[value="0"] ~ .resource-container .tier-2 .display-mode { display: none; }
+.row-toggle-4[value="0"] ~ .resource-container .tier-4 .display-mode { display: none; }
+.row-toggle-6[value="0"] ~ .resource-container .tier-6 .display-mode { display: none; }
+.row-toggle-8[value="0"] ~ .resource-container .tier-8 .display-mode { display: none; }
+.row-toggle-10[value="0"] ~ .resource-container .tier-10 .display-mode { display: none; }
+.row-toggle-12[value="0"] ~ .resource-container .tier-12 .display-mode { display: none; }
+
+.growing-resource-grid input[type="text"], 
+.growing-resource-grid textarea {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.growing-resource-grid textarea {
+    height: 40px;
+    resize: vertical;
+}
+.growing-resource {
+	grid-column: 1 / -1;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.stormwight-only {
+    display: none;
+    margin-top: 5px;
+    padding-left: 15px; 
+    border-left: 2px solid #ccc;
+}
+
+.main-resource-state[value="furystormwight"] ~ .stormwight-only {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.selector-row label {
+    margin-right: 10px;
+    min-width: 100px;
+}
+
+.selector-row select {
+    width: 100%;
+    cursor: pointer;
+}
 
 .stamina-panel {
 	grid-column-start: 6;
@@ -706,6 +795,10 @@ label[for*='minimize']::before {
 
 .resource-name-input-group > input {
 	width: 100px;
+	text-align: center;
+}
+
+.resource-name-input-group {
 	text-align: center;
 }
 
@@ -865,9 +958,15 @@ label[for*='minimize']::before {
 	grid-column-end: span 2;
 }
 
-.repcontainer[data-groupname="repeating_classfeatures"] {
+.repcontainer[data-groupname="repeating_classfeatures"],
+.repcontainer[data-groupname="repeating_perks"] {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
+	grid-gap: 0.2em;
+}
+
+.repcontainer[data-groupname="repeating_ancestrytraits"] {
+	display: grid;
 	grid-gap: 0.2em;
 }
 
@@ -903,11 +1002,18 @@ label[for*='minimize']::before {
 	white-space-collapse: preserve;
 }
 
+.feature-accordion textarea {
+  width: 100%;
+}
+
 .repcontainer[data-groupname="repeating_classfeatures"] > .repitem,
-.repcontainer[data-groupname="repeating_ancestrytraits"] > .repitem {
+.repcontainer[data-groupname="repeating_ancestrytraits"] > .repitem,
+.repcontainer[data-groupname="repeating_perks"] > .repitem,
+.repcontainer[data-groupname="repeating_titles"] > .repitem {
 	display: grid;
 	grid-gap: 0.3em;
 	overflow-wrap: anywhere;
+	padding: 5px;
 	box-shadow:
 		inset 1px 1px 2px #555,
 		inset -1px -1px 2px #111,
@@ -920,7 +1026,9 @@ label[for*='minimize']::before {
 }
 
 .repcontainer[data-groupname="repeating_classfeatures"] > .repitem > textarea,
-.repcontainer[data-groupname="repeating_ancestrytraits"] > .repitem > textarea {
+.repcontainer[data-groupname="repeating_ancestrytraits"] > .repitem > textarea,
+.repcontainer[data-groupname="repeating_perks"] > .repitem > textarea,
+.repcontainer[data-groupname="repeating_titles"] > .repitem > textarea {
 	height: 50px;
 	resize: vertical;
 }
@@ -931,25 +1039,6 @@ label[for*='minimize']::before {
 
 .titles-panel {
 	grid-column-end: span 2;
-}
-
-.repcontainer[data-groupname="repeating_perks"] {
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	grid-gap: 0.2em;
-	box-shadow:
-		inset 1px 1px 2px #555,
-		inset -1px -1px 2px #111,
-		0 2px 6px rgba(0, 0, 0, 0.5);
-}
-
-.repcontainer[data-groupname="repeating_titles"] {
-	display: grid;
-	grid-gap: 0.2em;
-	box-shadow:
-		inset 1px 1px 2px #555,
-		inset -1px -1px 2px #111,
-		0 2px 6px rgba(0, 0, 0, 0.5);
 }
 
 .modifiers-panel {
@@ -1045,7 +1134,7 @@ label[for*='minimize']::before {
 
 .kit-damage-label,
 .other-modifiers-label {
-  font-size: 0.75em !important;
+  font-size: 0.75em;
 }
 
 .kit-melee-damage-group,
@@ -1118,7 +1207,10 @@ label[for*='minimize']::before {
 .charsheet .sheet-maneuver,
 .charsheet .sheet-triggered,
 .charsheet .sheet-noaction,
-.charsheet .sheet-move {
+.charsheet .sheet-move,
+.charsheet .sheet-npcabilities,
+.charsheet .sheet-malice,
+.charsheet .sheet-villainaction {
     display: none;
 }
 
@@ -1126,17 +1218,31 @@ label[for*='minimize']::before {
 .charsheet .sheet-tabstoggle[value="maneuver"] ~ div.sheet-maneuver,
 .charsheet .sheet-tabstoggle[value="triggered"] ~ div.sheet-triggered,
 .charsheet .sheet-tabstoggle[value="noaction"] ~ div.sheet-noaction,
-.charsheet .sheet-tabstoggle[value="move"] ~ div.sheet-move {
+.charsheet .sheet-tabstoggle[value="move"] ~ div.sheet-move,
+.charsheet .sheet-tabstoggle[value="npcabilities"] ~ div.sheet-npcabilities,
+.charsheet .sheet-tabstoggle[value="malice"] ~ div.sheet-malice,
+.charsheet .sheet-tabstoggle[value="villainaction"] ~ div.sheet-villainaction {
 	display: block;
+}
+
+.charsheet .npc-abilities-panel:not(:has(input[name="attr_villain_action_show"][value="1"])) .sheet-villainaction {
+	display: none;
 }
 
 .charsheet .sheet-tabstoggle[value="action"] ~ .abilities-buttons .sheet-button-action,
 .charsheet .sheet-tabstoggle[value="maneuver"] ~ .abilities-buttons .sheet-button-maneuver,
 .charsheet .sheet-tabstoggle[value="triggered"] ~ .abilities-buttons .sheet-button-triggered,
 .charsheet .sheet-tabstoggle[value="noaction"] ~ .abilities-buttons .sheet-button-noaction,
-.charsheet .sheet-tabstoggle[value="move"] ~ .abilities-buttons .sheet-button-move {
+.charsheet .sheet-tabstoggle[value="move"] ~ .abilities-buttons .sheet-button-move,
+.charsheet .sheet-tabstoggle[value="npcabilities"] ~ .abilities-buttons .sheet-button-npcabilities,
+.charsheet .sheet-tabstoggle[value="malice"] ~ .abilities-buttons .sheet-button-malice,
+.charsheet .sheet-tabstoggle[value="villainaction"] ~ .abilities-buttons .sheet-button-villainaction {
 	background-color: var(--color-bg-subsection);
 	border-color: var(--color-button-hover-border);
+}
+
+.charsheet .npc-abilities-panel:not(:has(input[name="attr_villain_action_show"][value="1"])) .abilities-buttons .sheet-button-villainaction {
+	display: none;
 }
 
 .power-roll label.sublabel {
@@ -1206,7 +1312,9 @@ label[for*='minimize']::before {
 .repcontainer[data-groupname="repeating_triggered"],
 .repcontainer[data-groupname="repeating_noaction"],
 .repcontainer[data-groupname="repeating_moves"],
-.repcontainer[data-groupname="repeating_npcabilities"] {
+.repcontainer[data-groupname="repeating_npcabilities"],
+.repcontainer[data-groupname="repeating_malice"],
+.repcontainer[data-groupname="repeating_villainaction"] {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	grid-gap: 0.5em;
@@ -1218,7 +1326,9 @@ label[for*='minimize']::before {
 .repcontainer[data-groupname="repeating_triggered"] > .repitem,
 .repcontainer[data-groupname="repeating_noaction"] > .repitem,
 .repcontainer[data-groupname="repeating_moves"] > .repitem,
-.npc-abilities-panel > .repcontainer[data-groupname="repeating_npcabilities"] > .repitem {
+.sheet-npcabilities > .repcontainer[data-groupname="repeating_npcabilities"] > .repitem,
+.sheet-malice > .repcontainer[data-groupname="repeating_malice"] > .repitem,
+.sheet-villainaction > .repcontainer[data-groupname="repeating_villainaction"] > .repitem {
 	border: var(--border-main);
 	border-radius: var(--border-radius);
 	background-color: var(--color-bg-subsection);
@@ -1568,6 +1678,57 @@ input.name-input {
 	border-right: var(--border-main);
 }
 
+/*Director screen styling */
+
+#director-screen-toggle:not([value="1"]) ~ .director-screen-panel {
+    display: none;
+}
+
+.director-screen-panel details{
+	padding-left: 30px;
+	padding-bottom: 8px;
+}
+
+.director-screen-panel summary {
+	display: list-item;
+	font-weight: bold;
+	margin-left: -15px;
+}
+
+
+/* Container for the specific rules */
+.director-rules-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+/* Individual Rule Item */
+.director-rule-item {
+    display: block; /* Stacked for better mobile/small panel flow */
+    border-bottom: var(--border-main);
+    padding-bottom: 4px;
+	padding-left: 15px;
+}
+
+/* The Label (e.g., "Bleeding") */
+.director-rule-name {
+    display: inline-block;
+    font-weight: bold;
+    color: var(--color-text-header);
+    font-size: 0.9em;
+	margin-left: -15px;
+    margin-right: 5px;
+	text-decoration: underline;
+}
+
+/* The Description */
+.director-rule-desc, 
+.director-section-text {
+    font-size: 0.85em;
+    line-height: 1.2;
+    color: var(--color-text-body);
+}
 
 /* NPC edit styling */
 .charsheet label.npc-edit-icon {
@@ -1695,13 +1856,6 @@ input.npc-edit-toggle:not(:checked) ~ div.npc-edit {
 
 .npc-abilities-panel {
 	padding-top: 5px;
-}
-
-label[for="npc-checkbox"] {
-  color: var(--color-text-body);
-  font-weight: bold;
-  font-size: 1em;
-  padding-left: 0.5em;
 }
 
 /* Roll Template Styling */

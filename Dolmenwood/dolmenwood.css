@@ -177,7 +177,7 @@
   text-align: center;
 }
 
-h1 {
+.sheetform h1 {
   font-size: 2.4rem;
   font-family: "Metamorphous", serif;
   color: black;
@@ -193,7 +193,7 @@ h1 {
   font-weight: normal;
 }
 
-label {
+.sheetform label {
   font-weight: normal;
   font-family: "Metamorphous", serif;
   font-size: 14px;
@@ -202,16 +202,16 @@ label {
   padding-right: 0;
 }
 
-p {
+.sheetform p {
   font-weight: normal;
   font-family: "Metamorphous", serif;
   font-size: 14px;
   display: inline-block;
 }
 
-span,
-p span,
-label span {
+.sheetform span,
+.sheetform p span,
+.sheetform label span {
   font-family: "Metamorphous", serif;
   display: inline-block;
   vertical-align: middle;
@@ -299,7 +299,7 @@ body {
   background-repeat: no-repeat;
   background-position: center;
   display: flex;
-  padding-left: 10px;
+  justify-content: space-evenly;
 }
 
 /* Tabs */
@@ -487,6 +487,9 @@ label.current-hp {
 
 div.saving {
   display: flex;
+  width: 329px;
+  justify-content: space-evenly;
+  padding-right: 7px;
 }
 
 div.sheet-saves {
@@ -561,7 +564,8 @@ div.ac-attack {
   flex-direction: column;
   align-items: center;
   width: 119px;
-  padding-left: 10px;
+  padding-right: 5px;
+  margin-left: 9px;
   justify-content: space-around;
 }
 
@@ -589,7 +593,7 @@ label.attack span {
   grid-gap: 5px;
   display: grid;
   margin-bottom: 5px;
-  grid-template-columns: 35px 2.5fr 0.75fr 0.5fr 0.5fr 0.5fr;
+  grid-template-columns: 35px 1.5fr 0.75fr 0.5fr 0.5fr 0.5fr 0.5fr;
   font-family: "Metamorphous", serif;
   font-size: 12px;
 }
@@ -598,7 +602,7 @@ label.attack span {
   grid-gap: 5px;
   display: grid;
   margin-bottom: 5px;
-  grid-template-columns: 35px 2fr 0.5fr 1fr 0.5fr 0.5fr 0.5fr;
+  grid-template-columns: 35px 1.5fr 0.5fr 1fr 0.5fr 0.5fr 0.5fr 0.5fr;
   font-family: "Metamorphous", serif;
   font-size: 12px;
 }
@@ -641,7 +645,7 @@ div.class-traits label,
 div.class-traits textarea,
 div.repcontrol button,
 textarea[name="attr_retainerNotes"],
-li {
+.sheetform li {
   font-family: "Metamorphous", serif;
 }
 
@@ -872,25 +876,29 @@ div.sheet-turn-undead div {
   color: black;
 }
 
-.sheet-custom-spells,
-.sheet-spells-sub,
+.sheet-arcane-spells-sub,
+.sheet-holy-spells-sub,
 .sheet-glamours-sub,
 .sheet-runes-sub,
 .sheet-knacks-sub,
-input[name="attr_spells"][value*=","] ~ .sheet-spells .sheet-cannot-cast-message,
+input[name="attr_arcaneSpells"][value*=","] ~ .sheet-spells .sheet-cannot-cast-message,
+input[name="attr_holySpells"][value*=","] ~ .sheet-spells .sheet-cannot-cast-message,
 input[name="attr_knacks"][value="true"] ~ .sheet-spells .sheet-cannot-cast-message,
 input[name="attr_runes"][value="true"] ~ .sheet-spells .sheet-cannot-cast-message,
 input[name="attr_glamours"][value="true"] ~ .sheet-spells .sheet-cannot-cast-message,
+input[name="attr_class"][value="Monster" ] ~ .sheet-spells .sheet-cannot-cast-message,
 input[name="attr_class"][value="Custom Kindred-class" ] ~ .sheet-spells .sheet-cannot-cast-message,
 input[name="attr_class"][value="Custom" ] ~ .sheet-spells .sheet-cannot-cast-message,
 input[name="attr_kindred"][value="custom" ] ~ .sheet-spells .sheet-cannot-cast-message {
   display: none;
 }
 
-input[name="attr_spells"][value*=","] ~ .sheet-spells .sheet-spells-sub,
+input[name="attr_arcaneSpells"][value*=","] ~ .sheet-spells .sheet-arcane-spells-sub,
+input[name="attr_holySpells"][value*=","] ~ .sheet-spells .sheet-holy-spells-sub,
 input[name="attr_knacks"][value="true"] ~ .sheet-spells .sheet-knacks-sub,
 input[name="attr_runes"][value="true"] ~ .sheet-spells .sheet-runes-sub,
 input[name="attr_glamours"][value="true"] ~ .sheet-spells .sheet-glamours-sub,
+input[name="attr_class"][value="Monster" ] ~ .sheet-spells .sheet-custom-spells, 
 input[name="attr_class"][value="Custom Kindred-class" ] ~ .sheet-spells .sheet-custom-spells, 
 input[name="attr_class"][value="Custom" ] ~ .sheet-spells .sheet-custom-spells,
 input[name="attr_kindred"][value="custom" ] ~ .sheet-spells .sheet-custom-spells,
@@ -933,29 +941,44 @@ div.repcontainer textarea {
   font-size: 12px;
 }
 
-.glamour-grid,
-.knack-grid,
-.rune-grid,
-.spells-grid {
-  grid-gap: 5px;
-  display: grid;
+.h-line {
+  width: 100%;
+  height: 1px;
+  background: #393939;
+  margin: 1em 0;
+}
+
+.spell-rank-header {
+  display: flex;
+  align-items: center;
+  font-family: "Metamorphous", serif;
+  font-size: 15px;
   margin-bottom: 5px;
 }
 
-.glamour-grid {
-  grid-template-columns: 35px 2.5fr 1fr 1fr 1fr;
+.spell-rank-header label {
+    width: auto;
 }
 
-.rune-grid {
-  grid-template-columns: 35px 2.5fr 1.1fr 1fr 1fr 1fr;
+.spell-grid-outer {
+  display: grid;
+  margin-bottom: 5px;
+  grid-template-columns: 1fr 0.95fr;
 }
 
-.knack-grid {
-  grid-template-columns: 35px 2.5fr 1fr 1fr 1fr;
+.spell-grid-outer textarea {
+  height: 95%;
 }
 
-.spells-grid {
-  grid-template-columns: 40px 3.5em 2.5fr 3.5em 1fr 1fr 3.5em;
+.spell-row{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 295px;
+}
+
+.spell-grid-outer .spell-row input[type="number"] {
+  width: 210px;
 }
 
 div.glamour-grid input[type="text"],

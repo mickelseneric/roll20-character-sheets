@@ -108,6 +108,7 @@ button[type="roll"] {
 input[type="number"] {
   -moz-appearance: textfield !important;
   appearance: textfield !important;
+  text-align: center;
 }
 
 input[type="number"]::-webkit-inner-spin-button,
@@ -133,12 +134,6 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 /* -------------------------- INPUT STYLES -------------------------- */
-input[type="number"] {
-  -moz-appearance: textfield;
-  appearance: none;
-  text-align: center;
-}
-
 input::-webkit-inner-spin-button,
 input::-webkit-outer-spin-button {
   -webkit-appearance: none;
@@ -391,10 +386,10 @@ input[type="checkbox"]::before {
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/bottom-background3.png");
+  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/bottom-background3.png");
   background-size: cover;
   background-position: center;
-  border-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/BlocFrame-DZ55.png");
+  border-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/BlocFrame-DZ55.png");
   border-image-slice: 25;
   border-image-width: 18px;
   border-image-outset: 0px;
@@ -405,8 +400,8 @@ input[type="checkbox"]::before {
 
 .sheet-rolltemplate-dzapocalypse-description .sheet-rolltemplate-darkmode .sheet-template-header::before,
 .sheet-rolltemplate-dzapocalypse .sheet-rolltemplate-darkmode .sheet-template-header::before {
-  background-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/bottom-background3.png");
-  border-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/BlocFrame-DZ55_DM.png");
+  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/bottom-background3.png");
+  border-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/BlocFrame-DZ55_DM.png");
 }
 
 .sheet-rolltemplate-dzapocalypse-description .sheet-template-header > *,
@@ -1028,16 +1023,6 @@ input:hover ~ span {
   width: 100%;
   margin: 0 auto;
   padding: 0;
-  position: relative;
-}
-
-.sheet-standardbox::before {
-  display: flex;
-  flex-direction: column-reverse;
-  position: relative;
-  z-index: 0;
-  min-width: 0;
-  overflow: hidden;
 }
 
 .sheet-standardbox::before {
@@ -1048,204 +1033,207 @@ input:hover ~ span {
   display: block;
   height: 100%;
   left: 0;
+  min-width: 0;
+  overflow: hidden;
   position: absolute;
   top: 0;
   width: 100%;
+  z-index: 0;
 }
 
 .sheet-standardbox11.sheet-standardbox::before {
-  border-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/BlocFrame-DZ51.png") 22 fill stretch !important;
+  border-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/BlocFrame-DZ51.png") 22 fill stretch !important;
 }
 
 .sheet-standardbox12.sheet-standardbox::before {
-  border-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/BlocFrame-DZ51.png") 22 fill stretch !important;
+  border-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/BlocFrame-DZ51.png") 22 fill stretch !important;
   transform: scaleY(-1);
 }
 
 .sheet-standardbox13.sheet-standardbox::before {
-  border-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/BlocFrame-DZ51.png") 22 fill stretch !important;
+  border-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/BlocFrame-DZ51.png") 22 fill stretch !important;
   transform: scaleX(-1);
 }
 
 .sheet-standardbox14.sheet-standardbox::before {
-  border-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/BlocFrame-DZ51.png") 22 fill stretch !important;
+  border-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/BlocFrame-DZ51.png") 22 fill stretch !important;
   transform: scale(-1, -1);
 }
 
 .sheet-standardbox21.sheet-standardbox::before {
-  border-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/BlocFrame-DZ52.png") 22 fill stretch !important;
+  border-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/BlocFrame-DZ52.png") 22 fill stretch !important;
 }
 
 .sheet-standardbox22.sheet-standardbox::before {
-  border-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/BlocFrame-DZ52.png") 22 fill stretch !important;
+  border-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/BlocFrame-DZ52.png") 22 fill stretch !important;
   transform: scaleY(-1);
 }
 
 .sheet-standardbox23.sheet-standardbox::before {
-  border-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/BlocFrame-DZ52.png") 22 fill stretch !important;
+  border-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/BlocFrame-DZ52.png") 22 fill stretch !important;
   transform: scaleX(-1);
 }
 
 .sheet-standardbox24.sheet-standardbox::before {
-  border-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/BlocFrame-DZ52.png") 22 fill stretch !important;
+  border-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/BlocFrame-DZ52.png") 22 fill stretch !important;
   transform: scale(-1, -1);
 }
 
 .sheet-standardbox31.sheet-standardbox::before {
-  border-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/BlocFrame-DZ53.png") 22 fill stretch !important;
+  border-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/BlocFrame-DZ53.png") 22 fill stretch !important;
 }
 
 .sheet-standardbox32.sheet-standardbox::before {
-  border-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/BlocFrame-DZ53.png") 22 fill stretch !important;
+  border-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/BlocFrame-DZ53.png") 22 fill stretch !important;
   transform: scaleY(-1);
 }
 
 .sheet-standardbox33.sheet-standardbox::before {
-  border-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/BlocFrame-DZ53.png") 22 fill stretch !important;
+  border-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/BlocFrame-DZ53.png") 22 fill stretch !important;
   transform: scaleX(-1);
 }
 
 .sheet-standardbox34.sheet-standardbox::before {
-  border-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/BlocFrame-DZ53.png") 22 fill stretch !important;
+  border-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/BlocFrame-DZ53.png") 22 fill stretch !important;
   transform: scale(-1, -1);
 }
 
 .sheet-standardbox41.sheet-standardbox::before {
-  border-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/BlocFrame-DZ54.png") 22 fill stretch !important;
+  border-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/BlocFrame-DZ54.png") 22 fill stretch !important;
 }
 
 .sheet-standardbox42.sheet-standardbox::before {
-  border-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/BlocFrame-DZ54.png") 22 fill stretch !important;
+  border-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/BlocFrame-DZ54.png") 22 fill stretch !important;
   transform: scaleY(-1);
 }
 
 .sheet-standardbox43.sheet-standardbox::before {
-  border-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/BlocFrame-DZ54.png") 22 fill stretch !important;
+  border-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/BlocFrame-DZ54.png") 22 fill stretch !important;
   transform: scaleX(-1);
 }
 
 .sheet-standardbox44.sheet-standardbox::before {
-  border-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/BlocFrame-DZ54.png") 22 fill stretch !important;
+  border-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/BlocFrame-DZ54.png") 22 fill stretch !important;
   transform: scale(-1, -1);
 }
 
 .sheet-standardbox51.sheet-standardbox::before {
-  border-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/BlocFrame-DZ55.png") 22 fill stretch !important;
+  border-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/BlocFrame-DZ55.png") 22 fill stretch !important;
 }
 
 .sheet-standardbox52.sheet-standardbox::before {
-  border-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/BlocFrame-DZ55.png") 22 fill stretch !important;
+  border-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/BlocFrame-DZ55.png") 22 fill stretch !important;
   transform: scaleY(-1);
 }
 
 .sheet-standardbox53.sheet-standardbox::before {
-  border-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/BlocFrame-DZ55.png") 22 fill stretch !important;
+  border-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/BlocFrame-DZ55.png") 22 fill stretch !important;
   transform: scaleX(-1);
 }
 
 .sheet-standardbox54.sheet-standardbox::before {
-  border-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/BlocFrame-DZ55.png") 22 fill stretch !important;
+  border-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/BlocFrame-DZ55.png") 22 fill stretch !important;
   transform: scale(-1, -1);
 }
 
 /* -------------------------- DARKMODE -------------------------- */
 
 .sheet-darkmode .sheet-standardbox11.sheet-standardbox::before {
-  border-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/BlocFrame-DZ51_DM.png") 22 fill stretch !important;
+  border-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/BlocFrame-DZ51_DM.png") 22 fill stretch !important;
 }
 
 .sheet-darkmode .sheet-standardbox12.sheet-standardbox::before {
-  border-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/BlocFrame-DZ51_DM.png") 22 fill stretch !important;
+  border-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/BlocFrame-DZ51_DM.png") 22 fill stretch !important;
   transform: scaleY(-1);
 }
 
 .sheet-darkmode .sheet-standardbox13.sheet-standardbox::before {
-  border-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/BlocFrame-DZ51_DM.png") 22 fill stretch !important;
+  border-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/BlocFrame-DZ51_DM.png") 22 fill stretch !important;
   transform: scaleX(-1);
 }
 
 .sheet-darkmode .sheet-standardbox14.sheet-standardbox::before {
-  border-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/BlocFrame-DZ51_DM.png") 22 fill stretch !important;
+  border-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/BlocFrame-DZ51_DM.png") 22 fill stretch !important;
   transform: scale(-1, -1);
 }
 
 .sheet-darkmode .sheet-standardbox21.sheet-standardbox::before {
-  border-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/BlocFrame-DZ52_DM.png") 22 fill stretch !important;
+  border-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/BlocFrame-DZ52_DM.png") 22 fill stretch !important;
 }
 
 .sheet-darkmode .sheet-standardbox22.sheet-standardbox::before {
-  border-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/BlocFrame-DZ52_DM.png") 22 fill stretch !important;
+  border-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/BlocFrame-DZ52_DM.png") 22 fill stretch !important;
   transform: scaleY(-1);
 }
 
 .sheet-darkmode .sheet-standardbox23.sheet-standardbox::before {
-  border-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/BlocFrame-DZ52_DM.png") 22 fill stretch !important;
+  border-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/BlocFrame-DZ52_DM.png") 22 fill stretch !important;
   transform: scaleX(-1);
 }
 
 .sheet-darkmode .sheet-standardbox24.sheet-standardbox::before {
-  border-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/BlocFrame-DZ52_DM.png") 22 fill stretch !important;
+  border-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/BlocFrame-DZ52_DM.png") 22 fill stretch !important;
   transform: scale(-1, -1);
 }
 
 .sheet-darkmode .sheet-standardbox31.sheet-standardbox::before {
-  border-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/BlocFrame-DZ53_DM.png") 22 fill stretch !important;
+  border-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/BlocFrame-DZ53_DM.png") 22 fill stretch !important;
 }
 
 .sheet-darkmode .sheet-standardbox32.sheet-standardbox::before {
-  border-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/BlocFrame-DZ53_DM.png") 22 fill stretch !important;
+  border-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/BlocFrame-DZ53_DM.png") 22 fill stretch !important;
   transform: scaleY(-1);
 }
 
 .sheet-darkmode .sheet-standardbox33.sheet-standardbox::before {
-  border-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/BlocFrame-DZ53_DM.png") 22 fill stretch !important;
+  border-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/BlocFrame-DZ53_DM.png") 22 fill stretch !important;
   transform: scaleX(-1);
 }
 
 .sheet-darkmode .sheet-standardbox34.sheet-standardbox::before {
-  border-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/BlocFrame-DZ53_DM.png") 22 fill stretch !important;
+  border-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/BlocFrame-DZ53_DM.png") 22 fill stretch !important;
   transform: scale(-1, -1);
 }
 
 .sheet-darkmode .sheet-standardbox41.sheet-standardbox::before {
-  border-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/BlocFrame-DZ54_DM.png") 22 fill stretch !important;
+  border-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/BlocFrame-DZ54_DM.png") 22 fill stretch !important;
 }
 
 .sheet-darkmode .sheet-standardbox42.sheet-standardbox::before {
-  border-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/BlocFrame-DZ54_DM.png") 22 fill stretch !important;
+  border-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/BlocFrame-DZ54_DM.png") 22 fill stretch !important;
   transform: scaleY(-1);
 }
 
 .sheet-darkmode .sheet-standardbox43.sheet-standardbox::before {
-  border-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/BlocFrame-DZ54_DM.png") 22 fill stretch !important;
+  border-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/BlocFrame-DZ54_DM.png") 22 fill stretch !important;
   transform: scaleX(-1);
 }
 
 .sheet-darkmode .sheet-standardbox44.sheet-standardbox::before {
-  border-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/BlocFrame-DZ54_DM.png") 22 fill stretch !important;
+  border-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/BlocFrame-DZ54_DM.png") 22 fill stretch !important;
   transform: scale(-1, -1);
 }
 
 .sheet-darkmode .sheet-standardbox51.sheet-standardbox::before {
-  border-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/BlocFrame-DZ55_DM.png") 22 fill stretch !important;
+  border-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/BlocFrame-DZ55_DM.png") 22 fill stretch !important;
 }
 
 .sheet-darkmode .sheet-standardbox52.sheet-standardbox::before {
-  border-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/BlocFrame-DZ55_DM.png") 22 fill stretch !important;
+  border-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/BlocFrame-DZ55_DM.png") 22 fill stretch !important;
   transform: scaleY(-1);
 }
 
 .sheet-darkmode .sheet-standardbox53.sheet-standardbox::before {
-  border-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/BlocFrame-DZ55_DM.png") 22 fill stretch !important;
+  border-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/BlocFrame-DZ55_DM.png") 22 fill stretch !important;
   transform: scaleX(-1);
 }
 
 .sheet-darkmode .sheet-standardbox54.sheet-standardbox::before {
-  border-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/BlocFrame-DZ55_DM.png") 22 fill stretch !important;
+  border-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/BlocFrame-DZ55_DM.png") 22 fill stretch !important;
   transform: scale(-1, -1);
 }
 
-/* -------------------------- -------------------------- */
+/* -------------------------- LAYOUT -------------------------- */
 
 .sheet-oneline {
   width: calc(100% - 20px) !important;
@@ -1508,7 +1496,7 @@ input[name="attr_effect-time"] {
 
 .sheet-main-image {
   grid-area: image;
-  background-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/DZ-Logo.png") !important;
+  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/DZ-Logo.png") !important;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -1517,7 +1505,7 @@ input[name="attr_effect-time"] {
 }
 
 .sheet-darkmode .sheet-main-image {
-  background-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/DZ-Logo_dm.png") !important;
+  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/DZ-Logo_dm.png") !important;
 }
 
 .sheet-maingrid-area,
@@ -1632,7 +1620,7 @@ input[name="attr_effect-time"] {
 }
 
 .sheet-imgfixed-weapons {
-  background-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/weapon-icon.png");
+  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/weapon-icon.png");
   z-index: 0 !important;
   background-size: contain;
   background-repeat: no-repeat;
@@ -1644,7 +1632,7 @@ input[name="attr_effect-time"] {
 }
 
 .sheet-imgfixed-cadreblanc {
-    background-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/cadre-blanc5.png");
+    background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/cadre-blanc5.png");
     z-index: 999!important;
     background-size: contain;
     background-repeat: no-repeat;
@@ -1655,7 +1643,7 @@ input[name="attr_effect-time"] {
 }
 
 .sheet-darkmode .sheet-imgfixed-cadreblanc {
-    background-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/cadre-blanc5_dm.png");
+    background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/cadre-blanc5_dm.png");
 }
 
 img.error {
@@ -1674,81 +1662,77 @@ img.error {
 }
 
 .sheet-imgfixed-back {
-  background-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/backpack-icon.png");
+  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/backpack-icon.png");
 }
 
 .sheet-imgfixed-helmet {
-  background-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/helmet-icon.png");
+  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/helmet-icon.png");
 }
 
 .sheet-imgfixed-feets {
-  background-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/shoes-icon.png");
+  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/shoes-icon.png");
 }
 
 .sheet-imgfixed-hands {
-  background-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/gloves-icon.png");
+  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/gloves-icon.png");
 }
 
 .sheet-imgfixed-face {
-  background-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/face-icon.png");
+  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/face-icon.png");
 }
 
 .sheet-imgfixed-chest {
-  background-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/chest-icon.png");
+  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/chest-icon.png");
 }
 
 .sheet-imgfixed-belt {
-  background-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/belt-icon.png");
+  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/belt-icon.png");
 }
 
 .sheet-imgfixed-legs {
-  background-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/pants-icon.png");
+  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/pants-icon.png");
 }
 
 .sheet-imgfixed-holster {
-  background-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/holster-icon.png");
+  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/holster-icon.png");
 }
 
-.sheet-imgfixed-back {
-  background-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/backpack-icon.png");
-}
-
-/* -------------------------- -------------------------- */
+/* -------------------------- DARK MODE ICONS -------------------------- */
 
 .sheet-darkmode .sheet-imgfixed-helmet {
-  background-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/helmet_dm.png");
+  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/helmet_dm.png");
 }
 
 .sheet-darkmode .sheet-imgfixed-feets {
-  background-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/shoes_dm.png");
+  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/shoes_dm.png");
 }
 
 .sheet-darkmode .sheet-imgfixed-hands {
-  background-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/gloves_dm.png");
+  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/gloves_dm.png");
 }
 
 .sheet-darkmode .sheet-imgfixed-face {
-  background-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/face_dm.png");
+  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/face_dm.png");
 }
 
 .sheet-darkmode .sheet-imgfixed-chest {
-  background-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/chest_dm.png");
+  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/chest_dm.png");
 }
 
 .sheet-darkmode .sheet-imgfixed-belt {
-  background-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/belt_dm.png");
+  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/belt_dm.png");
 }
 
 .sheet-darkmode .sheet-imgfixed-legs {
-  background-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/pants_dm.png");
+  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/pants_dm.png");
 }
 
 .sheet-darkmode .sheet-imgfixed-holster {
-  background-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/holster_dm.png");
+  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/holster_dm.png");
 }
 
 .sheet-darkmode .sheet-imgfixed-back {
-  background-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/backpack_dm.png");
+  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/backpack_dm.png");
 }
 
 .sheet-bottom-background {
@@ -1758,22 +1742,18 @@ img.error {
     width: 100%;
     height: 217px !important;
     z-index: 0;
-    background-image: url("https://www.spirito.fr/DL/RP/dzapocalypse/bottom-background3.png");
+    background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/D&Z-Apocalypse/images/bottom-background3.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: bottom;
-    width: 100%;
     text-align: center;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 1px;
-    position: relative;
-    z-index: 1;
     margin: -75px auto -10px auto!important;
     border: 1px;
     padding: 1px;
     opacity: 0.5;
-    z-index:0;
 }
 
 
@@ -1976,7 +1956,7 @@ img.error {
 }
 
 .sheet-main-menu {
-  grid-area: menu;;
+  grid-area: menu;
 }
 
 .sheet-main-equipment {
@@ -2232,6 +2212,8 @@ span[name="attr_proficiency-source"] {
 .sheet-vanilla {
   background-color: transparent !important;
   border: none !important;
+  font-size: 18px !important;
+  font-family: var(--main-font);
 }
 
 .sheet-equipment {
@@ -2255,11 +2237,6 @@ span[name="attr_proficiency-source"] {
     left: -5px;
     width: calc(100% + 10px)!important;
     margin: 10px auto 0 auto !important;
-}
-
-.sheet-vanilla {
-  font-size: 18px !important;
-  font-family: var(--main-font);
 }
 
 .sheet-main-statistiques .sheet-inputchar2 {
@@ -2374,6 +2351,7 @@ height: 30px !important;
 
 .sheet-background-header-line1 {
   gap: 5px !important;
+  grid-template-columns: repeat(7, 1fr);
 }
 
 input::placeholder {
@@ -2428,10 +2406,6 @@ input::placeholder {
   justify-content: right !important;
 }
 
-.sheet-background-header-line1 {
-  grid-template-columns: repeat(7, 1fr);
-}
-
 .sheet-background-area img {
   background-color: red;
 }
@@ -2454,8 +2428,5 @@ input::placeholder {
   padding: 0;
   text-align: center;
   color: var(--secondary-color) !important;
-}
-
-.sheet-main-header-blank label {
   text-transform: uppercase !important;
 }
